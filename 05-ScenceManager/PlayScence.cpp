@@ -11,6 +11,7 @@
 #include"Archery.h"
 #include"Sword.h"
 #include"Weapon.h"
+#include"Item1000PTS.h"
 
 using namespace std;
 
@@ -56,6 +57,7 @@ Space* CPlayScene::getCurentSpace()
 #define OBJECT_TYPE_ARCHERY	6
 #define OBJECT_TYPE_SWORD	7
 #define OBJECT_TYPE_WEAPON	8
+#define OBJECT_TYPE_1000PTS	17
 
 #define MAX_SCENE_LINE 1024
 
@@ -183,8 +185,8 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_ARCHERY: obj = new Archery(); break;
 	case OBJECT_TYPE_SWORD: obj = new Sword(); break;
 	case OBJECT_TYPE_HEART_BIG: obj = new BigHeart(); break;
-	case OBJECT_TYPE_WEAPON: obj = Weapon::getInstance();
-		break;
+	case OBJECT_TYPE_WEAPON: obj = Weapon::getInstance(); break;
+	case OBJECT_TYPE_1000PTS: obj = new Item1000PTS(); break;
 	default:
 		DebugOut(L"[ERR] Invalid object type: %d\n", object_type);
 		return;
@@ -338,22 +340,29 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 	{
 	case DIK_Z:
 		simon->isAttack = true;
+		/*simon->isAttackPress = simon->isAttack && !simon->isPreviousAttackDown;
+		simon->isPreviousAttackDown = simon->isAttack;*/
 		break;
 	case DIK_SPACE:
 		simon->isJumpDown = true;
+		/*simon->isJumpPress = simon->isJumpDown && !simon->isPreviousJumpDown;
+		simon->isPreviousJumpDown = simon->isJumpDown;*/
 		break;
 	case DIK_UP:
 		simon->isUpDown = true;
+		/*simon->isUpPress = simon->isUpDown && !simon->isPreviousUpDown;
+		simon->isPreviousUpDown = simon->isUpDown;*/
 		break;
 	case DIK_DOWN:
 		simon->isDownDown = true;
+		/*simon->isJumpPress = simon->isJumpDown && !simon->isPreviousJumpDown;
+		simon->isPreviousJumpDown = simon->isJumpDown;*/
 		break;
 	case DIK_LEFT:
 		simon->isLeftDown = true;
 		break;
 	case DIK_RIGHT:
 		simon->isRightDown = true;
-	
 		break;
 	}
 	

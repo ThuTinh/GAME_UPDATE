@@ -135,6 +135,7 @@
     <ClCompile Include="Gate1.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="Item1000PTS.cpp" />
     <ClCompile Include="Koopas.cpp" />
     <ClCompile Include="MovableRect.cpp" />
     <ClCompile Include="Rect.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="Gate1.h" />
     <ClInclude Include="Gound.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="Item1000PTS.h" />
     <ClInclude Include="Koopas.h" />
     <ClInclude Include="MovableRect.h" />
     <ClInclude Include="Rect.h" />

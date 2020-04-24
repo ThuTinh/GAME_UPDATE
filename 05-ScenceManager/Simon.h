@@ -49,8 +49,17 @@ public:
 	bool isDownDown;
 	bool isJumpDown;
 	bool isAttack;
+	//bool isPreviousUpDown,
+	//	isUpPress,
+	//	isPreviousDownDown,
+	//	isDownPress,
+	//	isPreviousJumpDown,
+	//	isJumpPress,
+	//	isPreviousAttackDown,
+	//	isAttackPress;
 	int numberArchery;
 	DelayTime attachDelay;
+	DelayTime colorDelay;
 	Simon();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *colliable_objects = NULL);
 	virtual void Render();

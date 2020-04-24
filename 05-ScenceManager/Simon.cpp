@@ -16,7 +16,8 @@ Simon::Simon() : CGameObject()
 	setDirection(DIRECTION_RIGHT);
 	SetState(SIMON_STATE_NORMAL);
 	setNumberArchery(1);
-	attachDelay.init(100);
+	attachDelay.init(80);
+	colorDelay.init(300);
 
 }
 
@@ -25,12 +26,23 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	// Calculate dx, dy 
 	//vx = vy = 0;
 	attachDelay.update();
+	colorDelay.update();
+	if (aniIndex == SIMON_ANI_COLORS) {
+		
+		if(colorDelay.isTerminated()) {
+			Simon::getInstance()->aniIndex = SIMON_ANI_STAND;
+		}
+		else
+		{
+			return;
+
+		}
+	}
 	CGameObject::Update(dt);
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
 
 	coEvents.clear();
-
 	// turn off collision when die 
 	if (isAlive)
 		CalcPotentialCollisions(coObjects, coEvents);
@@ -51,11 +63,11 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		// TODO: This is a very ugly designed function!!!!
 		FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny, rdx, rdy);
 
-		// how to push back Mario if collides with a moving objects, what if Mario is pushed this way into another object?
+		//// how to push back Mario if collides with a moving objects, what if Mario is pushed this way into another object?
 		if (rdx != 0 && rdx != dx)
 			x += nx * abs(rdx);
 
-		// block every object first!
+		//// block every object first!
 
 		x += min_tx * dx + nx * 0.4f;
 		y += min_ty * dy + ny * 0.4f;
@@ -66,21 +78,20 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 //
 // Collision logic with other objects
 //
-		for (UINT i = 0; i < coEventsResult.size(); i++)
+		for (UINT i = 0; i < coEvents.size(); i++)
 		{
-			LPCOLLISIONEVENT e = coEventsResult[i];
+			LPCOLLISIONEVENT e = coEvents[i];
 			if (!dynamic_cast<Ground*>(e->obj)) {
-				x += dx;
-				
+				e->obj->onCollision(e->obj, e->t, e->nx, e->ny);
 			}
 			else
 			{
 				onCollision(e->obj, e->t, e->nx, e->ny);
-
+				
 			}
 			//Ground* ground = dynamic_cast<Ground*>(e->obj);
 		}
-
+		
 	}
 
 
@@ -94,7 +105,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	switch (state)
 	{
 	case SIMON_STATE_NORMAL: {
-		if (getIsOnGround()) {
+		if (isOnGround) {
 			if (isRightDown) {
 				setDirection(DIRECTION_RIGHT);
 				aniIndex = SIMON_ANI_GO;
@@ -109,8 +120,24 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				}
 				else
 				{
-					aniIndex = SIMON_ANI_STAND;
-					setVx(0);
+					
+					
+						if (isAttack) {
+							aniIndex = SIMON_ANI_STAND_USING_SUB;
+							//state = SIMON_STATE_ATTACK;
+							attachDelay.start();
+							if (attachDelay.isTerminated())
+							{
+								state = SIMON_STATE_NORMAL;
+							}
+						}
+						else
+						{
+							aniIndex = SIMON_ANI_STAND;
+							setVx(0);
+						}
+				
+					
 				}
 			}
 			if (isJumpDown) {
@@ -121,30 +148,20 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				{
 					state = SIMON_STATE_NORMAL;
 				}
-				
-			}
-			else
-			{
 
-				if (isAttack) {
-					aniIndex = SIMON_ANI_STAND_USING_SUB;
-					//state = SIMON_STATE_ATTACK;
-					attachDelay.start();
-					if (attachDelay.isTerminated())
-					{
-						state = SIMON_STATE_NORMAL;
-					}
-				}
+
 			}
+			
 		}
 		else
 		{
-			/*aniIndex = SIMON_ANI_JUMB;
-			if (isAttack) {
-				state = SIMON_STATE_ATTACK_JUMP;
-				attachDelay.start();
-				
-			}*/
+				aniIndex = SIMON_ANI_JUMB;
+				//setVy(-0.5);
+				if (isAttack) {
+					state = SIMON_STATE_ATTACK_JUMP;
+					attachDelay.start();
+
+				}
 		}
 	}
 	 break;
@@ -152,7 +169,8 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	{
 		
 		aniIndex = SIMON_ANI_DUCK_USING_SUB;
-		setVy(SIMON_JUMP_Y);
+		
+		
 		if (attachDelay.isTerminated())
 		{
 			state = SIMON_STATE_NORMAL;

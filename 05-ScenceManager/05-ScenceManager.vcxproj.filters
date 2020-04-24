@@ -132,6 +132,9 @@
     <ClCompile Include="DelayTime.cpp">
       <Filter>GameTime</Filter>
     </ClCompile>
+    <ClCompile Include="Item1000PTS.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Brick.h">
@@ -217,6 +220,9 @@
     </ClInclude>
     <ClInclude Include="DelayTime.h">
       <Filter>GameTime</Filter>
+    </ClInclude>
+    <ClInclude Include="Item1000PTS.h">
+      <Filter>Object\Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

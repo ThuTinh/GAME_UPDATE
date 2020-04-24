@@ -7,7 +7,8 @@
 #include "Sprites.h"
 #include "Animations.h"
 
-
+#define MAX(a,b) a>b? a:b
+#define MIN(a,b) a>b? b:a
 using namespace std;
 
 #define ID_TEX_BBOX -100		// special texture to draw object bounding box
@@ -69,7 +70,7 @@ public:
 	/* cho phép trọng lực hay không */
 	bool physicsEnable;
 	/* vật có đứng trên mặt sàn hay không */
-	bool isOnGround;
+
 	bool isAlive;
 	COLLISION_TYPE collitionType;
 	DIRECTION direction;
@@ -77,6 +78,7 @@ public:
 	bool isLastFrameAnimationDone;
 
 public: 
+	bool isOnGround;
 	void SetPosition(float x, float y) { this->x = x, this->y = y; }
 	void setX(float x);
 	void setY(float y);
@@ -130,10 +132,11 @@ public:
 		float &rdy);
 
 	CGameObject();
-
+	 CGameObject* GetSweptBroadPhaseBox();
+	 float SweptAABB(CGameObject* M, CGameObject* S, float& normalX, float& normalY);
 	virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects = NULL);
-	virtual void Render() = 0;
+	virtual void Render();
 	virtual void SetState(int state) { this->state = state; }
 	virtual void onCollision(CGameObject* other, float collisionTime, int nx, int ny);
 	void preventMovementWhenCollision(float collisionTime, int nx, int ny);
