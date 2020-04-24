@@ -1,15 +1,14 @@
 #pragma once
-#include"GameObject.h"
-class Gate1 : public CGameObject
+#include"Enemy.h"
+class BlackNight : public Enemy
 {
 public:
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	virtual void Render();
-	Gate1();
-	~Gate1();
+	BlackNight();
+	~BlackNight();
 
 private:
 
 };
-
 

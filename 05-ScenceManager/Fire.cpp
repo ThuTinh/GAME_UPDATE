@@ -18,6 +18,9 @@ void Fire::Render()
 
 Fire::Fire()
 {
+	setCollitionType(COLLISION_TYPE_MISC);
+	setPhysicsEnable(false);
+
 }
 
 void Fire::SetState(int state)

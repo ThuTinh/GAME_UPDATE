@@ -1,7 +1,7 @@
 #include "Gound.h"
 Ground::Ground()
 {
-	
+	setCollitionType(COLLISION_TYPE_GROUND);
 }
 
 

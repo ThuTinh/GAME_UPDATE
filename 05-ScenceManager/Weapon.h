@@ -15,11 +15,12 @@
 
 class Weapon : public CGameObject
 {
-	static Weapon* instance;
+	
 	
 public:
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	virtual void Render();
+	static Weapon* instance;
 	static Weapon* getInstance();
 	Weapon();
 	~Weapon();

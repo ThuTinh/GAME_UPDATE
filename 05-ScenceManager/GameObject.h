@@ -76,9 +76,12 @@ public:
 	DIRECTION direction;
 	int aniIndex;
 	bool isLastFrameAnimationDone;
+	bool pauseAnimation;
+	bool stopCollision;
 
 public: 
 	bool isOnGround;
+	vector<COLLISION_TYPE> collitionTypeToCheck;
 	void SetPosition(float x, float y) { this->x = x, this->y = y; }
 	void setX(float x);
 	void setY(float y);
@@ -90,6 +93,8 @@ public:
 	float getWidth();
 	float getHeight();
 	float getRight();
+	float getBottom();
+	float getLeft();
 	float getX();
 	float getY();
 	float getMidX();
@@ -140,7 +145,10 @@ public:
 	virtual void SetState(int state) { this->state = state; }
 	virtual void onCollision(CGameObject* other, float collisionTime, int nx, int ny);
 	void preventMovementWhenCollision(float collisionTime, int nx, int ny);
-	
+	void setPauseAnimation(bool pause);
+	bool getPauseAnimation();
+	void setStopCollision( bool stopCollision);
+	bool getStopCollision();
 	~CGameObject();
 };
 

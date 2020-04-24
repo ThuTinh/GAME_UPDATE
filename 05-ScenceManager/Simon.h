@@ -1,10 +1,10 @@
-#pragma once
+﻿#pragma once
 #include "GameObject.h"
 #include"DelayTime.h"
 
-#define SIMON_VX	0.04 
+#define SIMON_VX	0.06 
 //0.1f
-#define SIMON_JUMP_Y		0.25f
+#define SIMON_JUMP_Y		0.27f
 
 #define SIMON_JUMP_DEFLECT_SPEED 0.2f
 #define MARIO_GRAVITY			-0.0008f
@@ -40,8 +40,12 @@
 class Simon : public CGameObject
 {
 	int level;
-	static Simon* instance;
-
+	
+	int playerStairDestx, playerStairDesty;
+	int playerStairState;
+	int stairDirection;
+	/* là lần di chuyển cuối cùng của player. sau khi di chuyển player sẽ thoát khỏi stair  */
+	bool isLastRunStair;
 public: 
 	bool isRightDown;
 	bool isLeftDown;
@@ -67,8 +71,25 @@ public:
 	int getNumberArchery();
 	void addNumberArchery(int num);
 	void SetState(int state);
+	int getState();
 	void SetLevel(int l) { level = l; }
+	static Simon* instance;
 	static Simon* getInstance();
+	/* phương thức gọi ngay khi gặp stair và người chơi nhấn phím lên xuống để vào stair */
+	void setStartStair();
+
+	/* phương thức gọi ngay khi player quyết định thoát khỏi stair */
+	void setStopStair();
+
+	bool getIsLastRunStair();
+	void setIsLastRunStair(bool isLastRunStair);
+
+	/* đi lên cầu thang */
+	void goStairUp();
+	void goStairDown();
+	void setStairDirection(int stairDirection);
+	void setPlayerStairState(int playerStairState);
+
 	void onCollision(CGameObject* other, float collisionTime, int nx, int ny) override;
 	//virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom);
 };

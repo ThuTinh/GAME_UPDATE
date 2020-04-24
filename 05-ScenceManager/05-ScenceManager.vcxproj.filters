@@ -52,6 +52,9 @@
     <Filter Include="GameTime">
       <UniqueIdentifier>{e330deca-cced-4a47-b9e9-20240002b1d4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Stair">
+      <UniqueIdentifier>{efe0770c-6427-4870-8a6d-3b293db65048}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Brick.cpp">
@@ -134,6 +137,24 @@
     </ClCompile>
     <ClCompile Include="Item1000PTS.cpp">
       <Filter>Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="SmallHeart.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>Object\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackNight.cpp">
+      <Filter>Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Stair.cpp">
+      <Filter>Object\Stair</Filter>
+    </ClCompile>
+    <ClCompile Include="GateStair1.cpp">
+      <Filter>Object\Gate</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -223,6 +244,24 @@
     </ClInclude>
     <ClInclude Include="Item1000PTS.h">
       <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="SmallHeart.h">
+      <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>Object\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackNight.h">
+      <Filter>Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Stair.h">
+      <Filter>Object\Stair</Filter>
+    </ClInclude>
+    <ClInclude Include="GateStair1.h">
+      <Filter>Object\Gate</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

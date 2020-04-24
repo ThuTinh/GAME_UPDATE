@@ -27,6 +27,8 @@ protected:
 	void _ParseSection_OBJECTS(string line);
 	void _ParseSection_MAP(string line);
 	void _ParseSection_SPACE(string line);
+	void _ParseSection_STAIR(string line);
+
 public: 
 	CPlayScene(int id, LPCWSTR filePath);
 	void setCurentSpace(int index);

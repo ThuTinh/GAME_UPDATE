@@ -145,7 +145,7 @@ void CGameObject::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		dx = vx * dt;
 		dy = vy * dt;
 	}
-	
+
 }
 
 void CGameObject::Render()
@@ -182,6 +182,26 @@ void CGameObject::preventMovementWhenCollision(float collisionTime, int nx, int 
 	}
 }
 
+void CGameObject::setPauseAnimation(bool pause)
+{
+	this->pauseAnimation = pause;
+}
+
+bool CGameObject::getPauseAnimation()
+{
+	return pauseAnimation;
+}
+
+void CGameObject::setStopCollision(bool stopCollision)
+{
+	this->stopCollision = stopCollision;
+}
+
+bool CGameObject::getStopCollision()
+{
+	return  stopCollision;
+}
+
 /*
 	Extension of original SweptAABB to deal with two moving objects
 */
@@ -215,14 +235,20 @@ LPCOLLISIONEVENT CGameObject::SweptAABBEx(LPGAMEOBJECT coO)
 
 	CGameObject* box = GetSweptBroadPhaseBox();
 	CCollisionEvent* e = NULL;
-	if (box->AABBCheck(coO)) {
-		delete box;
-		float normalX = 0, normalY = 0;
-		/* thì tính collisionTime */
-		float t = SweptAABB(this, coO, normalX, normalY);
-		e = new CCollisionEvent(t, normalX, normalY, t*dx, t*dy, coO);
+	for (int i = 0; i < collitionTypeToCheck.size(); i++) {
+		if (coO->collitionType == collitionTypeToCheck.at(i))
+		{
+			if (box->AABBCheck(coO)) {
+				delete box;
+				float normalX = 0, normalY = 0;
+				/* thì tính collisionTime */
+				float t = SweptAABB(this, coO, normalX, normalY);
+				e = new CCollisionEvent(t, normalX, normalY, t * dx, t * dy, coO);
+			}
+			break;
+		}
 	}
-	
+
 	return e;
 }
 
@@ -236,22 +262,28 @@ void CGameObject::CalcPotentialCollisions(
 	vector<LPGAMEOBJECT> *coObjects, 
 	vector<LPCOLLISIONEVENT> &coEvents)
 {
-	for (UINT i = 0; i < coObjects->size(); i++)
-	{
-		if (coObjects->at(i)->getAlive()) {
-			LPCOLLISIONEVENT e = SweptAABBEx(coObjects->at(i));
-			if (e != NULL) {
-				if (e->t > 0 && e->t <= 1.0f)
-					coEvents.push_back(e);
-				else
-					delete e;
-			}
-			else
+
+
+		if (!coObjects->empty()) {
+			for (UINT k = 0; k < coObjects->size(); k++)
 			{
-				delete e;
+				if (coObjects->at(k)->getAlive()) {
+					LPCOLLISIONEVENT e = SweptAABBEx(coObjects->at(k));
+					if (e != NULL) {
+						if (e->t > 0 && e->t <= 1.0f)
+							coEvents.push_back(e);
+						else
+							delete e;
+					}
+					else
+					{
+						delete e;
+					}
+				}
 			}
-		}
+		
 	}
+			
 
 	std::sort(coEvents.begin(), coEvents.end(), CCollisionEvent::compare);
 }
@@ -328,6 +360,16 @@ float CGameObject::getHeight()
 float CGameObject::getRight()
 {
 	return  x + width;
+}
+
+float CGameObject::getBottom()
+{
+	return  y - height;
+}
+
+float CGameObject::getLeft()
+{
+	return x;
 }
 
 float CGameObject::getX()

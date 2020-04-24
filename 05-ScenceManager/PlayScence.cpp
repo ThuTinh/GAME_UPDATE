@@ -12,7 +12,11 @@
 #include"Sword.h"
 #include"Weapon.h"
 #include"Item1000PTS.h"
-
+#include"Light.h"
+#include"BlackNight.h"
+#include"Stair.h"
+#include"Gate1.h"
+#include"GateStair1.h"
 using namespace std;
 
 CPlayScene::CPlayScene(int id, LPCWSTR filePath):
@@ -26,6 +30,8 @@ void CPlayScene::setCurentSpace(int spaceID)
 {
 	this->currentSpace = spaces[spaceID];
 	Camera::getInstance()->setSpace(this->currentSpace);
+	Camera::getInstance()->setLocation(getCurentSpace()->CameraX, getCurentSpace()->CameraY);
+	player->SetPosition(getCurentSpace()->PlayerX, getCurentSpace()->PlayerY);
 }
 
 Space* CPlayScene::getCurentSpace()
@@ -43,10 +49,13 @@ Space* CPlayScene::getCurentSpace()
 #define SCENE_SECTION_MAP	3
 #define SCENE_SECTION_SPRITES 4
 #define SCENE_SECTION_ANIMATIONS 5
-#define SCENE_SECTION_ANIMATION_SETS	6
+#define SCENE_SECTION_ANIMATION_SETS 6
 #define SCENE_SECTION_OBJECTS	7
 #define SCENE_SECTION_SPACE	8
+#define SCENE_SECTION_STAIR 9
 
+#define OBJECT_TYPE_GATE_STAIR1 -4
+#define OBJECT_TYPE_GATE1 -3
 #define OBJECT_TYPE_GROUND	-1
 #define OBJECT_TYPE_SIMON	0
 #define OBJECT_TYPE_FIRE	1
@@ -58,9 +67,9 @@ Space* CPlayScene::getCurentSpace()
 #define OBJECT_TYPE_SWORD	7
 #define OBJECT_TYPE_WEAPON	8
 #define OBJECT_TYPE_1000PTS	17
+#define OBJECT_TYPE_BLACK_NIGHT  9
 
 #define MAX_SCENE_LINE 1024
-
 
 void CPlayScene::_ParseSection_TEXTURES(string line)
 {
@@ -172,11 +181,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	switch (object_type)
 	{
 	case OBJECT_TYPE_SIMON:
-		if (player!=NULL) 
-		{
-			DebugOut(L"[ERROR] MARIO object was created before! ");
-			return;
-		}
+		Simon::instance = 0;
 		obj = Simon::getInstance(); 
 		player = (Simon*)obj;  
 		break;
@@ -185,8 +190,12 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_ARCHERY: obj = new Archery(); break;
 	case OBJECT_TYPE_SWORD: obj = new Sword(); break;
 	case OBJECT_TYPE_HEART_BIG: obj = new BigHeart(); break;
-	case OBJECT_TYPE_WEAPON: obj = Weapon::getInstance(); break;
+	case OBJECT_TYPE_WEAPON: { Weapon::instance = 0; obj = Weapon::getInstance(); break; }
 	case OBJECT_TYPE_1000PTS: obj = new Item1000PTS(); break;
+	case OBJECT_TYPE_LIGHT: obj = new Light(); break;
+	case OBJECT_TYPE_BLACK_NIGHT: obj = new BlackNight(); break;
+	case OBJECT_TYPE_GATE1: obj = new Gate1(); break;
+	case OBJECT_TYPE_GATE_STAIR1: obj = new GateStair1(); break;
 	default:
 		DebugOut(L"[ERR] Invalid object type: %d\n", object_type);
 		return;
@@ -232,6 +241,31 @@ void CPlayScene::_ParseSection_SPACE(string line)
 	
 
 }
+void CPlayScene::_ParseSection_STAIR(string line)
+{
+	vector<string> tokens = split(line);
+
+	//DebugOut(L"--> %s\n",ToWSTR(line).c_str());
+
+	if (tokens.size() < 8) return; // skip invalid lines - an object set must have at least id, x, y
+
+	int object_type = atoi(tokens[0].c_str());
+	float x = atof(tokens[1].c_str());
+	float y = atof(tokens[2].c_str());
+	float width = atoi(tokens[3].c_str());
+	float height = atoi(tokens[4].c_str());
+	int ani_set_id = atoi(tokens[5].c_str());
+	bool isRight = atoi(tokens[6].c_str());
+	bool isTop = atoi(tokens[7].c_str());
+
+	Stair* obj = new Stair() ;
+	y = titlemap->getWorldHeight() - y;
+	obj->SetPosition(x, y);
+	obj->setWidth(width);
+	obj->setHeight(height);
+	obj->setRightTop(isRight, isTop);
+	objects.push_back(obj);
+}
 void CPlayScene::Load()
 {
 	
@@ -264,6 +298,9 @@ void CPlayScene::Load()
 		if (line == "[SPACE]") {
 			section = SCENE_SECTION_SPACE; continue;
 		}
+		if (line == "[STAIR]") {
+			section = SCENE_SECTION_STAIR; continue;
+		}
 		if (line[0] == '[') { section = SCENE_SECTION_UNKNOWN; continue; }	
 
 		//
@@ -278,6 +315,7 @@ void CPlayScene::Load()
 			case SCENE_SECTION_ANIMATION_SETS: _ParseSection_ANIMATION_SETS(line); break;
 			case SCENE_SECTION_OBJECTS: _ParseSection_OBJECTS(line); break;
 			case SCENE_SECTION_SPACE: _ParseSection_SPACE(line); break;
+			case SCENE_SECTION_STAIR: _ParseSection_STAIR(line); break;
 		}
 	}
 
@@ -285,9 +323,7 @@ void CPlayScene::Load()
 
 	//CTextures::GetInstance()->Add(ID_TEX_BBOX, L"textures\\bbox.png", D3DCOLOR_XRGB(255, 255, 255));
 	setCurentSpace(0);
-	Camera::getInstance()->setSpace(getCurentSpace());
-	Camera::getInstance()->setLocation(getCurentSpace()->CameraX, getCurentSpace()->CameraY);
-	player->SetPosition(getCurentSpace()->PlayerX, getCurentSpace()->PlayerY);
+	
 	DebugOut(L"[INFO] Done loading scene resources %s\n", sceneFilePath);
 }
 
@@ -307,7 +343,6 @@ void CPlayScene::Update(DWORD dt)
 		objects[i]->Update(dt, &coObjects);
 	}
 
-
 	// Update camera to follow mario
 	Camera::getInstance()->update();
 }
@@ -325,7 +360,10 @@ void CPlayScene::Render()
 void CPlayScene::Unload()
 {
 	for (int i = 0; i < objects.size(); i++)
+	{
 		delete objects[i];
+	}
+		
 
 	objects.clear();
 	player = NULL;

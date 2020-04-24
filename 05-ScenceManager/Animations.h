@@ -31,7 +31,7 @@ public:
 	LPANIMATION_FRAME getFrame(int index);
 	CAnimation(int defaultTime = 100) { this->defaultTime = defaultTime; lastFrameTime = -1; currentFrame = -1; }
 	void Add(int spriteId, DWORD time = 0);
-	void Render(float x, float y,int &frameIndex,DIRECTION direction, int alpha = 255);
+	void Render(float x, float y,int &frameIndex,DIRECTION direction, bool pauseAnimation = false ,int alpha = 255);
 };
 
 typedef CAnimation *LPANIMATION;

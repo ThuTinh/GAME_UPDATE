@@ -1,30 +1,16 @@
-﻿#include "Item.h"
-#include"Weapon.h"
-#include "Gound.h"
-Item::Item()
+﻿#include "Enemy.h"
+#include"Simon.h"
+#include"Gound.h"
+#include "Weapon.h"
+void Enemy::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	itemState = ITEM_STATE_INVISIBLE;
-	setPhysicsEnable(false);
-	setCollitionType(COLLISION_TYPE_MISC);
-	collitionTypeToCheck.push_back(COLLISION_TYPE_GROUND);
-}
-
-
-
-void Item::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
-{
-	if (itemState == ITEM_STATE_PLAYER_EATED)
-		return;
-	vy += ITEM_GRAVITY*dt;
+	vy += ENEMY_GRAVITY * dt;
 
 	if (AABBCheck(Weapon::getInstance())) {
-		setPhysicsEnable(true);
-		itemState = ITEM_STATE_VISIBLE;
-		setWidth(animation_set->at(0)->getFrame(0)->GetSprite()->getWidth());
-		setHeight(animation_set->at(0)->getFrame(0)->GetSprite()->getHeight());
+		
+		
 	}
 	CGameObject::Update(dt);
-
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
 
@@ -70,7 +56,7 @@ void Item::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 				onCollision(e->obj, e->t, e->nx, e->ny);
 
 			}
-			
+
 		}
 
 	}
@@ -80,29 +66,29 @@ void Item::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	/* mặc định là false cho tới khi chạm sàn */
 }
 
-void Item::Render()
+void Enemy::Render()
 {
-	if (itemState == ITEM_STATE_VISIBLE) {
-		animation_set->at(0)->Render(x, y, frameIndex,DIRECTION_LEFT);
+	animation_set->at(0)->Render(x, y, frameIndex, DIRECTION_LEFT);
+}
+
+void Enemy::setDirectionFollowPlayer()
+{
+	if (Simon::getInstance()->getMidX() - getMidX() < 0)
+	{
+		setDirection(DIRECTION_LEFT);
+	}
+	else
+	{
+		setDirection(DIRECTION_RIGHT);
 	}
 }
 
-void Item::SetState(int state)
+Enemy::Enemy()
 {
-
-
+	setCollitionType(COLLISION_TYPE_ENEMY);
+	collitionTypeToCheck.push_back(COLLISION_TYPE_GROUND);
 }
 
-void Item::setItemState(ITEM_STATE itemState)
-{
-	this->itemState = itemState;
-}
-
-ITEM_STATE Item::getItemState()
-{
-	return itemState;
-}
-
-void Item::onPlayerContact()
+Enemy::~Enemy()
 {
 }

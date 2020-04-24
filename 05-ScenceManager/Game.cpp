@@ -59,7 +59,7 @@ void CGame::Init(HWND hWnd)
 
 	OutputDebugString(L"[INFO] InitGame done;\n");
 
-	Camera::getInstance()->setSize(255, 224);
+	Camera::getInstance()->setSize(250, 224);
 		
 		
 }
@@ -394,12 +394,11 @@ void CGame::SwitchScene(int scene_id)
 {
 	DebugOut(L"[INFO] Switching to scene %d\n", scene_id);
 
-	scenes[current_scene]->Unload();;
+	scenes[current_scene]->Unload();
 
 	CTextures::GetInstance()->Clear();
 	CSprites::GetInstance()->Clear();
 	CAnimations::GetInstance()->Clear();
-
 	current_scene = scene_id;
 	LPSCENE s = scenes[scene_id];
 	CGame::GetInstance()->SetKeyHandler(s->GetKeyEventHandler());
