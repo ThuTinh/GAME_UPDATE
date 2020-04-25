@@ -156,6 +156,51 @@
     <ClCompile Include="GateStair1.cpp">
       <Filter>Object\Gate</Filter>
     </ClCompile>
+    <ClCompile Include="Item700PTS.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Item400PTS.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="HaiXanh.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="HaiDo.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Crown.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="GoldPotion.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="BoomeRang.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="BluePotion.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Axe.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Fleaman.cpp">
+      <Filter>Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Raven.cpp">
+      <Filter>Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Zoombie.cpp">
+      <Filter>Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Sketon.cpp">
+      <Filter>Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="BossBat.cpp">
+      <Filter>Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Bat.cpp">
+      <Filter>Object\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Brick.h">
@@ -262,6 +307,51 @@
     </ClInclude>
     <ClInclude Include="GateStair1.h">
       <Filter>Object\Gate</Filter>
+    </ClInclude>
+    <ClInclude Include="Item700PTS.h">
+      <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Item400PTS.h">
+      <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="HaiDo.h">
+      <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Crown.h">
+      <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="GoldPotion.h">
+      <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="BoomeRang.h">
+      <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="BluePotion.h">
+      <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Axe.h">
+      <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Fleaman.h">
+      <Filter>Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Raven.h">
+      <Filter>Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Zoombie.h">
+      <Filter>Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Sketon.h">
+      <Filter>Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="BossBat.h">
+      <Filter>Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Bat.h">
+      <Filter>Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="HaiXanh.h">
+      <Filter>Object\Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

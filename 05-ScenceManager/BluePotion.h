@@ -1,15 +1,13 @@
 #pragma once
 #include"Item.h"
-class SmallHeart : public Item
+class BluePotion : public Item
 {
 public:
-	SmallHeart();
-	~SmallHeart();
 	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) override;
-	void Render();
+	BluePotion();
+	~BluePotion();
 
 private:
 
 };
-
 

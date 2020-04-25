@@ -1,6 +1,6 @@
-#include "SmallHeart.h"
+#include "BoomeRang.h"
 #include"Simon.h"
-void SmallHeart::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
+void BoomeRang::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	Item::Update(dt, coObjects);
 	if (AABBCheck(Simon::getInstance()) && getItemState() == ITEM_STATE_VISIBLE) {
@@ -12,14 +12,10 @@ void SmallHeart::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	}
 }
 
-void SmallHeart::Render()
+BoomeRang::BoomeRang()
 {
 }
 
-SmallHeart::SmallHeart()
-{
-}
-
-SmallHeart::~SmallHeart()
+BoomeRang::~BoomeRang()
 {
 }

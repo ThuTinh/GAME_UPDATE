@@ -1,6 +1,6 @@
-#include "SmallHeart.h"
+#include "Item400PTS.h"
 #include"Simon.h"
-void SmallHeart::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
+void Item400PTS::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	Item::Update(dt, coObjects);
 	if (AABBCheck(Simon::getInstance()) && getItemState() == ITEM_STATE_VISIBLE) {
@@ -12,14 +12,10 @@ void SmallHeart::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	}
 }
 
-void SmallHeart::Render()
+Item400PTS::Item400PTS()
 {
 }
 
-SmallHeart::SmallHeart()
-{
-}
-
-SmallHeart::~SmallHeart()
+Item400PTS::~Item400PTS()
 {
 }
