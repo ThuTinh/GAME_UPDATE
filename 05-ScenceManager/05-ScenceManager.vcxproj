@@ -141,6 +141,7 @@
     <ClCompile Include="Fire.cpp" />
     <ClCompile Include="Fleaman.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameTime.cpp" />
     <ClCompile Include="Gate1.cpp" />
     <ClCompile Include="GateStair1.cpp" />
     <ClCompile Include="GoldPotion.cpp" />
@@ -156,6 +157,7 @@
     <ClCompile Include="MovableRect.cpp" />
     <ClCompile Include="Raven.cpp" />
     <ClCompile Include="Rect.cpp" />
+    <ClCompile Include="ScoreBar.cpp" />
     <ClCompile Include="Sketon.cpp" />
     <ClCompile Include="SmallHeart.cpp" />
     <ClCompile Include="Stair.cpp" />
@@ -191,6 +193,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Fire.h" />
     <ClInclude Include="Fleaman.h" />
+    <ClInclude Include="GameTime.h" />
     <ClInclude Include="Gate1.h" />
     <ClInclude Include="GateStair1.h" />
     <ClInclude Include="GoldPotion.h" />
@@ -206,6 +209,7 @@
     <ClInclude Include="MovableRect.h" />
     <ClInclude Include="Raven.h" />
     <ClInclude Include="Rect.h" />
+    <ClInclude Include="ScoreBar.h" />
     <ClInclude Include="Sketon.h" />
     <ClInclude Include="SmallHeart.h" />
     <ClInclude Include="Space.h" />

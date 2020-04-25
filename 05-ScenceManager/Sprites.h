@@ -12,7 +12,6 @@ enum DIRECTION
 class CSprite
 {
 	int id;				// Sprite ID in the sprite database
-
 	int x; 
 	int y;
 	int width;
@@ -52,7 +51,7 @@ class CSprites
 public:
 	void Add(int id, int x, int y, int with, int height, int anchorX, int anchorY, LPDIRECT3DTEXTURE9 tex);
 	LPSPRITE Get(int id);
-	void CSprites::Clear();
+	void CSprites::Clear(vector<int>listId);
 
 	static CSprites * GetInstance();
 };

@@ -86,15 +86,15 @@ LPSPRITE CSprites::Get(int id)
 /*
 	Clear all loaded textures
 */
-void CSprites::Clear()
+void CSprites::Clear(vector<int>listId)
 {
-	for (auto x : sprites)
+	for (size_t i = 0; i < listId.size(); i++)
 	{
-		LPSPRITE s = x.second;
-		delete s;
-	}
+		LPSPRITE s = Get(listId.at(i));
 
-	sprites.clear();
+		delete s;
+		sprites.erase(listId.at(i));
+	}
 }
 
 

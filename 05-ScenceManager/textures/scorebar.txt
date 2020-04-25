@@ -1,0 +1,53 @@
+# id	file_path	transparent_color_r	g	b
+[TEXTURE_MISC]
+99	textures\scorebar\misc.png	255	0	128
+[TEXTURE_SCORE_BAR]
+100	textures\scorebar\score_bar.png	255	0	128
+
+# id	left	top	with	height	 achorX achorY texture_id
+[SPRITES]
+# Number
+111000	121	188	7	7	0	0	99
+111001	121 	198 	7 	7	0	0	99	
+111002	129	188 	7 	7	0	0	99
+111003	129	198	7  	7	0	0	99
+111004	137	188 	7 	7	0	0	99
+111005	137	198 	7  	7	0	0	99
+111006	145	188 	7 	7	0	0	99
+111007	145	198	7 	7	0	0	99
+111008	153	188 	7 	7	0	0	99
+111009	153	198 	7 	7	0	0	99
+#LostHeatl
+1110010	184 	189 	3 	6	0	0	99
+
+# ani_id	sprite1_id	time1	sprite2_id	time2	...
+[ANIMATIONS]
+#==Number==
+211001	111000	100	111001	100	111002	100	111003	100	111004	100	111005	100	111006	100	111007	100	111008	100	111009	100		
+#lost heathy
+211002	1110010	100
+
+# id	ani1	ani2	ani3
+[ANIMATION_SETS]
+# SIMON
+30	211001	211002
+
+
+[LOCTION_LIFE]
+185 	24 	2
+[LOCATION_HEART_COUNT]
+185	16 	2
+[LOCATION_STAGE]
+226     8       2
+[LOCATION_SCORE]
+49      8       6
+[LOCATION_TIME]
+140     8       4
+[LOCATION_HEALTH]
+56      17      16
+[LOCATION_SUBWEAPON]
+136	22
+[LOCATION_BOSS_HEATHY]
+56	25	16
+
+

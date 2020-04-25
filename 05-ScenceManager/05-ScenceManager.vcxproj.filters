@@ -55,6 +55,9 @@
     <Filter Include="Object\Stair">
       <UniqueIdentifier>{efe0770c-6427-4870-8a6d-3b293db65048}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\ScoreBar">
+      <UniqueIdentifier>{fec8d67a-15a8-4296-a8d7-83c8dd79f03f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Brick.cpp">
@@ -200,6 +203,12 @@
     </ClCompile>
     <ClCompile Include="Bat.cpp">
       <Filter>Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreBar.cpp">
+      <Filter>Object\ScoreBar</Filter>
+    </ClCompile>
+    <ClCompile Include="GameTime.cpp">
+      <Filter>GameTime</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -352,6 +361,12 @@
     </ClInclude>
     <ClInclude Include="HaiXanh.h">
       <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreBar.h">
+      <Filter>Object\ScoreBar</Filter>
+    </ClInclude>
+    <ClInclude Include="GameTime.h">
+      <Filter>GameTime</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

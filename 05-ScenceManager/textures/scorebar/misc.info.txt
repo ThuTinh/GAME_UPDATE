@@ -1,0 +1,244 @@
+Sprite light
+R		G		B
+255	0		10		0
+Animation Count
+25
+
+
+Name
+light
+Frame Count
+10
+
+LocationX		LocationY		FrameWidth		FrameHeight	AnchorX	AmchorY
+121				188				7				7			0		0
+121             198             7               7			0		0		
+129             188             7               7			0		0
+129             198             7               7			0		0
+137             188             7               7			0		0
+137             198             7               7			0		0
+145             188             7               7			0		0
+145             198             7               7			0		0
+153             188             7               7			0		0
+153             198             7               7			0		0
+
+
+Name
+PlayerWeaponItem
+FramesCount
+1
+
+LocationX		LocationY		FrameWidth		FrameHeight
+74              22              16              16	0	0
+
+
+Name
+LostHealth
+FramesCount
+1
+
+LocationX		LocationY		FrameWidth		FrameHeight
+184              189              3              6	0	0
+
+
+Name
+KnifeItem
+FramesCount
+1
+
+LocationX		LocationY		FrameWidth		FrameHeight
+115              4              16              9	0	0
+
+
+Name
+Torch
+FramesCount
+2
+
+LocationX		LocationY		FrameWidth		FrameHeight
+148             60              16              32	0	0
+166             60              16              32	0	0
+
+
+Name
+ExplosionEffect
+FramesCount
+3
+
+LocationX		LocationY		FrameWidth		FrameHeight
+2               57              15               15	0	0
+2               74              15               15	0	0
+2				92				15			 	 15	0	0
+
+
+Name
+Candle
+FramesCount
+2
+
+LocationX		LocationY		FrameWidth		FrameHeight
+37              21              8               16	0	0
+47              21              8               16	0	0
+
+
+Name
+MermanBullet
+FramesCount
+1
+
+LocationX		LocationY		FrameWidth		FrameHeight
+40				65				7				6	0	0
+
+
+Name
+ItemMorningStar
+FramesCount
+1
+
+LocationX		LocationY		FrameWidth		FrameHeight
+74				22				16				16	0	0
+
+
+Name
+ItemSmallHeart
+FramesCount
+1
+
+LocationX		LocationY		FrameWidth		FrameHeight
+100				88				8				8	0	0
+
+
+Name
+Water
+FramesCount
+1
+
+LocationX		LocationY		FrameWidth		FrameHeight
+162				37				7				14	0	0
+
+
+Name
+ItemBigHeart
+FramesCount
+1
+
+LocationX		LocationY		FrameWidth		FrameHeight
+110				87				12				10	0	0
+
+
+Name
+ItemDagger
+FramesCount
+1
+
+LocationX		LocationY		FrameWidth		FrameHeight
+115			    4				16			    9	0	0
+
+
+Name
+HOLYWATER
+FramesCount
+1
+
+LocationX		LocationY		FrameWidth		FrameHeight
+35			    40				16			    16	0	0
+
+
+Name
+HOLYCROSS
+FramesCount
+1
+
+LocationX		LocationY		FrameWidth		FrameHeight
+107			    41				16			    16	0	0
+
+
+Name
+AXE
+FramesCount
+1
+
+LocationX		LocationY		FrameWidth		FrameHeight
+96			    2				15			    14	0	0
+
+
+Name
+GOLDPOTION
+FramesCount
+1
+
+LocationX		LocationY		FrameWidth		FrameHeight
+59			    21				13			    16	0	0
+
+
+Name
+GOLDPOTION
+FramesCount
+1
+
+LocationX		LocationY		FrameWidth		FrameHeight
+57			    40				15			    16	0	0
+
+
+Name
+GOLDPOTION
+FramesCount
+1
+
+LocationX		LocationY		FrameWidth		FrameHeight
+0			    16				16			    16	0	0
+
+
+Name
+GOLDPOTION
+FramesCount
+1
+
+LocationX		LocationY		FrameWidth		FrameHeight
+0			    0				16			    16	0	0
+
+
+Name
+GOLDPOTION
+FramesCount
+1
+
+LocationX		LocationY		FrameWidth		FrameHeight
+83			    84				15			    15	0	0
+
+
+Name
+GOLDPOTION
+FramesCount
+1
+
+LocationX		LocationY		FrameWidth		FrameHeight
+64			    84				15			    15	0	0
+
+
+Name
+1000pts
+FramesCount
+1
+
+LocationX		LocationY		FrameWidth		FrameHeight
+46			    84			    15			    15	0	0
+
+
+Name
+1000pts
+FramesCount
+1
+
+LocationX		LocationY		FrameWidth		FrameHeight			
+77				2				15				14	0	0
+
+
+Name
+1000pts
+FramesCount
+2
+
+LocationX		LocationY		FrameWidth		FrameHeight		
+60				2				14				14	0	0
+77				2				15				14	0	0

@@ -31,7 +31,8 @@ public:
 	LPANIMATION_FRAME getFrame(int index);
 	CAnimation(int defaultTime = 100) { this->defaultTime = defaultTime; lastFrameTime = -1; currentFrame = -1; }
 	void Add(int spriteId, DWORD time = 0);
-	void Render(float x, float y,int &frameIndex,DIRECTION direction, bool pauseAnimation = false ,int alpha = 255);
+	void Render(float x, float y,int &frameIndex, DIRECTION direction, bool pauseAnimation = false ,int alpha = 255);
+	void RenderScoreBar(float x, float y, int frameIndex, DIRECTION direction = DIRECTION_LEFT);
 };
 
 typedef CAnimation *LPANIMATION;
@@ -45,7 +46,7 @@ class CAnimations
 public:
 	void Add(int id, LPANIMATION ani);
 	LPANIMATION Get(int id);
-	void Clear();
+	void Clear(vector<int> anisID);
 
 	static CAnimations * GetInstance();
 };
@@ -67,6 +68,7 @@ public:
 	CAnimationSets();
 	void Add(int id, LPANIMATION_SET ani);
 	LPANIMATION_SET Get(unsigned int id);
+	void Clear(vector<int> listId);
 
 
 	static CAnimationSets * GetInstance();

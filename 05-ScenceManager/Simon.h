@@ -46,6 +46,10 @@ class Simon : public CGameObject
 	int stairDirection;
 	/* là lần di chuyển cuối cùng của player. sau khi di chuyển player sẽ thoát khỏi stair  */
 	bool isLastRunStair;
+	void _ParseSection_TEXTURES(string line);
+	void _ParseSection_SPRITES(string line);
+	void _ParseSection_ANIMATIONS(string line);
+	void _ParseSection_ANIMATION_SETS(string line);
 public: 
 	bool isRightDown;
 	bool isLeftDown;
@@ -78,4 +82,5 @@ public:
 	void setStairDirection(int stairDirection);
 	void setPlayerStairState(int playerStairState);
 	void onCollision(CGameObject* other, float collisionTime, int nx, int ny) override;
+	void Load(LPCWSTR simonFile);
 };

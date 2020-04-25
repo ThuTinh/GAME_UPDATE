@@ -14,12 +14,12 @@
 #include <windows.h>
 #include <d3d9.h>
 #include <d3dx9.h>
-
+#include"Simon.h"
 #include "Utils.h"
 #include "Game.h"
 #include "GameObject.h"
 #include "Textures.h"
-
+#include"ScoreBar.h"
 #include "Mario.h"
 #include "Brick.h"
 #include "Goomba.h"
@@ -179,9 +179,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	game = CGame::GetInstance();
 	game->Init(hWnd);
 	game->InitKeyboard();
+	Simon::getInstance()->Load(L"textures\\simon.txt");
+	ScoreBar::getInstance()->Load(L"textures\\scorebar.txt");
 
 	game->Load(L"mario-sample.txt");
-
 	Run();
 
 	return 0;

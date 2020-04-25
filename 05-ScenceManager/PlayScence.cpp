@@ -17,6 +17,7 @@
 #include"Stair.h"
 #include"Gate1.h"
 #include"GateStair1.h"
+#include"ScoreBar.h"
 using namespace std;
 
 CPlayScene::CPlayScene(int id, LPCWSTR filePath):
@@ -101,7 +102,7 @@ void CPlayScene::_ParseSection_TEXTURES(string line)
 	int R = atoi(tokens[2].c_str());
 	int G = atoi(tokens[3].c_str());
 	int B = atoi(tokens[4].c_str());
-
+	texturesID.push_back(texID);
 	CTextures::GetInstance()->Add(texID, path.c_str(), D3DCOLOR_XRGB(R, G, B));
 }
 
@@ -126,7 +127,7 @@ void CPlayScene::_ParseSection_SPRITES(string line)
 		DebugOut(L"[ERROR] Texture ID %d not found!\n", texID);
 		return; 
 	}
-
+	spritesID.push_back(ID);
 	CSprites::GetInstance()->Add(ID, x, y, with, height, anchorX, anchorY, tex);
 }
 
@@ -147,7 +148,7 @@ void CPlayScene::_ParseSection_ANIMATIONS(string line)
 		int frame_time = atoi(tokens[i+1].c_str());
 		ani->Add(sprite_id, frame_time);
 	}
-
+	animationsID.push_back(ani_id);
 	CAnimations::GetInstance()->Add(ani_id, ani);
 }
 
@@ -170,7 +171,7 @@ void CPlayScene::_ParseSection_ANIMATION_SETS(string line)
 		LPANIMATION ani = animations->Get(ani_id);
 		s->push_back(ani);
 	}
-
+	animationSetsID.push_back(ani_set_id);
 	CAnimationSets::GetInstance()->Add(ani_set_id, s);
 }
 
@@ -199,11 +200,22 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 
 	switch (object_type)
 	{
-	case OBJECT_TYPE_SIMON:
-		Simon::instance = 0;
-		obj = Simon::getInstance(); 
-		player = (Simon*)obj;  
-		break;
+	case OBJECT_TYPE_SIMON: {
+		if (player != NULL)
+		{
+			DebugOut(L"[ERROR] MARIO object was created before! ");
+			return;
+		}
+		player = Simon::getInstance();
+		y = titlemap->getWorldHeight() - y;
+		player->SetPosition(x, y);
+		player->setWidth(width);
+		player->setHeight(height);
+		LPANIMATION_SET ani_set = animation_sets->Get(ani_set_id);
+		player->SetAnimationSet(ani_set);
+		return;
+	}
+		
 	case OBJECT_TYPE_GROUND: obj = new Ground(); break;
 	case OBJECT_TYPE_FIRE: obj = new Fire(); break;
 	case OBJECT_TYPE_ARCHERY: obj = new Archery(); break;
@@ -363,6 +375,10 @@ void CPlayScene::Update(DWORD dt)
 	}
 
 	// Update camera to follow mario
+	if (player == NULL)
+		return;
+	player->Update(dt, &coObjects);
+	ScoreBar::getInstance()->update();
 	Camera::getInstance()->update();
 }
 
@@ -371,6 +387,8 @@ void CPlayScene::Render()
 	titlemap->render(Camera::getInstance());
 	for (int i = 0; i < objects.size(); i++)
 		objects[i]->Render();
+	player->Render();
+	ScoreBar::getInstance()->render();
 }
 
 /*
@@ -383,7 +401,17 @@ void CPlayScene::Unload()
 		delete objects[i];
 	}
 	objects.clear();
+
 	player = NULL;
+	CTextures::GetInstance()->Clear(texturesID);
+	CSprites::GetInstance()->Clear(spritesID);
+	CAnimations::GetInstance()->Clear(animationsID);
+	CAnimationSets::GetInstance()->Clear(animationSetsID);
+	texturesID.clear();
+	spritesID.clear();
+	animationsID.clear();
+	animationSetsID.clear();
+
 }
 
 void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
@@ -395,15 +423,12 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 	{
 	case DIK_Z:
 		simon->isAttack = true;
-		
 		break;
 	case DIK_SPACE:
 		simon->isJumpDown = true;
-		
 		break;
 	case DIK_UP:
 		simon->isUpDown = true;
-		
 		break;
 	case DIK_DOWN:
 		simon->isDownDown = true;		
