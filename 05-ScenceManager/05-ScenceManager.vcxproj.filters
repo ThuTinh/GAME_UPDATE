@@ -201,6 +201,9 @@
     <ClCompile Include="Bat.cpp">
       <Filter>Object\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="Gate2.cpp">
+      <Filter>Object\Gate</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Brick.h">
@@ -352,6 +355,9 @@
     </ClInclude>
     <ClInclude Include="HaiXanh.h">
       <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Gate2.h">
+      <Filter>Object\Gate</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

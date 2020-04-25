@@ -17,6 +17,22 @@
 #include"Stair.h"
 #include"Gate1.h"
 #include"GateStair1.h"
+#include"SmallHeart.h"
+#include"Sword.h"
+#include"Axe.h"
+#include"Item700PTS.h"
+#include"Item400PTS.h"
+#include"HaiDo.h"
+#include"HaiXanh.h"
+#include"GoldPotion.h"
+#include"BluePotion.h"
+#include"BoomeRang.h"
+#include"Bat.h"
+#include"Fleaman.h"
+#include"Raven.h"
+#include"Sketon.h"
+#include"Zoombie.h"
+
 using namespace std;
 
 CPlayScene::CPlayScene(int id, LPCWSTR filePath):
@@ -54,6 +70,8 @@ Space* CPlayScene::getCurentSpace()
 #define SCENE_SECTION_SPACE	8
 #define SCENE_SECTION_STAIR 9
 
+#define OBJECT_TYPE_GATE2 -6
+#define OBJECT_TYPE_GATE_STAIR2 -5
 #define OBJECT_TYPE_GATE_STAIR1 -4
 #define OBJECT_TYPE_GATE1 -3
 #define OBJECT_TYPE_GROUND	-1
@@ -80,7 +98,7 @@ Space* CPlayScene::getCurentSpace()
 #define OBJECT_TYPE_SWORD	21
 #define OBJECT_TYPE_700PTS	22
 #define OBJECT_TYPE_HAIDO	23
-#define OBJECT_TYPE_BLUE	24
+#define OBJECT_TYPE_BLUEPOTION	24
 #define OBJECT_TYPE_400PTS	25
 #define OBJECT_TYPE_DIE_EFECT	26
 #define OBJECT_TYPE_BOSSBAT	27
@@ -215,11 +233,20 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_BLACK_NIGHT: obj = new BlackNight(); break;
 	case OBJECT_TYPE_GATE1: obj = new Gate1(); break;
 	case OBJECT_TYPE_GATE_STAIR1: obj = new GateStair1(); break;
+	case OBJECT_TYPE_HEART_SMALL: obj = new SmallHeart(); break;
+	case OBJECT_TYPE_700PTS: obj = new Item700PTS(); break;
+	case OBJECT_TYPE_400PTS: obj = new Item400PTS(); break;
+	case OBJECT_TYPE_AXE: obj = new Axe(); break;
+	case OBJECT_TYPE_BAT: obj = new Bat(); break;
+	case OBJECT_TYPE_BOOMERANG: obj = new BoomeRang(); break;
+	case OBJECT_TYPE_FLEAMAN: obj = new Fleaman(); break;
+	case OBJECT_TYPE_SKETON: obj = new Sketon(); break;
+	case OBJECT_TYPE_GOLDPOTION: obj = new GoldPotion();
+	case OBJECT_TYPE_BLUEPOTION: obj = new BluePotion(); break;
 	default:
 		DebugOut(L"[ERR] Invalid object type: %d\n", object_type);
 		return;
 	}
-
 	// General object setup
 	y = titlemap->getWorldHeight() - y;
 	obj->SetPosition(x, y);

@@ -77,9 +77,6 @@ void Tilemap::render(Camera* camera)
 				yTileInTileSheet, /* top */
 				xTileInTileSheet + widthTileInTilesheet, /* right */
 				yTileInTileSheet + heightTileInTilesheet); /* bottom */
-
-			/* vẽ tile lên màn hình tại vị trí view */
-			//tilesheet->Draw(xViewOfTile, yViewOfTile, 0, 0, &rectCrop);
 			CGame::GetInstance()->DrawRect(xViewOfTile, yViewOfTile, 0, 0, tilesheet, rectCrop);
 		}
 	}
@@ -93,8 +90,6 @@ int Tilemap::getWorldHeight()
 void Tilemap::Init(int idSheet, string matrixPath)
 {
 	/* khởi tạo tilesheet */
-	//tilesheet = new LPSPRITE();
-	//tilesheet->Init(tilesheetPath);
 	tilesheet = CTextures::GetInstance()->Get(idSheet);
 	auto tempPath = ToWSTR(matrixPath);
 
@@ -120,18 +115,6 @@ void Tilemap::Init(int idSheet, string matrixPath)
 
 }
 
-//void Tilemap::Init(const char* folderPath)
-//{
-//	/* tìm đường dẫn tilesheet và matrix */
-//	string folderPathString = (string)folderPath;
-//	string tilesheetString = folderPathString;
-//	tilesheetString.append("/tilesheet.png");
-//	string matrixPathString = folderPathString;
-//	matrixPathString.append("/matrix.dat");
-//
-//	/* khởi tạo bằng phương thức trên */
-//	Init(tilesheetString.c_str(), matrixPathString.c_str());
-//}
 int Tilemap::getTileWidth()
 {
 	return  tileWidth;

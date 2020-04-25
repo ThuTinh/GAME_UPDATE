@@ -12,9 +12,7 @@ void SmallHeart::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	}
 }
 
-void SmallHeart::Render()
-{
-}
+
 
 SmallHeart::SmallHeart()
 {

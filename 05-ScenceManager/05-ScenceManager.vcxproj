@@ -142,6 +142,7 @@
     <ClCompile Include="Fleaman.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Gate1.cpp" />
+    <ClCompile Include="Gate2.cpp" />
     <ClCompile Include="GateStair1.cpp" />
     <ClCompile Include="GoldPotion.cpp" />
     <ClCompile Include="Ground.cpp" />
@@ -192,6 +193,7 @@
     <ClInclude Include="Fire.h" />
     <ClInclude Include="Fleaman.h" />
     <ClInclude Include="Gate1.h" />
+    <ClInclude Include="Gate2.h" />
     <ClInclude Include="GateStair1.h" />
     <ClInclude Include="GoldPotion.h" />
     <ClInclude Include="Gound.h" />

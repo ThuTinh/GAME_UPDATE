@@ -6,7 +6,7 @@ public:
 	SmallHeart();
 	~SmallHeart();
 	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) override;
-	void Render();
+	
 
 private:
 

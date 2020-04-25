@@ -3,11 +3,13 @@
 class BoomeRang : public Item
 {
 public:
-	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) override;
 	BoomeRang();
 	~BoomeRang();
+	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) override;
+
 
 private:
 
 };
+
 

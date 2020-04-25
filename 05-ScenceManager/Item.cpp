@@ -29,7 +29,6 @@ void Item::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	vector<LPCOLLISIONEVENT> coEventsResult;
 
 	coEvents.clear();
-
 	// turn off collision when die 
 	if (isAlive)
 		CalcPotentialCollisions(coObjects, coEvents);
