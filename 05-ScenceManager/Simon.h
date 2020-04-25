@@ -53,14 +53,6 @@ public:
 	bool isDownDown;
 	bool isJumpDown;
 	bool isAttack;
-	//bool isPreviousUpDown,
-	//	isUpPress,
-	//	isPreviousDownDown,
-	//	isDownPress,
-	//	isPreviousJumpDown,
-	//	isJumpPress,
-	//	isPreviousAttackDown,
-	//	isAttackPress;
 	int numberArchery;
 	DelayTime attachDelay;
 	DelayTime colorDelay;
@@ -75,12 +67,8 @@ public:
 	void SetLevel(int l) { level = l; }
 	static Simon* instance;
 	static Simon* getInstance();
-	/* phương thức gọi ngay khi gặp stair và người chơi nhấn phím lên xuống để vào stair */
 	void setStartStair();
-
-	/* phương thức gọi ngay khi player quyết định thoát khỏi stair */
 	void setStopStair();
-
 	bool getIsLastRunStair();
 	void setIsLastRunStair(bool isLastRunStair);
 
@@ -89,7 +77,5 @@ public:
 	void goStairDown();
 	void setStairDirection(int stairDirection);
 	void setPlayerStairState(int playerStairState);
-
 	void onCollision(CGameObject* other, float collisionTime, int nx, int ny) override;
-	//virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom);
 };

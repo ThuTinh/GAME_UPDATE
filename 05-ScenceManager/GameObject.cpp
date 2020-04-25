@@ -156,8 +156,7 @@ void CGameObject::onCollision(CGameObject* other, float collisionTime, int nx, i
 {
 	
 	if (ny != 0 && dynamic_cast<Ground*>(other))
-	{		//preventMovementWhenCollision(collisionTime,nx, ny);
-		/* isOnGround = true tức vật có đứng trên sàn */
+	{		
 		setIsOnGround(true);
 		/*vy = 0;*/
 

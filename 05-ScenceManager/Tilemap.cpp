@@ -92,16 +92,12 @@ int Tilemap::getWorldHeight()
 
 void Tilemap::Init(int idSheet, string matrixPath)
 {
-	/* khởi tạo tilesheet */
-	//tilesheet = new LPSPRITE();
-	//tilesheet->Init(tilesheetPath);
 	tilesheet = CTextures::GetInstance()->Get(idSheet);
 	auto tempPath = ToWSTR(matrixPath);
 
 	auto Path = tempPath.c_str();
 	/* khởi tạo matrix */
 	fstream fs(Path);
-	/* đọc cái giá trị đã nêu trong file world */
 	fs >> tileRows >> tileColumns >> tileWidth >> tileHeight >> tilesheetColumns;
 
 	int k = 5;
@@ -120,18 +116,6 @@ void Tilemap::Init(int idSheet, string matrixPath)
 
 }
 
-//void Tilemap::Init(const char* folderPath)
-//{
-//	/* tìm đường dẫn tilesheet và matrix */
-//	string folderPathString = (string)folderPath;
-//	string tilesheetString = folderPathString;
-//	tilesheetString.append("/tilesheet.png");
-//	string matrixPathString = folderPathString;
-//	matrixPathString.append("/matrix.dat");
-//
-//	/* khởi tạo bằng phương thức trên */
-//	Init(tilesheetString.c_str(), matrixPathString.c_str());
-//}
 int Tilemap::getTileWidth()
 {
 	return  tileWidth;

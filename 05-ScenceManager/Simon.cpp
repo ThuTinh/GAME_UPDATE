@@ -28,7 +28,6 @@ Simon::Simon() : CGameObject()
 void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
 	// Calculate dx, dy 
-	//vx = vy = 0;
 	attachDelay.update();
 	colorDelay.update();
 	if (aniIndex == SIMON_ANI_COLORS) {
@@ -88,7 +87,6 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					onCollision(e->obj, e->t, e->nx, e->ny);
 
 				}
-				//Ground* ground = dynamic_cast<Ground*>(e->obj);
 			}
 		}
 
@@ -97,8 +95,6 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		/* mặc định là false cho tới khi chạm sàn */
 
 	}
-	
-	
 	// Simple fall down
 	vy += MARIO_GRAVITY * dt;
 
@@ -120,22 +116,20 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				}
 				else
 				{
-					
-					
-						if (isAttack) {
-							aniIndex = SIMON_ANI_STAND_USING_SUB;
-							//state = SIMON_STATE_ATTACK;
-							attachDelay.start();
-							if (attachDelay.isTerminated())
-							{
-								state = SIMON_STATE_NORMAL;
-							}
-						}
-						else
+					if (isAttack) {
+						aniIndex = SIMON_ANI_STAND_USING_SUB;
+						//state = SIMON_STATE_ATTACK;
+						attachDelay.start();
+						if (attachDelay.isTerminated())
 						{
-							aniIndex = SIMON_ANI_STAND;
-							setVx(0);
+							state = SIMON_STATE_NORMAL;
 						}
+					}
+					else
+					{
+						aniIndex = SIMON_ANI_STAND;
+						setVx(0);
+					}
 				}
 			}
 			if (isJumpDown) {
@@ -146,8 +140,6 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				{
 					state = SIMON_STATE_NORMAL;
 				}
-
-
 			}
 			
 		}
@@ -169,9 +161,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	}
 	case SIMON_STATE_ATTACK_JUMP:
 	{
-		
 		aniIndex = SIMON_ANI_DUCK_USING_SUB;
-		
 		
 		if (attachDelay.isTerminated())
 		{
@@ -365,7 +355,6 @@ void Simon::setStartStair()
 	/* set player stair state */
 	setPlayerStairState(SIMON_STAIR_STATE_NORUN);
 
-
 	/* tắt xử lý va chạm */
 	setStopCollision(true);
 }
@@ -463,12 +452,5 @@ void Simon::onCollision(CGameObject* other, float collisionTime, int nx, int ny)
 	CGameObject::onCollision( other,  collisionTime,  nx,  ny);
 }
 
-//void Simon::GetBoundingBox(float &left, float &top, float &right, float &bottom)
-//{
-//	left = x;
-//	top = y; 
-//	right = x + getWidth();
-//	bottom = y + getHeight();
-//	
-//}
+
 

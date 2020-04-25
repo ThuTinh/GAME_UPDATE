@@ -6,7 +6,7 @@
 6	textures\misc\cung.png	255	0	128
 7	textures\misc\Kiem.png	255	0	0
 8	textures\weopon\image.png	55	0	128
-17	textures\misc\TienDo.png	255	0	128
+16	textures\misc\TienDo.png	255	0	128
 -1	textures\tilesheet.png	255	0	0
 
 [MAP]
@@ -107,11 +107,11 @@
 
 #TienDo
 #Alone
-70001	0	0	16	16	0	0	17
+70001	0	0	16	16	0	0	16
 #Ani
-70002	0	0	16	16	0	0	17
-70003	16	0	16	16	0	0	17
-70004	32	0	16	16	0	0	17
+70002	0	0	16	16	0	0	16
+70003	16	0	16	16	0	0	16
+70004	32	0	16	16	0	0	16
 
 # ani_id	sprite1_id	time1	sprite2_id	time2	...
 [ANIMATIONS]
@@ -206,7 +206,7 @@
 6	340	132	20	32	4
 7	543	142	30	25	5
 -3	683	66	23	99	-1
-17	616	140	17	16	7
+16	616	140	17	16	7
 8	100	40	25	18	6
 0	100	40	16	30	1
 

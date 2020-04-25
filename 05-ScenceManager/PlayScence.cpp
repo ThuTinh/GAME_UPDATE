@@ -64,7 +64,7 @@ Space* CPlayScene::getCurentSpace()
 #define OBJECT_TYPE_ZOOMIE	4
 #define OBJECT_TYPE_HEART_BIG	5
 #define OBJECT_TYPE_ARCHERY	6
-//#define OBJECT_TYPE_SWORD	7
+#define OBJECT_TYPE_SWORD	7
 #define OBJECT_TYPE_WEAPON	8
 #define OBJECT_TYPE_BLACK_NIGHT  9
 #define OBJECT_TYPE_BAT  10
@@ -77,7 +77,7 @@ Space* CPlayScene::getCurentSpace()
 #define OBJECT_TYPE_AXE	18
 #define OBJECT_TYPE_HAIXANH	19
 #define OBJECT_TYPE_BOOMERANG 20
-#define OBJECT_TYPE_SWORD	21
+#define OBJECT_TYPE_CROWN	21
 #define OBJECT_TYPE_700PTS	22
 #define OBJECT_TYPE_HAIDO	23
 #define OBJECT_TYPE_BLUE	24
@@ -382,8 +382,6 @@ void CPlayScene::Unload()
 	{
 		delete objects[i];
 	}
-		
-
 	objects.clear();
 	player = NULL;
 }
@@ -397,23 +395,18 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 	{
 	case DIK_Z:
 		simon->isAttack = true;
-		/*simon->isAttackPress = simon->isAttack && !simon->isPreviousAttackDown;
-		simon->isPreviousAttackDown = simon->isAttack;*/
+		
 		break;
 	case DIK_SPACE:
 		simon->isJumpDown = true;
-		/*simon->isJumpPress = simon->isJumpDown && !simon->isPreviousJumpDown;
-		simon->isPreviousJumpDown = simon->isJumpDown;*/
+		
 		break;
 	case DIK_UP:
 		simon->isUpDown = true;
-		/*simon->isUpPress = simon->isUpDown && !simon->isPreviousUpDown;
-		simon->isPreviousUpDown = simon->isUpDown;*/
+		
 		break;
 	case DIK_DOWN:
-		simon->isDownDown = true;
-		/*simon->isJumpPress = simon->isJumpDown && !simon->isPreviousJumpDown;
-		simon->isPreviousJumpDown = simon->isJumpDown;*/
+		simon->isDownDown = true;		
 		break;
 	case DIK_LEFT:
 		simon->isLeftDown = true;
