@@ -124,6 +124,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AdditionalObject.cpp" />
     <ClCompile Include="Animations.cpp" />
     <ClCompile Include="Archery.cpp" />
     <ClCompile Include="Axe.cpp" />
@@ -137,6 +138,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Crown.cpp" />
     <ClCompile Include="DelayTime.cpp" />
+    <ClCompile Include="Die-effect.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Fire.cpp" />
     <ClCompile Include="Fleaman.cpp" />
@@ -176,6 +178,7 @@
     <ClCompile Include="Zoombie.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AdditionalObject.h" />
     <ClInclude Include="Animations.h" />
     <ClInclude Include="Archery.h" />
     <ClInclude Include="Axe.h" />
@@ -190,6 +193,7 @@
     <ClInclude Include="CollitionType.h" />
     <ClInclude Include="Crown.h" />
     <ClInclude Include="DelayTime.h" />
+    <ClInclude Include="Die-affect.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Fire.h" />
     <ClInclude Include="Fleaman.h" />

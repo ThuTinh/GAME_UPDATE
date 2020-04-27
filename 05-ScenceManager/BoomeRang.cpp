@@ -12,6 +12,10 @@ void BoomeRang::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	}
 }
 
+void BoomeRang::onPlayerContact()
+{
+}
+
 BoomeRang::BoomeRang()
 {
 }

@@ -88,7 +88,7 @@ void Weapon::Render()
 			{
 			case 0:
 				setY(Simon::getInstance()->getY());
-				setX(Simon::getInstance()->getX()+ 20);
+				setX(Simon::getInstance()->getX()+ 10);
 				switch (Simon::getInstance()->getNumberArchery())
 				{
 				case 0:
@@ -109,7 +109,7 @@ void Weapon::Render()
 
 			case 1:
 				setY(Simon::getInstance()->getY());
-				setX(Simon::getInstance()->getX() + 15);
+				setX(Simon::getInstance()->getX() + 10);
 				switch (Simon::getInstance()->getNumberArchery())
 				{
 				case 0:
@@ -130,11 +130,11 @@ void Weapon::Render()
 				break;
 			default:
 				setY(Simon::getInstance()->getY() + 2);
-				setX(Simon::getInstance()->getX() - 30);
+				setX(Simon::getInstance()->getX() - 40);
 				switch (Simon::getInstance()->getNumberArchery())
 				{
 				case 0:
-					setX(Simon::getInstance()->getX() -20);
+					setX(Simon::getInstance()->getX() -30);
 					aniIndex = WEAPON_ANI_W13;
 					break;
 				case 1:

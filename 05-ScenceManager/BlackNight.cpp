@@ -1,20 +1,25 @@
 ﻿#include "BlackNight.h"
 #include"Gound.h"
+#include"Simon.h"
+#include"ScoreBar.h"
+#include"Weapon.h"
 void BlackNight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 
 	vy += ENEMY_GRAVITY * dt;
 	CGameObject::Update(dt);
+	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive) {
+		setAlive(false);
+		ScoreBar::getInstance()->increaseScore(BLACKNIGHT_SCORE);
+
+	}
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
 	coEvents.clear();
 
-
 	// turn off collision when die 
 	if (isAlive)
 		CalcPotentialCollisions(coObjects, coEvents);
-
-
 	// No collision occured, proceed normally
 	if (coEvents.size() == 0)
 	{
@@ -66,16 +71,17 @@ void BlackNight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		}
 
 	}
-
 	//clean up collision events
 	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
 	/* mặc định là false cho tới khi chạm sàn */
+	
 	
 }
 
 void BlackNight::Render()
 {
-	animation_set->at(0)->Render(x, y, frameIndex, direction);
+	if(isAlive)
+		animation_set->at(0)->Render(x, y, frameIndex, direction);
 }
 
 BlackNight::BlackNight()
@@ -84,7 +90,7 @@ BlackNight::BlackNight()
 	collitionTypeToCheck.push_back(COLLISION_TYPE_GROUND);
 	setPhysicsEnable(true);
 	setDirection(DIRECTION_RIGHT);
-	setVx(0.03);
+	setVx(BLACKNIGHT_VX);
 }
 
 BlackNight::~BlackNight()

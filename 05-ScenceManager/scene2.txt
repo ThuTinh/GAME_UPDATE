@@ -240,9 +240,9 @@
 #id X       Y       Width       Height CameraX     CameraY PlayerX     PlayerY
 #SceneCount 2
 #space1
-0	225	197 	250	186	228	197	299	339
+0	225	197	250	186	228	175	299	339
 #spcae2
-1	1	3	505	170	262	0	391	157	
+1	1	3	505	170	262	-30	391	157	
 
 
 

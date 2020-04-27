@@ -15,6 +15,9 @@
 	 }
 
 }
+ void Archery::onPlayerContact()
+ {
+ }
  Archery::Archery()
  {
  }

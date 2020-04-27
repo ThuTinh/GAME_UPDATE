@@ -1,0 +1,18 @@
+Sprite die-effect
+R	G	B
+255	0	0	0
+Animation Count
+1
+
+
+Name
+Animation
+Frame Count
+3
+
+FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
+0			2			11				13				10			3
+11			3			13				12				10			2
+24			0			8				15				4			2
+
+
