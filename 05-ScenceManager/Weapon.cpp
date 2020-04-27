@@ -4,9 +4,10 @@
 Weapon* Weapon::instance = 0;
 void Weapon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	if (Simon::getInstance()->aniIndex != SIMON_ANI_STAND_USING_SUB && Simon::getInstance()->aniIndex != SIMON_ANI_DUCK_USING_SUB) {
+	/*if (Simon::getInstance()->aniIndex != SIMON_ANI_STAND_USING_SUB && Simon::getInstance()->aniIndex != SIMON_ANI_DUCK_USING_SUB) {
 		setAlive(false);
-	}
+	}*/
+	setAlive(false);
 }
 
 void Weapon::Render()
@@ -166,6 +167,7 @@ Weapon* Weapon::getInstance()
 
 Weapon::Weapon()
 {
+	setAlive(false);
 }
 
 Weapon::~Weapon()

@@ -11,6 +11,7 @@
 10	textures\enemy\bat.png	255	0	128
 9	textures\enemy\BlackNight.png	255	0	128
 5	textures\misc\heart.png	255	0	0
+50	textures\misc\die-effect.png	255	0	0
 8	textures\weopon\image.png	55	0	128
 -1	textures\map2\tilesheet.png	255	0	0
 
@@ -97,6 +98,11 @@
 140002	16	0	16	32	0	0	9
 140003	32	1	16	31	0	0	9
 
+#die efect
+550001	0	2	11	13	10	3	50
+550002	11	3	13	12	10	2	50
+
+
 
 # ani_id	sprite1_id	time1	sprite2_id	time2	...
 [ANIMATIONS]
@@ -147,7 +153,8 @@
 #== BaclkNight==
 1401	140001	100	140002	100	140003	100
 
-
+# die efect
+5501	550001	100	550002	100
 
 # id	ani1	ani2	ani3
 [ANIMATION_SETS]
@@ -175,14 +182,16 @@
 #Black nghit
 15	1401
 
+#die-efect
+50	5501
 
 [STAIR]
 #type collitionid 	x	y	with  height  ani_set_id IsRightStair IsTop
 
--2	311	266	13	8	-1	1	0	
--2	344	362	13	7	-1	1	0	
--2	398	295	17	12	-1	1	1	
--2	395	185	13	7	-1	1	0	
+-2	311	266	13	8	-1	1	0
+-2	344	362	13	7	-1	1	0
+-2	398	295	17	12	-1	1	1
+-2	395	185	13	7	-1	1	0
 -2	471	99	17	15	-1	1	1
 
 [OBJECTS]

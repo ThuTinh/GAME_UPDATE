@@ -3,6 +3,8 @@
 #include"Simon.h"
 #include"ScoreBar.h"
 #include"Weapon.h"
+#include"Die-affect.h"
+#include"Game.h"
 void BlackNight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 
@@ -11,6 +13,12 @@ void BlackNight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive) {
 		setAlive(false);
 		ScoreBar::getInstance()->increaseScore(BLACKNIGHT_SCORE);
+		DieEffect *dieEffect = new DieEffect();
+		CGame::GetInstance()->GetCurrentScene()->addObject(dieEffect);
+		dieEffect->setX(getMidX());
+		dieEffect->setY(getMidY());
+		dieEffect->setAlive(true);
+		dieEffect->timeDelay.start();
 
 	}
 	vector<LPCOLLISIONEVENT> coEvents;
