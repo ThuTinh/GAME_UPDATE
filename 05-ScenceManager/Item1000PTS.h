@@ -6,6 +6,7 @@ public:
 	Item1000PTS();
 	~Item1000PTS();
 	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) override;
+	void onPlayerContact() override;
 	void Render();
 
 private:

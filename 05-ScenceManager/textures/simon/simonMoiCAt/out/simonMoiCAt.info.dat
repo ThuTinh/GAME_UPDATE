@@ -1,0 +1,153 @@
+Sprite simonMoiCAt
+R	G	B
+255	0	128	0
+Animation Count
+13
+
+
+Name
+Stand
+Frame Count
+1
+
+FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
+0			0			16				32				0			0
+
+
+Name
+Go
+Frame Count
+3
+
+FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
+16			0			16				32				0			0
+32			0			16				32				0			0
+48			0			16				32				0			0
+
+
+Name
+Jumb
+Frame Count
+1
+
+FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
+64			0			16				32				0			0
+
+
+Name
+lencauThang
+Frame Count
+2
+
+FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
+80			0			16				32				0			0
+32			0			16				32				0			0
+
+
+Name
+XuongCauThang
+Frame Count
+2
+
+FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
+96			0			16				32				0			0
+32			0			16				32				0			0
+
+
+Name
+Heart
+Frame Count
+1
+
+FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
+112			0			16				32				0			0
+
+
+Name
+dead
+Frame Count
+2
+
+FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
+128			0			16				32				0			0
+144			16			32				16				0			0
+
+
+Name
+Intro
+Frame Count
+1
+
+FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
+176			0			16				32				0			0
+
+
+Name
+StandingHaveUseSubWeapon
+Frame Count
+6
+
+FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
+192			0			24				32				0			0
+216			0			16				32				0			0
+232			0			24				32				7			0
+256			0			24				32				7			0
+280			0			24				32				7			0
+304			0			24				32				7			0
+
+
+Name
+#DuckingHaveUseSubWeapon
+Frame Count
+6
+
+FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
+328			0			24				32				0			0
+352			0			16				32				0			0
+368			0			24				32				7			0
+392			0			24				32				7			0
+416			0			24				32				7			0
+440			0			24				32				7			0
+
+
+Name
+#AscendingStairsHaveUseSubweapon
+Frame Count
+6
+
+FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
+464			0			24				32				0			0
+488			0			16				32				0			0
+504			0			24				32				8			0
+528			0			24				32				8			0
+552			0			24				32				8			0
+576			0			24				32				8			0
+
+
+Name
+DescendingStairsHaveUseSubweapon
+Frame Count
+6
+
+FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
+600			0			24				32				0			0
+624			0			16				32				0			0
+640			0			24				32				8			0
+664			0			24				32				8			0
+688			0			24				32				8			0
+712			0			24				32				8			0
+
+
+Name
+Colors
+Frame Count
+5
+
+FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
+736			0			16				32				0			0
+752			0			16				32				0			0
+768			0			16				32				0			0
+784			0			16				32				0			0
+800			0			16				32				0			0
+
+

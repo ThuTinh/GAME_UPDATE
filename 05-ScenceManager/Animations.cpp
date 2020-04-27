@@ -56,9 +56,9 @@ void CAnimation::Render(float x, float y, int &frameIndex, DIRECTION direction, 
 void CAnimation::RenderScoreBar(float x, float y, int frameIndex, DIRECTION direction)
 {
 	float xView, yView;
-	Camera::getInstance()->convertWorldToView(x, y, xView, yView);
-	frames[frameIndex]->GetSprite()->Draw(xView, yView, direction);
-}
+	//Camera::getInstance()->convertWorldToView(x, y, xView, yView);
+	frames[frameIndex]->GetSprite()->Draw(x, y, direction);
+} 
 
 
 

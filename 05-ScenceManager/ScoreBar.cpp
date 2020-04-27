@@ -37,8 +37,7 @@ void ScoreBar::renderNumber(int num, int x, int y, int maxLength)
 	{
 		currentX -= NUMBER_WIDTH;
 		int val = num % 10;
-		//animation_set->render(currentX, y, MISC_SPRITE_ID_NUMBER, val);
-		animation_set->at(MISC_SPRITE_ID_NUMBER)->RenderScoreBar(x, y, val);
+		animation_set->at(MISC_SPRITE_ID_NUMBER)->RenderScoreBar(currentX, y, val);
 		num /= 10;
 		length++;
 	}
@@ -46,7 +45,7 @@ void ScoreBar::renderNumber(int num, int x, int y, int maxLength)
 	{
 		currentX -= NUMBER_WIDTH;
 
-		animation_set->at(MISC_SPRITE_ID_NUMBER)->RenderScoreBar(x, y, 0);
+		animation_set->at(MISC_SPRITE_ID_NUMBER)->RenderScoreBar(currentX, y, 0);
 	}
 }
 
@@ -268,6 +267,7 @@ ScoreBar::ScoreBar()
 	setHealth(maxHealth);
 	setBossHealth(maxHealth);
 	setTime(900);
+	currentStageNumber = 1;
 	//setSubWeapon(0);
 
 }
@@ -280,7 +280,7 @@ ScoreBar::~ScoreBar()
 void ScoreBar::render()
 {
 	//scoreBar->Render(0, 0, 0);
-	CGame::GetInstance()->Draw(0,0,0,0, scoreBar,0,0,250,40);
+	CGame::GetInstance()->Draw(0,0,0,0, scoreBar,0,0,255,40);
 	renderNumber(getPlayerLife(), lifeLocation.X, lifeLocation.Y, lifeLocation.MaxLength);
 	renderNumber(getHeartCount(), heartLocation.X, heartLocation.Y, heartLocation.MaxLength);
 	renderNumber(currentStageNumber, stageLocation.X, stageLocation.Y, stageLocation.MaxLength);
@@ -348,6 +348,11 @@ void ScoreBar::increaseHeartCount(int heartCount)
 void ScoreBar::setCurrentStageNumber(int currentStageNumber)
 {
 	this->currentStageNumber = currentStageNumber;
+}
+
+int ScoreBar::getCurrentStageNumber()
+{
+	return currentStageNumber;
 }
 
 void ScoreBar::Load(LPCWSTR sorebarFile)

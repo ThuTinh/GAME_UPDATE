@@ -49,15 +49,15 @@ void BlackNight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			{
 				if (this->getX() + 5 > e->obj->getRight() || nx ==-1) {
 					setDirection(DIRECTION_LEFT);
-					setVx(-0.05);
+					setVx(-BLACKNIGHT_VX);
 				
 				}
 				else
 				{
 					if (this->getX() - 5 < e->obj->getLeft() || nx==1 ) {
 						setDirection(DIRECTION_RIGHT);
-						x += 2;
-						setVx(0.05);
+						//x += 1;
+						setVx(BLACKNIGHT_VX);
 					}
 				}
 				

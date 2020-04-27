@@ -91,6 +91,7 @@ public:
 	int getMaxHealth();
 
 	void setCurrentStageNumber(int currentStageNumber);
+	int getCurrentStageNumber();
 	void Load(LPCWSTR sorebarFile);
 };
 

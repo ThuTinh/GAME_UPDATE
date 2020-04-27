@@ -1,5 +1,6 @@
 #pragma once
 #include"Enemy.h"
+#define BLACKNIGHT_VX 0.02
 class BlackNight : public Enemy
 {
 public:

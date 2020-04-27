@@ -11,7 +11,6 @@ void Weapon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 void Weapon::Render()
 {
-
 	if (Simon::getInstance()->aniIndex == SIMON_ANI_STAND_USING_SUB || Simon::getInstance()->aniIndex == SIMON_ANI_DUCK_USING_SUB) {
 		if (Simon::getInstance()->getDirection() == DIRECTION_RIGHT) {
 			setDirection(DIRECTION::DIRECTION_RIGHT);
@@ -106,7 +105,6 @@ void Weapon::Render()
 					break;
 				}
 
-
 				break;
 
 			case 1:
@@ -155,9 +153,7 @@ void Weapon::Render()
 		}
 		setAlive(true);
 		animation_set->at(aniIndex)->Render(x, y, frameIndex, direction);
-
 	}
-	
 }
 
 Weapon* Weapon::getInstance()
