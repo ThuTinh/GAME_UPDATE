@@ -1,9 +1,9 @@
-#include"Gate1.h"
+#include"Gate.h"
 #include"Simon.h"
 #include"Game.h"
 #include"Camera.h"
 #include"ScoreBar.h"
-void Gate1::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
+void Gate::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	if (AABBCheck(Simon::getInstance())) {
 		CGame::GetInstance()->SwitchScene(CGame::GetInstance()->current_scene + 1);
@@ -11,15 +11,15 @@ void Gate1::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	}
 }
 
- void Gate1::Render()
+void Gate::Render()
 {
 }
 
-Gate1::Gate1()
+Gate::Gate()
 {
-	
+
 }
 
-Gate1::~Gate1()
+Gate::~Gate()
 {
 }

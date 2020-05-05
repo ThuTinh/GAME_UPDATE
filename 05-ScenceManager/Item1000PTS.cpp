@@ -2,6 +2,7 @@
 #include"Simon.h"
 #include"Gound.h"
 #include"ScoreBar.h"
+#include "Game.h"
 void Item1000PTS::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	if (getItemState() == ITEM_STATE_PLAYER_EATED || !getAlive())
@@ -9,7 +10,7 @@ void Item1000PTS::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	else
 	{
 		
-		if (Simon::getInstance()->getX() - getX() > 30) {
+		if (Simon::getInstance()->getX() - getX() > 30 && CGame::GetInstance()->current_scene == 1) {
 			setItemState(ITEM_STATE_VISIBLE);
 		}
 		if (getItemState() == ITEM_STATE_VISIBLE) {

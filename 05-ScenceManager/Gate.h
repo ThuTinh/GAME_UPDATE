@@ -1,13 +1,15 @@
 #pragma once
-#include"Item.h"
-class Sword : public Item
+#include"GameObject.h"
+class Gate : public CGameObject
 {
 public:
-	Sword();
-	~Sword();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
-	void onPlayerContact() override;
+	virtual void Render();
+	Gate();
+	~Gate();
+
 private:
 
 };
+
 

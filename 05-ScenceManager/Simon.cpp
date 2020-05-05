@@ -223,6 +223,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					else
 					{
 						aniIndex = SIMON_ANI_STAND;
+						
 						setVx(0);
 					}
 				}
@@ -364,6 +365,16 @@ void Simon::Render()
 	animation_set->at(aniIndex)->Render(x, y,frameIndex , direction, pauseAnimation);	
 }
 
+Item *Simon::getSubweapo()
+{
+	return subWeapon;
+}
+
+void Simon::setSubWeapon(Item* item)
+{
+	this->subWeapon = item;
+}
+
 void Simon::setNumberArchery(int num)
 {
 	this->numberArchery = num;
@@ -492,13 +503,13 @@ void Simon::goStairUp()
 	if (stairDirection == 0)
 	{
 		/* stair phải */
-		playerStairDestx += 8;
+		playerStairDestx += 5;
 		setDirection(DIRECTION_LEFT);
 	}
 	else
 	{
 		/* stair trái */
-		playerStairDestx -= 8;
+		playerStairDestx -= 5;
 		setDirection(DIRECTION_RIGHT);
 	}
 
@@ -514,13 +525,13 @@ void Simon::goStairDown()
 	if (stairDirection == 0)
 	{
 		/* stair phải */
-		playerStairDestx -= 8;
+		playerStairDestx -= 5;
 		setDirection(DIRECTION_RIGHT);
 	}
 	else
 	{
 		/* stair trái */
-		playerStairDestx += 8;
+		playerStairDestx += 5;
 		setDirection(DIRECTION_LEFT);
 	}
 

@@ -219,6 +219,24 @@
     <ClCompile Include="Die-effect.cpp">
       <Filter>Object\Misc</Filter>
     </ClCompile>
+    <ClCompile Include="Gate2.cpp">
+      <Filter>Object\Gate</Filter>
+    </ClCompile>
+    <ClCompile Include="GateStair2.cpp">
+      <Filter>Object\Gate</Filter>
+    </ClCompile>
+    <ClCompile Include="GateStairChangeDirection.cpp">
+      <Filter>Object\Gate</Filter>
+    </ClCompile>
+    <ClCompile Include="Gate.cpp">
+      <Filter>Object\Gate</Filter>
+    </ClCompile>
+    <ClCompile Include="GateStair.cpp">
+      <Filter>Object\Gate</Filter>
+    </ClCompile>
+    <ClCompile Include="SubWeaponItem.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Brick.h">
@@ -382,6 +400,24 @@
     </ClInclude>
     <ClInclude Include="Die-affect.h">
       <Filter>Object\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Gate2.h">
+      <Filter>Object\Gate</Filter>
+    </ClInclude>
+    <ClInclude Include="GateStair2.h">
+      <Filter>Object\Gate</Filter>
+    </ClInclude>
+    <ClInclude Include="GateStairChangeDirection.h">
+      <Filter>Object\Gate</Filter>
+    </ClInclude>
+    <ClInclude Include="Gate.h">
+      <Filter>Object\Gate</Filter>
+    </ClInclude>
+    <ClInclude Include="GateStair.h">
+      <Filter>Object\Gate</Filter>
+    </ClInclude>
+    <ClInclude Include="SubWeaponItem.h">
+      <Filter>Object\Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

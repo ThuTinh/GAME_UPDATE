@@ -24,6 +24,8 @@
 
 #define MISC_SPRITE_ID_NUMBER 0
 #define MISC_SPRITE_ID_LOST_HEALTH 1
+#define MISC_SPRITE_ID_KNIFE 2
+#define MISC_SPRITE_ID_BOOMERANG 3
 #define NUMBER_WIDTH 8
 #define HEALTH_WIDTH 4
 void ignoreLineIfstream(ifstream & fs, int lineCount);
@@ -75,15 +77,29 @@ void ScoreBar::renderBossHealth()
 	}
 }
 
-//void ScoreBar::renderSubWeapon()
-//{
-//	if (this->subWeapon != 0)
-//	{
-//		this->subWeapon->getSprite()->render(subWeaponLocation.X,
-//			subWeaponLocation.Y,
-//			subWeapon->getAction(), 0);
-//	}
-//}
+void ScoreBar::renderSubWeapon()
+{
+	//if (this->subWeapon != 0)
+	//{
+	//	/*this->subWeapon->getSprite()->render(subWeaponLocation.X,
+	//		subWeaponLocation.Y,
+	//		subWeapon->getAction(), 0);*/
+	//	subWeapon->animation_set->at(0)->RenderScoreBar(subWeaponLocation.X, subWeaponLocation.Y, 0);
+
+	//}
+
+	switch (stypeSubweapon)
+	{
+	case SWORD:
+		animation_set->at(MISC_SPRITE_ID_KNIFE)->RenderScoreBar(subWeaponLocation.X, subWeaponLocation.Y, 0);
+		break;
+	case BOOMERANG:
+		animation_set->at(MISC_SPRITE_ID_BOOMERANG)->RenderScoreBar(subWeaponLocation.X, subWeaponLocation.Y, 0);
+		break;
+	default:
+		break;
+	}
+}
 
 ScoreBar* ScoreBar::instance = 0;
 void ScoreBar::_ParseSection_TEXTURE_MISC(string line)
@@ -268,7 +284,8 @@ ScoreBar::ScoreBar()
 	setBossHealth(maxHealth);
 	setTime(900);
 	currentStageNumber = 1;
-	//setSubWeapon(0);
+	setSubWeapon(0);
+	stypeSubweapon = DEFAUL;
 
 }
 
@@ -288,7 +305,7 @@ void ScoreBar::render()
 	renderNumber(time, timeLocation.X, timeLocation.Y, timeLocation.MaxLength);
 	renderHealth();
 	renderBossHealth();
-	//renderSubWeapon();
+	renderSubWeapon();
 }
 
 void ScoreBar::update()
@@ -299,10 +316,22 @@ void ScoreBar::update()
 	}
 }
 
-//void ScoreBar::setSubWeapon(SubWeaponItem * subWeapon)
-//{
-//	this->subWeapon = subWeapon;
-//}
+void ScoreBar::setSubWeapon(Item* subWeapon)
+{
+	this->subWeapon = subWeapon;
+}
+
+void ScoreBar::setTypeSubWeapon(TYPE_SUBWEAPON type)
+{
+	this->stypeSubweapon = type;
+}
+
+TYPE_SUBWEAPON ScoreBar::getTypeSubWeapon()
+{
+	return stypeSubweapon;
+}
+
+
 
 void ScoreBar::restoreHealth()
 {

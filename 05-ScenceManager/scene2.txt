@@ -4,8 +4,8 @@
 19	textures\misc\HaiXanh.png	255	0	128
 15	textures\misc\heartSmall.png	255	0	128
 2	textures\misc\light.png		255	0	128
-20	textures\misc\vkXanh.png	255	0	128
-17	textures\misc\TienDo.png	255	0	128
+20	textures\misc\boomerang.png	255	0	128
+16	textures\misc\TienDo.png	255	0	128
 22	textures\misc\TienVang.png	255	0	128
 21	textures\misc\VuonNiem.png	255	0	128
 10	textures\enemy\bat.png	255	0	128
@@ -52,11 +52,11 @@
 
 #TienDo
 #Alone
-70001	0	0	16	16	0	0	17
+70001	0	0	16	16	0	0	16
 #Ani
-70002	0	0	16	16	0	0	17
-70003	16	0	16	16	0	0	17
-70004	32	0	16	16	0	0	17
+70002	0	0	16	16	0	0	16
+70003	16	0	16	16	0	0	16
+70004	32	0	16	16	0	0	16
 
 ##TienVang
 #Alone

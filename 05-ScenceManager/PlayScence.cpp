@@ -16,7 +16,12 @@
 #include"BlackNight.h"
 #include"Stair.h"
 #include"Gate1.h"
+#include"Gate2.h"
+#include"Gate.h"
 #include"GateStair1.h"
+#include"GateStair2.h"
+#include"GateStair.h"
+#include"GateStairChangeDirection.h"
 #include"ScoreBar.h"
 #include"SmallHeart.h"
 #include"Sword.h"
@@ -70,8 +75,11 @@ Space* CPlayScene::getCurentSpace()
 #define SCENE_SECTION_SPACE	8
 #define SCENE_SECTION_STAIR 9
 
+#define OBJECT_TYPE_GATE3 -9
+#define OBJECT_TYPE_GATE_STAIR_CHANGE_DIRECTION -8
+#define OBJECT_TYPE_GATE_STAIR2 -7
 #define OBJECT_TYPE_GATE2 -6
-#define OBJECT_TYPE_GATE_STAIR2 -5
+//#define OBJECT_TYPE_GATE_STAIR2 -5
 #define OBJECT_TYPE_GATE_STAIR1 -4
 #define OBJECT_TYPE_GATE1 -3
 #define OBJECT_TYPE_GROUND	-1
@@ -242,8 +250,12 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_1000PTS: obj = new Item1000PTS(); break;
 	case OBJECT_TYPE_LIGHT: obj = new Light(); break;
 	case OBJECT_TYPE_BLACK_NIGHT: obj = new BlackNight(); break;
-	case OBJECT_TYPE_GATE1: obj = new Gate1(); break;
-	case OBJECT_TYPE_GATE_STAIR1: obj = new GateStair1(); break;
+	case OBJECT_TYPE_GATE1: obj = new Gate(); break;
+	case OBJECT_TYPE_GATE2: obj = new Gate(); break;
+	case OBJECT_TYPE_GATE3: obj = new Gate(); break;
+	case OBJECT_TYPE_GATE_STAIR1: obj = new GateStair(); break;
+	case OBJECT_TYPE_GATE_STAIR2: obj = new GateStair(); break;
+	case OBJECT_TYPE_GATE_STAIR_CHANGE_DIRECTION: obj = new GateStairChangeDirection(); break;
 	case OBJECT_TYPE_HEART_SMALL: obj = new SmallHeart(); break;
 	case OBJECT_TYPE_700PTS: obj = new Item700PTS(); break;
 	case OBJECT_TYPE_400PTS: obj = new Item400PTS(); break;

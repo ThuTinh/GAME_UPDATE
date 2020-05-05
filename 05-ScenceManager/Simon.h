@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "GameObject.h"
 #include"DelayTime.h"
-
+#include "Item.h"
 #define SIMON_VX	0.06 
 //0.1f
 #define SIMON_JUMP_Y		0.27f
@@ -40,7 +40,6 @@
 class Simon : public CGameObject
 {
 	int level;
-	
 	int playerStairDestx, playerStairDesty;
 	int playerStairState;
 	int stairDirection;
@@ -51,6 +50,7 @@ class Simon : public CGameObject
 	void _ParseSection_ANIMATIONS(string line);
 	void _ParseSection_ANIMATION_SETS(string line);
 public: 
+	Item *subWeapon;
 	bool isRightDown;
 	bool isLeftDown;
 	bool isUpDown;
@@ -63,6 +63,8 @@ public:
 	Simon();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *colliable_objects = NULL);
 	virtual void Render();
+	Item *getSubweapo();
+	void setSubWeapon(Item * item);
 	void setNumberArchery(int num);
 	int getNumberArchery();
 	void addNumberArchery(int num);
