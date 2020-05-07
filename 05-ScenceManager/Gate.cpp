@@ -17,7 +17,7 @@ void Gate::Render()
 
 Gate::Gate()
 {
-
+	setCollitionType(COLLISION_TYPE_MISC);
 }
 
 Gate::~Gate()

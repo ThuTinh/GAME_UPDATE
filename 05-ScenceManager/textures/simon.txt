@@ -87,7 +87,7 @@
 #Hurt
 105	10010	100
 #Dead
-106	10011	100	10012	100
+106	10012	100
 #intro
 107	10013	100
 #StandingHaveUseSubWeapon

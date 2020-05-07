@@ -261,8 +261,6 @@ void CGameObject::CalcPotentialCollisions(
 	vector<LPGAMEOBJECT> *coObjects, 
 	vector<LPCOLLISIONEVENT> &coEvents)
 {
-
-
 		if (!coObjects->empty()) {
 			for (UINT k = 0; k < coObjects->size(); k++)
 			{

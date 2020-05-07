@@ -236,6 +236,8 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		player->SetPosition(x, y);
 		player->setWidth(width);
 		player->setHeight(height);
+		player->fixHeight = height;
+		player->fixWidth = width;
 		LPANIMATION_SET ani_set = animation_sets->Get(ani_set_id);
 		player->SetAnimationSet(ani_set);
 		return;

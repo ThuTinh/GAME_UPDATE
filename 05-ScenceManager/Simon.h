@@ -15,6 +15,8 @@
 #define SIMON_STATE_ATTACK 102
 #define SIMON_STATE_ATTACK_JUMP 103
 #define SIMON_STATE_DIE 104
+#define SIMON_STATE_HURT 105
+
 
 #define SIMON_STAIR_STATE_NORUN 200
 #define SIMON_STAIR_STATE_GO_UP 201
@@ -58,11 +60,18 @@ public:
 	bool isJumpDown;
 	bool isAttack;
 	int numberArchery;
+	int fixWidth;
+	int fixHeight;
 	DelayTime attachDelay;
 	DelayTime colorDelay;
+	DelayTime hurtDelay;
+	DelayTime deadDelay;
+
+
 	Simon();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *colliable_objects = NULL);
 	virtual void Render();
+	void retoreWidthHeight();
 	Item *getSubweapo();
 	void setSubWeapon(Item * item);
 	void setNumberArchery(int num);

@@ -6,6 +6,9 @@
 #include "Game.h"
 #include "Gound.h"
 #include "Textures.h"
+#include "ScoreBar.h"
+#include "Weapon.h"
+#include "Enemy.h"
 
 #define SCENE_SECTION_UNKNOWN -1
 #define SCENE_SECTION_TEXTURES 2
@@ -113,8 +116,11 @@ Simon::Simon() : CGameObject()
 	setNumberArchery(1);
 	attachDelay.init(80);
 	colorDelay.init(300);
+	hurtDelay.init(10);
+	deadDelay.init(200);
 	setCollitionType(COLLISION_TYPE_PLAYER);
 	collitionTypeToCheck.push_back(COLLISION_TYPE_GROUND);
+	collitionTypeToCheck.push_back(COLLISION_TYPE_ENEMY);
 
 
 
@@ -125,6 +131,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	// Calculate dx, dy 
 	attachDelay.update();
 	colorDelay.update();
+	hurtDelay.update();
 	if (aniIndex == SIMON_ANI_COLORS) {
 		
 		if(colorDelay.isTerminated()) {
@@ -135,6 +142,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			return;
 		}
 	}
+	
 	CGameObject::Update(dt);
 	if (!stopCollision) {
 		vector<LPCOLLISIONEVENT> coEvents;
@@ -175,13 +183,29 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			{
 				LPCOLLISIONEVENT e = coEvents[i];
 				if (!dynamic_cast<Ground*>(e->obj)) {
-					e->obj->onCollision(e->obj, e->t, e->nx, e->ny);
+					
+					if (dynamic_cast<Enemy*>(e->obj)) {
+						//e->obj->onCollision(e->obj, e->t, e->nx, e->ny); 
+						aniIndex = SIMON_ANI_HURT;
+						state = SIMON_STATE_HURT;
+						/*setX(getX() - direction*10);
+						setY(getY() + 10);*/
+						hurtDelay.start();
+						if (ScoreBar::getInstance()->getHealth() <= 0) {
+							ScoreBar::getInstance()->increasePlayerLife(-1);
+							aniIndex = SIMON_ANI_DEAD;
+							state = SIMON_STATE_DIE;
+							setHeight(animation_set->at(aniIndex)->getFrame(0)->GetSprite()->getHeight());
+							deadDelay.start();
+						}
+						
+					}
 				}
 				else
 				{
 					onCollision(e->obj, e->t, e->nx, e->ny);
 
-				}
+				} 
 			}
 		}
 
@@ -223,6 +247,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					else
 					{
 						aniIndex = SIMON_ANI_STAND;
+						//aniIndex = SIMON_ANI_DEAD;
 						
 						setVx(0);
 					}
@@ -257,7 +282,9 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	}
 	case SIMON_STATE_ATTACK_JUMP:
 	{
-		aniIndex = SIMON_ANI_DUCK_USING_SUB;
+		//aniIndex = SIMON_ANI_DUCK_USING_SUB;
+		aniIndex = SIMON_ANI_STAND_USING_SUB;
+
 		
 		if (attachDelay.isTerminated())
 		{
@@ -353,6 +380,40 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		}
 		break;
 	}
+	case SIMON_STATE_DIE: {
+		deadDelay.update();
+		setVx(0);
+		//setHeight(getCurrentFrameHeight());
+		if (deadDelay.isTerminated())
+		{
+			//int currentArea = changeArea->getCurrentAreaIndex();
+			/*if (currentArea == 5)
+				currentArea = 4;*/
+			//boss->restore();
+			/*changeArea->changeArea(currentArea);
+			changeArea->resetLocation();*/
+			//Camera::getInstance()->preventMoving = false;
+			ScoreBar::getInstance()->restoreHealth();
+			ScoreBar::getInstance()->restoreBossHealth();
+		//	Weapon::getInstance()->setType(MORNINGSTAR_TYPE_1);
+			retoreWidthHeight();
+			setY(getY()+16);
+			state = SIMON_STATE_NORMAL ;
+		}
+
+		return;
+	}
+	case SIMON_STATE_HURT: {
+		
+		if (hurtDelay.isTerminated()) {
+			ScoreBar::getInstance()->increaseHealth(-1);
+			//Simon::getInstance()->aniIndex = SIMON_ANI_STAND;
+			state = SIMON_STATE_NORMAL;
+			
+
+		}
+		return;
+	}
 	
 	default:
 		break;
@@ -362,7 +423,14 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 void Simon::Render()
 {	
+
 	animation_set->at(aniIndex)->Render(x, y,frameIndex , direction, pauseAnimation);	
+}
+
+void Simon::retoreWidthHeight()
+{
+	setWidth(fixWidth);
+	setHeight(fixHeight);
 }
 
 Item *Simon::getSubweapo()

@@ -248,7 +248,9 @@ void ScoreBar::_ParseSection_LOCATION_HEALTHY(string line)
 	if (tokens.size() < 3) return; // skip invalid lines
 	healthLocation.X = atoi(tokens[0].c_str());
 	healthLocation.Y = atoi(tokens[1].c_str());
-	healthLocation.MaxLength = atoi(tokens[2].c_str());
+	maxHealth = atoi(tokens[2].c_str());
+	setHealth(maxHealth);
+	setBossHealth(maxHealth);
 }
 void ScoreBar::_ParseSection_LOCATION_SUBWEAPON(string line)
 {
