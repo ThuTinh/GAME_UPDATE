@@ -151,6 +151,7 @@
     <ClCompile Include="GateStair1.cpp" />
     <ClCompile Include="GateStair2.cpp" />
     <ClCompile Include="GateStairChangeDirection.cpp" />
+    <ClCompile Include="GiaDo.cpp" />
     <ClCompile Include="GoldPotion.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="HaiDo.cpp" />
@@ -211,6 +212,7 @@
     <ClInclude Include="GateStair1.h" />
     <ClInclude Include="GateStair2.h" />
     <ClInclude Include="GateStairChangeDirection.h" />
+    <ClInclude Include="GiaDo.h" />
     <ClInclude Include="GoldPotion.h" />
     <ClInclude Include="Gound.h" />
     <ClInclude Include="HaiDo.h" />

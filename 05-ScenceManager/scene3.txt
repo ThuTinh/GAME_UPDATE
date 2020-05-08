@@ -12,6 +12,7 @@
 11	textures\enemy\Sketon.png	255	0	128
 12	textures\enemy\fleaman.png	255	0	128
 13	textures\enemy\raven.png	255	0	128
+50	textures\misc\die-effect.png	255	0	0
 8	textures\weopon\image.png	55	0	128
 -1	textures\map3\tilesheet.png	255	0	0
 
@@ -106,7 +107,9 @@
 200003	32	0	16	16	0	0	13
 200004	48	0	16	16	0	0	13
 
-
+#die efect
+550001	0	2	11	13	10	3	50
+550002	11	3	13	12	10	2	50
 
 
 
@@ -165,7 +168,8 @@
 #TienTim
 2101	70009	100
 2102	70010	100	70011	100	70012	100
-
+# die efect
+5501	550001	100	550002	100
 
 # id	ani1	ani2	ani3
 [ANIMATION_SETS]
@@ -196,6 +200,8 @@
 21	2001	2002
 #TienTim
 22	2101	2102
+#die-efect
+50	5501
 
 [STAIR]
 #type 	x	y	with  height  ani_set_id IsRightStair IsTop

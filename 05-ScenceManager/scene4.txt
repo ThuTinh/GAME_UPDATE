@@ -7,6 +7,7 @@
 17	textures\misc\BinhVang.png	255	0	128
 18	textures\misc\axe.png	255	0	128
 5	textures\misc\heart.png		255	0	0
+50	textures\misc\die-effect.png	255	0	0
 27	textures\enemy\Boss.png	255	0	128
 4	textures\enemy\zoombie.png	255	0	128
 8	textures\weopon\image.png	55	0	128
@@ -82,6 +83,9 @@
 220002	16	0	48	32	23	0	27
 220003	64	0	32	32	15	1	27
 
+#die efect
+550001	0	2	11	13	10	3	50
+550002	11	3	13	12	10	2	50
 
 # ani_id	sprite1_id	time1	sprite2_id	time2	...
 [ANIMATIONS]
@@ -128,6 +132,9 @@
 2301	220001	100
 2302	220002	100	220003	100
 
+# die efect
+5501	550001	100	550002	100
+
 # id	ani1	ani2	ani3
 [ANIMATION_SETS]
 #HEART
@@ -150,6 +157,8 @@
 23	2201
 #boss
 24	2301	2302
+#die-efect
+50	5501
 
 [STAIR]
 #type 	x	y	with  height  ani_set_id IsRightStair IsTop

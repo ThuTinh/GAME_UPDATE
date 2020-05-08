@@ -16,6 +16,8 @@
 #define SIMON_STATE_ATTACK_JUMP 103
 #define SIMON_STATE_DIE 104
 #define SIMON_STATE_HURT 105
+#define SIMON_STATE_DUCK 106
+#define SIMON_STATE_ATTACK_DUCK 107
 
 
 #define SIMON_STAIR_STATE_NORUN 200
@@ -66,6 +68,8 @@ public:
 	DelayTime colorDelay;
 	DelayTime hurtDelay;
 	DelayTime deadDelay;
+	DelayTime duckDelay;
+	DelayTime attackDuckDelay;
 
 
 	Simon();

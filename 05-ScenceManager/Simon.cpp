@@ -118,6 +118,8 @@ Simon::Simon() : CGameObject()
 	colorDelay.init(300);
 	hurtDelay.init(10);
 	deadDelay.init(200);
+	duckDelay.init(400);
+	attackDuckDelay.init(300);
 	setCollitionType(COLLISION_TYPE_PLAYER);
 	collitionTypeToCheck.push_back(COLLISION_TYPE_GROUND);
 	collitionTypeToCheck.push_back(COLLISION_TYPE_ENEMY);
@@ -132,6 +134,8 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	attachDelay.update();
 	colorDelay.update();
 	hurtDelay.update();
+	duckDelay.update();
+	attackDuckDelay.update();
 	if (aniIndex == SIMON_ANI_COLORS) {
 		
 		if(colorDelay.isTerminated()) {
@@ -235,22 +239,30 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				}
 				else
 				{
-					if (isAttack) {
-						aniIndex = SIMON_ANI_STAND_USING_SUB;
-						//state = SIMON_STATE_ATTACK;
-						attachDelay.start();
-						if (attachDelay.isTerminated())
-						{
-							state = SIMON_STATE_NORMAL;
-						}
+					if (isDownDown) {
+						state = SIMON_STATE_DUCK;
+						setHeight(25);
+						duckDelay.start();
 					}
 					else
 					{
-						aniIndex = SIMON_ANI_STAND;
-						//aniIndex = SIMON_ANI_DEAD;
-						
-						setVx(0);
+						if (isAttack) {
+							aniIndex = SIMON_ANI_STAND_USING_SUB;
+							//state = SIMON_STATE_ATTACK;
+							attachDelay.start();
+							if (attachDelay.isTerminated())
+							{
+								state = SIMON_STATE_NORMAL;
+							}
+						}
+						else
+						{
+							aniIndex = SIMON_ANI_STAND;
+							//aniIndex = SIMON_ANI_DEAD;
+							setVx(0);
+						}
 					}
+					
 				}
 			}
 			if (isJumpDown) {
@@ -262,7 +274,6 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					state = SIMON_STATE_NORMAL;
 				}
 			}
-			
 		}
 		else
 		{
@@ -271,7 +282,6 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			if (isAttack) {
 				state = SIMON_STATE_ATTACK_JUMP;
 				attachDelay.start();
-
 			}
 		}
 	}
@@ -284,8 +294,6 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	{
 		//aniIndex = SIMON_ANI_DUCK_USING_SUB;
 		aniIndex = SIMON_ANI_STAND_USING_SUB;
-
-		
 		if (attachDelay.isTerminated())
 		{
 			state = SIMON_STATE_NORMAL;
@@ -400,7 +408,6 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			setY(getY()+16);
 			state = SIMON_STATE_NORMAL ;
 		}
-
 		return;
 	}
 	case SIMON_STATE_HURT: {
@@ -409,21 +416,45 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			ScoreBar::getInstance()->increaseHealth(-1);
 			//Simon::getInstance()->aniIndex = SIMON_ANI_STAND;
 			state = SIMON_STATE_NORMAL;
-			
-
 		}
 		return;
 	}
 	
+	case SIMON_STATE_DUCK: {
+		aniIndex = SIMON_ANI_JUMB;
+		if (isAttack) {
+			state = SIMON_STATE_ATTACK_DUCK;
+			attackDuckDelay.start();
+			return;
+		}
+		if (duckDelay.isTerminated())
+		{
+			state = SIMON_STATE_NORMAL;
+			retoreWidthHeight();
+			setY(getY() + 30);
+		}
+		
+		break;
+
+	}
+	case SIMON_STATE_ATTACK_DUCK: {
+		aniIndex = SIMON_ANI_DUCK_USING_SUB;
+		//setHeight(25);
+		if (attackDuckDelay.isTerminated())
+		{
+			state = SIMON_STATE_NORMAL;
+			retoreWidthHeight();
+			setY(getY() + 30);
+		}
+		break;
+	}
 	default:
 		break;
 	}
-
 }
 
 void Simon::Render()
 {	
-
 	animation_set->at(aniIndex)->Render(x, y,frameIndex , direction, pauseAnimation);	
 }
 

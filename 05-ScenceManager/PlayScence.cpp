@@ -38,6 +38,7 @@
 #include"Raven.h"
 #include"Sketon.h"
 #include"Zoombie.h"
+#include"GiaDo.h"
 using namespace std;
 
 CPlayScene::CPlayScene(int id, LPCWSTR filePath):
@@ -110,6 +111,7 @@ Space* CPlayScene::getCurentSpace()
 #define OBJECT_TYPE_400PTS	25
 #define OBJECT_TYPE_DIE_EFECT	26
 #define OBJECT_TYPE_BOSSBAT	27
+#define OBJECT_TYPE_GIADO 30
 
 
 
@@ -266,8 +268,10 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_BOOMERANG: obj = new BoomeRang(); break;
 	case OBJECT_TYPE_FLEAMAN: obj = new Fleaman(); break;
 	case OBJECT_TYPE_SKETON: obj = new Sketon(); break;
-	case OBJECT_TYPE_GOLDPOTION: obj = new GoldPotion();
+	case OBJECT_TYPE_GOLDPOTION: obj = new GoldPotion(); break;
 	case OBJECT_TYPE_BLUEPOTION: obj = new BluePotion(); break;
+	case OBJECT_TYPE_GIADO: obj = new GiaDo(); break;
+	case OBJECT_TYPE_ZOOMIE: obj = new Zoombie(); break;
 	default:
 		DebugOut(L"[ERR] Invalid object type: %d\n", object_type);
 		return;
