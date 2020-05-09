@@ -1,5 +1,7 @@
 ﻿#include "Fleaman.h"
+#include "Simon.h"
 #include"Gound.h"
+#include "Enemy.h"
 //void Fleaman::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 //{
 //
@@ -61,6 +63,53 @@
 //
 //}
 
+void Fleaman::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
+{
+	Enemy::Update(dt, coObjects);
+	if (abs(Simon::getInstance()->getX() - getX()) < FLEAMAN_DISTANCE_TO_JUMB) {
+		setPhysicsEnable(true);
+		setDirectionFollowPlayer();
+		setVx(getDirection() * FLEAMAN_VX);
+		switch (fleamanState)
+		{
+		case FLEAMAN_STATE_JUMP_SHORT:
+			if (getIsOnGround())
+			{
+				if (jumpRemain > 0)
+				{
+					setVy(FLEAMAN_VY_SHORT);
+					jumpRemain--;
+				}
+				else
+				{
+					fleamanState = FLEAMAN_STATE_JUMP_LONG;
+					jumpRemain = FLEAMAN_JUMBLONG_COUNTER;
+				}
+			}
+			break;
+		case FLEAMAN_STATE_JUMP_LONG:
+			if (getIsOnGround())
+			{
+				if (jumpRemain > 0)
+				{
+					setVy(FLEAMAN_VY_LONG);
+					jumpRemain--;
+				}
+				else
+				{
+					fleamanState = FLEAMAN_STATE_JUMP_SHORT;
+					jumpRemain = FLEAMAN_FUMBSHORT_COUNTER;
+				}
+			}
+			break;
+		default:
+			break;
+		}
+		
+	}
+	
+}
+
 void Fleaman::Render()
 {
 	if (isAlive)
@@ -71,9 +120,13 @@ Fleaman::Fleaman()
 {
 	setCollitionType(COLLISION_TYPE_ENEMY);
 	collitionTypeToCheck.push_back(COLLISION_TYPE_GROUND);
-	setPhysicsEnable(true);
+	setPhysicsEnable(false);
+	setVx(0);
+	setVy(0);
 	setDirection(DIRECTION_RIGHT);
-	setVx(0.03);
+	aniIndex = FLEAMAN_ACTION_STAND;
+	fleamanState = FLEAMAN_STATE_JUMP_SHORT;
+	jumpRemain = FLEAMAN_FUMBSHORT_COUNTER;
 }
 
 Fleaman::~Fleaman()

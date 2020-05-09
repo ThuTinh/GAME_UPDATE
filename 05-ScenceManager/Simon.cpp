@@ -65,9 +65,6 @@ void Simon::_ParseSection_ANIMATIONS(string line)
 	vector<string> tokens = split(line);
 
 	if (tokens.size() < 3) return; // skip invalid lines - an animation must at least has 1 frame and 1 frame time
-
-	//DebugOut(L"--> %s\n",ToWSTR(line).c_str());
-
 	LPANIMATION ani = new CAnimation();
 
 	int ani_id = atoi(tokens[0].c_str());
@@ -109,7 +106,6 @@ Simon::Simon() : CGameObject()
 	setCollitionType(COLLISION_TYPE_GROUND);
 	setPhysicsEnable(true);
 	setVx(0);
-	//setVy(SIMON_JUMP_Y);
 	setAlive(true);
 	setDirection(DIRECTION_RIGHT);
 	SetState(SIMON_STATE_NORMAL);
@@ -151,12 +147,10 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	if (!stopCollision) {
 		vector<LPCOLLISIONEVENT> coEvents;
 		vector<LPCOLLISIONEVENT> coEventsResult;
-
 		coEvents.clear();
 		// turn off collision when die 
 		if (isAlive)
 			CalcPotentialCollisions(coObjects, coEvents);
-
 		// No collision occured, proceed normally
 		if (coEvents.size() == 0)
 		{
@@ -176,8 +170,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			if (rdx != 0 && rdx != dx)
 				x += nx * abs(rdx);
 
-			//// block every object first!
-
+			//block every object first!
 			x += min_tx * dx + nx * 0.4f;
 			y += min_ty * dy + ny * 0.4f;
 			//
@@ -192,8 +185,6 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 						//e->obj->onCollision(e->obj, e->t, e->nx, e->ny); 
 						aniIndex = SIMON_ANI_HURT;
 						state = SIMON_STATE_HURT;
-						/*setX(getX() - direction*10);
-						setY(getY() + 10);*/
 						hurtDelay.start();
 						if (ScoreBar::getInstance()->getHealth() <= 0) {
 							ScoreBar::getInstance()->increasePlayerLife(-1);
@@ -202,13 +193,11 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 							setHeight(animation_set->at(aniIndex)->getFrame(0)->GetSprite()->getHeight());
 							deadDelay.start();
 						}
-						
 					}
 				}
 				else
 				{
 					onCollision(e->obj, e->t, e->nx, e->ny);
-
 				} 
 			}
 		}
@@ -216,7 +205,6 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		//clean up collision events
 		for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
 		/* mặc định là false cho tới khi chạm sàn */
-
 	}
 	// Simple fall down
 	vy += MARIO_GRAVITY * dt;
@@ -258,7 +246,6 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 						else
 						{
 							aniIndex = SIMON_ANI_STAND;
-							//aniIndex = SIMON_ANI_DEAD;
 							setVx(0);
 						}
 					}
@@ -278,7 +265,6 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		else
 		{
 			aniIndex = SIMON_ANI_JUMB;
-			//setVy(-0.5);
 			if (isAttack) {
 				state = SIMON_STATE_ATTACK_JUMP;
 				attachDelay.start();
@@ -292,7 +278,6 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	}
 	case SIMON_STATE_ATTACK_JUMP:
 	{
-		//aniIndex = SIMON_ANI_DUCK_USING_SUB;
 		aniIndex = SIMON_ANI_STAND_USING_SUB;
 		if (attachDelay.isTerminated())
 		{
@@ -325,16 +310,14 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			}
 			return;
 		case SIMON_STAIR_STATE_GO_UP:
-			//setDx(getDirection());
 			x += getDirection();
-			/* đi lên */
+			/* go up stair */
 			setDy(1);
 			y += 1;
 			break;
 		case SIMON_STAIR_STATE_GO_DOWN:
-			//setDx(getDirection());
 			x += getDirection();
-			/* đi xuống */
+			/* go down stair */
 			setDy(-1);
 			y -= 1;
 			break;
@@ -351,7 +334,6 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				{
 					/* tới vị trí */
 					setStartStair();
-
 					setX(playerStairDestx);
 					setY(playerStairDesty);
 
@@ -359,7 +341,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					if (getIsLastRunStair())
 					{
 						setY(getY() + 15);
-						setX(getX() + 12);
+						setX(getX() + 10);
 						setStopStair();
 					}
 				}
@@ -391,19 +373,10 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	case SIMON_STATE_DIE: {
 		deadDelay.update();
 		setVx(0);
-		//setHeight(getCurrentFrameHeight());
 		if (deadDelay.isTerminated())
 		{
-			//int currentArea = changeArea->getCurrentAreaIndex();
-			/*if (currentArea == 5)
-				currentArea = 4;*/
-			//boss->restore();
-			/*changeArea->changeArea(currentArea);
-			changeArea->resetLocation();*/
-			//Camera::getInstance()->preventMoving = false;
 			ScoreBar::getInstance()->restoreHealth();
 			ScoreBar::getInstance()->restoreBossHealth();
-		//	Weapon::getInstance()->setType(MORNINGSTAR_TYPE_1);
 			retoreWidthHeight();
 			setY(getY()+16);
 			state = SIMON_STATE_NORMAL ;
@@ -414,7 +387,6 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		
 		if (hurtDelay.isTerminated()) {
 			ScoreBar::getInstance()->increaseHealth(-1);
-			//Simon::getInstance()->aniIndex = SIMON_ANI_STAND;
 			state = SIMON_STATE_NORMAL;
 		}
 		return;
@@ -439,7 +411,6 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	}
 	case SIMON_STATE_ATTACK_DUCK: {
 		aniIndex = SIMON_ANI_DUCK_USING_SUB;
-		//setHeight(25);
 		if (attackDuckDelay.isTerminated())
 		{
 			state = SIMON_STATE_NORMAL;
@@ -493,30 +464,20 @@ void Simon::SetState(int state)
 {
 	CGameObject::SetState(state);
 
-	//switch (state)
-	//{
-	//case MARIO_STATE_WALKING_RIGHT:
-	//	vx = MARIO_WALKING_SPEED;
-	//	nx = 1;
-	//	break;
-	//case MARIO_STATE_WALKING_LEFT: 
-	//	vx = -MARIO_WALKING_SPEED;
-	//	nx = -1;
-	//	break;
-	//case MARIO_STATE_JUMP: 
-	//	vy = -MARIO_JUMP_SPEED_Y;
-	//case MARIO_STATE_IDLE: 
-	//	vx = 0;
-	//	break;
-	//case MARIO_STATE_DIE:
-	//	vy = -MARIO_DIE_DEFLECT_SPEED;
-	//	break;
-	//}
 }
 
 int Simon::getState()
 {
 	return state;
+}
+
+void Simon::setAnChorRight()
+{
+
+}
+
+void Simon::setAnChorLeft()
+{
 }
 
 Simon* Simon::getInstance()
@@ -541,23 +502,17 @@ void Simon::setStartStair()
 	{
 		/* tắt chuyển animation cho player */
 		setPauseAnimation(true);
-
-		/* stop tất cả chuyển động */
 		this->setVx(0);
 		this->setVy(0);
 		this->setDx(0);
 		this->setDy(0);
-
-		/* reset frame */
 		frameIndex = 0;
 	}
 
 	/* set state lên cầu thang cho player */
 	 state = SIMON_STATE_ON_STAIR;
-
 	/* set player stair state */
 	setPlayerStairState(SIMON_STAIR_STATE_NORUN);
-
 	/* tắt xử lý va chạm */
 	setStopCollision(true);
 }
@@ -569,20 +524,10 @@ void Simon::setStopStair()
 	this->setVy(0);
 	this->setDx(0);
 	this->setDy(0);
-
-	/* bật chuyển animation cho player */
 	setPauseAnimation(false);
-
-	/* bật xử lý va chạm */
 	setStopCollision(false);
-
-	/* bật vật lý */
 	setPhysicsEnable(true);
-
-	/* chuyển về state normal */
-	 state = SIMON_STATE_NORMAL;
-
-	/* tắt chạy stair theo frame cuối */
+	state = SIMON_STATE_NORMAL;
 	setIsLastRunStair(false);
 }
 
@@ -599,15 +544,14 @@ void Simon::setIsLastRunStair(bool isLastRunStair)
 void Simon::goStairUp()
 {
 	playerStairDesty = getY() + 8;
+	//stairDirection == 0 is right
 	if (stairDirection == 0)
 	{
-		/* stair phải */
 		playerStairDestx += 5;
 		setDirection(DIRECTION_LEFT);
 	}
 	else
 	{
-		/* stair trái */
 		playerStairDestx -= 5;
 		setDirection(DIRECTION_RIGHT);
 	}
@@ -623,13 +567,11 @@ void Simon::goStairDown()
 	playerStairDesty -= 8;
 	if (stairDirection == 0)
 	{
-		/* stair phải */
 		playerStairDestx -= 5;
 		setDirection(DIRECTION_RIGHT);
 	}
 	else
 	{
-		/* stair trái */
 		playerStairDestx += 5;
 		setDirection(DIRECTION_LEFT);
 	}
@@ -686,9 +628,6 @@ void Simon::Load(LPCWSTR simonFile)
 
 		if (line[0] == '[') { section = SCENE_SECTION_UNKNOWN; continue; }
 
-		//
-		// data section
-		//
 		switch (section)
 		{
 		case SCENE_SECTION_TEXTURES: _ParseSection_TEXTURES(line); break;

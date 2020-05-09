@@ -8,7 +8,7 @@ void Bat::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	case BAT_STATE_STAND:
 		setDx(0);
 		setDy(0);
-		if (Simon::getInstance()->getX() > getX() && Simon::getInstance()->getX() - getX() < BAT_RUN_DX &&  abs(Simon::getInstance()->getY() - getY() )<100 )
+		if (Simon::getInstance()->getX() > getX() && Simon::getInstance()->getX() - getX() < BAT_RUN_DX &&  abs(Simon::getInstance()->getY() - getY() )<80 )
 		{
 			state = BAT_STATE_FLY;
 			setPhysicsEnable(true);
@@ -24,7 +24,6 @@ void Bat::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	}
 	x += dx;
 	y += dy;
-	/*vy += ENEMY_GRAVITY * dt;*/
 	CGameObject::Update(dt);
 }
 

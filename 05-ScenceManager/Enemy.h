@@ -2,7 +2,7 @@
 #include "DelayTime.h"
 
 #pragma once
-#define ENEMY_GRAVITY -0.00002
+#define ENEMY_GRAVITY -0.00003
 #define ENEMY_SCORE 500
 class Enemy :  public CGameObject
 {

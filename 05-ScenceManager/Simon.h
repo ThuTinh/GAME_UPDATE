@@ -64,6 +64,7 @@ public:
 	int numberArchery;
 	int fixWidth;
 	int fixHeight;
+
 	DelayTime attachDelay;
 	DelayTime colorDelay;
 	DelayTime hurtDelay;
@@ -71,8 +72,8 @@ public:
 	DelayTime duckDelay;
 	DelayTime attackDuckDelay;
 
-
-	Simon();
+	static Simon* instance;
+	static Simon* getInstance();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *colliable_objects = NULL);
 	virtual void Render();
 	void retoreWidthHeight();
@@ -83,19 +84,19 @@ public:
 	void addNumberArchery(int num);
 	void SetState(int state);
 	int getState();
+	void setAnChorRight();
+	void setAnChorLeft();
 	void SetLevel(int l) { level = l; }
-	static Simon* instance;
-	static Simon* getInstance();
 	void setStartStair();
 	void setStopStair();
 	bool getIsLastRunStair();
 	void setIsLastRunStair(bool isLastRunStair);
-
-	/* đi lên cầu thang */
 	void goStairUp();
 	void goStairDown();
 	void setStairDirection(int stairDirection);
 	void setPlayerStairState(int playerStairState);
 	void onCollision(CGameObject* other, float collisionTime, int nx, int ny) override;
 	void Load(LPCWSTR simonFile);
+	Simon();
+
 };

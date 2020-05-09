@@ -3,7 +3,6 @@
 
 void GiaDo::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	
 	if (getX()+ width >= MAX_X) {
 		nx = -1;
 	}
@@ -11,7 +10,6 @@ void GiaDo::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		nx = 1;
 	}
 	setX(getX() + nx*0.2);
-	
 }
 
 void GiaDo::Render()

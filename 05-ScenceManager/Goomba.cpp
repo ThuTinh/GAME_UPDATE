@@ -35,7 +35,6 @@ void CGoomba::Render()
 
 	animation_set->at(ani)->Render(x,y,frameIndex, DIRECTION_RIGHT);
 
-	//RenderBoundingBox();
 }
 
 void CGoomba::SetState(int state)
