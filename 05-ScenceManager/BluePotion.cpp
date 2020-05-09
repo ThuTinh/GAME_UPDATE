@@ -12,6 +12,10 @@ void BluePotion::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	}
 }
 
+void BluePotion::onPlayerContact()
+{
+}
+
 BluePotion::BluePotion()
 {
 }

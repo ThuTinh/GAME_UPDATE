@@ -69,10 +69,13 @@ void CGame::Draw(float x, float y , int anchorX, int anchorY, LPDIRECT3DTEXTURE9
 {
 
 	RECT r;
-	r.left = left;
-	r.top = top;
-	r.right = right;
-	r.bottom = bottom;
+	
+	if (right != 0 && bottom != 0) {
+		r.left = left;
+		r.top = top;
+		r.right = right;
+		r.bottom = bottom;
+	}
 	spriteHandler->Draw(texture, &r, &D3DXVECTOR3(anchorX, anchorY, 0), &D3DXVECTOR3(x, y, 0), D3DCOLOR_ARGB(alpha, 255, 255, 255));
 }
 

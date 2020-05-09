@@ -12,6 +12,10 @@ void Axe::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	}
 }
 
+void Axe::onPlayerContact()
+{
+}
+
 Axe::Axe()
 {
 }

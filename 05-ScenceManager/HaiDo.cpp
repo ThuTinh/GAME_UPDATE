@@ -12,6 +12,10 @@ void HaiDo::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	}
 }
 
+void HaiDo::onPlayerContact()
+{
+}
+
 HaiDo::HaiDo()
 {
 }

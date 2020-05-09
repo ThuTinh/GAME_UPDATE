@@ -24,6 +24,8 @@
 
 #define MISC_SPRITE_ID_NUMBER 0
 #define MISC_SPRITE_ID_LOST_HEALTH 1
+#define MISC_SPRITE_ID_KNIFE 2
+#define MISC_SPRITE_ID_BOOMERANG 3
 #define NUMBER_WIDTH 8
 #define HEALTH_WIDTH 4
 void ignoreLineIfstream(ifstream & fs, int lineCount);
@@ -37,8 +39,7 @@ void ScoreBar::renderNumber(int num, int x, int y, int maxLength)
 	{
 		currentX -= NUMBER_WIDTH;
 		int val = num % 10;
-		//animation_set->render(currentX, y, MISC_SPRITE_ID_NUMBER, val);
-		animation_set->at(MISC_SPRITE_ID_NUMBER)->RenderScoreBar(x, y, val);
+		animation_set->at(MISC_SPRITE_ID_NUMBER)->RenderScoreBar(currentX, y, val);
 		num /= 10;
 		length++;
 	}
@@ -46,7 +47,7 @@ void ScoreBar::renderNumber(int num, int x, int y, int maxLength)
 	{
 		currentX -= NUMBER_WIDTH;
 
-		animation_set->at(MISC_SPRITE_ID_NUMBER)->RenderScoreBar(x, y, 0);
+		animation_set->at(MISC_SPRITE_ID_NUMBER)->RenderScoreBar(currentX, y, 0);
 	}
 }
 
@@ -76,15 +77,29 @@ void ScoreBar::renderBossHealth()
 	}
 }
 
-//void ScoreBar::renderSubWeapon()
-//{
-//	if (this->subWeapon != 0)
-//	{
-//		this->subWeapon->getSprite()->render(subWeaponLocation.X,
-//			subWeaponLocation.Y,
-//			subWeapon->getAction(), 0);
-//	}
-//}
+void ScoreBar::renderSubWeapon()
+{
+	//if (this->subWeapon != 0)
+	//{
+	//	/*this->subWeapon->getSprite()->render(subWeaponLocation.X,
+	//		subWeaponLocation.Y,
+	//		subWeapon->getAction(), 0);*/
+	//	subWeapon->animation_set->at(0)->RenderScoreBar(subWeaponLocation.X, subWeaponLocation.Y, 0);
+
+	//}
+
+	switch (stypeSubweapon)
+	{
+	case SWORD:
+		animation_set->at(MISC_SPRITE_ID_KNIFE)->RenderScoreBar(subWeaponLocation.X, subWeaponLocation.Y, 0);
+		break;
+	case BOOMERANG:
+		animation_set->at(MISC_SPRITE_ID_BOOMERANG)->RenderScoreBar(subWeaponLocation.X, subWeaponLocation.Y, 0);
+		break;
+	default:
+		break;
+	}
+}
 
 ScoreBar* ScoreBar::instance = 0;
 void ScoreBar::_ParseSection_TEXTURE_MISC(string line)
@@ -233,7 +248,9 @@ void ScoreBar::_ParseSection_LOCATION_HEALTHY(string line)
 	if (tokens.size() < 3) return; // skip invalid lines
 	healthLocation.X = atoi(tokens[0].c_str());
 	healthLocation.Y = atoi(tokens[1].c_str());
-	healthLocation.MaxLength = atoi(tokens[2].c_str());
+	maxHealth = atoi(tokens[2].c_str());
+	setHealth(maxHealth);
+	setBossHealth(maxHealth);
 }
 void ScoreBar::_ParseSection_LOCATION_SUBWEAPON(string line)
 {
@@ -268,7 +285,9 @@ ScoreBar::ScoreBar()
 	setHealth(maxHealth);
 	setBossHealth(maxHealth);
 	setTime(900);
-	//setSubWeapon(0);
+	currentStageNumber = 1;
+	setSubWeapon(0);
+	stypeSubweapon = DEFAUL;
 
 }
 
@@ -280,7 +299,7 @@ ScoreBar::~ScoreBar()
 void ScoreBar::render()
 {
 	//scoreBar->Render(0, 0, 0);
-	CGame::GetInstance()->Draw(0,0,0,0, scoreBar,0,0,250,40);
+	CGame::GetInstance()->Draw(0,0,0,0, scoreBar,0,0,255,40);
 	renderNumber(getPlayerLife(), lifeLocation.X, lifeLocation.Y, lifeLocation.MaxLength);
 	renderNumber(getHeartCount(), heartLocation.X, heartLocation.Y, heartLocation.MaxLength);
 	renderNumber(currentStageNumber, stageLocation.X, stageLocation.Y, stageLocation.MaxLength);
@@ -288,7 +307,7 @@ void ScoreBar::render()
 	renderNumber(time, timeLocation.X, timeLocation.Y, timeLocation.MaxLength);
 	renderHealth();
 	renderBossHealth();
-	//renderSubWeapon();
+	renderSubWeapon();
 }
 
 void ScoreBar::update()
@@ -299,10 +318,22 @@ void ScoreBar::update()
 	}
 }
 
-//void ScoreBar::setSubWeapon(SubWeaponItem * subWeapon)
-//{
-//	this->subWeapon = subWeapon;
-//}
+void ScoreBar::setSubWeapon(Item* subWeapon)
+{
+	this->subWeapon = subWeapon;
+}
+
+void ScoreBar::setTypeSubWeapon(TYPE_SUBWEAPON type)
+{
+	this->stypeSubweapon = type;
+}
+
+TYPE_SUBWEAPON ScoreBar::getTypeSubWeapon()
+{
+	return stypeSubweapon;
+}
+
+
 
 void ScoreBar::restoreHealth()
 {
@@ -348,6 +379,11 @@ void ScoreBar::increaseHeartCount(int heartCount)
 void ScoreBar::setCurrentStageNumber(int currentStageNumber)
 {
 	this->currentStageNumber = currentStageNumber;
+}
+
+int ScoreBar::getCurrentStageNumber()
+{
+	return currentStageNumber;
 }
 
 void ScoreBar::Load(LPCWSTR sorebarFile)

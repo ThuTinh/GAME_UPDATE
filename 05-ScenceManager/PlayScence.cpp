@@ -16,8 +16,29 @@
 #include"BlackNight.h"
 #include"Stair.h"
 #include"Gate1.h"
+#include"Gate2.h"
+#include"Gate.h"
 #include"GateStair1.h"
+#include"GateStair2.h"
+#include"GateStair.h"
+#include"GateStairChangeDirection.h"
 #include"ScoreBar.h"
+#include"SmallHeart.h"
+#include"Sword.h"
+#include"Axe.h"
+#include"Item700PTS.h"
+#include"Item400PTS.h"
+#include"HaiDo.h"
+#include"HaiXanh.h"
+#include"GoldPotion.h"
+#include"BluePotion.h"
+#include"BoomeRang.h"
+#include"Bat.h"
+#include"Fleaman.h"
+#include"Raven.h"
+#include"Sketon.h"
+#include"Zoombie.h"
+#include"GiaDo.h"
 using namespace std;
 
 CPlayScene::CPlayScene(int id, LPCWSTR filePath):
@@ -55,6 +76,11 @@ Space* CPlayScene::getCurentSpace()
 #define SCENE_SECTION_SPACE	8
 #define SCENE_SECTION_STAIR 9
 
+#define OBJECT_TYPE_GATE3 -9
+#define OBJECT_TYPE_GATE_STAIR_CHANGE_DIRECTION -8
+#define OBJECT_TYPE_GATE_STAIR2 -7
+#define OBJECT_TYPE_GATE2 -6
+//#define OBJECT_TYPE_GATE_STAIR2 -5
 #define OBJECT_TYPE_GATE_STAIR1 -4
 #define OBJECT_TYPE_GATE1 -3
 #define OBJECT_TYPE_GROUND	-1
@@ -81,10 +107,11 @@ Space* CPlayScene::getCurentSpace()
 #define OBJECT_TYPE_CROWN	21
 #define OBJECT_TYPE_700PTS	22
 #define OBJECT_TYPE_HAIDO	23
-#define OBJECT_TYPE_BLUE	24
+#define OBJECT_TYPE_BLUEPOTION	24
 #define OBJECT_TYPE_400PTS	25
 #define OBJECT_TYPE_DIE_EFECT	26
 #define OBJECT_TYPE_BOSSBAT	27
+#define OBJECT_TYPE_GIADO 30
 
 
 
@@ -211,6 +238,8 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		player->SetPosition(x, y);
 		player->setWidth(width);
 		player->setHeight(height);
+		player->fixHeight = height;
+		player->fixWidth = width;
 		LPANIMATION_SET ani_set = animation_sets->Get(ani_set_id);
 		player->SetAnimationSet(ani_set);
 		return;
@@ -225,8 +254,24 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_1000PTS: obj = new Item1000PTS(); break;
 	case OBJECT_TYPE_LIGHT: obj = new Light(); break;
 	case OBJECT_TYPE_BLACK_NIGHT: obj = new BlackNight(); break;
-	case OBJECT_TYPE_GATE1: obj = new Gate1(); break;
-	case OBJECT_TYPE_GATE_STAIR1: obj = new GateStair1(); break;
+	case OBJECT_TYPE_GATE1: obj = new Gate(); break;
+	case OBJECT_TYPE_GATE2: obj = new Gate(); break;
+	case OBJECT_TYPE_GATE3: obj = new Gate(); break;
+	case OBJECT_TYPE_GATE_STAIR1: obj = new GateStair(); break;
+	case OBJECT_TYPE_GATE_STAIR2: obj = new GateStair(); break;
+	case OBJECT_TYPE_GATE_STAIR_CHANGE_DIRECTION: obj = new GateStairChangeDirection(); break;
+	case OBJECT_TYPE_HEART_SMALL: obj = new SmallHeart(); break;
+	case OBJECT_TYPE_700PTS: obj = new Item700PTS(); break;
+	case OBJECT_TYPE_400PTS: obj = new Item400PTS(); break;
+	case OBJECT_TYPE_AXE: obj = new Axe(); break;
+	case OBJECT_TYPE_BAT: obj = new Bat(); break;
+	case OBJECT_TYPE_BOOMERANG: obj = new BoomeRang(); break;
+	case OBJECT_TYPE_FLEAMAN: obj = new Fleaman(); break;
+	case OBJECT_TYPE_SKETON: obj = new Sketon(); break;
+	case OBJECT_TYPE_GOLDPOTION: obj = new GoldPotion(); break;
+	case OBJECT_TYPE_BLUEPOTION: obj = new BluePotion(); break;
+	case OBJECT_TYPE_GIADO: obj = new GiaDo(); break;
+	case OBJECT_TYPE_ZOOMIE: obj = new Zoombie(); break;
 	default:
 		DebugOut(L"[ERR] Invalid object type: %d\n", object_type);
 		return;
@@ -412,6 +457,11 @@ void CPlayScene::Unload()
 	animationsID.clear();
 	animationSetsID.clear();
 
+}
+
+void CPlayScene::addObject(LPGAMEOBJECT obj)
+{
+	objects.push_back(obj);
 }
 
 void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)

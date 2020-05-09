@@ -12,6 +12,10 @@ void Crown::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	}
 }
 
+void Crown::onPlayerContact()
+{
+}
+
 Crown::Crown()
 {
 }

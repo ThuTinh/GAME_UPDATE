@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "GameObject.h"
 #include"DelayTime.h"
-
+#include "Item.h"
 #define SIMON_VX	0.06 
 //0.1f
 #define SIMON_JUMP_Y		0.27f
@@ -15,6 +15,10 @@
 #define SIMON_STATE_ATTACK 102
 #define SIMON_STATE_ATTACK_JUMP 103
 #define SIMON_STATE_DIE 104
+#define SIMON_STATE_HURT 105
+#define SIMON_STATE_DUCK 106
+#define SIMON_STATE_ATTACK_DUCK 107
+
 
 #define SIMON_STAIR_STATE_NORUN 200
 #define SIMON_STAIR_STATE_GO_UP 201
@@ -40,7 +44,6 @@
 class Simon : public CGameObject
 {
 	int level;
-	
 	int playerStairDestx, playerStairDesty;
 	int playerStairState;
 	int stairDirection;
@@ -51,6 +54,7 @@ class Simon : public CGameObject
 	void _ParseSection_ANIMATIONS(string line);
 	void _ParseSection_ANIMATION_SETS(string line);
 public: 
+	Item *subWeapon;
 	bool isRightDown;
 	bool isLeftDown;
 	bool isUpDown;
@@ -58,11 +62,22 @@ public:
 	bool isJumpDown;
 	bool isAttack;
 	int numberArchery;
+	int fixWidth;
+	int fixHeight;
 	DelayTime attachDelay;
 	DelayTime colorDelay;
+	DelayTime hurtDelay;
+	DelayTime deadDelay;
+	DelayTime duckDelay;
+	DelayTime attackDuckDelay;
+
+
 	Simon();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *colliable_objects = NULL);
 	virtual void Render();
+	void retoreWidthHeight();
+	Item *getSubweapo();
+	void setSubWeapon(Item * item);
 	void setNumberArchery(int num);
 	int getNumberArchery();
 	void addNumberArchery(int num);

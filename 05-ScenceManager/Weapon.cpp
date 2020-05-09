@@ -4,14 +4,14 @@
 Weapon* Weapon::instance = 0;
 void Weapon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	if (Simon::getInstance()->aniIndex != SIMON_ANI_STAND_USING_SUB && Simon::getInstance()->aniIndex != SIMON_ANI_DUCK_USING_SUB) {
+	/*if (Simon::getInstance()->aniIndex != SIMON_ANI_STAND_USING_SUB && Simon::getInstance()->aniIndex != SIMON_ANI_DUCK_USING_SUB) {
 		setAlive(false);
-	}
+	}*/
+	setAlive(false);
 }
 
 void Weapon::Render()
 {
-
 	if (Simon::getInstance()->aniIndex == SIMON_ANI_STAND_USING_SUB || Simon::getInstance()->aniIndex == SIMON_ANI_DUCK_USING_SUB) {
 		if (Simon::getInstance()->getDirection() == DIRECTION_RIGHT) {
 			setDirection(DIRECTION::DIRECTION_RIGHT);
@@ -89,7 +89,7 @@ void Weapon::Render()
 			{
 			case 0:
 				setY(Simon::getInstance()->getY());
-				setX(Simon::getInstance()->getX()+ 20);
+				setX(Simon::getInstance()->getX()+ 10);
 				switch (Simon::getInstance()->getNumberArchery())
 				{
 				case 0:
@@ -106,12 +106,11 @@ void Weapon::Render()
 					break;
 				}
 
-
 				break;
 
 			case 1:
 				setY(Simon::getInstance()->getY());
-				setX(Simon::getInstance()->getX() + 15);
+				setX(Simon::getInstance()->getX() + 10);
 				switch (Simon::getInstance()->getNumberArchery())
 				{
 				case 0:
@@ -132,11 +131,11 @@ void Weapon::Render()
 				break;
 			default:
 				setY(Simon::getInstance()->getY() + 2);
-				setX(Simon::getInstance()->getX() - 30);
+				setX(Simon::getInstance()->getX() - 40);
 				switch (Simon::getInstance()->getNumberArchery())
 				{
 				case 0:
-					setX(Simon::getInstance()->getX() -20);
+					setX(Simon::getInstance()->getX() -30);
 					aniIndex = WEAPON_ANI_W13;
 					break;
 				case 1:
@@ -155,9 +154,7 @@ void Weapon::Render()
 		}
 		setAlive(true);
 		animation_set->at(aniIndex)->Render(x, y, frameIndex, direction);
-
 	}
-	
 }
 
 Weapon* Weapon::getInstance()
@@ -170,6 +167,7 @@ Weapon* Weapon::getInstance()
 
 Weapon::Weapon()
 {
+	setAlive(false);
 }
 
 Weapon::~Weapon()

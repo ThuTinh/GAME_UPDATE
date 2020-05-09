@@ -4,13 +4,15 @@
 19	textures\misc\HaiXanh.png	255	0	128
 15	textures\misc\heartSmall.png	255	0	128
 2	textures\misc\light.png		255	0	128
-20	textures\misc\vkXanh.png	255	0	128
-17	textures\misc\TienDo.png	255	0	128
+20	textures\misc\boomerang.png	255	0	128
+16	textures\misc\TienDo.png	255	0	128
 22	textures\misc\TienVang.png	255	0	128
 21	textures\misc\VuonNiem.png	255	0	128
 10	textures\enemy\bat.png	255	0	128
 9	textures\enemy\BlackNight.png	255	0	128
 5	textures\misc\heart.png	255	0	0
+50	textures\misc\die-effect.png	255	0	0
+30	textures\misc\giado.png	255	0	0
 8	textures\weopon\image.png	55	0	128
 -1	textures\map2\tilesheet.png	255	0	0
 
@@ -51,11 +53,11 @@
 
 #TienDo
 #Alone
-70001	0	0	16	16	0	0	17
+70001	0	0	16	16	0	0	16
 #Ani
-70002	0	0	16	16	0	0	17
-70003	16	0	16	16	0	0	17
-70004	32	0	16	16	0	0	17
+70002	0	0	16	16	0	0	16
+70003	16	0	16	16	0	0	16
+70004	32	0	16	16	0	0	16
 
 ##TienVang
 #Alone
@@ -96,6 +98,13 @@
 140001	0	1	16	31	0	0	9
 140002	16	0	16	32	0	0	9
 140003	32	1	16	31	0	0	9
+
+#die efect
+550001	0	2	11	13	10	3	50
+550002	11	3	13	12	10	2	50
+
+#Giado
+650001	0	0	32	16	0	0	30
 
 
 # ani_id	sprite1_id	time1	sprite2_id	time2	...
@@ -147,7 +156,11 @@
 #== BaclkNight==
 1401	140001	100	140002	100	140003	100
 
+# die efect
+5501	550001	100	550002	100
 
+#Giado
+6501	650001	100
 
 # id	ani1	ani2	ani3
 [ANIMATION_SETS]
@@ -175,21 +188,27 @@
 #Black nghit
 15	1401
 
+#die-efect
+50	5501
+
+#giado
+40	6501
 
 [STAIR]
 #type collitionid 	x	y	with  height  ani_set_id IsRightStair IsTop
 
--2	311	266	13	8	-1	1	0	
--2	344	362	13	7	-1	1	0	
--2	398	295	17	12	-1	1	1	
--2	395	185	13	7	-1	1	0	
+-2	311	266	13	8	-1	1	0
+-2	344	362	13	7	-1	1	0
+-2	398	295	17	12	-1	1	1
+-2	395	185	13	7	-1	1	0
 -2	471	99	17	15	-1	1	1
 
 [OBJECTS]
-# type collitionid 	x	y	with  height  ani_set_id	extra_settings per object type
+# type 	x	y	with  height  ani_set_id	extra_settings per object type
 # type: 0 = Simon , 1 = FIRE, 5 = HEART, 6= CUNG, 7=KIEM, 8 = weapon, -1  = Ground, -3 = Gate
 # Simon
 
+-6	2	32	16	50	-1
 2	313	307	8	16	11
 20	310	305	16	16	10
 21	375	351	17	17	9
@@ -204,11 +223,12 @@
 15	329	16	9	16	12
 9	323	112	16	31	15
 10	293	16	16	16	14
+10	259	209	16	16	14
 2	276	18	8	16	11
 15	275	18	9	16	12
 2	203	18	8	16	11
 15	202	18	9	16	12
-9	126	48	16	31	15
+9	117	47	16	31	15
 2	115	15	8	16	11
 22	110	16	16	16	8
 2	46	51	8	16	11
@@ -232,7 +252,7 @@
 -1	447	115	15	14	-1
 -4	364	194	24	11	-1
 -5	389	183	20	8	-1
--6	2	32	16	50	-1
+30	57	86	32	16	40
 8	100	40	25	18	6
 0	100	40	16	30	1
 
@@ -240,9 +260,9 @@
 #id X       Y       Width       Height CameraX     CameraY PlayerX     PlayerY
 #SceneCount 2
 #space1
-0	225	197 	250	186	228	197	299	339
+0	225	197	250	186	228	175	299	339
 #spcae2
-1	1	3	505	170	262	0	391	157	
+1	1	3	505	170	262	-30	391	157	
 
 
 

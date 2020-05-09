@@ -1,4 +1,5 @@
 #include "BoomeRang.h"
+#include"ScoreBar.h"
 #include"Simon.h"
 void BoomeRang::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
@@ -10,6 +11,11 @@ void BoomeRang::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 
 	}
+}
+
+void BoomeRang::onPlayerContact()
+{
+	ScoreBar::getInstance()->setTypeSubWeapon(TYPE_SUBWEAPON::BOOMERANG);
 }
 
 BoomeRang::BoomeRang()

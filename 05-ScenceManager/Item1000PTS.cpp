@@ -1,6 +1,8 @@
 ﻿#include "Item1000PTS.h"
 #include"Simon.h"
 #include"Gound.h"
+#include"ScoreBar.h"
+#include "Game.h"
 void Item1000PTS::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	if (getItemState() == ITEM_STATE_PLAYER_EATED || !getAlive())
@@ -8,7 +10,7 @@ void Item1000PTS::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	else
 	{
 		
-		if (Simon::getInstance()->getX() - getX() > 30) {
+		if (Simon::getInstance()->getX() - getX() > 30 && CGame::GetInstance()->current_scene == 1) {
 			setItemState(ITEM_STATE_VISIBLE);
 		}
 		if (getItemState() == ITEM_STATE_VISIBLE) {
@@ -60,22 +62,21 @@ void Item1000PTS::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 				}
 
 			}
-
 			//clean up collision events
 			for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
 			/* mặc định là false cho tới khi chạm sàn */
 			if (AABBCheck(Simon::getInstance()) && getItemState() == ITEM_STATE_VISIBLE) {
 				setItemState(ITEM_STATE_PLAYER_EATED);
 				setAlive(false);
-				this->onPlayerContact();
-
-
+				onPlayerContact();
 			}
 		}
-
 	}
-	
+}
 
+void Item1000PTS::onPlayerContact()
+{
+	ScoreBar::getInstance()->increaseScore(1000);
 }
 
 void Item1000PTS::Render()

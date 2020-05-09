@@ -2,14 +2,51 @@
 #include"Simon.h"
 #include"Gound.h"
 #include "Weapon.h"
+#include"ScoreBar.h"
+#include"Die-affect.h"
+#include "Game.h"
+#include "BigHeart.h"
+#include <stdlib.h>
 void Enemy::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	vy += ENEMY_GRAVITY * dt;
 
-	if (AABBCheck(Weapon::getInstance())) {
+	/*if (AABBCheck(Simon::getInstance())) {
 		
-		
+		Simon::getInstance()->aniIndex = SIMON_ANI_HURT;
+	}*/
+	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive) {
+		setAlive(false);
+		ScoreBar::getInstance()->increaseScore(ENEMY_SCORE);
+		DieEffect *dieEffect = new DieEffect();
+		CGame::GetInstance()->GetCurrentScene()->addObject(dieEffect);
+		dieEffect->setX(getMidX());
+		dieEffect->setY(getMidY());
+		dieEffect->setAlive(true);
+		dieEffect->timeDelay.start();
+		int r = rand();
+		if (r / 2 == 0) {
+			BigHeart *bigHeart = new BigHeart();
+			bigHeart->animation_set = CAnimationSets::GetInstance()->Get(ID_ANI_HEART);
+			CGame::GetInstance()->GetCurrentScene()->addObject(bigHeart);
+			bigHeart->setX(getMidX());
+			bigHeart->setY(getMidY());
+			bigHeart->setAlive(true);
+		}
 	}
+	/*if (AABBCheck(Simon::getInstance())) {
+
+		Simon::getInstance()->aniIndex = SIMON_ANI_HURT;
+		ScoreBar::getInstance()->increaseHealth(-1);
+		if (ScoreBar::getInstance()->getHealth() <= 0) {
+			ScoreBar::getInstance()->increasePlayerLife(-1);
+			Simon::getInstance()->aniIndex = SIMON_ANI_DEAD;
+			Simon::getInstance()->state = SIMON_STATE_DIE;
+			Simon::getInstance()->setHeight(Simon::getInstance()->animation_set->at(Simon::getInstance()->aniIndex)->getFrame(0)->GetSprite()->getHeight());
+			Simon::getInstance()->deadDelay.start();
+		}
+		Simon::getInstance()->hurtDelay.start();
+	}*/
 	CGameObject::Update(dt);
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
@@ -56,11 +93,8 @@ void Enemy::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 				onCollision(e->obj, e->t, e->nx, e->ny);
 
 			}
-
 		}
-
 	}
-
 	//clean up collision events
 	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
 	/* mặc định là false cho tới khi chạm sàn */
@@ -69,6 +103,13 @@ void Enemy::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 void Enemy::Render()
 {
 	animation_set->at(0)->Render(x, y, frameIndex, DIRECTION_LEFT);
+}
+
+void Enemy::onCollision(CGameObject* other, float collisionTime, int nx, int ny)
+{
+	/*collisionDelay.start();
+	onPlayerContact();*/
+	
 }
 
 void Enemy::setDirectionFollowPlayer()
@@ -83,10 +124,32 @@ void Enemy::setDirectionFollowPlayer()
 	}
 }
 
+void Enemy::onPlayerContact()
+{
+	/*collisionDelay.update();
+	if (collisionDelay.isTerminated()) {
+		Simon::getInstance()->aniIndex = SIMON_ANI_HURT;
+		ScoreBar::getInstance()->increaseHealth(-1);
+		if (ScoreBar::getInstance()->getHealth() <= 0) {
+			ScoreBar::getInstance()->increasePlayerLife(-1);
+			Simon::getInstance()->aniIndex = SIMON_ANI_DEAD;
+			Simon::getInstance()->state = SIMON_STATE_DIE;
+			Simon::getInstance()->setHeight(Simon::getInstance()->animation_set->at(Simon::getInstance()->aniIndex)->getFrame(0)->GetSprite()->getHeight());
+			Simon::getInstance()->deadDelay.start();
+		}
+		Simon::getInstance()->hurtDelay.start();
+	}
+	else
+	{
+		return;
+	}*/
+}
+
 Enemy::Enemy()
 {
 	setCollitionType(COLLISION_TYPE_ENEMY);
 	collitionTypeToCheck.push_back(COLLISION_TYPE_GROUND);
+	collisionDelay.init(100);
 }
 
 Enemy::~Enemy()

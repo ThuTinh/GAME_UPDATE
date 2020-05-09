@@ -12,6 +12,10 @@ void GoldPotion::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	}
 }
 
+void GoldPotion::onPlayerContact()
+{
+}
+
 GoldPotion::GoldPotion()
 {
 }

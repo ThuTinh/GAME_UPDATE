@@ -12,6 +12,10 @@ void HaiXanh::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	}
 }
 
+void HaiXanh::onPlayerContact()
+{
+}
+
 HaiXanh::HaiXanh()
 {
 }

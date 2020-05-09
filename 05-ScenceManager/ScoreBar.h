@@ -2,7 +2,7 @@
 #include"GameTime.h"
 #include"Sprites.h"
 #include "Animations.h"
-//#include"SubWeaponItem.h"
+#include"Item.h"
 
 struct SCORE_LOCATION
 {
@@ -11,15 +11,22 @@ struct SCORE_LOCATION
 	int MaxLength;
 };
 
+enum TYPE_SUBWEAPON {
+	SWORD,
+	BOOMERANG,
+	DEFAUL
+};
+
 class ScoreBar
 {
-	//SubWeaponItem* subWeapon;
+	Item* subWeapon;
+	TYPE_SUBWEAPON stypeSubweapon;
 	LPANIMATION_SET animation_set;
 	LPDIRECT3DTEXTURE9 scoreBar;
 	void renderNumber(int num, int x, int y, int maxLength);
 	void renderHealth();
 	void renderBossHealth();
-	//void renderSubWeapon();
+	void renderSubWeapon();
 	static ScoreBar* instance;
 	SCORE_LOCATION lifeLocation;
 	SCORE_LOCATION heartLocation;
@@ -59,8 +66,10 @@ public:
 	void render();
 	void update();
 
-	//void setSubWeapon(SubWeaponItem* subWeapon);
+	void setSubWeapon(Item* subWeapon);
 
+	void setTypeSubWeapon(TYPE_SUBWEAPON type);
+	TYPE_SUBWEAPON getTypeSubWeapon();
 	void restoreHealth();
 	void restoreBossHealth();
 
@@ -91,6 +100,7 @@ public:
 	int getMaxHealth();
 
 	void setCurrentStageNumber(int currentStageNumber);
+	int getCurrentStageNumber();
 	void Load(LPCWSTR sorebarFile);
 };
 
