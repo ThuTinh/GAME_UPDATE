@@ -15,7 +15,7 @@ void BlackNight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			setAlive(false);
 			ScoreBar::getInstance()->increaseScore(ENEMY_SCORE);
 			DieEffect* dieEffect = new DieEffect();
-			CGame::GetInstance()->GetCurrentScene()->addObject(dieEffect);
+			CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(dieEffect);
 			dieEffect->setX(getMidX());
 			dieEffect->setY(getMidY());
 			dieEffect->setAlive(true);
@@ -24,7 +24,7 @@ void BlackNight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			if (r % 2 == 0) {
 				BigHeart* bigHeart = new BigHeart();
 				bigHeart->animation_set = CAnimationSets::GetInstance()->Get(ID_ANI_HEART);
-				CGame::GetInstance()->GetCurrentScene()->addObject(bigHeart);
+				CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(bigHeart);
 				bigHeart->setX(getMidX());
 				bigHeart->setY(getMidY());
 				bigHeart->setAlive(true);

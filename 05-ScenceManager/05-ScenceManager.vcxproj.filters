@@ -61,8 +61,8 @@
     <Filter Include="Object\Addtional">
       <UniqueIdentifier>{6154164d-98e4-494f-b432-378f8b708699}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Grid">
-      <UniqueIdentifier>{997be8a4-3426-4776-936c-4ce9975ed806}</UniqueIdentifier>
+    <Filter Include="GridGame">
+      <UniqueIdentifier>{b1bfed4f-51a3-474b-90dd-aaf6f22e0179}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -244,10 +244,10 @@
       <Filter>Object\Misc</Filter>
     </ClCompile>
     <ClCompile Include="Cell.cpp">
-      <Filter>Grid</Filter>
+      <Filter>GridGame</Filter>
     </ClCompile>
     <ClCompile Include="Grid.cpp">
-      <Filter>Grid</Filter>
+      <Filter>GridGame</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -435,10 +435,10 @@
       <Filter>Object\Misc</Filter>
     </ClInclude>
     <ClInclude Include="Cell.h">
-      <Filter>Grid</Filter>
+      <Filter>GridGame</Filter>
     </ClInclude>
     <ClInclude Include="Grid.h">
-      <Filter>Grid</Filter>
+      <Filter>GridGame</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

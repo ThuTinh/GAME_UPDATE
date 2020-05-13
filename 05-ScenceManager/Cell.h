@@ -1,20 +1,20 @@
-//#pragma once
-//#include "Rect.h"
-//#include <unordered_map>
-//
-//class Cell : public Rect
-//{
-//public:
-//
-//	std::vector<int> getInxObjects();
-//	void setInxObjects(std::vector<int> inxList);
-//
-//	Cell();
-//	~Cell();
-//
-//private:
-//
-//	std::vector<int> inxObjList;
-//
-//};
-//
+#pragma once
+#include "Rect.h"
+#include"Sprites.h"
+
+class Cell : public Rect
+{
+public:
+
+	vector<int> getInxObjects();
+	void setInxObjects(vector<int> inxList);
+
+	Cell();
+	~Cell();
+
+private:
+
+	vector<int> inxObjList;
+
+};
+

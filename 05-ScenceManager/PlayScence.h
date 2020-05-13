@@ -9,14 +9,18 @@
 #include "Koopas.h"
 #include"Tilemap.h"
 #include"Space.h"
-
+#include"Grid.h"
 
 class CPlayScene: public CScene
 {
 protected: 
 	Simon *player;					// A play scene has to have player, right? 
 	Tilemap *titlemap;
+	Grid grid;
 	vector<LPGAMEOBJECT> objects;
+	vector<LPGAMEOBJECT> objectsInCamara;
+	vector<LPGAMEOBJECT> addtionalObject;
+
 	unordered_map<int, Space*> spaces;
 	Space* currentSpace;
 
@@ -33,6 +37,7 @@ protected:
 	void _ParseSection_MAP(string line);
 	void _ParseSection_SPACE(string line);
 	void _ParseSection_STAIR(string line);
+	void _ParseSection_GRID(string line);
 
 public: 
 	CPlayScene(int id, LPCWSTR filePath);
@@ -42,7 +47,7 @@ public:
 	virtual void Update(DWORD dt);
 	virtual void Render();
 	virtual void Unload();
-	virtual void addObject(LPGAMEOBJECT obj);
+	virtual void addAddtionalObject(LPGAMEOBJECT obj);
 	friend class CPlayScenceKeyHandler;
 };
 

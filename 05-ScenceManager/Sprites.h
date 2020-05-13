@@ -18,10 +18,12 @@ class CSprite
 	int height;
 	int anchorX;
 	int anchorY;
+	int anChorXRight;
+	int anchorYRight;
 	DIRECTION direction;
 	LPDIRECT3DTEXTURE9 texture;
 public: 
-	CSprite(int id, int x, int y, int witdh, int height, int anchorX, int anchorY, LPDIRECT3DTEXTURE9 tex);
+	CSprite(int id, int x, int y, int witdh, int height, int anchorX, int anchorY, int anchorXRight, int anchorYRight, LPDIRECT3DTEXTURE9 tex);
 	float getleft();
 	float getRight();
 	float getTop();
@@ -32,6 +34,8 @@ public:
 	void setAnchorY(int anchorY);
 	int getAnchorX();
 	int getAnchorY();
+	int getAnchorXRight();
+	int getAnchorYRight();
 	void Draw(float x, float y, DIRECTION direction,int alpha = 255);
 	void setDirection(DIRECTION direction);
 	DIRECTION getDirection();
@@ -49,7 +53,7 @@ class CSprites
 	unordered_map<int, LPSPRITE> sprites;
 
 public:
-	void Add(int id, int x, int y, int with, int height, int anchorX, int anchorY, LPDIRECT3DTEXTURE9 tex);
+	void Add(int id, int x, int y, int with, int height, int anchorX, int anchorY, int anchorXRight, int anchorYRight, LPDIRECT3DTEXTURE9 tex);
 	LPSPRITE Get(int id);
 	void CSprites::Clear(vector<int>listId);
 
