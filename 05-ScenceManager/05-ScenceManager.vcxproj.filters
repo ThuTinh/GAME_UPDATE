@@ -249,6 +249,9 @@
     <ClCompile Include="Grid.cpp">
       <Filter>GridGame</Filter>
     </ClCompile>
+    <ClCompile Include="ObjectBlack.cpp">
+      <Filter>Object\Misc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Brick.h">
@@ -439,6 +442,9 @@
     </ClInclude>
     <ClInclude Include="Grid.h">
       <Filter>GridGame</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectBlack.h">
+      <Filter>Object\Misc</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

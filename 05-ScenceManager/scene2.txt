@@ -12,6 +12,7 @@
 9	textures\enemy\BlackNight.png	255	0	128
 5	textures\misc\heart.png	255	0	0
 50	textures\misc\die-effect.png	255	0	0
+28	textures\misc\objectBlack.png	255	0	0
 30	textures\misc\giado.png	255	0	0
 8	textures\weopon\image.png	55	0	128
 -1	textures\map2\tilesheet.png	255	0	0
@@ -106,6 +107,8 @@
 #Giado
 650001	0	0	32	16	0	0	0	0	30
 
+#Object Black
+750001	0	0	16	31	0	0	0	0	28
 
 # ani_id	sprite1_id	time1	sprite2_id	time2	...
 [ANIMATIONS]
@@ -162,6 +165,9 @@
 #Giado
 6501	650001	100
 
+#Object black
+7501	750001	100
+
 # id	ani1	ani2	ani3
 [ANIMATION_SETS]
 #HEART
@@ -194,6 +200,8 @@
 #giado
 40	6501
 
+#Black object
+60	7501
 [STAIR]
 #type collitionid 	x	y	with  height  ani_set_id IsRightStair IsTop
 
@@ -251,6 +259,7 @@
 -6	2	32	16	50	-1
 10	259	209	16	16	14
 30	57	86	32	16	40
+28	447	274	16	31	60
 8	100	40	25	18	6
 0	100	40	16	30	1
 

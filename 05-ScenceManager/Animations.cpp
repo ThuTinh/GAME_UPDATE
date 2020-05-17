@@ -9,6 +9,11 @@ LPANIMATION_FRAME CAnimation::getFrame(int index)
 	return frames.at(index);
 }
 
+void CAnimation::setCurrentFrame(int frameIndex)
+{
+	this->currentFrame = frameIndex;
+}
+
 void CAnimation::Add(int spriteId, DWORD time)
 {
 	int t = time;

@@ -65,12 +65,14 @@ public:
 	int fixWidth;
 	int fixHeight;
 
-	DelayTime attachDelay;
+	DelayTime attackStandDelay;
 	DelayTime colorDelay;
 	DelayTime hurtDelay;
 	DelayTime deadDelay;
 	DelayTime duckDelay;
+	//DelayTime jumbDelay;
 	DelayTime attackDuckDelay;
+	DelayTime attacJumbDelay;
 
 	static Simon* instance;
 	static Simon* getInstance();

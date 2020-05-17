@@ -112,13 +112,15 @@ Simon::Simon() : CGameObject()
 	setAlive(true);
 	setDirection(DIRECTION_RIGHT);
 	SetState(SIMON_STATE_NORMAL);
-	setNumberArchery(1);
-	attachDelay.init(80);
+	setNumberArchery(0);
+	attackStandDelay.init(80);
+	attacJumbDelay.init(400);
 	colorDelay.init(300);
-	hurtDelay.init(10);
+	hurtDelay.init(200);
 	deadDelay.init(200);
-	duckDelay.init(400);
-	attackDuckDelay.init(300);
+	duckDelay.init(200);
+	//jumbDelay.init(80);
+	attackDuckDelay.init(200);
 	setCollitionType(COLLISION_TYPE_PLAYER);
 	collitionTypeToCheck.push_back(COLLISION_TYPE_GROUND);
 	collitionTypeToCheck.push_back(COLLISION_TYPE_ENEMY);
@@ -130,10 +132,11 @@ Simon::Simon() : CGameObject()
 void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
 	// Calculate dx, dy 
-	attachDelay.update();
+	attackStandDelay.update();
 	colorDelay.update();
 	hurtDelay.update();
 	duckDelay.update();
+	attacJumbDelay.update();
 	attackDuckDelay.update();
 	if (aniIndex == SIMON_ANI_COLORS) {
 		
@@ -211,11 +214,22 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	}
 	// Simple fall down
 	vy += MARIO_GRAVITY * dt;
-
+	if (attackStandDelay.isTerminated())
+	{
+		state = SIMON_STATE_NORMAL;
+		animation_set->at(SIMON_ANI_STAND_USING_SUB)->setCurrentFrame(-1);
+	}
+	if (attacJumbDelay.isTerminated())
+	{
+		state = SIMON_STATE_NORMAL;
+		animation_set->at(SIMON_ANI_STAND_USING_SUB)->setCurrentFrame(-1);
+	}
+	
 	switch (state)
 	{
 	case SIMON_STATE_NORMAL: {
 		if (isOnGround) {
+			
 			if (isRightDown) {
 				setDirection(DIRECTION_RIGHT);
 				aniIndex = SIMON_ANI_GO;
@@ -239,12 +253,8 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					{
 						if (isAttack) {
 							aniIndex = SIMON_ANI_STAND_USING_SUB;
-							//state = SIMON_STATE_ATTACK;
-							attachDelay.start();
-							if (attachDelay.isTerminated())
-							{
-								state = SIMON_STATE_NORMAL;
-							}
+							attackStandDelay.start();
+							
 						}
 						else
 						{
@@ -258,11 +268,6 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			if (isJumpDown) {
 				aniIndex = SIMON_ANI_JUMB;
 				setVy(SIMON_JUMP_Y);
-				attachDelay.start();
-				if (attachDelay.isTerminated())
-				{
-					state = SIMON_STATE_NORMAL;
-				}
 			}
 		}
 		else
@@ -270,7 +275,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			aniIndex = SIMON_ANI_JUMB;
 			if (isAttack) {
 				state = SIMON_STATE_ATTACK_JUMP;
-				attachDelay.start();
+				attacJumbDelay.start();
 			}
 		}
 	}
@@ -282,10 +287,6 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	case SIMON_STATE_ATTACK_JUMP:
 	{
 		aniIndex = SIMON_ANI_STAND_USING_SUB;
-		if (attachDelay.isTerminated())
-		{
-			state = SIMON_STATE_NORMAL;
-		}
 		break;
 	}
 	case SIMON_STATE_ON_STAIR:
@@ -400,13 +401,20 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		if (isAttack) {
 			state = SIMON_STATE_ATTACK_DUCK;
 			attackDuckDelay.start();
-			return;
+			/*return;*/
 		}
 		if (duckDelay.isTerminated())
 		{
-			state = SIMON_STATE_NORMAL;
-			retoreWidthHeight();
-			setY(getY() + 30);
+			if (!isDownDown) {
+				
+				state = SIMON_STATE_NORMAL;
+				retoreWidthHeight();
+				setY(getY() + 16);
+			}
+			else {
+				duckDelay.start();
+			}
+			
 		}
 		
 		break;
@@ -416,9 +424,9 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		aniIndex = SIMON_ANI_DUCK_USING_SUB;
 		if (attackDuckDelay.isTerminated())
 		{
-			state = SIMON_STATE_NORMAL;
-			retoreWidthHeight();
-			setY(getY() + 30);
+			state = SIMON_STATE_DUCK;
+			/*retoreWidthHeight();
+			setY(getY() + 16);*/
 		}
 		break;
 	}
