@@ -1,5 +1,6 @@
 #pragma once
 #include"Item.h"
+#define SCORE  2000
 class Crown : public Item
 {
 public:

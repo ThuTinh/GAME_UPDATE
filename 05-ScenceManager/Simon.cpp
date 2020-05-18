@@ -461,6 +461,17 @@ void Simon::setNumberArchery(int num)
 	this->numberArchery = num;
 }
 
+void Simon::addNumberObjectBlack(int num)
+{
+	numberObjectBlack += num;
+}
+
+int Simon::getNumberObjectBlack()
+{
+	return numberObjectBlack;
+}
+
+
 int Simon::getNumberArchery()
 {
 	return numberArchery;

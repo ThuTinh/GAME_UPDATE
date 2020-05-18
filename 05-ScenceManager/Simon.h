@@ -64,7 +64,7 @@ public:
 	int numberArchery;
 	int fixWidth;
 	int fixHeight;
-
+	int numberObjectBlack;
 	DelayTime attackStandDelay;
 	DelayTime colorDelay;
 	DelayTime hurtDelay;
@@ -82,6 +82,8 @@ public:
 	Item *getSubweapo();
 	void setSubWeapon(Item * item);
 	void setNumberArchery(int num);
+	void addNumberObjectBlack(int num);
+	int getNumberObjectBlack();
 	int getNumberArchery();
 	void addNumberArchery(int num);
 	void SetState(int state);
