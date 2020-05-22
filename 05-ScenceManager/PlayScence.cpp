@@ -517,6 +517,11 @@ void CPlayScene::addAddtionalObject(LPGAMEOBJECT obj)
 	addtionalObject.push_back(obj);
 }
 
+vector<LPGAMEOBJECT> CPlayScene::getAddtionalObject()
+{
+	return addtionalObject;
+}
+
 void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 {
 	//DebugOut(L"[INFO] KeyDown: %d\n", KeyCode);

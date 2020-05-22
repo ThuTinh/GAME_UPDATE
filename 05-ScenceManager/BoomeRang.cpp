@@ -15,7 +15,7 @@ void BoomeRang::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 void BoomeRang::onPlayerContact()
 {
-	ScoreBar::getInstance()->setTypeSubWeapon(TYPE_SUBWEAPON::BOOMERANG);
+	ScoreBar::getInstance()->setTypeSubWeapon(TYPE_SUBWEAPON::BOOMERANG); 
 }
 
 BoomeRang::BoomeRang()

@@ -1,6 +1,11 @@
 ﻿#include "Bat.h"
 #include"Gound.h"
 #include"Simon.h"
+#include "Weapon.h"
+#include "ScoreBar.h"
+#include "Die-affect.h"
+#include "BigHeart.h"
+#include "Game.h"
 void Bat::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	switch (state)
@@ -18,13 +23,24 @@ void Bat::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		}
 		break;
 	case BAT_STATE_FLY:
+		if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive) {
+				setAlive(false);
+				ScoreBar::getInstance()->increaseScore(ENEMY_SCORE);
+				DieEffect* dieEffect = new DieEffect();
+				CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(dieEffect);
+				dieEffect->setX(getMidX());
+				dieEffect->setY(getMidY());
+				dieEffect->setAlive(true);
+				dieEffect->timeDelay.start();
+				
+		}
 		break;
 	default:
 		break;
 	}
+	Enemy::Update(dt, coObjects);
 	x += dx;
 	y += dy;
-	CGameObject::Update(dt);
 }
 
 void Bat::Render()

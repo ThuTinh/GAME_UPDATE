@@ -24,6 +24,7 @@
 #define SIMON_STAIR_STATE_GO_UP 201
 #define SIMON_STAIR_STATE_GO_DOWN 202
 
+
 #define SIMON_ANI_STAND 0
 #define SIMON_ANI_GO	1
 #define SIMON_ANI_JUMB	2
@@ -65,6 +66,7 @@ public:
 	int fixWidth;
 	int fixHeight;
 	int numberObjectBlack;
+	bool isUseSub;
 	DelayTime attackStandDelay;
 	DelayTime colorDelay;
 	DelayTime hurtDelay;
@@ -73,6 +75,7 @@ public:
 	//DelayTime jumbDelay;
 	DelayTime attackDuckDelay;
 	DelayTime attacJumbDelay;
+
 
 	static Simon* instance;
 	static Simon* getInstance();

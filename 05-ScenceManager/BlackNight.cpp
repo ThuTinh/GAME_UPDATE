@@ -6,6 +6,7 @@
 #include"Die-affect.h"
 #include "Game.h"
 #include "BigHeart.h"
+#include "SubWeaponAttack.h"
 void BlackNight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	vy += ENEMY_GRAVITY * dt;
@@ -31,10 +32,9 @@ void BlackNight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			}
 		}
 	}
-	CGameObject::Update(dt);
+	Enemy::Update(dt, coObjects);
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
-
 	coEvents.clear();
 
 	// turn off collision when die 

@@ -48,6 +48,7 @@ public:
 	virtual void Render();
 	virtual void Unload();
 	virtual void addAddtionalObject(LPGAMEOBJECT obj);
+	virtual vector<LPGAMEOBJECT> getAddtionalObject();
 	friend class CPlayScenceKeyHandler;
 };
 

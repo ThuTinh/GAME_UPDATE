@@ -252,6 +252,15 @@
     <ClCompile Include="ObjectBlack.cpp">
       <Filter>Object\Misc</Filter>
     </ClCompile>
+    <ClCompile Include="SubWeaponAttack.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="SubDaggerAttack.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="SubBoomerangAttack.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Brick.h">
@@ -445,6 +454,15 @@
     </ClInclude>
     <ClInclude Include="ObjectBlack.h">
       <Filter>Object\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="SubWeaponAttack.h">
+      <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="SubDaggerAttack.h">
+      <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="SubBoomerangAttack.h">
+      <Filter>Object\Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

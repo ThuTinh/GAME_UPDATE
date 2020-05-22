@@ -9,7 +9,9 @@
 #include "ScoreBar.h"
 #include "Weapon.h"
 #include "Enemy.h"
-
+#include "SubDaggerAttack.h"
+#include "SubBoomerangAttack.h"
+#include "SubWeaponAttack.h"
 #define SCENE_SECTION_UNKNOWN -1
 #define SCENE_SECTION_TEXTURES 2
 #define SCENE_SECTION_MAP	3
@@ -113,6 +115,7 @@ Simon::Simon() : CGameObject()
 	setDirection(DIRECTION_RIGHT);
 	SetState(SIMON_STATE_NORMAL);
 	setNumberArchery(0);
+	isUseSub = false;
 	attackStandDelay.init(80);
 	attacJumbDelay.init(400);
 	colorDelay.init(300);
@@ -132,6 +135,7 @@ Simon::Simon() : CGameObject()
 void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
 	// Calculate dx, dy 
+	
 	attackStandDelay.update();
 	colorDelay.update();
 	hurtDelay.update();
@@ -224,7 +228,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		state = SIMON_STATE_NORMAL;
 		animation_set->at(SIMON_ANI_STAND_USING_SUB)->setCurrentFrame(-1);
 	}
-	
+	isUseSub = false;
 	switch (state)
 	{
 	case SIMON_STATE_NORMAL: {
@@ -251,16 +255,51 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					}
 					else
 					{
-						if (isAttack) {
-							aniIndex = SIMON_ANI_STAND_USING_SUB;
-							attackStandDelay.start();
-							
+						if (isUpDown) {
+							if (isAttack) {
+								isUseSub = true;
+								aniIndex = SIMON_ANI_STAND_USING_SUB;
+								SubWeaponAttack  *sub;
+								switch (ScoreBar::getInstance()->getTypeSubWeapon())
+								{
+								case SWORD:
+									 sub = new SubDaggerAttack();
+									CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(sub);
+									sub->setX(getMidX());
+									sub->setY(getMidY() + 10);
+									sub->setAlive(true);
+									sub->setPhysicsEnable(true);
+									sub->timeDelay.start();
+									break;
+								case BOOMERANG:
+									 sub = new SubBoomerangAttack();
+									CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(sub);
+									sub->setX(getMidX());
+									sub->setY(getMidY() + 10);
+									sub->setAlive(true);
+									sub->setPhysicsEnable(true);
+									sub->timeDelay.start();
+									break;
+								default:
+									break;
+								}
+								
+							}
 						}
 						else
 						{
-							aniIndex = SIMON_ANI_STAND;
-							setVx(0);
+							if (isAttack) {
+								aniIndex = SIMON_ANI_STAND_USING_SUB;
+								attackStandDelay.start();
+
+							}
+							else
+							{
+								aniIndex = SIMON_ANI_STAND;
+								setVx(0);
+							}
 						}
+						
 					}
 					
 				}
@@ -269,6 +308,8 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				aniIndex = SIMON_ANI_JUMB;
 				setVy(SIMON_JUMP_Y);
 			}
+
+
 		}
 		else
 		{

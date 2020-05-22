@@ -1,13 +1,12 @@
 #pragma once
-#include"Enemy.h"
-class Sketon : public Enemy
+#include"Item.h"
+class Sword : public Item
 {
 public:
+	Sword();
+	~Sword();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
-	virtual void Render();
-	Sketon();
-	~Sketon();
-
+	void onPlayerContact() override;
 private:
 
 };
