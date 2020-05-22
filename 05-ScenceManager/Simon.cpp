@@ -116,14 +116,15 @@ Simon::Simon() : CGameObject()
 	SetState(SIMON_STATE_NORMAL);
 	setNumberArchery(0);
 	isUseSub = false;
-	attackStandDelay.init(80);
+	attackStandDelay.init(400);
 	attacJumbDelay.init(400);
 	colorDelay.init(300);
 	hurtDelay.init(200);
 	deadDelay.init(200);
 	duckDelay.init(200);
+	attackUseSub.init(400);
 	//jumbDelay.init(80);
-	attackDuckDelay.init(200);
+	attackDuckDelay.init(400);
 	setCollitionType(COLLISION_TYPE_PLAYER);
 	collitionTypeToCheck.push_back(COLLISION_TYPE_GROUND);
 	collitionTypeToCheck.push_back(COLLISION_TYPE_ENEMY);
@@ -142,6 +143,8 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	duckDelay.update();
 	attacJumbDelay.update();
 	attackDuckDelay.update();
+	attackUseSub.update();
+	
 	if (aniIndex == SIMON_ANI_COLORS) {
 		
 		if(colorDelay.isTerminated()) {
@@ -228,6 +231,16 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		state = SIMON_STATE_NORMAL;
 		animation_set->at(SIMON_ANI_STAND_USING_SUB)->setCurrentFrame(-1);
 	}
+	if (attackDuckDelay.isTerminated())
+	{
+		state = SIMON_STATE_DUCK;
+		animation_set->at(SIMON_ANI_DUCK_USING_SUB)->setCurrentFrame(-1);
+	}
+	if (attackUseSub.isTerminated()) {
+		state = SIMON_STATE_NORMAL;
+		animation_set->at(SIMON_ANI_STAND_USING_SUB)->setCurrentFrame(-1);
+	}
+
 	isUseSub = false;
 	switch (state)
 	{
@@ -256,14 +269,14 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					else
 					{
 						if (isUpDown) {
-							if (isAttack) {
-								isUseSub = true;
-								aniIndex = SIMON_ANI_STAND_USING_SUB;
-								SubWeaponAttack  *sub;
+							if (isAttack)    {
+								state = SIMON_STATE_USE_SUB;	
+								attackUseSub.start();
+								SubWeaponAttack* sub;
 								switch (ScoreBar::getInstance()->getTypeSubWeapon())
 								{
 								case SWORD:
-									 sub = new SubDaggerAttack();
+									sub = new SubDaggerAttack();
 									CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(sub);
 									sub->setX(getMidX());
 									sub->setY(getMidY() + 10);
@@ -272,7 +285,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 									sub->timeDelay.start();
 									break;
 								case BOOMERANG:
-									 sub = new SubBoomerangAttack();
+									sub = new SubBoomerangAttack();
 									CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(sub);
 									sub->setX(getMidX());
 									sub->setY(getMidY() + 10);
@@ -281,20 +294,26 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 									sub->timeDelay.start();
 									break;
 								default:
-									break;
+									return;
 								}
-								
+
+							}
+							else {
+
+								aniIndex = SIMON_ANI_STAND;
+								setVx(0);
 							}
 						}
 						else
 						{
 							if (isAttack) {
-								aniIndex = SIMON_ANI_STAND_USING_SUB;
+								state = SIMON_STATE_ATTACK_STAND;
 								attackStandDelay.start();
 
 							}
 							else
 							{
+
 								aniIndex = SIMON_ANI_STAND;
 								setVx(0);
 							}
@@ -308,8 +327,6 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				aniIndex = SIMON_ANI_JUMB;
 				setVy(SIMON_JUMP_Y);
 			}
-
-
 		}
 		else
 		{
@@ -321,8 +338,9 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		}
 	}
 	 break;
-	case SIMON_STATE_ATTACK:
+	case SIMON_STATE_ATTACK_STAND:
 	{
+		aniIndex = SIMON_ANI_STAND_USING_SUB;
 		break;
 	}
 	case SIMON_STATE_ATTACK_JUMP:
@@ -463,12 +481,18 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	}
 	case SIMON_STATE_ATTACK_DUCK: {
 		aniIndex = SIMON_ANI_DUCK_USING_SUB;
-		if (attackDuckDelay.isTerminated())
-		{
-			state = SIMON_STATE_DUCK;
-			/*retoreWidthHeight();
-			setY(getY() + 16);*/
-		}
+		//if (attackDuckDelay.isTerminated())
+		//{
+		//	state = SIMON_STATE_DUCK;
+		//	/*retoreWidthHeight();
+		//	setY(getY() + 16);*/
+		//}
+		break;
+	}
+	case SIMON_STATE_USE_SUB:
+	{
+		isUseSub = true;
+		aniIndex = SIMON_ANI_STAND_USING_SUB;
 		break;
 	}
 	default:

@@ -72,7 +72,7 @@ void Fleaman::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	vy += ENEMY_GRAVITY * dt;
 	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive) {
 		setAlive(false);
-		ScoreBar::getInstance()->increaseScore(ENEMY_SCORE);
+		ScoreBar::getInstance()->increaseScore(FLEAMAN_SCORE);
 		DieEffect *dieEffect = new DieEffect();
 		CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(dieEffect);
 		dieEffect->setX(getMidX());

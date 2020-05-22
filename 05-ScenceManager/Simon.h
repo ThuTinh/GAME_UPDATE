@@ -12,13 +12,13 @@
 
 #define SIMON_STATE_NORMAL 100
 #define SIMON_STATE_ON_STAIR 101
-#define SIMON_STATE_ATTACK 102
+#define SIMON_STATE_ATTACK_STAND 102
 #define SIMON_STATE_ATTACK_JUMP 103
 #define SIMON_STATE_DIE 104
 #define SIMON_STATE_HURT 105
 #define SIMON_STATE_DUCK 106
 #define SIMON_STATE_ATTACK_DUCK 107
-
+#define SIMON_STATE_USE_SUB 108
 
 #define SIMON_STAIR_STATE_NORUN 200
 #define SIMON_STAIR_STATE_GO_UP 201
@@ -75,6 +75,7 @@ public:
 	//DelayTime jumbDelay;
 	DelayTime attackDuckDelay;
 	DelayTime attacJumbDelay;
+	DelayTime attackUseSub;
 
 
 	static Simon* instance;

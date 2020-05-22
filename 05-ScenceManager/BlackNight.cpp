@@ -14,7 +14,7 @@ void BlackNight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		++counterInjured;
 		if (counterInjured >= COUNTER_LIFE) {
 			setAlive(false);
-			ScoreBar::getInstance()->increaseScore(ENEMY_SCORE);
+			ScoreBar::getInstance()->increaseScore(BLACKNIGHT_SCORE);
 			DieEffect* dieEffect = new DieEffect();
 			CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(dieEffect);
 			dieEffect->setX(getMidX());

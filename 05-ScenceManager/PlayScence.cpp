@@ -575,7 +575,7 @@ void CPlayScenceKeyHandler::OnKeyUp(int KeyCode)
 	case DIK_RIGHT:
 		simon->isRightDown = false;
 		break;
-	}
+	} 
 
 }
 

@@ -1,5 +1,6 @@
 #pragma once
 #include"Enemy.h"
+#define SKETON_SCORE 200
 class Sketon : public Enemy
 {
 public:

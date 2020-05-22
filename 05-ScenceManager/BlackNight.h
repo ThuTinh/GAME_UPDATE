@@ -2,7 +2,7 @@
 #include"Enemy.h"
 
 #define BLACKNIGHT_VX 0.03
-#define BLACKNIGHT_SCORE 500
+#define BLACKNIGHT_SCORE 400
 #define COUNTER_LIFE 2
 class BlackNight : public Enemy
 {

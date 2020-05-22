@@ -1,5 +1,6 @@
 #pragma once
 #include"Enemy.h"
+#define RAVEN_SCORE 200
 class Raven : public Enemy
 {
 public:

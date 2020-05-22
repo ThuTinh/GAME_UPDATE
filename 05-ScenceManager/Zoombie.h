@@ -1,5 +1,6 @@
 #pragma once
 #include"Enemy.h"
+#define ZOOMBIE_SCORE 100
 class Zoombie : public Enemy
 {
 public:
