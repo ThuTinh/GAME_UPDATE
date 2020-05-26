@@ -1,10 +1,26 @@
 ﻿#include "Zoombie.h"
 #include"Gound.h"
+#include "Simon.h"
+#include "ScoreBar.h"
+#include "Die-affect.h"
+#include "Camera.h"
+#include "Weapon.h"
+#include"Game.h"
 void Zoombie::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 
-	vy += ENEMY_GRAVITY * dt;
-	CGameObject::Update(dt);
+	vy += ZOOMBIE_GRAVITY * dt;
+	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive) {
+		setAlive(false);
+		ScoreBar::getInstance()->increaseScore(ZOOMBIE_SCORE);
+		DieEffect* dieEffect = new DieEffect();
+		CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(dieEffect);
+		dieEffect->setX(getMidX());
+		dieEffect->setY(getMidY());
+		dieEffect->setAlive(true);
+		dieEffect->timeDelay.start();
+	}
+	Enemy::Update(dt, coObjects);
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
 	coEvents.clear();
@@ -41,11 +57,11 @@ void Zoombie::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		{
 			LPCOLLISIONEVENT e = coEvents[i];
 			if (!dynamic_cast<Ground*>(e->obj)) {
-
+				x += dx;
 			}
 			else
 			{
-
+				onCollision(e->obj, e->t, e->nx, e->ny);
 
 			}
 
@@ -57,6 +73,31 @@ void Zoombie::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
 	/* mặc định là false cho tới khi chạm sàn */
 
+	switch (state)
+	{
+	case ZOOMBIE_STAND:
+		if (abs(getX() - Simon::getInstance()->getX()) < ZOOMBIE_RUN_DX) {
+			state = ZOOMBIE_RUN;
+		}
+		break;
+	case ZOOMBIE_RUN:
+		setVx(-ZOOMBIE_RUN_VX);
+		if (abs(Camera::getInstance()->getSpace()->X - getX()) < 30) {
+			state = ZOOMBIE_RUN_TURNING;
+		}
+
+		if (abs(Simon::getInstance()->getX() - getX()) > ZOOMBIE_RUN_DX_TO_TURNING) {
+			state = ZOOMBIE_RUN_TURNING;
+		}
+		break;
+
+	case ZOOMBIE_RUN_TURNING:
+		setVx(ZOOMBIE_RUN_VX);
+		break;
+
+	default:
+		break;
+	}
 }
 
 void Zoombie::Render()
@@ -70,7 +111,6 @@ Zoombie::Zoombie()
 	collitionTypeToCheck.push_back(COLLISION_TYPE_GROUND);
 	setPhysicsEnable(true);
 	setDirection(DIRECTION_RIGHT);
-	setVx(0.03);
 }
 
 Zoombie::~Zoombie()
