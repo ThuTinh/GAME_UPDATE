@@ -56,16 +56,15 @@ void Sketon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		{
 			LPCOLLISIONEVENT e = coEvents[i];
 			if (!dynamic_cast<Ground*>(e->obj)) {
-
+				x += dx;
 			}
 			else
 			{
-
+				onCollision(e->obj, e->t, e->nx, e->ny);
 
 			}
 
 		}
-
 	}
 
 	//clean up collision events
@@ -74,6 +73,23 @@ void Sketon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 	Enemy::Update(dt,coObjects);
 
+}
+
+void Sketon::onCollision(CGameObject* other, float collisionTime, int nx, int ny)
+{
+	if (this->getX() + 5 > other->getRight() || nx == -1) {
+		setDirection(DIRECTION_LEFT);
+		setVx(-SKETON_VX);
+
+	}
+	else
+	{
+		if (this->getX() - 5 < other->getLeft() || nx == 1) {
+			setDirection(DIRECTION_RIGHT);
+			//x += 1;
+			setVx(SKETON_VX);
+		}
+	}
 }
 
 void Sketon::Render()

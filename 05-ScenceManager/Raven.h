@@ -2,6 +2,7 @@
 #include"Enemy.h"
 #define RAVEN_SCORE 200
 #define DISTANCE_X 60
+#define RAVEN_DISTANCE_STOP 10
 #define VX 0.02
 #define VY 0.0003
 #define RAVEN_GRAVITY -0.003

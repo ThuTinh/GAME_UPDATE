@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "GameObject.h"
 #include"DelayTime.h"
+#include "GameTime.h"
 #include "Item.h"
 #define SIMON_VX	0.06 
 //0.1f
@@ -19,7 +20,6 @@
 #define SIMON_STATE_DUCK 106
 #define SIMON_STATE_ATTACK_DUCK 107
 #define SIMON_STATE_USE_SUB 108
-
 #define SIMON_STAIR_STATE_NORUN 200
 #define SIMON_STAIR_STATE_GO_UP 201
 #define SIMON_STAIR_STATE_GO_DOWN 202
@@ -67,6 +67,8 @@ public:
 	int fixHeight;
 	int numberObjectBlack;
 	bool isUseSub;
+	bool renderActive;
+	int hurtDirection;
 	DelayTime attackStandDelay;
 	DelayTime colorDelay;
 	DelayTime hurtDelay;
@@ -76,6 +78,8 @@ public:
 	DelayTime attackDuckDelay;
 	DelayTime attacJumbDelay;
 	DelayTime attackUseSub;
+	GameTime blinkTime;
+	DelayTime hideHurtDelay;
 
 
 	static Simon* instance;
@@ -103,6 +107,8 @@ public:
 	void goStairDown();
 	void setStairDirection(int stairDirection);
 	void setPlayerStairState(int playerStairState);
+	void setRenderActive(bool renderActive);
+	bool getRenderActive();
 	void onCollision(CGameObject* other, float collisionTime, int nx, int ny) override;
 	void Load(LPCWSTR simonFile);
 	Simon();

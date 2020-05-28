@@ -70,9 +70,12 @@ void Fleaman::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	//clean up collision events
 	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
 
-	if (abs(Simon::getInstance()->getX() - getX()) < FLEAMAN_DISTANCE_TO_JUMB) {
+	if (abs(Simon::getInstance()->getX() - getX()) < FLEAMAN_DISTANCE_TO_JUMB ) {
 		setPhysicsEnable(true);
-		setDirectionFollowPlayer();
+		if (abs(Simon::getInstance()->getX() - getX()) > FLEAMAN_DISTANCE_STOP) {
+			setDirectionFollowPlayer();
+
+		}
 		setVx(getDirection() * FLEAMAN_VX);
 		switch (fleamanState)
 		{

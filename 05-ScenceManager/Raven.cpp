@@ -73,11 +73,13 @@ void Raven::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	//clean up collision events
 	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
 	/* mặc định là false cho tới khi chạm sàn */
-	setDirectionFollowPlayer();
 	switch (state)
 	{
 	case RAVEN_STATE_STAND:
 		if (abs(getX() - Simon::getInstance()->getX()) < DISTANCE_X) {
+			if (abs(Simon::getInstance()->getX() - getX()) > RAVEN_DISTANCE_STOP) {
+				setDirectionFollowPlayer();
+			}
 			state = RAVEN_STATE_ATTACK;
 			setPhysicsEnable(true);
 		}
@@ -86,6 +88,10 @@ void Raven::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		setVy(VY);
 		setVx(getDirection() * VX);
 		aniIndex = RAVEN_ACTION_FLY;
+		/*if (getY()> Simon::getInstance()->getY())
+		{
+			setAlive(false);
+		}*/
 		break;
 	default:
 		break;
