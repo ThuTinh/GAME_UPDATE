@@ -3,11 +3,14 @@
 #include "Weapon.h"
 #include "Die-affect.h"
 #include "ScoreBar.h"
+#include "Simon.h"
 #include "Game.h"
+#include "WhiteBone.h"
 void Sketon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 
 	vy += ENEMY_GRAVITY * dt;
+	whiteBoneDelay.update();
 	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive) {
 		setAlive(false);
 		ScoreBar::getInstance()->increaseScore(SKETON_SCORE);
@@ -70,22 +73,39 @@ void Sketon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	//clean up collision events
 	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
 	/* mặc định là false cho tới khi chạm sàn */
-
+	if (Simon::getInstance()->getX() < getX()) {
+		setDirection(DIRECTION_LEFT);
+	}
+	else
+	{
+		setDirection(DIRECTION_RIGHT);
+	}
 	Enemy::Update(dt,coObjects);
-
+	if (Simon::getInstance()->getX()< getX() && abs(Simon::getInstance()->getX() - getX())<= DISTANCE_TO_THROW_WHITEBONE) {
+		whiteBoneDelay.start();
+		
+	}
+	if (whiteBoneDelay.isTerminated()) {
+		WhiteBone* whiteBone = new WhiteBone();
+		CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(whiteBone);
+		whiteBone->setX(getMidX());
+		whiteBone->setY(getMidY());
+		whiteBone->setAlive(true);
+		whiteBone->setPhysicsEnable(true);
+		whiteBone->timeDelay.start();
+	}
 }
 
 void Sketon::onCollision(CGameObject* other, float collisionTime, int nx, int ny)
 {
 	if (this->getX() + 5 > other->getRight() || nx == -1) {
-		setDirection(DIRECTION_LEFT);
+	
 		setVx(-SKETON_VX);
 
 	}
 	else
 	{
 		if (this->getX() - 5 < other->getLeft() || nx == 1) {
-			setDirection(DIRECTION_RIGHT);
 			//x += 1;
 			setVx(SKETON_VX);
 		}
@@ -105,6 +125,7 @@ Sketon::Sketon()
 	setPhysicsEnable(true);
 	setDirection(DIRECTION_RIGHT);
 	setVx(0.03);
+	whiteBoneDelay.init(400);
 }
 
 Sketon::~Sketon()

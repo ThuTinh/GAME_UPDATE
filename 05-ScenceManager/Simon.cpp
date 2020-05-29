@@ -126,6 +126,7 @@ Simon::Simon() : CGameObject()
 	attackUseSub.init(400);
 	blinkTime.setDeltaTime(200);
 	hideHurtDelay.init(50);
+	attackInStairDelay.init(400);
 	//jumbDelay.init(80);
 	attackDuckDelay.init(400);
 	setCollitionType(COLLISION_TYPE_PLAYER);
@@ -148,6 +149,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	attackDuckDelay.update();
 	attackUseSub.update();
 	hideHurtDelay.update();
+	attackInStairDelay.update();
 	if (aniIndex == SIMON_ANI_COLORS) {
 		
 		if(colorDelay.isTerminated()) {
@@ -226,6 +228,29 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	if (attackUseSub.isTerminated()) {
 		state = SIMON_STATE_NORMAL;
 		animation_set->at(SIMON_ANI_STAND_USING_SUB)->setCurrentFrame(-1);
+	}
+	if (aniIndex == SIMON_ANI_ASCEN_STAIRS_USING_SUB || aniIndex == SIMON_ANI_DESCEN_STAIRS_USING_SUB)
+	{
+		if (attackInStairDelay.isTerminated())
+		{
+			playerStairState = SIMON_STAIR_STATE_NORUN;
+			if (aniIndex == SIMON_ANI_DESCEN_STAIRS_USING_SUB)
+			{
+				aniIndex = SIMON_ANI_DESCEN_STAIRS;
+				animation_set->at(SIMON_ANI_DESCEN_STAIRS_USING_SUB)->setCurrentFrame(-1);
+			}
+			else
+			{
+				aniIndex = SIMON_ANI_ASCEND_STAIRS;
+				animation_set->at(SIMON_ANI_ASCEN_STAIRS_USING_SUB)->setCurrentFrame(-1);
+			}
+
+		}
+		else
+		{
+			return;
+		}
+
 	}
 	
 	isUseSub = false;
@@ -349,14 +374,37 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				setX(playerStairDestx);
 				setY(playerStairDesty);
 			}
+			
 			if (isUpDown)
 			{
 				goStairUp();
+				
 			}
 			if (isDownDown)
 			{
 				goStairDown();
+				
 			}
+			if (isAttack) {
+				attackInStairDelay.start();
+				setPauseAnimation(false);
+				if (aniIndex == SIMON_ANI_ASCEND_STAIRS)
+				{
+					playerStairState = SIMON_STAIR_STATE_ATTACK_ASCEN;
+					aniIndex = SIMON_ANI_ASCEN_STAIRS_USING_SUB;
+				}
+				else
+				{
+					if (aniIndex == SIMON_ANI_DESCEN_STAIRS)
+					{
+						playerStairState = SIMON_STAIR_STATE_ATTACK_DESEN;
+						aniIndex = SIMON_ANI_DESCEN_STAIRS_USING_SUB;
+
+					}
+				}
+
+			}
+			
 			return;
 		case SIMON_STAIR_STATE_GO_UP:
 			x += getDirection();
@@ -369,6 +417,20 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			/* go down stair */
 			setDy(-1);
 			y -= 1;
+			
+			break;
+		case SIMON_STAIR_STATE_ATTACK_DESEN:
+
+			if (attackInStairDelay.isTerminated())
+			{
+				playerStairState = SIMON_STAIR_STATE_NORUN;
+			}
+			break;
+		case SIMON_STAIR_STATE_ATTACK_ASCEN:
+			if (attackInStairDelay.isTerminated())
+			{
+				playerStairState = SIMON_STAIR_STATE_NORUN;
+			}
 			break;
 		default:
 			break;

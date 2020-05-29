@@ -1,0 +1,18 @@
+Sprite WhiteBone
+R	G	B
+255	255	255	255
+Animation Count
+1
+
+
+Name
+WhiteBone
+Frame Count
+3
+
+FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
+0			0			6				16				0			0
+6			3			15				13				0			0
+21			3			15				13				0			0
+
+

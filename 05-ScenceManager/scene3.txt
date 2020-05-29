@@ -13,6 +13,7 @@
 12	textures\enemy\fleaman.png	255	0	128
 13	textures\enemy\raven.png	255	0	128
 50	textures\misc\die-effect.png	255	0	0
+51	textures\enemy\WhiteBone.png	255	0	128
 8	textures\weopon\image.png	55	0	128
 -1	textures\map3\tilesheet.png	255	0	0
 
@@ -111,7 +112,10 @@
 550001	0	2	11	13	10	3	10	3	50
 550002	11	3	13	12	10	2	10	2	50
 
-
+#WhiteBone
+660001	0	0	6	16	0	0	0	0	51
+660002	6	3	15	13	0	0	0	0	51
+660003	21	3	15	13	0	0	0	0	51
 
 # ani_id	sprite1_id	time1	sprite2_id	time2	...
 [ANIMATIONS]
@@ -171,6 +175,9 @@
 # die efect
 5501	550001	100	550002	100
 
+#whiteBone
+6601	660001	100	660002	100	660003	100
+
 # id	ani1	ani2	ani3
 [ANIMATION_SETS]
 #HEART
@@ -202,6 +209,9 @@
 22	2101	2102
 #die-efect
 50	5501
+
+#white bone 
+51	6601
 
 [STAIR]
 #type 	x	y	with  height  ani_set_id IsRightStair IsTop
@@ -263,8 +273,8 @@
 2	729	83	8	16	11
 11	37	301	16	32	19
 11	654	125	16	32	19
-12	423	316	16	16	20
-12	169	284	16	16	20
+12	433	316	16	16	20
+12	181	284	16	16	20
 13	274	29	16	16	21
 13	416	78	16	16	21
 13	481	46	16	16	21
@@ -277,7 +287,7 @@
 2	475	349	8	16	11
 16	471	350	17	16	7
 15	426	350	9	16	12
-12	299	316	16	16	20
+12	307	316	16	16	20
 16	286	352	17	16	7
 15	223	351	9	16	12
 16	95	325	17	16	7

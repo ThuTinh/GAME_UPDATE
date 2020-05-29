@@ -23,6 +23,8 @@
 #define SIMON_STAIR_STATE_NORUN 200
 #define SIMON_STAIR_STATE_GO_UP 201
 #define SIMON_STAIR_STATE_GO_DOWN 202
+#define SIMON_STAIR_STATE_ATTACK_ASCEN 203 // len cau thang
+#define SIMON_STAIR_STATE_ATTACK_DESEN 204
 
 
 #define SIMON_ANI_STAND 0
@@ -80,6 +82,7 @@ public:
 	DelayTime attackUseSub;
 	GameTime blinkTime;
 	DelayTime hideHurtDelay;
+	DelayTime	attackInStairDelay;
 
 
 	static Simon* instance;

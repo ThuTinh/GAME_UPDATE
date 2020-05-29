@@ -14,7 +14,7 @@ void Weapon::Render()
 {
 
 	//Simon::getInstance()->aniIndex == SIMON_ANI_STAND_USING_SUB ||
-	if (!Simon::getInstance()->isUseSub && (Simon::getInstance()->aniIndex == SIMON_ANI_STAND_USING_SUB || Simon::getInstance()->aniIndex == SIMON_ANI_DUCK_USING_SUB)) {
+	if (!Simon::getInstance()->isUseSub && (Simon::getInstance()->aniIndex == SIMON_ANI_STAND_USING_SUB || Simon::getInstance()->aniIndex == SIMON_ANI_DUCK_USING_SUB || Simon::getInstance()->aniIndex == SIMON_ANI_DESCEN_STAIRS_USING_SUB || Simon::getInstance()->aniIndex == SIMON_ANI_ASCEN_STAIRS_USING_SUB)) {
 		if (Simon::getInstance()->getDirection() == DIRECTION_RIGHT) {
 			setDirection(DIRECTION::DIRECTION_RIGHT);
 			switch (Simon::getInstance()->frameIndex)

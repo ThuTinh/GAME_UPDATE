@@ -261,6 +261,9 @@
     <ClCompile Include="SubBoomerangAttack.cpp">
       <Filter>Object\Item</Filter>
     </ClCompile>
+    <ClCompile Include="WhiteBone.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Brick.h">
@@ -462,6 +465,9 @@
       <Filter>Object\Item</Filter>
     </ClInclude>
     <ClInclude Include="SubBoomerangAttack.h">
+      <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="WhiteBone.h">
       <Filter>Object\Item</Filter>
     </ClInclude>
   </ItemGroup>
