@@ -12,7 +12,8 @@ void Weapon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 void Weapon::Render()
 {
-	if (Simon::getInstance()->aniIndex == SIMON_ANI_STAND_USING_SUB || Simon::getInstance()->aniIndex == SIMON_ANI_DUCK_USING_SUB) {
+	//Simon::getInstance()->aniIndex == SIMON_ANI_STAND_USING_SUB ||
+	if (!Simon::getInstance()->isUseSub && (Simon::getInstance()->aniIndex == SIMON_ANI_STAND_USING_SUB || Simon::getInstance()->aniIndex == SIMON_ANI_DUCK_USING_SUB || Simon::getInstance()->aniIndex == SIMON_ANI_DESCEN_STAIRS_USING_SUB || Simon::getInstance()->aniIndex == SIMON_ANI_ASCEN_STAIRS_USING_SUB)) {
 		if (Simon::getInstance()->getDirection() == DIRECTION_RIGHT) {
 			setDirection(DIRECTION::DIRECTION_RIGHT);
 			switch (Simon::getInstance()->frameIndex)
@@ -105,7 +106,6 @@ void Weapon::Render()
 					aniIndex = WEAPON_ANI_W41;
 					break;
 				}
-
 				break;
 
 			case 1:
@@ -126,8 +126,6 @@ void Weapon::Render()
 					aniIndex = WEAPON_ANI_W42;
 					break;
 				}
-
-
 				break;
 			default:
 				setY(Simon::getInstance()->getY() + 2);
@@ -149,7 +147,6 @@ void Weapon::Render()
 					break;
 				}
 				break;
-
 			}
 		}
 		setAlive(true);

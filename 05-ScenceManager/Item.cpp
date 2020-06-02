@@ -24,10 +24,8 @@ void Item::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		setHeight(animation_set->at(0)->getFrame(0)->GetSprite()->getHeight());
 	}
 	CGameObject::Update(dt);
-
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
-
 	coEvents.clear();
 
 	// turn off collision when die 
@@ -68,11 +66,8 @@ void Item::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			else
 			{
 				onCollision(e->obj, e->t, e->nx, e->ny);
-
 			}
-			
 		}
-
 	}
 
 	//clean up collision events

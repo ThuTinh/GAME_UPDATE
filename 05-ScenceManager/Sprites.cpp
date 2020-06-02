@@ -2,7 +2,7 @@
 #include "Game.h"
 #include "Utils.h"
 
-CSprite::CSprite(int id, int x, int y, int width, int height, int anchorX, int anchorY, LPDIRECT3DTEXTURE9 tex)
+CSprite::CSprite(int id, int x, int y, int width, int height, int anchorX, int anchorY, int anchorXRight, int anchorYRight, LPDIRECT3DTEXTURE9 tex)
 {
 	this->id = id;
 	this->x = x;
@@ -11,6 +11,8 @@ CSprite::CSprite(int id, int x, int y, int width, int height, int anchorX, int a
 	this->height = height;
 	this->anchorX = anchorX;
 	this->anchorY = anchorY;
+	this->anChorXRight = anchorXRight;
+	this->anchorYRight = anchorYRight;
 	this->texture = tex;
 	this->direction = DIRECTION_LEFT;
 
@@ -47,7 +49,15 @@ void CSprite::Draw(float x, float y, DIRECTION direction,int alpha)
 	}
 
 	/* vẽ đối tượng lên màn hình */
-	game->Draw(x, y, getAnchorX(), getAnchorY(), texture, getleft(), getTop(), getRight(), getBottom(), alpha);
+	if (currentDirection == DIRECTION_RIGHT) {
+		game->Draw(x, y, getAnchorXRight(), getAnchorYRight(), texture, getleft(), getTop(), getRight(), getBottom(), alpha);
+
+	}
+	else
+	{ 
+		game->Draw(x, y, getAnchorX(), getAnchorY(), texture, getleft(), getTop(), getRight(), getBottom(), alpha);
+
+	}
 
 	if (direction != imageDirection)
 	{
@@ -70,9 +80,9 @@ DIRECTION CSprite::getDirection()
 	return direction;
 }
 
-void CSprites::Add(int id, int x, int y, int width, int height,int anchorX, int anchorY, LPDIRECT3DTEXTURE9 tex)
+void CSprites::Add(int id, int x, int y, int width, int height,int anchorX, int anchorY, int anchorXRight, int anchorYRight, LPDIRECT3DTEXTURE9 tex)
 {
-	LPSPRITE s = new CSprite(id, x, y, width, height, anchorX, anchorY, tex);
+	LPSPRITE s = new CSprite(id, x, y, width, height, anchorX, anchorY,  anchorXRight,  anchorYRight, tex);
 	sprites[id] = s;
 
 	DebugOut(L"[INFO] sprite added: %d, %d, %d, %d, %d \n", id, x, y, width, height);
@@ -147,4 +157,14 @@ int CSprite::getAnchorX()
 int CSprite::getAnchorY()
 {
 	return anchorY;
+}
+
+int CSprite::getAnchorXRight()
+{
+	return anChorXRight;
+}
+
+int CSprite::getAnchorYRight()
+{
+	return anchorYRight;
 }

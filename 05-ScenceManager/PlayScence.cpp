@@ -39,6 +39,9 @@
 #include"Sketon.h"
 #include"Zoombie.h"
 #include"GiaDo.h"
+#include"Crown.h"
+#include "BossBat.h"
+#include"ObjectBlack.h"
 using namespace std;
 
 CPlayScene::CPlayScene(int id, LPCWSTR filePath):
@@ -75,12 +78,13 @@ Space* CPlayScene::getCurentSpace()
 #define SCENE_SECTION_OBJECTS	7
 #define SCENE_SECTION_SPACE	8
 #define SCENE_SECTION_STAIR 9
+#define SCENE_SECTION_GRID 10
 
 #define OBJECT_TYPE_GATE3 -9
 #define OBJECT_TYPE_GATE_STAIR_CHANGE_DIRECTION -8
 #define OBJECT_TYPE_GATE_STAIR2 -7
 #define OBJECT_TYPE_GATE2 -6
-//#define OBJECT_TYPE_GATE_STAIR2 -5
+//#define OBJECT_TYPE_GATE_STAIR1_2 -5
 #define OBJECT_TYPE_GATE_STAIR1 -4
 #define OBJECT_TYPE_GATE1 -3
 #define OBJECT_TYPE_GROUND	-1
@@ -111,6 +115,7 @@ Space* CPlayScene::getCurentSpace()
 #define OBJECT_TYPE_400PTS	25
 #define OBJECT_TYPE_DIE_EFECT	26
 #define OBJECT_TYPE_BOSSBAT	27
+#define OBJECT_TYPE_OBJECTBLACK 	28
 #define OBJECT_TYPE_GIADO 30
 
 
@@ -137,7 +142,7 @@ void CPlayScene::_ParseSection_SPRITES(string line)
 {
 	vector<string> tokens = split(line);
 
-	if (tokens.size() < 8) return; // skip invalid lines
+	if (tokens.size() < 10) return; // skip invalid lines
 
 	int ID = atoi(tokens[0].c_str());
 	int x = atoi(tokens[1].c_str());
@@ -146,7 +151,9 @@ void CPlayScene::_ParseSection_SPRITES(string line)
 	int height = atoi(tokens[4].c_str());
 	int anchorX = atoi(tokens[5].c_str());
 	int anchorY = atoi(tokens[6].c_str());
-	int texID = atoi(tokens[7].c_str());
+	int anchorXRight = atoi(tokens[7].c_str());
+	int anchorYRight = atoi(tokens[8].c_str());
+	int texID = atoi(tokens[9].c_str());
 
 	LPDIRECT3DTEXTURE9 tex = CTextures::GetInstance()->Get(texID);
 	if (tex == NULL)
@@ -155,7 +162,7 @@ void CPlayScene::_ParseSection_SPRITES(string line)
 		return; 
 	}
 	spritesID.push_back(ID);
-	CSprites::GetInstance()->Add(ID, x, y, with, height, anchorX, anchorY, tex);
+	CSprites::GetInstance()->Add(ID, x, y, with, height, anchorX, anchorY,anchorXRight, anchorYRight , tex);
 }
 
 void CPlayScene::_ParseSection_ANIMATIONS(string line)
@@ -272,6 +279,12 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_BLUEPOTION: obj = new BluePotion(); break;
 	case OBJECT_TYPE_GIADO: obj = new GiaDo(); break;
 	case OBJECT_TYPE_ZOOMIE: obj = new Zoombie(); break;
+	case OBJECT_TYPE_CROWN: obj = new Crown(); break;
+	case OBJECT_TYPE_HAIXANH: obj = new HaiXanh(); break;
+	case OBJECT_TYPE_HAIDO: obj = new HaiDo(); break;
+	case OBJECT_TYPE_RAVEN : obj = new Raven(); break;
+	case OBJECT_TYPE_BOSSBAT: obj = new BossBat(); break;
+	case OBJECT_TYPE_OBJECTBLACK: obj = new ObjectBlack(); break;
 	default:
 		DebugOut(L"[ERR] Invalid object type: %d\n", object_type);
 		return;
@@ -342,6 +355,16 @@ void CPlayScene::_ParseSection_STAIR(string line)
 	obj->setRightTop(isRight, isTop);
 	objects.push_back(obj);
 }
+void CPlayScene::_ParseSection_GRID(string line)
+{
+	
+	vector<string> tokens = split(line);
+	if (tokens.size() < 1) return;
+	string path = tokens[0];
+	grid.Init(path);
+	
+
+}
 void CPlayScene::Load()
 {
 	
@@ -377,8 +400,11 @@ void CPlayScene::Load()
 		if (line == "[STAIR]") {
 			section = SCENE_SECTION_STAIR; continue;
 		}
+		if (line == "[GRID]") {
+			section = SCENE_SECTION_GRID; continue;
+		}
 		if (line[0] == '[') { section = SCENE_SECTION_UNKNOWN; continue; }	
-
+		
 		//
 		// data section
 		//
@@ -392,6 +418,7 @@ void CPlayScene::Load()
 			case SCENE_SECTION_OBJECTS: _ParseSection_OBJECTS(line); break;
 			case SCENE_SECTION_SPACE: _ParseSection_SPACE(line); break;
 			case SCENE_SECTION_STAIR: _ParseSection_STAIR(line); break;
+			case SCENE_SECTION_GRID:  _ParseSection_GRID(line); break;
 		}
 	}
 
@@ -408,21 +435,42 @@ void CPlayScene::Update(DWORD dt)
 	// We know that Mario is the first object in the list hence we won't add him into the colliable object list
 	// TO-DO: This is a "dirty" way, need a more organized way 
 
-	vector<LPGAMEOBJECT> coObjects;
-	for (size_t i = 0; i < objects.size()-1; i++)
-	{
-		coObjects.push_back(objects[i]);
+	//vector<LPGAMEOBJECT> coObjects;
+	objectsInCamara.clear();
+	grid.checkCellColitionCamera(Camera::getInstance());
+	vector<int> tempIndexObject = grid.getInxInCamera();
+	for (int j = 0; j < tempIndexObject.size(); j++) {
+		int k = tempIndexObject[j];
+		LPGAMEOBJECT obj = objects[k];
+		if (obj->getAlive())
+		{
+			objectsInCamara.push_back(obj);
+		}
 	}
+	/*for (size_t i = 0; i < objects.size()-1; i++)
+	{
 
-	for (size_t i = 0; i < objects.size(); i++)
+		coObjects.push_back(objects[i]);
+	}*/
+
+	/*for (size_t i = 0; i < objects.size(); i++)
 	{
 		objects[i]->Update(dt, &coObjects);
+	}*/
+
+	for (size_t i = 0; i < objectsInCamara.size(); i++)
+	{
+		objectsInCamara[i]->Update(dt, &objectsInCamara);
 	}
 
+	for (int j = 0; j < addtionalObject.size(); j++) {
+		addtionalObject[j]->Update(dt, &objectsInCamara);
+	}
 	// Update camera to follow mario
 	if (player == NULL)
 		return;
-	player->Update(dt, &coObjects);
+	player->Update(dt, &objectsInCamara);
+	Weapon::getInstance()->Update(dt, &objectsInCamara);
 	ScoreBar::getInstance()->update();
 	Camera::getInstance()->update();
 }
@@ -430,9 +478,14 @@ void CPlayScene::Update(DWORD dt)
 void CPlayScene::Render()
 {
 	titlemap->render(Camera::getInstance());
-	for (int i = 0; i < objects.size(); i++)
-		objects[i]->Render();
+	for (int i = 0; i < objectsInCamara.size(); i++)
+		objectsInCamara[i]->Render();
+
+	for (int j = 0; j < addtionalObject.size(); j++) {
+		addtionalObject[j]->Render();
+	}
 	player->Render();
+	Weapon::getInstance()->Render();
 	ScoreBar::getInstance()->render();
 }
 
@@ -446,7 +499,7 @@ void CPlayScene::Unload()
 		delete objects[i];
 	}
 	objects.clear();
-
+	objectsInCamara.clear();
 	player = NULL;
 	CTextures::GetInstance()->Clear(texturesID);
 	CSprites::GetInstance()->Clear(spritesID);
@@ -459,9 +512,14 @@ void CPlayScene::Unload()
 
 }
 
-void CPlayScene::addObject(LPGAMEOBJECT obj)
+void CPlayScene::addAddtionalObject(LPGAMEOBJECT obj)
 {
-	objects.push_back(obj);
+	addtionalObject.push_back(obj);
+}
+
+vector<LPGAMEOBJECT> CPlayScene::getAddtionalObject()
+{
+	return addtionalObject;
 }
 
 void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
@@ -517,7 +575,7 @@ void CPlayScenceKeyHandler::OnKeyUp(int KeyCode)
 	case DIK_RIGHT:
 		simon->isRightDown = false;
 		break;
-	}
+	} 
 
 }
 

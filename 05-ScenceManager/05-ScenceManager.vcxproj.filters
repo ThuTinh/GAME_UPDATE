@@ -61,6 +61,9 @@
     <Filter Include="Object\Addtional">
       <UniqueIdentifier>{6154164d-98e4-494f-b432-378f8b708699}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GridGame">
+      <UniqueIdentifier>{b1bfed4f-51a3-474b-90dd-aaf6f22e0179}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Brick.cpp">
@@ -239,6 +242,27 @@
     </ClCompile>
     <ClCompile Include="GiaDo.cpp">
       <Filter>Object\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Cell.cpp">
+      <Filter>GridGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid.cpp">
+      <Filter>GridGame</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectBlack.cpp">
+      <Filter>Object\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="SubWeaponAttack.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="SubDaggerAttack.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="SubBoomerangAttack.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="WhiteBone.cpp">
+      <Filter>Object\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -424,6 +448,27 @@
     </ClInclude>
     <ClInclude Include="GiaDo.h">
       <Filter>Object\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Cell.h">
+      <Filter>GridGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid.h">
+      <Filter>GridGame</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectBlack.h">
+      <Filter>Object\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="SubWeaponAttack.h">
+      <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="SubDaggerAttack.h">
+      <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="SubBoomerangAttack.h">
+      <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="WhiteBone.h">
+      <Filter>Object\Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

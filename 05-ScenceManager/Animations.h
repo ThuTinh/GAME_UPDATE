@@ -2,7 +2,6 @@
 #include <Windows.h>
 #include <d3dx9.h>
 #include <unordered_map>
-
 #include "Sprites.h"
 
 /*
@@ -29,6 +28,7 @@ class CAnimation
 	vector<LPANIMATION_FRAME> frames;
 public:
 	LPANIMATION_FRAME getFrame(int index);
+	void setCurrentFrame(int frameIndex);
 	CAnimation(int defaultTime = 100) { this->defaultTime = defaultTime; lastFrameTime = -1; currentFrame = -1; }
 	void Add(int spriteId, DWORD time = 0);
 	void Render(float x, float y,int &frameIndex, DIRECTION direction, bool pauseAnimation = false ,int alpha = 255);

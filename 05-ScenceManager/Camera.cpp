@@ -26,10 +26,8 @@ void Camera::convertWorldToView(float xWorld, float yWorld, float& xView, float&
 	D3DXVECTOR3 pos3(xWorld, yWorld, 1);
 	D3DXVECTOR4 MatrixResult;
 	D3DXVec3Transform(&MatrixResult, &pos3, &matrixWorldToView);
-
 	xView = MatrixResult.x;
 	yView = MatrixResult.y;
-
 
 }
 

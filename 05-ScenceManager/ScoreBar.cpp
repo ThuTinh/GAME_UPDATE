@@ -134,7 +134,8 @@ void ScoreBar::_ParseSection_SPRITES(string line)
 {
 	vector<string> tokens = split(line);
 
-	if (tokens.size() < 8) return; // skip invalid lines
+
+	if (tokens.size() < 10) return; // skip invalid lines
 
 	int ID = atoi(tokens[0].c_str());
 	int x = atoi(tokens[1].c_str());
@@ -143,7 +144,9 @@ void ScoreBar::_ParseSection_SPRITES(string line)
 	int height = atoi(tokens[4].c_str());
 	int anchorX = atoi(tokens[5].c_str());
 	int anchorY = atoi(tokens[6].c_str());
-	int texID = atoi(tokens[7].c_str());
+	int anchorXRight = atoi(tokens[7].c_str());
+	int anchorYRight = atoi(tokens[8].c_str());
+	int texID = atoi(tokens[9].c_str());
 
 	LPDIRECT3DTEXTURE9 tex = CTextures::GetInstance()->Get(texID);
 	if (tex == NULL)
@@ -152,7 +155,7 @@ void ScoreBar::_ParseSection_SPRITES(string line)
 		return;
 	}
 
-	CSprites::GetInstance()->Add(ID, x, y, with, height, anchorX, anchorY, tex);
+	CSprites::GetInstance()->Add(ID, x, y, with, height, anchorX, anchorY,anchorXRight, anchorYRight, tex);
 }
 void ScoreBar::_ParseSection_ANIMATIONS(string line)
 {

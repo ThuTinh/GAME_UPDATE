@@ -136,6 +136,7 @@
     <ClCompile Include="BossBat.cpp" />
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Cell.cpp" />
     <ClCompile Include="Crown.cpp" />
     <ClCompile Include="DelayTime.cpp" />
     <ClCompile Include="Die-effect.cpp" />
@@ -153,6 +154,7 @@
     <ClCompile Include="GateStairChangeDirection.cpp" />
     <ClCompile Include="GiaDo.cpp" />
     <ClCompile Include="GoldPotion.cpp" />
+    <ClCompile Include="Grid.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="HaiDo.cpp" />
     <ClCompile Include="HaiXanh.cpp" />
@@ -163,12 +165,15 @@
     <ClCompile Include="Koopas.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="MovableRect.cpp" />
+    <ClCompile Include="ObjectBlack.cpp" />
     <ClCompile Include="Raven.cpp" />
     <ClCompile Include="Rect.cpp" />
     <ClCompile Include="ScoreBar.cpp" />
     <ClCompile Include="Sketon.cpp" />
     <ClCompile Include="SmallHeart.cpp" />
     <ClCompile Include="Stair.cpp" />
+    <ClCompile Include="SubBoomerangAttack.cpp" />
+    <ClCompile Include="SubDaggerAttack.cpp" />
     <ClCompile Include="SubWeaponItem.cpp" />
     <ClCompile Include="Sword.cpp" />
     <ClCompile Include="Tilemap.cpp" />
@@ -182,6 +187,8 @@
     <ClCompile Include="Sprites.cpp" />
     <ClCompile Include="Textures.cpp" />
     <ClCompile Include="Weapon.cpp" />
+    <ClCompile Include="SubWeaponAttack.cpp" />
+    <ClCompile Include="WhiteBone.cpp" />
     <ClCompile Include="Zoombie.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -197,6 +204,7 @@
     <ClInclude Include="BossBat.h" />
     <ClInclude Include="Brick.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Cell.h" />
     <ClInclude Include="CollitionType.h" />
     <ClInclude Include="Crown.h" />
     <ClInclude Include="DelayTime.h" />
@@ -215,6 +223,7 @@
     <ClInclude Include="GiaDo.h" />
     <ClInclude Include="GoldPotion.h" />
     <ClInclude Include="Gound.h" />
+    <ClInclude Include="Grid.h" />
     <ClInclude Include="HaiDo.h" />
     <ClInclude Include="HaiXanh.h" />
     <ClInclude Include="Item.h" />
@@ -224,6 +233,7 @@
     <ClInclude Include="Koopas.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="MovableRect.h" />
+    <ClInclude Include="ObjectBlack.h" />
     <ClInclude Include="Raven.h" />
     <ClInclude Include="Rect.h" />
     <ClInclude Include="ScoreBar.h" />
@@ -231,6 +241,8 @@
     <ClInclude Include="SmallHeart.h" />
     <ClInclude Include="Space.h" />
     <ClInclude Include="Stair.h" />
+    <ClInclude Include="SubBoomerangAttack.h" />
+    <ClInclude Include="SubDaggerAttack.h" />
     <ClInclude Include="SubWeaponItem.h" />
     <ClInclude Include="Sword.h" />
     <ClInclude Include="Tilemap.h" />
@@ -245,6 +257,8 @@
     <ClInclude Include="Sprites.h" />
     <ClInclude Include="Textures.h" />
     <ClInclude Include="Weapon.h" />
+    <ClInclude Include="SubWeaponAttack.h" />
+    <ClInclude Include="WhiteBone.h" />
     <ClInclude Include="Zoombie.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

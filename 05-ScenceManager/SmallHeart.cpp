@@ -10,8 +10,6 @@ void SmallHeart::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		setItemState(ITEM_STATE_PLAYER_EATED);
 		setAlive(false);
 		onPlayerContact();
-
-
 	}
 }
 

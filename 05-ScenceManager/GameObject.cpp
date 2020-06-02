@@ -130,7 +130,7 @@ float CGameObject::SweptAABB(CGameObject* M, CGameObject* S, float& normalx, flo
 void CGameObject::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
 	left = x;
-	top =  y - height/2+2;
+	top =  y - height/2;
 	right = x + width;
 	bottom = y + height;
 }

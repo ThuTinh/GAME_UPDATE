@@ -8,14 +8,12 @@ void BoomeRang::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		setItemState(ITEM_STATE_PLAYER_EATED);
 		setAlive(false);
 		this->onPlayerContact();
-
-
 	}
 }
 
 void BoomeRang::onPlayerContact()
 {
-	ScoreBar::getInstance()->setTypeSubWeapon(TYPE_SUBWEAPON::BOOMERANG);
+	ScoreBar::getInstance()->setTypeSubWeapon(TYPE_SUBWEAPON::BOOMERANG); 
 }
 
 BoomeRang::BoomeRang()
