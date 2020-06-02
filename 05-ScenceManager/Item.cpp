@@ -17,7 +17,7 @@ void Item::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		return;
 	vy += ITEM_GRAVITY*dt;
 
-	if (AABBCheck(Weapon::getInstance())) {
+	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive) {
 		setPhysicsEnable(true);
 		itemState = ITEM_STATE_VISIBLE;
 		setWidth(animation_set->at(0)->getFrame(0)->GetSprite()->getWidth());
