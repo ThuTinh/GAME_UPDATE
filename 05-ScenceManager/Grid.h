@@ -2,7 +2,6 @@
 #include "Cell.h"
 #include "Camera.h"
 
-
 class Grid
 {
 public:

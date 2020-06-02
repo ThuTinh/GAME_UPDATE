@@ -10,7 +10,6 @@
 		setAlive(false);
 		 this->onPlayerContact();
 		 Simon::getInstance()->addNumberArchery(1);
-	
 	 }
 
 }

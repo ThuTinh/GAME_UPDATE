@@ -8,7 +8,6 @@
 #include "WhiteBone.h"
 void Sketon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-
 	vy += ENEMY_GRAVITY * dt;
 	whiteBoneDelay.update();
 	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive) {
@@ -66,7 +65,6 @@ void Sketon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 				onCollision(e->obj, e->t, e->nx, e->ny);
 
 			}
-
 		}
 	}
 
@@ -83,7 +81,6 @@ void Sketon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	Enemy::Update(dt,coObjects);
 	if (Simon::getInstance()->getX()< getX() && abs(Simon::getInstance()->getX() - getX())<= DISTANCE_TO_THROW_WHITEBONE) {
 		whiteBoneDelay.start();
-		
 	}
 	if (whiteBoneDelay.isTerminated()) {
 		WhiteBone* whiteBone = new WhiteBone();
@@ -99,9 +96,7 @@ void Sketon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 void Sketon::onCollision(CGameObject* other, float collisionTime, int nx, int ny)
 {
 	if (this->getX() + 5 > other->getRight() || nx == -1) {
-	
 		setVx(-SKETON_VX);
-
 	}
 	else
 	{
@@ -125,7 +120,7 @@ Sketon::Sketon()
 	setPhysicsEnable(true);
 	setDirection(DIRECTION_RIGHT);
 	setVx(0.03);
-	whiteBoneDelay.init(400);
+	whiteBoneDelay.init(300);
 }
 
 Sketon::~Sketon()

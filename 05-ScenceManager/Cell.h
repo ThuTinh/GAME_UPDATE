@@ -13,7 +13,6 @@ public:
 	~Cell();
 
 private:
-
 	vector<int> inxObjList;
 
 };

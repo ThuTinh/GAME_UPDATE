@@ -49,13 +49,11 @@ void Grid::Init(string gridPath)
 				int index;
 				fs >> index;
 				inxObjList.push_back(index);
-
 			}
 			cell->setInxObjects(inxObjList);
 		}
 		CellList->push_back(cell);
 		ignoreLineIfstream(fs, 1);
-
 	}
 }
 
@@ -65,12 +63,9 @@ bool Grid::CheckCollisionCamara( Camera* camera, Cell* cell)
 		(camera->getY() - camera->getHeight() < cell->getY() && camera->getY() > cell->getY() - cell->getHeight()));
 }
 
-
-
 Grid::Grid()
 {
 	CellList = new vector<Cell*>();
-
 }
 
 Grid::~Grid()

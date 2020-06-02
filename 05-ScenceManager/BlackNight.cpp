@@ -9,8 +9,12 @@
 #include "SubWeaponAttack.h"
 void BlackNight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
+	timeDelay.update();
 	vy += ENEMY_GRAVITY * dt;
 	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive) {
+		timeDelay.start();
+	}
+	if (timeDelay.isTerminated()) {
 		++counterInjured;
 		if (counterInjured >= COUNTER_LIFE) {
 			setAlive(false);
@@ -89,7 +93,6 @@ void BlackNight::onCollision(CGameObject* other, float collisionTime, int nx, in
 	if (this->getX() + 5 > other->getRight() || nx == -1) {
 		setDirection(DIRECTION_LEFT);
 		setVx(-BLACKNIGHT_VX);
-
 	}
 	else
 	{
@@ -114,6 +117,7 @@ BlackNight::BlackNight()
 	setPhysicsEnable(true);
 	setDirection(DIRECTION_RIGHT);
 	setVx(BLACKNIGHT_VX);
+	timeDelay.init(20);
 	counterInjured = 0;
 }
 

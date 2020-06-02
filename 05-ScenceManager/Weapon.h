@@ -15,8 +15,6 @@
 
 class Weapon : public CGameObject
 {
-	
-	
 public:
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	virtual void Render();
