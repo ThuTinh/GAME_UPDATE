@@ -14,7 +14,8 @@ struct SCORE_LOCATION
 enum TYPE_SUBWEAPON {
 	SWORD,
 	BOOMERANG,
-	DEFAUL
+	AXE,
+	DEFAUL,
 };
 
 class ScoreBar

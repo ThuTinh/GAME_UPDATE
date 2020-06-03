@@ -6,7 +6,6 @@
 #define SIMON_VX	0.06 
 //0.1f
 #define SIMON_JUMP_Y		0.27f
-
 #define SIMON_JUMP_DEFLECT_SPEED 0.2f
 #define MARIO_GRAVITY			-0.0008f
 #define SIMON_DIE_DEFLECT_SPEED	 0.5f
@@ -82,7 +81,7 @@ public:
 	DelayTime attackUseSub;
 	GameTime blinkTime;
 	DelayTime hideHurtDelay;
-	DelayTime	attackInStairDelay;
+	DelayTime attackInStairDelay;
 
 
 	static Simon* instance;

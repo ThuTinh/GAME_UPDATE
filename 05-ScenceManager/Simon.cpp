@@ -12,6 +12,7 @@
 #include "SubDaggerAttack.h"
 #include "SubBoomerangAttack.h"
 #include "SubWeaponAttack.h"
+#include "SubAxeAttack.h"
 #define SCENE_SECTION_UNKNOWN -1
 #define SCENE_SECTION_TEXTURES 2
 #define SCENE_SECTION_MAP	3
@@ -304,10 +305,18 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 									sub->setPhysicsEnable(true);
 									sub->timeDelay.start();
 									break;
+								case AXE:
+									sub = new SubAxeAttack();
+									CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(sub);
+									sub->setX(getMidX());
+									sub->setY(getMidY() + 10);
+									sub->setAlive(true);
+									sub->setPhysicsEnable(true);
+									sub->timeDelay.start();
+									break;
 								default:
 									return;
 								}
-
 							}
 							else {
 

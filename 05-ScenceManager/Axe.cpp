@@ -1,5 +1,6 @@
 #include "Axe.h"
 #include"Simon.h"
+#include "ScoreBar.h"
 void Axe::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	Item::Update(dt, coObjects);
@@ -12,6 +13,7 @@ void Axe::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 void Axe::onPlayerContact()
 {
+	ScoreBar::getInstance()->setTypeSubWeapon(TYPE_SUBWEAPON::AXE);
 }
 
 Axe::Axe()

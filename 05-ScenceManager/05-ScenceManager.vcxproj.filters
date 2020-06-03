@@ -225,9 +225,6 @@
     <ClCompile Include="GateStair.cpp">
       <Filter>Object\Gate</Filter>
     </ClCompile>
-    <ClCompile Include="SubWeaponItem.cpp">
-      <Filter>Object\Item</Filter>
-    </ClCompile>
     <ClCompile Include="GiaDo.cpp">
       <Filter>Object\Misc</Filter>
     </ClCompile>
@@ -250,6 +247,9 @@
       <Filter>Object\Item</Filter>
     </ClCompile>
     <ClCompile Include="WhiteBone.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="SubAxeAttack.cpp">
       <Filter>Object\Item</Filter>
     </ClCompile>
   </ItemGroup>
@@ -422,9 +422,6 @@
     <ClInclude Include="GateStair.h">
       <Filter>Object\Gate</Filter>
     </ClInclude>
-    <ClInclude Include="SubWeaponItem.h">
-      <Filter>Object\Item</Filter>
-    </ClInclude>
     <ClInclude Include="GiaDo.h">
       <Filter>Object\Misc</Filter>
     </ClInclude>
@@ -447,6 +444,9 @@
       <Filter>Object\Item</Filter>
     </ClInclude>
     <ClInclude Include="WhiteBone.h">
+      <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="SubAxeAttack.h">
       <Filter>Object\Item</Filter>
     </ClInclude>
   </ItemGroup>
