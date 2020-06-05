@@ -3,7 +3,7 @@
 #include"DelayTime.h"
 #include "GameTime.h"
 #include "Item.h"
-#define SIMON_VX	0.06 
+#define SIMON_VX	0.07
 //0.1f
 #define SIMON_JUMP_Y		0.27f
 #define SIMON_JUMP_DEFLECT_SPEED 0.2f

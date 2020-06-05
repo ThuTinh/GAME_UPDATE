@@ -3,7 +3,7 @@
 #include "DelayTime.h"
 #define SKETON_SCORE 200
 #define SKETON_VX 0.05
-#define DISTANCE_TO_THROW_WHITEBONE 40
+#define DISTANCE_TO_THROW_WHITEBONE 30
 class Sketon : public Enemy
 {
 public:

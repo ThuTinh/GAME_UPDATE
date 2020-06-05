@@ -209,22 +209,16 @@ LPCOLLISIONEVENT CGameObject::SweptAABBEx(LPGAMEOBJECT coO)
 	//float sl, st, sr, sb;		// static object bbox
 	//float ml, mt, mr, mb;		// moving object bbox
 	//float t, nx, ny;
-
 	//coO->GetBoundingBox(sl, st, sr, sb);
-
 	//// deal with moving object: m speed = original m speed - collide object speed
 	//float svx, svy;
 	//coO->GetSpeed(svx, svy);
-
 	//float sdx = svx*dt;
 	//float sdy = svy*dt;
-
 	//// (rdx, rdy) is RELATIVE movement distance/velocity 
 	//float rdx = this->dx - sdx;
 	//float rdy = this->dy - sdy;
-
 	//GetBoundingBox(ml, mt, mr, mb);
-
 	//CGame::SweptAABB(
 	//	ml, mt, mr, mb,
 	//	rdx, rdy,

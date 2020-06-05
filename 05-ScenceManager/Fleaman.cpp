@@ -29,7 +29,6 @@ void Fleaman::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	if (isAlive)
 		CalcPotentialCollisions(coObjects, coEvents);
 
-
 	// No collision occured, proceed normally
 	if (coEvents.size() == 0)
 	{
@@ -63,7 +62,6 @@ void Fleaman::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			else
 			{
 				onCollision(e->obj, e->t, e->nx, e->ny);
-
 			}
 		}
 	}
@@ -74,7 +72,6 @@ void Fleaman::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		setPhysicsEnable(true);
 		if (abs(Simon::getInstance()->getX() - getX()) > FLEAMAN_DISTANCE_STOP) {
 			setDirectionFollowPlayer();
-
 		}
 		setVx(getDirection() * FLEAMAN_VX);
 		switch (fleamanState)
