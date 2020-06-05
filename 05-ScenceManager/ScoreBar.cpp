@@ -26,6 +26,7 @@
 #define MISC_SPRITE_ID_LOST_HEALTH 1
 #define MISC_SPRITE_ID_KNIFE 2
 #define MISC_SPRITE_ID_BOOMERANG 3
+#define MISC_SPRITE_ID_AXE 4
 #define NUMBER_WIDTH 8
 #define HEALTH_WIDTH 4
 void ignoreLineIfstream(ifstream & fs, int lineCount);
@@ -95,6 +96,9 @@ void ScoreBar::renderSubWeapon()
 		break;
 	case BOOMERANG:
 		animation_set->at(MISC_SPRITE_ID_BOOMERANG)->RenderScoreBar(subWeaponLocation.X, subWeaponLocation.Y, 0);
+		break;
+	case AXE:
+		animation_set->at(MISC_SPRITE_ID_AXE)->RenderScoreBar(subWeaponLocation.X, subWeaponLocation.Y, 0);
 		break;
 	default:
 		break;

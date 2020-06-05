@@ -15,8 +15,6 @@
 #include"Light.h"
 #include"BlackNight.h"
 #include"Stair.h"
-#include"Gate1.h"
-#include"Gate2.h"
 #include"Gate.h"
 #include"GateStair1.h"
 #include"GateStair2.h"

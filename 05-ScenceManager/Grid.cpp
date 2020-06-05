@@ -27,7 +27,6 @@ void Grid::checkCellColitionCamera(Camera* camera)
 
 void Grid::Init(string gridPath)
 {
-	
 	ifstream fs(gridPath);
 	int count;
 	int mapHeight;

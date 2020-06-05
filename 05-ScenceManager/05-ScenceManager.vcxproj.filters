@@ -58,9 +58,6 @@
     <Filter Include="Object\ScoreBar">
       <UniqueIdentifier>{fec8d67a-15a8-4296-a8d7-83c8dd79f03f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\Addtional">
-      <UniqueIdentifier>{6154164d-98e4-494f-b432-378f8b708699}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GridGame">
       <UniqueIdentifier>{b1bfed4f-51a3-474b-90dd-aaf6f22e0179}</UniqueIdentifier>
     </Filter>
@@ -134,9 +131,6 @@
     </ClCompile>
     <ClCompile Include="Item.cpp">
       <Filter>Object\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="Gate1.cpp">
-      <Filter>Object\Gate</Filter>
     </ClCompile>
     <ClCompile Include="Weapon.cpp">
       <Filter>Object\Weapon</Filter>
@@ -216,14 +210,8 @@
     <ClCompile Include="GameTime.cpp">
       <Filter>GameTime</Filter>
     </ClCompile>
-    <ClCompile Include="AdditionalObject.cpp">
-      <Filter>Object\Addtional</Filter>
-    </ClCompile>
     <ClCompile Include="Die-effect.cpp">
       <Filter>Object\Misc</Filter>
-    </ClCompile>
-    <ClCompile Include="Gate2.cpp">
-      <Filter>Object\Gate</Filter>
     </ClCompile>
     <ClCompile Include="GateStair2.cpp">
       <Filter>Object\Gate</Filter>
@@ -236,9 +224,6 @@
     </ClCompile>
     <ClCompile Include="GateStair.cpp">
       <Filter>Object\Gate</Filter>
-    </ClCompile>
-    <ClCompile Include="SubWeaponItem.cpp">
-      <Filter>Object\Item</Filter>
     </ClCompile>
     <ClCompile Include="GiaDo.cpp">
       <Filter>Object\Misc</Filter>
@@ -262,6 +247,9 @@
       <Filter>Object\Item</Filter>
     </ClCompile>
     <ClCompile Include="WhiteBone.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="SubAxeAttack.cpp">
       <Filter>Object\Item</Filter>
     </ClCompile>
   </ItemGroup>
@@ -341,9 +329,6 @@
     <ClInclude Include="Item.h">
       <Filter>Object\Item</Filter>
     </ClInclude>
-    <ClInclude Include="Gate1.h">
-      <Filter>Object\Gate</Filter>
-    </ClInclude>
     <ClInclude Include="Weapon.h">
       <Filter>Object\Weapon</Filter>
     </ClInclude>
@@ -422,14 +407,8 @@
     <ClInclude Include="GameTime.h">
       <Filter>GameTime</Filter>
     </ClInclude>
-    <ClInclude Include="AdditionalObject.h">
-      <Filter>Object\Addtional</Filter>
-    </ClInclude>
     <ClInclude Include="Die-affect.h">
       <Filter>Object\Misc</Filter>
-    </ClInclude>
-    <ClInclude Include="Gate2.h">
-      <Filter>Object\Gate</Filter>
     </ClInclude>
     <ClInclude Include="GateStair2.h">
       <Filter>Object\Gate</Filter>
@@ -442,9 +421,6 @@
     </ClInclude>
     <ClInclude Include="GateStair.h">
       <Filter>Object\Gate</Filter>
-    </ClInclude>
-    <ClInclude Include="SubWeaponItem.h">
-      <Filter>Object\Item</Filter>
     </ClInclude>
     <ClInclude Include="GiaDo.h">
       <Filter>Object\Misc</Filter>
@@ -468,6 +444,9 @@
       <Filter>Object\Item</Filter>
     </ClInclude>
     <ClInclude Include="WhiteBone.h">
+      <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="SubAxeAttack.h">
       <Filter>Object\Item</Filter>
     </ClInclude>
   </ItemGroup>

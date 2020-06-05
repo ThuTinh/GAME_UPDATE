@@ -79,7 +79,7 @@ void Sketon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		setDirection(DIRECTION_RIGHT);
 	}
 	Enemy::Update(dt,coObjects);
-	if (Simon::getInstance()->getX()< getX() && abs(Simon::getInstance()->getX() - getX())<= DISTANCE_TO_THROW_WHITEBONE) {
+	if (Simon::getInstance()->getX()< getX() && abs(Simon::getInstance()->getX() - getX()) <= DISTANCE_TO_THROW_WHITEBONE) {
 		whiteBoneDelay.start();
 	}
 	if (whiteBoneDelay.isTerminated()) {
@@ -101,7 +101,6 @@ void Sketon::onCollision(CGameObject* other, float collisionTime, int nx, int ny
 	else
 	{
 		if (this->getX() - 5 < other->getLeft() || nx == 1) {
-			//x += 1;
 			setVx(SKETON_VX);
 		}
 	}
@@ -120,7 +119,7 @@ Sketon::Sketon()
 	setPhysicsEnable(true);
 	setDirection(DIRECTION_RIGHT);
 	setVx(0.03);
-	whiteBoneDelay.init(300);
+	whiteBoneDelay.init(10);
 }
 
 Sketon::~Sketon()
