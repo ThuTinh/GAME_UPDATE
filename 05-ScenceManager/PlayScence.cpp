@@ -16,8 +16,6 @@
 #include"BlackNight.h"
 #include"Stair.h"
 #include"Gate.h"
-#include"GateStair1.h"
-#include"GateStair2.h"
 #include"GateStair.h"
 #include"GateStairChangeDirection.h"
 #include"ScoreBar.h"
@@ -359,7 +357,7 @@ void CPlayScene::_ParseSection_GRID(string line)
 	vector<string> tokens = split(line);
 	if (tokens.size() < 1) return;
 	string path = tokens[0];
-	grid.Init(path);
+	grid.init(path);
 	
 
 }
@@ -464,7 +462,6 @@ void CPlayScene::Update(DWORD dt)
 	for (int j = 0; j < addtionalObject.size(); j++) {
 		addtionalObject[j]->Update(dt, &objectsInCamara);
 	}
-	// Update camera to follow mario
 	if (player == NULL)
 		return;
 	player->Update(dt, &objectsInCamara);
@@ -581,7 +578,6 @@ void CPlayScenceKeyHandler::KeyState(BYTE *states)
 {
 	CGame *game = CGame::GetInstance();
 	Simon *mario = ((CPlayScene*)scence)->player;
-
 	// disable control key when Mario die 
 	/*if (mario->GetState() == MARIO_STATE_DIE) return;
 	if (game->IsKeyDown(DIK_RIGHT))

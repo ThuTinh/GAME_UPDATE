@@ -8,8 +8,8 @@ public:
 	vector<Cell*>* GetCells();
 	vector<int> getInxInCamera();
 	void checkCellColitionCamera(Camera* camera);
-	void Init(string gridPath);
-	bool CheckCollisionCamara(Camera* camera, Cell* cell);
+	void init(string gridPath);
+	bool checkCollisionCamara(Camera* camera, Cell* cell);
 
 	Grid();
 	~Grid();

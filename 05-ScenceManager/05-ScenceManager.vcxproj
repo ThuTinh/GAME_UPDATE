@@ -146,8 +146,6 @@
     <ClCompile Include="GameTime.cpp" />
     <ClCompile Include="Gate.cpp" />
     <ClCompile Include="GateStair.cpp" />
-    <ClCompile Include="GateStair1.cpp" />
-    <ClCompile Include="GateStair2.cpp" />
     <ClCompile Include="GateStairChangeDirection.cpp" />
     <ClCompile Include="GiaDo.cpp" />
     <ClCompile Include="GoldPotion.cpp" />
@@ -211,8 +209,6 @@
     <ClInclude Include="GameTime.h" />
     <ClInclude Include="Gate.h" />
     <ClInclude Include="GateStair.h" />
-    <ClInclude Include="GateStair1.h" />
-    <ClInclude Include="GateStair2.h" />
     <ClInclude Include="GateStairChangeDirection.h" />
     <ClInclude Include="GiaDo.h" />
     <ClInclude Include="GoldPotion.h" />

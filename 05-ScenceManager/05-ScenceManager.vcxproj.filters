@@ -156,9 +156,6 @@
     <ClCompile Include="Stair.cpp">
       <Filter>Object\Stair</Filter>
     </ClCompile>
-    <ClCompile Include="GateStair1.cpp">
-      <Filter>Object\Gate</Filter>
-    </ClCompile>
     <ClCompile Include="Item700PTS.cpp">
       <Filter>Object\Item</Filter>
     </ClCompile>
@@ -212,9 +209,6 @@
     </ClCompile>
     <ClCompile Include="Die-effect.cpp">
       <Filter>Object\Misc</Filter>
-    </ClCompile>
-    <ClCompile Include="GateStair2.cpp">
-      <Filter>Object\Gate</Filter>
     </ClCompile>
     <ClCompile Include="GateStairChangeDirection.cpp">
       <Filter>Object\Gate</Filter>
@@ -353,9 +347,6 @@
     <ClInclude Include="Stair.h">
       <Filter>Object\Stair</Filter>
     </ClInclude>
-    <ClInclude Include="GateStair1.h">
-      <Filter>Object\Gate</Filter>
-    </ClInclude>
     <ClInclude Include="Item700PTS.h">
       <Filter>Object\Item</Filter>
     </ClInclude>
@@ -409,9 +400,6 @@
     </ClInclude>
     <ClInclude Include="Die-affect.h">
       <Filter>Object\Misc</Filter>
-    </ClInclude>
-    <ClInclude Include="GateStair2.h">
-      <Filter>Object\Gate</Filter>
     </ClInclude>
     <ClInclude Include="GateStairChangeDirection.h">
       <Filter>Object\Gate</Filter>
