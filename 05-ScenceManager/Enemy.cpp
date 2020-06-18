@@ -13,28 +13,15 @@ void Enemy::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	
 	///* mặc định là false cho tới khi chạm sàn */
 	if (AABBCheck(Simon::getInstance()) && Simon::getInstance()->state != SIMON_STATE_ON_STAIR) {
-		Simon::getInstance()->state = SIMON_STATE_HURT;
-		Simon::getInstance()->setPhysicsEnable(false);
-		Simon::getInstance()->setStopCollision(true);
-		Simon::getInstance()->hurtDelay.start();
-		Simon::getInstance()->hideHurtDelay.start();
-		if (Simon::getInstance()->hurtDelay.isOnTime()) {
-			if (Simon::getInstance()->aniIndex != SIMON_ANI_HURT)
-			{
-				if (Simon::getInstance()->blinkTime.atTime()) {
-					Simon::getInstance()->setRenderActive(false);
-				}
-			}
-		}
-		Simon::getInstance()->aniIndex = SIMON_ANI_HURT;
+		Simon::getInstance()->setHurt();
 	
-		if (Simon::getInstance()->getX() > getX()) {
+	/*	if (Simon::getInstance()->getX() > getX()) {
 			Simon::getInstance()->hurtDirection = 1;
 		}
 		else
 		{
 			Simon::getInstance()->hurtDirection = -1;
-		}
+		}*/
 		
 	}
 	if (CGame::GetInstance()->GetCurrentScene()->getAddtionalObject().size() > 0) {

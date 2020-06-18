@@ -135,7 +135,8 @@ Simon::Simon() : CGameObject()
 	collitionTypeToCheck.push_back(COLLISION_TYPE_ENEMY);
 
 
-
+	hurtTimeDelay.init(2000);
+	hurtTime.init(50);
 }
 
 void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
@@ -144,22 +145,45 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	
 	attackStandDelay.update();
 	colorDelay.update();
-	hurtDelay.update();
+	//hurtDelay.update();
 	duckDelay.update();
 	attacJumbDelay.update();
 	attackDuckDelay.update();
 	attackUseSub.update();
-	hideHurtDelay.update();
+	//hideHurtDelay.update();
+	hurtTimeDelay.update();
 	attackInStairDelay.update();
 	if (aniIndex == SIMON_ANI_COLORS) {
 		
 		if(colorDelay.isTerminated()) {
-			Simon::getInstance()->aniIndex = SIMON_ANI_STAND;
+			aniIndex = SIMON_ANI_STAND;
+			state = SIMON_STATE_NORMAL;
 		}
 		else
 		{
 			return;
 		}
+	}
+
+	if (hurtTimeDelay.isOnTime())
+	{
+		if (hurtTime.atTime())
+		{
+			setRenderActive(true);
+		}
+		else
+		{
+			setRenderActive(false);
+		}
+	}
+
+	if (hurtTimeDelay.isTerminated())
+	{
+		setRenderActive(true);
+		setPhysicsEnable(true);
+		ScoreBar::getInstance()->increaseHealth(-1);
+		setStopCollision(false);
+		state = SIMON_STATE_NORMAL;
 	}
 	
 	CGameObject::Update(dt);
@@ -209,6 +233,9 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
 		/* mặc định là false cho tới khi chạm sàn */
 	}
+
+	
+
 	// Simple fall down
 	vy += MARIO_GRAVITY * dt;
 	if (attackStandDelay.isTerminated())
@@ -460,8 +487,8 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					/* nếu là lần di chuyển cuối cùng */
 					if (getIsLastRunStair())
 					{
-						setY(getY() + 15);
-						setX(getX() + 10);
+						setY(getY() + 10);
+						setX(getX() + 5);
 						setStopStair();
 					}
 				}
@@ -506,7 +533,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	case SIMON_STATE_HURT: {
 
 		
-		if (hurtDelay.isTerminated()) {
+		/*if (hurtDelay.isTerminated()) {
 			setPhysicsEnable(true);
 			ScoreBar::getInstance()->increaseHealth(-1);
 			setStopCollision(false);
@@ -522,7 +549,10 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			state = SIMON_STATE_DIE;
 			setHeight(animation_set->at(aniIndex)->getFrame(0)->GetSprite()->getHeight());
 			deadDelay.start();
-		}
+		}*/
+		
+	/*	x += dx;
+		y += dy;*/
 		return;
 	}
 	
@@ -766,6 +796,35 @@ bool Simon::getRenderActive()
 void Simon::onCollision(CGameObject* other, float collisionTime, int nx, int ny)
 {
 	CGameObject::onCollision( other,  collisionTime,  nx,  ny);
+}
+
+void Simon::setHurt() {
+	if (!hurtTimeDelay.isOnTime())
+	{
+		state = SIMON_STATE_HURT;
+		setPhysicsEnable(false);
+		setStopCollision(true);
+
+		/*setVx(-getDirection() * 0.003);
+		setVy(0.04);*/
+
+
+		/*hurtDelay.start();
+		hideHurtDelay.start();
+		if (hurtDelay.isOnTime()) {
+			if (aniIndex != SIMON_ANI_HURT)
+			{
+				if (blinkTime.atTime()) {
+					setRenderActive(false);
+				}
+			}
+		}*/
+		setVx(-getDirection() * 0.03);
+		setVy(0.4);
+		aniIndex = SIMON_ANI_HURT;
+		//aniIndex = SIMON_ANI_HURT;
+		hurtTimeDelay.start();
+	}
 }
 
 void Simon::Load(LPCWSTR simonFile)
