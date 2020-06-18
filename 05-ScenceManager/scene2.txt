@@ -4,7 +4,7 @@
 19	textures\misc\HaiXanh.png	255	0	128
 15	textures\misc\heartSmall.png	255	0	128
 2	textures\misc\light.png		255	0	128
-20	textures\misc\boomerang.png	255	0	128
+20	textures\misc\boomerang_item.png	255	0	128
 16	textures\misc\TienDo.png	255	0	128
 22	textures\misc\TienVang.png	255	0	128
 21	textures\misc\VuonNiem.png	255	0	128
@@ -258,7 +258,7 @@
 -4	364	194	24	11	-1
 -6	2	32	16	50	-1
 10	259	209	16	16	14
-30	57	86	32	16	40
+30	57	80	32	16	40
 28	446	272	16	4	60
 28	447	295	16	4	60
 8	100	40	25	18	6

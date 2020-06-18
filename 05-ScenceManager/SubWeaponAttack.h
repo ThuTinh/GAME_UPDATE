@@ -1,8 +1,9 @@
 #pragma once
 #include"GameObject.h"
 #include "DelayTime.h"
-#define VX 0.5
-#define TIME_DELAY 4000
+#include "GameTime.h"
+#define VX 0.1
+#define TIME_DELAY 3000
 class SubWeaponAttack : public CGameObject
 {
 public:
@@ -12,6 +13,7 @@ public:
 	void Render();
 	void setDirectionFollowPlayer();
 	DelayTime timeDelay;
+	DelayTime timeCheckSimon;
 private:
 
 };

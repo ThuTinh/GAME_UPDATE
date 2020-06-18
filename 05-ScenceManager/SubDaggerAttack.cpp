@@ -18,7 +18,6 @@ void SubDaggerAttack::Render()
 SubDaggerAttack::SubDaggerAttack()
 {
 	setVy(0);
-	setVx(VX);
 	animation_set = CAnimationSets::GetInstance()->Get(ANI);
 
 }

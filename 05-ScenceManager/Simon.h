@@ -84,7 +84,7 @@ public:
 	DelayTime attackInStairDelay;
 	DelayTime hurtTimeDelay;
 	GameTime hurtTime;
-
+	DelayTime jumbHurtTimeDelay;
 
 	static Simon* instance;
 	static Simon* getInstance();
@@ -116,7 +116,7 @@ public:
 	void onCollision(CGameObject* other, float collisionTime, int nx, int ny) override;
 	void Load(LPCWSTR simonFile);
 
-	void setHurt();
+	void setHurt(int directEnemy);
 	Simon();
 
 };

@@ -1,6 +1,7 @@
 # id	file_path	transparent_color_r	g	b
 [TEXTURES]
 0	textures\simon\simon.png	255	0	128
+101	textures\misc\boomerang.png	255	0	128
 
 # id	left	top	with	height	 achorX achorY texture_id
 [SPRITES]
@@ -70,7 +71,10 @@
 40001	0	0	20	20	0	0	0	0	6
 #KIEM
 50001	0	0	20	14	0	0	0	0	7
-
+#BOOMERANG
+222001	0	0	16	16	0	0	0	0	101
+222002	16	0	16	16	0	0	0	0	101
+222003	32	0	16	16	0	0	0	0	101
 # ani_id	sprite1_id	time1	sprite2_id	time2	...
 [ANIMATIONS]
 #==SIMON==
@@ -100,11 +104,11 @@
 111	10032	100	10033	100	10034	100	10035	100	10036	100
 #Colors
 112	10038	100	10039	100	10040	100	10041	100	10042	100
-
+22201	222001	100	222002	100	222003	100
 # id	ani1	ani2	ani3
 [ANIMATION_SETS]
 # SIMON
 1	100	101	102	103	104	105	106	107	108	109	110	111	112
-
+66	22201
 
 

@@ -1,7 +1,7 @@
 #pragma once
 #include"SubWeaponAttack.h"
-#define ANI 30
-#define INDEX 3
+#define ANI 66
+#define INDEX 0
 class SubBoomerangAttack : public SubWeaponAttack
 {
 public:

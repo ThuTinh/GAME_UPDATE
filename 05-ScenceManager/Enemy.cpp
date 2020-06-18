@@ -13,7 +13,7 @@ void Enemy::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	
 	///* mặc định là false cho tới khi chạm sàn */
 	if (AABBCheck(Simon::getInstance()) && Simon::getInstance()->state != SIMON_STATE_ON_STAIR) {
-		Simon::getInstance()->setHurt();
+		Simon::getInstance()->setHurt(getDirection());
 	
 	/*	if (Simon::getInstance()->getX() > getX()) {
 			Simon::getInstance()->hurtDirection = 1;
