@@ -527,6 +527,8 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 	case DIK_Z:
 		simon->isAttack = true;
 		break;
+	case DIK_X:
+		simon->isJumpDown = true;
 	case DIK_SPACE:
 		simon->isJumpDown = true;
 		break;
@@ -554,6 +556,9 @@ void CPlayScenceKeyHandler::OnKeyUp(int KeyCode)
 	{
 	case DIK_Z:
 		simon->isAttack = false;
+		break;
+	case DIK_X:
+		simon->isJumpDown = false;
 		break;
 	case DIK_SPACE:
 		simon->isJumpDown = false;

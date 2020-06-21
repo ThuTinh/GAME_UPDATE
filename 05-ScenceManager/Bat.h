@@ -1,7 +1,7 @@
 #pragma once
 #include"Enemy.h"
 #define BAT_RUN_DX 85
-#define BAT_VX 0.05
+#define BAT_VX 0.06
 #define BAT_VY -0.08
 #define BAT_SCORE 200
 #define DISTACE_CHANGE_FLY_HORIZONTAL 40

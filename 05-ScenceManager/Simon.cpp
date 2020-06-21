@@ -156,6 +156,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	hurtTimeDelay.update();
 	attackInStairDelay.update();
 	jumbHurtTimeDelay.update();
+	isOnGiaDo = false;
 	if (aniIndex == SIMON_ANI_COLORS) {
 		
 		if(colorDelay.isTerminated()) {
@@ -242,11 +243,8 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					onCollision(e->obj, e->t, e->nx, e->ny);
 				}
 				if (dynamic_cast<GiaDo*>(e->obj)) {
-					int dx = getX() - e->obj->getX();
-					if (dx >= 0) {
-						setX(e->obj->getX() + dx -4 );
-
-					}
+					setVx(e->obj->getVx());
+					isOnGiaDo = true;
 					onCollision(e->obj, e->t, e->nx, e->ny);
 				}
 				
@@ -388,7 +386,8 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 							{
 
 								aniIndex = SIMON_ANI_STAND;
-								setVx(0);
+								if(!isOnGiaDo)
+									setVx(0);
 							}
 						}
 						

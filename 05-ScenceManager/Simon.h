@@ -70,6 +70,7 @@ public:
 	bool isUseSub;
 	bool renderActive;
 	int hurtDirection;
+	bool isOnGiaDo;
 	DelayTime attackStandDelay;
 	DelayTime colorDelay;
 	DelayTime hurtDelay;
