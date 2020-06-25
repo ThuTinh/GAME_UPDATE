@@ -73,3 +73,8 @@ void ignoreLineIfstream(ifstream& fs, int lineCount)
 		std::getline(fs, s);
 	}
 }
+
+int getRandom(int start, int end)
+{
+	return rand() % (end - start + 1) + start;
+}

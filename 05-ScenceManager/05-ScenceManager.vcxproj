@@ -216,6 +216,7 @@
     <ClInclude Include="Grid.h" />
     <ClInclude Include="HaiDo.h" />
     <ClInclude Include="HaiXanh.h" />
+    <ClInclude Include="IBoss.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Item1000PTS.h" />
     <ClInclude Include="Item400PTS.h" />

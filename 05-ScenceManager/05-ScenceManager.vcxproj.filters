@@ -437,5 +437,8 @@
     <ClInclude Include="SubAxeAttack.h">
       <Filter>Object\Item</Filter>
     </ClInclude>
+    <ClInclude Include="IBoss.h">
+      <Filter>Object\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
