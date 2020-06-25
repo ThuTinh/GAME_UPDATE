@@ -25,6 +25,9 @@
 #define SCENE_SECTION_STAIR 9
 #define MAX_SCENE_LINE 1024
 Simon *Simon::instance = 0;
+
+typedef vector<LPCOLLISIONEVENT> VectorType;
+
 void Simon::_ParseSection_TEXTURES(string line)
 {
 	vector<string> tokens = split(line);
@@ -85,6 +88,18 @@ void Simon::_ParseSection_ANIMATIONS(string line)
 	CAnimations::GetInstance()->Add(ani_id, ani);
 }
 
+LPGAMEOBJECT getMyObject(vector<LPGAMEOBJECT>* coo)
+{
+	for (size_t i = 0; i < coo->size(); i++)
+	{
+		if (coo->at(i)->getX() == 65)
+		{
+			return coo->at(i);
+		}
+	}
+	return 0;
+}
+
 void Simon::_ParseSection_ANIMATION_SETS(string line)
 {
 	vector<string> tokens = split(line);
@@ -133,11 +148,11 @@ Simon::Simon() : CGameObject()
 	attackDuckDelay.init(400);
 	setCollitionType(COLLISION_TYPE_PLAYER);
 	collitionTypeToCheck.push_back(COLLISION_TYPE_GROUND);
-	collitionTypeToCheck.push_back(COLLISION_TYPE_ENEMY);
+//	collitionTypeToCheck.push_back(COLLISION_TYPE_ENEMY);
 
 
-	hurtTimeDelay.init(1000);
-	jumbHurtTimeDelay.init(100);
+	hurtTimeDelay.init(2000);
+	jumbHurtTimeDelay.init(500);
 	hurtTime.init(50);
 }
 
@@ -174,13 +189,12 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		
 		if (hurtTime.atTime())
 		{
-			setRenderActive(true);
+			setRenderActive(false);
 		}
 		else
 		{
-			setRenderActive(false);
+			setRenderActive(true);
 		}
-		
 	}
 
 	if (hurtTimeDelay.isTerminated())
@@ -231,8 +245,9 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				if (dynamic_cast<Ground*>(e->obj)) {
 					if (state == SIMON_STATE_HURT) {
 						if (jumbHurtTimeDelay.isOnTime()) {
-							x +=  -getDirection()* 0.8;
-							y += 12;
+							x +=  -getDirection()*0.7;
+							y += 20;
+							return;
 						}
 						if (jumbHurtTimeDelay.isTerminated()) {
 							setPhysicsEnable(false);
@@ -255,9 +270,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
 		/* mặc định là false cho tới khi chạm sàn */
 	}
-
 	
-
 	// Simple fall down
 	vy += MARIO_GRAVITY * dt;
 	if (attackStandDelay.isTerminated())
@@ -265,6 +278,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		state = SIMON_STATE_NORMAL;
 		animation_set->at(SIMON_ANI_STAND_USING_SUB)->setCurrentFrame(-1);
 	}
+	
 	if (attacJumbDelay.isTerminated())
 	{
 		state = SIMON_STATE_NORMAL;
@@ -312,6 +326,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				setDirection(DIRECTION_RIGHT);
 				aniIndex = SIMON_ANI_GO;
 				setVx(SIMON_VX);
+				
 			}
 			else
 			{
@@ -319,6 +334,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					aniIndex = SIMON_ANI_GO;
 					setDirection(DIRECTION_LEFT);
 					setVx(-SIMON_VX);
+					
 				}
 				else
 				{
@@ -333,7 +349,8 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 							if (isAttack)    {
 								state = SIMON_STATE_USE_SUB;	
 								attackUseSub.start();
-								SubWeaponAttack* sub;
+								makeSubWeapon(ScoreBar::getInstance()->getTypeSubWeapon());
+								/*SubWeaponAttack* sub;
 								switch (ScoreBar::getInstance()->getTypeSubWeapon())
 								{
 								case SWORD:
@@ -367,7 +384,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 									break;
 								default:
 									return;
-								}
+								}*/
 							}
 							else {
 
@@ -379,6 +396,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 						{
 							if (isAttack) {
 								state = SIMON_STATE_ATTACK_STAND;
+								setVx(0);
 								attackStandDelay.start();
 
 							}
@@ -441,30 +459,38 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				goStairUp();
 				
 			}
-			if (isDownDown)
+			else
 			{
-				goStairDown();
-				
-			}
-			if (isAttack) {
-				attackInStairDelay.start();
-				setPauseAnimation(false);
-				if (aniIndex == SIMON_ANI_ASCEND_STAIRS)
+				if (isDownDown)
 				{
-					playerStairState = SIMON_STAIR_STATE_ATTACK_ASCEN;
-					aniIndex = SIMON_ANI_ASCEN_STAIRS_USING_SUB;
+					goStairDown();
+
 				}
 				else
 				{
-					if (aniIndex == SIMON_ANI_DESCEN_STAIRS)
-					{
-						playerStairState = SIMON_STAIR_STATE_ATTACK_DESEN;
-						aniIndex = SIMON_ANI_DESCEN_STAIRS_USING_SUB;
+					if (isAttack) {
+						attackInStairDelay.start();
+						setPauseAnimation(false);
+						if (aniIndex == SIMON_ANI_ASCEND_STAIRS)
+						{
+							playerStairState = SIMON_STAIR_STATE_ATTACK_ASCEN;
+							aniIndex = SIMON_ANI_ASCEN_STAIRS_USING_SUB;
+						}
+						else
+						{
+							if (aniIndex == SIMON_ANI_DESCEN_STAIRS)
+							{
+								playerStairState = SIMON_STAIR_STATE_ATTACK_DESEN;
+								aniIndex = SIMON_ANI_DESCEN_STAIRS_USING_SUB;
+
+							}
+						}
 
 					}
 				}
-
 			}
+			
+			
 			
 			return;
 		case SIMON_STAIR_STATE_GO_UP:
@@ -668,6 +694,44 @@ void Simon::Render()
 		animation_set->at(aniIndex)->Render(x, y,frameIndex , direction, pauseAnimation);	
 }
 
+void Simon::makeSubWeapon(TYPE_SUBWEAPON type) {
+	SubWeaponAttack* sub;
+	switch (type)
+	{
+	case SWORD:
+		sub = new SubDaggerAttack();
+		CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(sub);
+		sub->setX(getMidX());
+		sub->setY(getMidY() + 10);
+		sub->setAlive(true);
+		sub->setPhysicsEnable(true);
+		sub->timeDelay.start();
+
+		break;
+	case BOOMERANG:
+		sub = new SubBoomerangAttack();
+		CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(sub);
+		sub->setX(getMidX());
+		sub->setY(getMidY() + 10);
+		sub->setAlive(true);
+		sub->setPhysicsEnable(true);
+		sub->timeDelay.start();
+		sub->timeCheckSimon.start();
+		break;
+	case AXE:
+		sub = new SubAxeAttack();
+		CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(sub);
+		sub->setX(getMidX());
+		sub->setY(getMidY() + 10);
+		sub->setAlive(true);
+		sub->setPhysicsEnable(true);
+		sub->timeDelay.start();
+		break;
+	default:
+		return;
+	}
+	ScoreBar::getInstance()->increaseHeartCount(-1);
+}
 void Simon::retoreWidthHeight()
 {
 	setWidth(fixWidth);
@@ -890,7 +954,6 @@ void Simon::setHurt( int directEnemy) {
 		}
 		aniIndex = SIMON_ANI_HURT;
 		//aniIndex = SIMON_ANI_HURT;
-			
 		hurtTimeDelay.start();
 		jumbHurtTimeDelay.start();  
 	}

@@ -133,7 +133,7 @@ void Weapon::Render()
 				switch (Simon::getInstance()->getNumberArchery())
 				{
 				case 0:
-					setX(Simon::getInstance()->getX() -30);
+					setX(Simon::getInstance()->getX() -25);
 					aniIndex = WEAPON_ANI_W13;
 					break;
 				case 1:

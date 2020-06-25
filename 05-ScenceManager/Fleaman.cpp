@@ -73,10 +73,16 @@ void Fleaman::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		if (abs(Simon::getInstance()->getX() - getX()) > FLEAMAN_DISTANCE_STOP) {
 			setDirectionFollowPlayer();
 		}
-		setVx(getDirection() * FLEAMAN_VX);
+		
 		switch (fleamanState)
 		{
+		case FLEAMAN_STATE_TO_JUMB:
+			setVx(getDirection() * FLEAMAN_VX_WHEN_JUM);
+			setVy(FLEAMAN_VY_WHEN_JUMB);
+			fleamanState = FLEAMAN_STATE_JUMP_SHORT;
+			break;
 		case FLEAMAN_STATE_JUMP_SHORT:
+			setVx(getDirection() * FLEAMAN_VX);
 			if (getIsOnGround())
 			{
 				if (jumpRemain > 0)
@@ -92,6 +98,7 @@ void Fleaman::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			}
 			break;
 		case FLEAMAN_STATE_JUMP_LONG:
+			setVx(getDirection() * FLEAMAN_VX);
 			if (getIsOnGround())
 			{
 				if (jumpRemain > 0)
@@ -129,7 +136,7 @@ Fleaman::Fleaman()
 	setVy(0);
 	setDirection(DIRECTION_RIGHT);
 	aniIndex = FLEAMAN_ACTION_STAND;
-	fleamanState = FLEAMAN_STATE_JUMP_SHORT;
+	fleamanState = FLEAMAN_STATE_TO_JUMB;
 	jumpRemain = FLEAMAN_FUMBSHORT_COUNTER;
 }
 

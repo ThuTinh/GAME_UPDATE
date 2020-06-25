@@ -28,7 +28,7 @@ void Enemy::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		vector<LPGAMEOBJECT> listObject = CGame::GetInstance()->GetCurrentScene()->getAddtionalObject();
 		for (size_t i = 0; i < listObject.size(); i++)
 		{
-			if (dynamic_cast<SubWeaponAttack*>(listObject[i])) {
+			if (dynamic_cast<SubWeaponAttack*>(listObject[i]) && listObject[i]->isAlive) {
 				if (AABBCheck(listObject[i])) {
 					setAlive(false);
 					ScoreBar::getInstance()->increaseScore(ENEMY_SCORE);

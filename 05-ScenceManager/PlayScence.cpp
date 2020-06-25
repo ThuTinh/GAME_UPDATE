@@ -443,24 +443,14 @@ void CPlayScene::Update(DWORD dt)
 			objectsInCamara.push_back(obj);
 		}
 	}
-	/*for (size_t i = 0; i < objects.size()-1; i++)
-	{
-
-		coObjects.push_back(objects[i]);
-	}*/
-
-	/*for (size_t i = 0; i < objects.size(); i++)
-	{
-		objects[i]->Update(dt, &coObjects);
-	}*/
 
 	for (size_t i = 0; i < objectsInCamara.size(); i++)
 	{
 		objectsInCamara[i]->Update(dt, &objectsInCamara);
 	}
-
 	for (int j = 0; j < addtionalObject.size(); j++) {
-		addtionalObject[j]->Update(dt, &objectsInCamara);
+		if(addtionalObject[j]->isAlive)
+			addtionalObject[j]->Update(dt, &objectsInCamara);
 	}
 	if (player == NULL)
 		return;

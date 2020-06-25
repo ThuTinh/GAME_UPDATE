@@ -380,7 +380,14 @@ void ScoreBar::setHeartCount(int heartCount)
 
 void ScoreBar::increaseHeartCount(int heartCount)
 {
-	setHeartCount(this->heartCount + heartCount);
+	if (this->heartCount + heartCount < 0) {
+		setHeartCount(0);
+	}
+	else
+	{
+		setHeartCount(this->heartCount + heartCount);
+	}
+	
 }
 
 void ScoreBar::setCurrentStageNumber(int currentStageNumber)

@@ -3,11 +3,12 @@
 #include"DelayTime.h"
 #include "GameTime.h"
 #include "Item.h"
-#define SIMON_VX	0.07
+#include "ScoreBar.h"
+#define SIMON_VX	0.08
 //0.1f
-#define SIMON_JUMP_Y		0.27f
+#define SIMON_JUMP_Y		0.25f
 #define SIMON_JUMP_DEFLECT_SPEED 0.2f
-#define MARIO_GRAVITY			-0.0008f
+#define MARIO_GRAVITY			-0.0007f
 #define SIMON_DIE_DEFLECT_SPEED	 0.5f
 
 #define SIMON_STATE_NORMAL 100
@@ -101,6 +102,7 @@ public:
 	void addNumberArchery(int num);
 	void SetState(int state);
 	int getState();
+	void makeSubWeapon(TYPE_SUBWEAPON type);
 	void setAnChorRight();
 	void setAnChorLeft();
 	void SetLevel(int l) { level = l; }

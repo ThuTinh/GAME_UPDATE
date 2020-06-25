@@ -90,7 +90,7 @@ void BlackNight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 void BlackNight::onCollision(CGameObject* other, float collisionTime, int nx, int ny)
 {
-	if (this->getX() + 5 > other->getRight() || nx == -1) {
+	if (this->getX() + 16 > other->getRight() || nx == -1) {
 		setDirection(DIRECTION_LEFT);
 		setVx(-BLACKNIGHT_VX);
 	}

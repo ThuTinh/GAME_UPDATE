@@ -5,18 +5,21 @@ void WhiteBone::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	timeDelay.update();
 	vy += WHITE_BONE_GRAVITY * dt;
-	if (isAlive) {
-		if (AABBCheck(Simon::getInstance())) {
-			ScoreBar::getInstance()->increaseHealth(-1);
+	
+	if (timeCheck.atTime())
+	{
+		if (isAlive) {
+			if (AABBCheck(Simon::getInstance())) {
+				ScoreBar::getInstance()->increaseHealth(-1);
+			}
 		}
 	}
-	if (timeDelay.isTerminated())
-	{
+	if (timeDelay.isTerminated()) {
 		setAlive(false);
 	}
 	CGameObject::Update(dt, coObjects);
 	setX(-getDx() + getX());
-	setY(getDy() + getY());
+	setY(getDy() + getY());  
 
 
 }
@@ -41,10 +44,10 @@ void WhiteBone::setDirectionFollowPlayer()
 
 WhiteBone::WhiteBone()
 {
-	setVy(0);
 	setVx(VX);
 	setVy(VY);
 	timeDelay.init(TIME_DELAY);
+	timeCheck.init(TIME_DELAY);
 	animation_set = CAnimationSets::GetInstance()->Get(WHITE_BONE_ANI);
 
 

@@ -6,7 +6,7 @@ void SubBoomerangAttack::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 
 	SubWeaponAttack::Update(dt, coObjects);
-	if (getX() >= Camera::getInstance()->getX()+ Camera::getInstance()->getWidth()) {
+	if (getX() >= Camera::getInstance()->getX() + Camera::getInstance()->getWidth()) {
 		setVx(-VX);
 
 	}
@@ -16,6 +16,8 @@ void SubBoomerangAttack::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	
 	if (!timeCheckSimon.isOnTime()) {
 		if (AABBCheck(Simon::getInstance())) {
+			if(isAlive)
+				ScoreBar::getInstance()->increaseHeartCount(1);
 			setAlive(false);
 		}
 	}

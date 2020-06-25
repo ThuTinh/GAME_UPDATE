@@ -79,18 +79,35 @@ void Sketon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		setDirection(DIRECTION_RIGHT);
 	}
 	Enemy::Update(dt,coObjects);
-	if (Simon::getInstance()->getX()< getX() && abs(Simon::getInstance()->getX() - getX()) <= DISTANCE_TO_THROW_WHITEBONE) {
+	//if (Simon::getInstance()->getX()< getX() && abs(Simon::getInstance()->getX() - getX()) <= DISTANCE_TO_THROW_WHITEBONE) {
+	//	whiteBoneDelay.start();
+	//}
+	if (Simon::getInstance()->getY() > getY() && abs(Simon::getInstance()->getX() - getX()) <= DISTANCE_TO_THROW_WHITEBONE) {
+		//whiteBoneDelay.start();
+		if (timeThrow.atTime()) {
+			WhiteBone* whiteBone = new WhiteBone();
+			CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(whiteBone);
+			whiteBone->setX(getMidX());
+			whiteBone->setY(getMidY());
+			whiteBone->setAlive(true);
+			whiteBone->setPhysicsEnable(true);
+			whiteBone->timeDelay.start();
+		}
+	}
+
+	/*if (abs(Simon::getInstance()->getX() - getX()) <= DISTANCE_TO_THROW_WHITEBONE) {
 		whiteBoneDelay.start();
-	}
-	if (whiteBoneDelay.isTerminated()) {
-		WhiteBone* whiteBone = new WhiteBone();
-		CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(whiteBone);
-		whiteBone->setX(getMidX());
-		whiteBone->setY(getMidY());
-		whiteBone->setAlive(true);
-		whiteBone->setPhysicsEnable(true);
-		whiteBone->timeDelay.start();
-	}
+	}*/
+	//if (whiteBoneDelay.isTerminated()) {
+	//	WhiteBone* whiteBone = new WhiteBone();
+	//	CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(whiteBone);
+	//	whiteBone->setX(getMidX());
+	//	whiteBone->setY(getMidY());
+	//	whiteBone->setAlive(true);
+	//	whiteBone->setPhysicsEnable(true);
+	//	whiteBone->timeDelay.start();
+	//}
+	
 }
 
 void Sketon::onCollision(CGameObject* other, float collisionTime, int nx, int ny)
@@ -120,6 +137,7 @@ Sketon::Sketon()
 	setDirection(DIRECTION_RIGHT);
 	setVx(0.03);
 	whiteBoneDelay.init(10);
+	timeThrow.init(1000);
 }
 
 Sketon::~Sketon()
