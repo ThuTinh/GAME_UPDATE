@@ -246,6 +246,9 @@
     <ClCompile Include="SubAxeAttack.cpp">
       <Filter>Object\Item</Filter>
     </ClCompile>
+    <ClCompile Include="Ghost.cpp">
+      <Filter>Object\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Brick.h">
@@ -438,6 +441,9 @@
       <Filter>Object\Item</Filter>
     </ClInclude>
     <ClInclude Include="IBoss.h">
+      <Filter>Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Ghost.h">
       <Filter>Object\Enemy</Filter>
     </ClInclude>
   </ItemGroup>

@@ -125,7 +125,6 @@ void Simon::_ParseSection_ANIMATION_SETS(string line)
 
 Simon::Simon() : CGameObject()
 {
-	setCollitionType(COLLISION_TYPE_GROUND);
 	setPhysicsEnable(true);
 	setRenderActive(true);
 	setVx(0);

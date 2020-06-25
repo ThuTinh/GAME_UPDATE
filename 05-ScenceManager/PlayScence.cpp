@@ -35,6 +35,7 @@
 #include"Sketon.h"
 #include"Zoombie.h"
 #include"GiaDo.h"
+#include "Ghost.h"
 #include"Crown.h"
 #include "BossBat.h"
 #include"ObjectBlack.h"
@@ -113,7 +114,7 @@ Space* CPlayScene::getCurentSpace()
 #define OBJECT_TYPE_BOSSBAT	27
 #define OBJECT_TYPE_OBJECTBLACK 	28
 #define OBJECT_TYPE_GIADO 30
-
+#define OBJECT_TYPE_GHOST 32
 
 
 
@@ -279,6 +280,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_HAIXANH: obj = new HaiXanh(); break;
 	case OBJECT_TYPE_HAIDO: obj = new HaiDo(); break;
 	case OBJECT_TYPE_RAVEN : obj = new Raven(); break;
+	case OBJECT_TYPE_GHOST: obj = new Ghost(); break;
 	case OBJECT_TYPE_BOSSBAT: obj = new BossBat(); break;
 	case OBJECT_TYPE_OBJECTBLACK: obj = new ObjectBlack(); break;
 	default:
