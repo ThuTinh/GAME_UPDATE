@@ -21,7 +21,7 @@ protected:
 	vector<LPGAMEOBJECT> objectsInCamara;
 	vector<LPGAMEOBJECT> addtionalObject;
 
-	unordered_map<int, Space*> spaces;
+	
 	Space* currentSpace;
 
 	vector<int> texturesID;
@@ -41,6 +41,7 @@ protected:
 
 public: 
 	CPlayScene(int id, LPCWSTR filePath);
+	unordered_map<int, Space*> spaces;
 	void setCurentSpace(int index);
 	Space* getCurentSpace();
 	virtual void Load();
