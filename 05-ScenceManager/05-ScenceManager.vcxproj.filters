@@ -249,6 +249,9 @@
     <ClCompile Include="Ghost.cpp">
       <Filter>Object\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="SubFireBombAttack.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Brick.h">
@@ -445,6 +448,9 @@
     </ClInclude>
     <ClInclude Include="Ghost.h">
       <Filter>Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="SubFireBombAttack.h">
+      <Filter>Object\Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

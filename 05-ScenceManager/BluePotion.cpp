@@ -12,6 +12,7 @@ void BluePotion::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 void BluePotion::onPlayerContact()
 {
+	ScoreBar::getInstance()->setTypeSubWeapon(TYPE_SUBWEAPON::BLUEPOTION);
 }
 
 BluePotion::BluePotion()

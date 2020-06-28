@@ -5,7 +5,7 @@ void WhiteBone::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	timeDelay.update();
 	vy += WHITE_BONE_GRAVITY * dt;
-	
+	setDirectionFollowPlayer();
 	if (timeCheck.atTime())
 	{
 		if (isAlive) {
@@ -18,7 +18,7 @@ void WhiteBone::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		setAlive(false);
 	}
 	CGameObject::Update(dt, coObjects);
-	setX(-getDx() + getX());
+	setX(getDirection()*  getDx() + getX());
 	setY(getDy() + getY());  
 
 
@@ -32,13 +32,13 @@ void WhiteBone::Render()
 
 void WhiteBone::setDirectionFollowPlayer()
 {
-	if (Simon::getInstance()->getDirection() == DIRECTION_LEFT)
+	if (Simon::getInstance()->getMidX() - getMidX() < 0)
+	{
 		setDirection(DIRECTION_LEFT);
-
+	}
 	else
 	{
 		setDirection(DIRECTION_RIGHT);
-
 	}
 }
 

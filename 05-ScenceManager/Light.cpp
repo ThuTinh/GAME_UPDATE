@@ -4,7 +4,7 @@
 #include"Simon.h"
 void Light::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive()) {
+	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive()  && (Weapon::getInstance()->aniIndex ==2 || Weapon::getInstance()->aniIndex == 5 || Weapon::getInstance()->aniIndex == 8|| Weapon::getInstance()->aniIndex == 11) ) {
 		setAlive(false);
 	}
 }

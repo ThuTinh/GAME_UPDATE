@@ -3,6 +3,7 @@
 0	textures\simon\simon.png	255	0	128
 101	textures\misc\boomerang.png	255	0	128
 102	textures\misc\axes.png	255	0	128
+103	textures\misc\fireBomb.png	255	0	0
 
 # id	left	top	with	height	 achorX achorY texture_id
 [SPRITES]
@@ -81,6 +82,8 @@
 222005	16	0	16	16	5	0	0	0	102
 222006	32	0	16	16	10	0	0	0	102
 222007	48	0	16	16	10	0	0	0	102
+## FIRE BOMB
+222008	0	0	8	8	0	0	0	0	103
 
 # ani_id	sprite1_id	time1	sprite2_id	time2	...
 [ANIMATIONS]
@@ -92,15 +95,16 @@
 #Jumb
 102	10005	100
 #AscendStairs
-103	10006	100	10007	100
+103	10006	120	10007	70
 #DescendStairs
-104	10008	100	10009	100
+104	10008	120	10009	70
 #Hurt
 105	10010	100
 #Dead
 106	10012	100
 #intro
 107	10013	100
+
 #StandingHaveUseSubWeapon
 108	10014	100	10015	100	10016	100	10017	100	10018	100	10019	100
 #DuckingHaveUseSubWeapon
@@ -115,11 +119,11 @@
 22201	222001	100	222002	100	222003	100
 #axes
 22202	222004	100	222005	100	222006	100	222007	100
-
+22203	222008	100
 # id	ani1	ani2	ani3
 [ANIMATION_SETS]
 # SIMON
 1	100	101	102	103	104	105	106	107	108	109	110	111	112
-66	22201	22202
+66	22201	22202	22203
 
 

@@ -1,6 +1,6 @@
 #pragma once
 #include "GameObject.h"
-#define ITEM_GRAVITY -0.000009
+#define ITEM_GRAVITY -0.0000099
 enum ITEM_STATE
 {
 	ITEM_STATE_INVISIBLE,

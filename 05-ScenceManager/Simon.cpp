@@ -14,6 +14,7 @@
 #include "SubBoomerangAttack.h"
 #include "SubWeaponAttack.h"
 #include "SubAxeAttack.h"
+#include "SubFireBombAttack.h"
 #define SCENE_SECTION_UNKNOWN -1
 #define SCENE_SECTION_TEXTURES 2
 #define SCENE_SECTION_MAP	3
@@ -722,6 +723,15 @@ void Simon::makeSubWeapon(TYPE_SUBWEAPON type) {
 		CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(sub);
 		sub->setX(getMidX());
 		sub->setY(getMidY() + 10);
+		sub->setAlive(true);
+		sub->setPhysicsEnable(true);
+		sub->timeDelay.start();
+		break;
+	case BLUEPOTION:
+		sub = new SubFireBombAttack();
+		CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(sub);
+		sub->setX(getMidX());
+		sub->setY(getMidY() +5);
 		sub->setAlive(true);
 		sub->setPhysicsEnable(true);
 		sub->timeDelay.start();

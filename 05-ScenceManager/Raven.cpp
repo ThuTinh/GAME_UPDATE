@@ -9,7 +9,7 @@ void Raven::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 
 	vy += RAVEN_GRAVITY * dt;
-	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive) {
+	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive && (Weapon::getInstance()->aniIndex == 2 || Weapon::getInstance()->aniIndex == 5 || Weapon::getInstance()->aniIndex == 8 || Weapon::getInstance()->aniIndex == 11)) {
 			setAlive(false);
 			ScoreBar::getInstance()->increaseScore(RAVEN_SCORE);
 			DieEffect* dieEffect = new DieEffect();

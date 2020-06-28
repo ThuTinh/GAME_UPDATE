@@ -9,6 +9,7 @@
 24	textures\misc\BinhXanh.png	255	0	128
 18	textures\misc\axe.png	255	0	128
 5	textures\misc\heart.png	255	0	0
+6	textures\misc\cung.png	255	0	128
 11	textures\enemy\Sketon.png	255	0	128
 12	textures\enemy\fleaman.png	255	0	128
 32	textures\enemy\ghost.png	255	0	128
@@ -124,12 +125,14 @@
 #fly
 660005	0	0	16	16	0	0	0	0	32
 660006	16	0	16	16	0	0	0	0	32
-
+#CUNG
+40001	0	0	20	20	0	0	0	0	6
 # ani_id	sprite1_id	time1	sprite2_id	time2	...
 [ANIMATIONS]
 #==HEART BIG==
 300	30001	100
-
+#==CUNG==
+400	40001	100
 #==Weapon==
 601	60001	100
 602	60002	100
@@ -193,7 +196,8 @@
 [ANIMATION_SETS]
 #HEART
 3	300
-
+# CUNG
+4	400
 #Weapon
 6	601	602	603	604	605	606	607	608	609	610	611	612
 #TienDo
@@ -300,7 +304,7 @@
 22	723	335	16	16	8
 2	475	349	8	16	11
 16	471	350	17	16	7
-15	426	350	9	16	12
+6	426	350	9	16	4
 12	307	316	16	16	20
 16	286	352	17	16	7
 15	223	351	9	16	12

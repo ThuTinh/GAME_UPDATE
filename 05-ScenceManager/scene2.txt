@@ -9,6 +9,7 @@
 22	textures\misc\TienVang.png	255	0	128
 21	textures\misc\VuonNiem.png	255	0	128
 10	textures\enemy\bat.png	255	0	128
+6	textures\misc\cung.png	255	0	128
 9	textures\enemy\BlackNight.png	255	0	128
 5	textures\misc\heart.png	255	0	0
 50	textures\misc\die-effect.png	255	0	0
@@ -110,6 +111,9 @@
 #Object Black
 750001	0	0	16	16	0	0	0	0	28
 
+#CUNG
+40001	0	0	20	20	0	0	0	0	6
+
 # ani_id	sprite1_id	time1	sprite2_id	time2	...
 [ANIMATIONS]
 #==HEART BIG==
@@ -168,6 +172,10 @@
 #Object black
 7501	750001	100
 
+
+#==CUNG==
+400	40001	100
+
 # id	ani1	ani2	ani3
 [ANIMATION_SETS]
 #HEART
@@ -202,6 +210,8 @@
 
 #Black object
 60	7501
+# CUNG
+4	400
 [STAIR]
 #type collitionid 	x	y	with  height  ani_set_id IsRightStair IsTop
 
@@ -231,7 +241,7 @@
 9	323	112	16	31	15
 10	293	16	16	16	14
 2	276	18	8	16	11
-15	275	18	9	16	12
+6	275	18	9	16	4
 2	203	18	8	16	11
 15	202	18	9	16	12
 9	117	47	16	31	15

@@ -10,7 +10,7 @@ void Sketon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	vy += ENEMY_GRAVITY * dt;
 	whiteBoneDelay.update();
-	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive) {
+	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive && (Weapon::getInstance()->aniIndex == 2 || Weapon::getInstance()->aniIndex == 5 || Weapon::getInstance()->aniIndex == 8 || Weapon::getInstance()->aniIndex == 11)) {
 		setAlive(false);
 		ScoreBar::getInstance()->increaseScore(SKETON_SCORE);
 		DieEffect* dieEffect = new DieEffect();
@@ -79,11 +79,8 @@ void Sketon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		setDirection(DIRECTION_RIGHT);
 	}
 	Enemy::Update(dt,coObjects);
-	//if (Simon::getInstance()->getX()< getX() && abs(Simon::getInstance()->getX() - getX()) <= DISTANCE_TO_THROW_WHITEBONE) {
-	//	whiteBoneDelay.start();
-	//}
+
 	if (Simon::getInstance()->getY() > getY() && abs(Simon::getInstance()->getX() - getX()) <= DISTANCE_TO_THROW_WHITEBONE) {
-		//whiteBoneDelay.start();
 		if (timeThrow.atTime()) {
 			WhiteBone* whiteBone = new WhiteBone();
 			CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(whiteBone);
@@ -94,20 +91,6 @@ void Sketon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			whiteBone->timeDelay.start();
 		}
 	}
-
-	/*if (abs(Simon::getInstance()->getX() - getX()) <= DISTANCE_TO_THROW_WHITEBONE) {
-		whiteBoneDelay.start();
-	}*/
-	//if (whiteBoneDelay.isTerminated()) {
-	//	WhiteBone* whiteBone = new WhiteBone();
-	//	CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(whiteBone);
-	//	whiteBone->setX(getMidX());
-	//	whiteBone->setY(getMidY());
-	//	whiteBone->setAlive(true);
-	//	whiteBone->setPhysicsEnable(true);
-	//	whiteBone->timeDelay.start();
-	//}
-	
 }
 
 void Sketon::onCollision(CGameObject* other, float collisionTime, int nx, int ny)

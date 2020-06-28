@@ -7,6 +7,7 @@
 17	textures\misc\BinhVang.png	255	0	128
 18	textures\misc\axe.png	255	0	128
 5	textures\misc\heart.png		255	0	0
+6	textures\misc\cung.png	255	0	128
 50	textures\misc\die-effect.png	255	0	0
 27	textures\enemy\Boss.png	255	0	128
 4	textures\enemy\zoombie.png	255	0	128
@@ -21,7 +22,8 @@
 [SPRITES]
 #HEARTBIG
 30001	0	0	10	10	0	0	0	0	5
-
+#CUNG
+40001	0	0	20	20	0	0	0	0	6
 # Weapon
 #w11
 60001	0	0	8	2	0	0	0	0	8
@@ -91,7 +93,8 @@
 [ANIMATIONS]
 #==HEART BIG==
 300	30001	100
-
+#==CUNG==
+400	40001	100
 #==Weapon==
 601	60001	100
 602	60002	100
@@ -139,6 +142,8 @@
 [ANIMATION_SETS]
 #HEART
 3	300
+# CUNG
+4	400
 #Weapon
 6	601	602	603	604	605	606	607	608	609	610	611	612
 #TienDo
@@ -200,7 +205,7 @@
 4	532	142	16	29	23
 15	311	143	9	16	12
 16	103	48	17	16	7
-15	170	81	9	16	12
+6	170	81	9	16	4
 17	230	50	17	16	17
 18	368	110	17	16	18
 15	426	146	9	16	12
