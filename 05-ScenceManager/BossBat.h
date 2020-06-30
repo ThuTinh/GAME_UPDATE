@@ -32,15 +32,16 @@ public:
 	DelayTime waitDelay;
 	DelayTime moveFastDelay;
 	DelayTime moveSlowDelay;
+	DelayTime hurtDelay;
 	float xDes, yDes;
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	virtual void Render();
 	//void onCollision(MovableRect* other, float collisionTime, int nx, int ny) override;
 	void setBossState(BOSS_STATE bossState);
 	void calculateOtherPoint();
-
+	void checkWithSimon();
 	void onDecreaseHealth();
-
+	void makeEffectDie();
 	void restore();
 
 	void preventGoOutsideCamera();

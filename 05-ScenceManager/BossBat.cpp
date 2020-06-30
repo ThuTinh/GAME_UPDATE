@@ -1,6 +1,9 @@
 #include "BossBat.h"
 #include "Camera.h"
+#include"Die-affect.h"
+#include "Weapon.h"
 #include"Game.h"
+#include "SubWeaponAttack.h"
 #include"PlayScence.h"
 #define MAX(a,b) (a>b? a : b)
 #define MIN(a,b) (a<b? a : b)
@@ -12,11 +15,11 @@ void BossBat::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	waitDelay.update();
 	moveFastDelay.update();
 	moveSlowDelay.update();
+	checkWithSimon();
 	switch (bossState)
 	{
 	case BOSS_STATE_INVISIBLE:
 	{
-		
 		//dynamic_cast<CPlayScene*>(CGame::GetInstance()->GetCurrentScene())->setCurentSpace(1);
 		int distance = player->getX() - getX();
 		if (distance > boss_distance_activ)
@@ -51,7 +54,7 @@ void BossBat::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			calculateOtherPoint();
 			if (xDes < getX())
 			{
-				vx2 = vampire_bat_fast_momen;
+				vx2 = -vampire_bat_fast_momen;
 			}
 			else
 			{
@@ -71,7 +74,7 @@ void BossBat::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			calculateOtherPoint();
 			if (xDes < getX())
 			{
-				vx2 = vampire_bat_fast_momen;
+				vx2 = -vampire_bat_fast_momen;
 			}
 			else
 			{
@@ -87,7 +90,7 @@ void BossBat::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			calculateOtherPoint();
 			if (xDes < getX())
 			{
-				vx2 = vampire_bat_fast_momen;
+				vx2 = -vampire_bat_fast_momen;
 			}
 			else
 			{
@@ -136,6 +139,7 @@ void BossBat::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	}
 	setX(getX() + getDx());
 	setY(getY() + getDy());
+
 }
 
 void BossBat::Render()
@@ -168,9 +172,63 @@ void BossBat::calculateOtherPoint()
 	yDes = getRandom(yMin, yMax);
 }
 
+void BossBat::checkWithSimon()
+{
+	hurtDelay.update();
+	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive && (Weapon::getInstance()->aniIndex == 2 || Weapon::getInstance()->aniIndex == 5 || Weapon::getInstance()->aniIndex == 8 || Weapon::getInstance()->aniIndex == 11)) {
+		hurtDelay.start();
+	}
+	if (AABBCheck(Simon::getInstance()) && Simon::getInstance()->state != SIMON_STATE_ON_STAIR) {
+		if (!Simon::getInstance()->isDie()) {
+			Simon::getInstance()->setHurt(getDirection(), getX());
+		}
+	}
+	if (CGame::GetInstance()->GetCurrentScene()->getAddtionalObject().size() > 0) {
+		vector<LPGAMEOBJECT> listObject = CGame::GetInstance()->GetCurrentScene()->getAddtionalObject();
+		for (size_t i = 0; i < listObject.size(); i++)
+		{
+			if (dynamic_cast<SubWeaponAttack*>(listObject[i]) && listObject[i]->isAlive) {
+				if (AABBCheck(listObject[i])) {
+					if (ScoreBar::getInstance()->getBossHealth() - 1 >= 0)
+					{
+						
+						hurtDelay.start();
+					}
+					else
+					{
+						makeEffectDie();
+					}
+				}
+			}
+		}
+	}
+	if (hurtDelay.isTerminated()) {
+		if (ScoreBar::getInstance()->getBossHealth() - 1 >= 0)
+		{
+			ScoreBar::getInstance()->increaseBossHealth(-1);
+
+		}
+		else
+		{
+			setAlive(false);
+			makeEffectDie();
+		}
+	}
+}
+
 void BossBat::onDecreaseHealth()
 {
 	ScoreBar::getInstance()->increaseBossHealth(-16);
+}
+
+void BossBat::makeEffectDie()
+{
+	DieEffect* dieEffect = new DieEffect();
+	CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(dieEffect);
+	dieEffect->setX(getMidX());
+	dieEffect->setY(getMidY());
+	dieEffect->setAlive(true);
+	dieEffect->timeDelay.start();
 }
 
 void BossBat::restore()
@@ -202,11 +260,12 @@ void BossBat::preventGoOutsideCamera()
 BossBat::BossBat()
 {
 	player = Simon::getInstance();
+	setDirection(DIRECTION_LEFT);
 	waitDelay.init(BOSS_TIME_WAITE);
 	setPhysicsEnable(false);
 	aniIndex = 0;
 	setAlive(true);
-
+	hurtDelay.init(20);
 }
 
 BossBat::~BossBat()

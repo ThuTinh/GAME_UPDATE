@@ -3,7 +3,7 @@
 #define GHOST_SCORE 200
 #define DISTANCE_X 60
 #define GHOST_DISTANCE_STOP 10
-#define VX 0.025
+#define VX 0.015
 #define GHOST_GRAVITY -0.003
 enum GHOST_STATE {
 	GHOST_STATE_STAND,

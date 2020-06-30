@@ -93,7 +93,7 @@ public:
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *colliable_objects = NULL);
 	virtual void Render();
 	void retoreWidthHeight();
-	Item *getSubweapo();
+	Item *getSubweapon();
 	void setSubWeapon(Item * item);
 	void setNumberArchery(int num);
 	void addNumberObjectBlack(int num);
@@ -119,7 +119,8 @@ public:
 	void onCollision(CGameObject* other, float collisionTime, int nx, int ny) override;
 	void Load(LPCWSTR simonFile);
 
-	void setHurt(int directEnemy);
+	void setHurt(int directEnemy, float xOfEnemy);
+	bool isDie();
 	Simon();
 
 };

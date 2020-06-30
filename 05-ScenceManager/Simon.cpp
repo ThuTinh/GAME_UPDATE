@@ -151,9 +151,9 @@ Simon::Simon() : CGameObject()
 //	collitionTypeToCheck.push_back(COLLISION_TYPE_ENEMY);
 
 
-	hurtTimeDelay.init(2000);
+	hurtTimeDelay.init(1500);
 	jumbHurtTimeDelay.init(500);
-	hurtTime.init(50);
+	hurtTime.init(45);
 }
 
 void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
@@ -186,7 +186,6 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 	if (hurtTimeDelay.isOnTime())
 	{
-		
 		if (hurtTime.atTime())
 		{
 			setRenderActive(false);
@@ -245,7 +244,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				if (dynamic_cast<Ground*>(e->obj)) {
 					if (state == SIMON_STATE_HURT) {
 						if (jumbHurtTimeDelay.isOnTime()) {
-							x +=  -getDirection()*0.7;
+							x += hurtDirection *0.7;
 							y += 20;
 							return;
 						}
@@ -308,7 +307,6 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				aniIndex = SIMON_ANI_ASCEND_STAIRS;
 				animation_set->at(SIMON_ANI_ASCEN_STAIRS_USING_SUB)->setCurrentFrame(-1);
 			}
-
 		}
 		else
 		{
@@ -576,7 +574,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			ScoreBar::getInstance()->restoreHealth();
 			ScoreBar::getInstance()->restoreBossHealth();
 			retoreWidthHeight();
-			setY(getY()+16);
+			setY(getY() + 45);
 			state = SIMON_STATE_NORMAL ;
 		}
 		return;
@@ -610,6 +608,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			setPhysicsEnable(false);
 			setStopCollision(true);
 		}*/
+	
 		if ( !jumbHurtTimeDelay.isOnTime()) {
 			if (isRightDown) {
 				setDirection(DIRECTION_RIGHT);
@@ -747,7 +746,7 @@ void Simon::retoreWidthHeight()
 	setHeight(fixHeight);
 }
 
-Item *Simon::getSubweapo()
+Item *Simon::getSubweapon()
 {
 	return subWeapon;
 }
@@ -931,7 +930,19 @@ void Simon::onCollision(CGameObject* other, float collisionTime, int nx, int ny)
 	CGameObject::onCollision( other,  collisionTime,  nx,  ny);
 }
 
-void Simon::setHurt( int directEnemy) {
+bool Simon::isDie() {
+	if (ScoreBar::getInstance()->getHealth()-1 <= 0) {
+		ScoreBar::getInstance()->increaseHealth(-1);
+		ScoreBar::getInstance()->increasePlayerLife(-1);
+		aniIndex = SIMON_ANI_DEAD;
+		state = SIMON_STATE_DIE;
+		setHeight(animation_set->at(aniIndex)->getFrame(0)->GetSprite()->getHeight()-5);
+		deadDelay.start();
+		return true;
+	}
+	return false;
+}
+void Simon::setHurt( int directEnemy, float xOfEnemy) {
 	if (!hurtTimeDelay.isOnTime())
 	{
 		state = SIMON_STATE_HURT;
@@ -954,13 +965,16 @@ void Simon::setHurt( int directEnemy) {
 		}*/
 		/*setVx(-getDirection() * 0.3);
 		setVy(0.004);*/
-		if (directEnemy == 1) {
-			setDirection(DIRECTION_LEFT);
+		if (xOfEnemy < getX()) {
+				setDirection(DIRECTION_LEFT);
+				hurtDirection = 1;
 		}
 		else
 		{
 			setDirection(DIRECTION_RIGHT);
+			hurtDirection = -1;
 		}
+		
 		aniIndex = SIMON_ANI_HURT;
 		//aniIndex = SIMON_ANI_HURT;
 		hurtTimeDelay.start();

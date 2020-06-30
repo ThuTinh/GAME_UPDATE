@@ -74,22 +74,13 @@ void ScoreBar::renderBossHealth()
 	int lastLocationXHealth = bossHealthLocation.X + HEALTH_WIDTH * maxHealth - HEALTH_WIDTH;
 	for (size_t i = 0; i < healthLost; i++)
 	{
-		animation_set->at(MISC_SPRITE_ID_LOST_HEALTH)->RenderScoreBar(lastLocationXHealth, healthLocation.Y, 0);
+		animation_set->at(MISC_SPRITE_ID_LOST_HEALTH)->RenderScoreBar(lastLocationXHealth, bossHealthLocation.Y, 0);
 		lastLocationXHealth -= HEALTH_WIDTH;
 	}
 }
 
 void ScoreBar::renderSubWeapon()
 {
-	//if (this->subWeapon != 0)
-	//{
-	//	/*this->subWeapon->getSprite()->render(subWeaponLocation.X,
-	//		subWeaponLocation.Y,
-	//		subWeapon->getAction(), 0);*/
-	//	subWeapon->animation_set->at(0)->RenderScoreBar(subWeaponLocation.X, subWeaponLocation.Y, 0);
-
-	//}
-
 	switch (stypeSubweapon)
 	{
 	case SWORD:
