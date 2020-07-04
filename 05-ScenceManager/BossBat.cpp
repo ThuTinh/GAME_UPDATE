@@ -177,6 +177,11 @@ void BossBat::checkWithSimon()
 	hurtDelay.update();
 	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive && (Weapon::getInstance()->aniIndex == 2 || Weapon::getInstance()->aniIndex == 5 || Weapon::getInstance()->aniIndex == 8 || Weapon::getInstance()->aniIndex == 11)) {
 		hurtDelay.start();
+		if (ScoreBar::getInstance()->getBossHealth() == 1)
+		{
+			makeEffectDie();
+			return;
+		}
 	}
 	if (AABBCheck(Simon::getInstance()) && Simon::getInstance()->state != SIMON_STATE_ON_STAIR) {
 		if (!Simon::getInstance()->isDie()) {
@@ -189,7 +194,7 @@ void BossBat::checkWithSimon()
 		{
 			if (dynamic_cast<SubWeaponAttack*>(listObject[i]) && listObject[i]->isAlive) {
 				if (AABBCheck(listObject[i])) {
-					if (ScoreBar::getInstance()->getBossHealth() - 1 >= 0)
+					if (ScoreBar::getInstance()->getBossHealth() > 1)
 					{
 						
 						hurtDelay.start();
@@ -197,21 +202,22 @@ void BossBat::checkWithSimon()
 					else
 					{
 						makeEffectDie();
+						return;
 					}
 				}
 			}
 		}
 	}
 	if (hurtDelay.isTerminated()) {
-		if (ScoreBar::getInstance()->getBossHealth() - 1 >= 0)
+		if (ScoreBar::getInstance()->getBossHealth()  > 1)
 		{
 			ScoreBar::getInstance()->increaseBossHealth(-1);
 
 		}
 		else
 		{
-			setAlive(false);
 			makeEffectDie();
+			return;
 		}
 	}
 }
@@ -223,12 +229,14 @@ void BossBat::onDecreaseHealth()
 
 void BossBat::makeEffectDie()
 {
+	ScoreBar::getInstance()->increaseBossHealth(-1);
 	DieEffect* dieEffect = new DieEffect();
 	CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(dieEffect);
 	dieEffect->setX(getMidX());
 	dieEffect->setY(getMidY());
 	dieEffect->setAlive(true);
 	dieEffect->timeDelay.start();
+	setAlive(false);
 }
 
 void BossBat::restore()
@@ -265,7 +273,7 @@ BossBat::BossBat()
 	setPhysicsEnable(false);
 	aniIndex = 0;
 	setAlive(true);
-	hurtDelay.init(20);
+	hurtDelay.init(16);
 }
 
 BossBat::~BossBat()
