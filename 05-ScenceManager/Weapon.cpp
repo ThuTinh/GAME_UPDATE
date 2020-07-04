@@ -58,8 +58,8 @@ void Weapon::Render()
 
 				break;
 			default:
-				setY(Simon::getInstance()->getY() + 2);
-				setX(Simon::getInstance()->getX() + 20);
+				setY(Simon::getInstance()->getY() + 1);
+				setX(Simon::getInstance()->getX() + 17);
 				switch (Simon::getInstance()->getNumberArchery())
 				{
 				case 0:

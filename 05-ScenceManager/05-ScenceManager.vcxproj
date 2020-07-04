@@ -161,6 +161,7 @@
     <ClCompile Include="Koopas.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="MovableRect.cpp" />
+    <ClCompile Include="objectBlack-effect.cpp" />
     <ClCompile Include="ObjectBlack.cpp" />
     <ClCompile Include="Raven.cpp" />
     <ClCompile Include="Rect.cpp" />
@@ -227,6 +228,7 @@
     <ClInclude Include="Koopas.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="MovableRect.h" />
+    <ClInclude Include="objectBlack-effect.h" />
     <ClInclude Include="ObjectBlack.h" />
     <ClInclude Include="Raven.h" />
     <ClInclude Include="Rect.h" />

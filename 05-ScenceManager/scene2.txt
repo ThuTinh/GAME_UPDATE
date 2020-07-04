@@ -15,6 +15,7 @@
 50	textures\misc\die-effect.png	255	0	0
 28	textures\misc\objectBlack.png	255	0	0
 30	textures\misc\giado.png	255	0	0
+35	textures\misc\objectBlack-effect.png	255	0	0
 8	textures\weopon\image.png	55	0	128
 -1	textures\map2\tilesheet.png	255	0	0
 
@@ -111,6 +112,8 @@
 #Object Black
 750001	0	0	16	16	0	0	0	0	28
 
+# objectBlack-effect
+850001	0	0	8	16	0	0	0	0	35
 #CUNG
 40001	0	0	20	20	0	0	0	0	6
 
@@ -172,6 +175,8 @@
 #Object black
 7501	750001	100
 
+# Object black effect
+8501	850001	100
 
 #==CUNG==
 400	40001	100
@@ -210,6 +215,9 @@
 
 #Black object
 60	7501
+
+#Object black effect
+70	8501
 # CUNG
 4	400
 [STAIR]
@@ -269,7 +277,7 @@
 -6	2	32	16	50	-1
 10	259	209	16	16	14
 30	57	78	32	16	40
-28	446	272	16	4	60
+28	447	272	16	4	60
 28	447	295	16	4	60
 -4	377	180	18	12	-1
 8	100	40	25	18	6

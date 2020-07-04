@@ -252,6 +252,9 @@
     <ClCompile Include="SubFireBombAttack.cpp">
       <Filter>Object\Item</Filter>
     </ClCompile>
+    <ClCompile Include="objectBlack-effect.cpp">
+      <Filter>Object\Misc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Brick.h">
@@ -451,6 +454,9 @@
     </ClInclude>
     <ClInclude Include="SubFireBombAttack.h">
       <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="objectBlack-effect.h">
+      <Filter>Object\Misc</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
