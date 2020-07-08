@@ -8,6 +8,8 @@
 void Ghost::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 
+	if (isRender) {
+
 	
 	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive && (Weapon::getInstance()->aniIndex == 2 || Weapon::getInstance()->aniIndex == 5 || Weapon::getInstance()->aniIndex == 8 || Weapon::getInstance()->aniIndex == 11)) {
 		setAlive(false);
@@ -19,8 +21,9 @@ void Ghost::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		dieEffect->setAlive(true);
 		dieEffect->timeDelay.start();
 	}
-	if(isRender)
+	
 		Enemy::Update(dt, coObjects);
+	
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
 	coEvents.clear();
@@ -54,21 +57,13 @@ void Ghost::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 		x += min_tx * dx + nx * 0.4f;
 		y += min_ty * dy + ny * 0.4f;
-
-		/*for (UINT i = 0; i < coEvents.size(); i++)
-		{
-			LPCOLLISIONEVENT e = coEvents[i];
-
-		}*/
-
 	}
 
 	//clean up collision events
 	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
-	/* mặc định là false cho tới khi chạm sàn */
-	//if (abs(Simon::getInstance()->getX() - getX()) > GHOST_DISTANCE_STOP) {
+
 		setDirectionFollowPlayer();
-	//}
+	}
 	switch (state)
 	{
 	case GHOST_STATE_STAND:

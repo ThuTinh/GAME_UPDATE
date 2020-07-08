@@ -63,7 +63,11 @@ public:
 	bool isUpDown;
 	bool isDownDown;
 	bool isJumpDown;
+	bool isPreviousJumpDown;
+	bool isJump;
 	bool isAttack;
+	bool isAttackDown;
+	bool isPreviousAttackDown;
 	int numberArchery;
 	int fixWidth;
 	int fixHeight;

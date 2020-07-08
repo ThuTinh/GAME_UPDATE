@@ -138,7 +138,7 @@ Simon::Simon() : CGameObject()
 	attacJumbDelay.init(400);
 	colorDelay.init(300);
 	hurtDelay.init(100);
-	deadDelay.init(400);
+	deadDelay.init(200);
 	duckDelay.init(200);
 	attackUseSub.init(400);
 	blinkTime.setDeltaTime(200);
@@ -169,6 +169,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	attackUseSub.update();
 	//hideHurtDelay.update();
 	hurtTimeDelay.update();
+	deadDelay.update();
 	attackInStairDelay.update();
 	jumbHurtTimeDelay.update();
 	isOnGiaDo = false;
@@ -567,15 +568,18 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		break;
 	}
 	case SIMON_STATE_DIE: {
-		deadDelay.update();
 		setVx(0);
 		if (deadDelay.isTerminated())
 		{
+			ScoreBar::getInstance()->increasePlayerLife(-1);
 			ScoreBar::getInstance()->restoreHealth();
-			ScoreBar::getInstance()->restoreBossHealth();
-			retoreWidthHeight();
-			setY(getY() + 45);
+		/*	retoreWidthHeight();
+			setY(getY() + 45);*/
+			CGame::GetInstance()->SwitchScene(CGame::GetInstance()->current_scene);
 			state = SIMON_STATE_NORMAL ;
+			aniIndex = SIMON_ANI_STAND;
+			setVx(0);
+			setVy(0);
 		}
 		return;
 	}
@@ -933,7 +937,6 @@ void Simon::onCollision(CGameObject* other, float collisionTime, int nx, int ny)
 bool Simon::isDie() {
 	if (ScoreBar::getInstance()->getHealth()-1 <= 0) {
 		ScoreBar::getInstance()->increaseHealth(-1);
-		ScoreBar::getInstance()->increasePlayerLife(-1);
 		aniIndex = SIMON_ANI_DEAD;
 		state = SIMON_STATE_DIE;
 		setHeight(animation_set->at(aniIndex)->getFrame(0)->GetSprite()->getHeight()-5);

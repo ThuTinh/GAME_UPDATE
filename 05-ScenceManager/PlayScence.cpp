@@ -511,76 +511,28 @@ vector<LPGAMEOBJECT> CPlayScene::getAddtionalObject()
 
 void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 {
-	//DebugOut(L"[INFO] KeyDown: %d\n", KeyCode);
-
-	Simon *simon = ((CPlayScene*)scence)->player;
-	switch (KeyCode)
-	{
-	case DIK_Z:
-		simon->isAttack = true;
-		break;
-	case DIK_X:
-		simon->isJumpDown = true;
-	case DIK_SPACE:
-		simon->isJumpDown = true;
-		break;
-	case DIK_UP:
-		simon->isUpDown = true;
-		break;
-	case DIK_DOWN:
-		simon->isDownDown = true;		
-		break;
-	case DIK_LEFT:
-		simon->isLeftDown = true;
-		break;
-	case DIK_RIGHT:
-		simon->isRightDown = true;
-		break;
-	}
 	
-
 }
 
 void CPlayScenceKeyHandler::OnKeyUp(int KeyCode)
 {
-	Simon* simon = ((CPlayScene*)scence)->player;
-	switch (KeyCode)
-	{
-	case DIK_Z:
-		simon->isAttack = false;
-		break;
-	case DIK_X:
-		simon->isJumpDown = false;
-		break;
-	case DIK_SPACE:
-		simon->isJumpDown = false;
-		break;
-	case DIK_UP:
-		simon->isUpDown = false;
-		break;
-	case DIK_DOWN:
-		simon->isDownDown = false;
-		break;
-	case DIK_LEFT:
-		simon->isLeftDown = false;
-		break;
-	case DIK_RIGHT:
-		simon->isRightDown = false;
-		break;
-	} 
 
 }
 
+
 void CPlayScenceKeyHandler::KeyState(BYTE *states)
 {
+	Simon* simon = ((CPlayScene*)scence)->player;
 	CGame *game = CGame::GetInstance();
-	Simon *mario = ((CPlayScene*)scence)->player;
-	// disable control key when Mario die 
-	/*if (mario->GetState() == MARIO_STATE_DIE) return;
-	if (game->IsKeyDown(DIK_RIGHT))
-		mario->SetState(MARIO_STATE_WALKING_RIGHT);
-	else if (game->IsKeyDown(DIK_LEFT))
-		mario->SetState(MARIO_STATE_WALKING_LEFT);
-	else
-		mario->SetState(MARIO_STATE_IDLE);*/
+	simon->isRightDown = game->IsKeyDown(DIK_RIGHT);
+	simon->isLeftDown = game->IsKeyDown(DIK_LEFT);
+	simon->isDownDown = game->IsKeyDown(DIK_DOWN);
+	simon->isUpDown = game->IsKeyDown(DIK_UP);;
+	simon->isJump = game->IsKeyDown(DIK_X);
+	simon->isJumpDown = simon->isJump && !simon->isPreviousJumpDown;
+	simon->isPreviousJumpDown = simon->isJump;
+	simon->isAttackDown = game->IsKeyDown(DIK_Z);
+	simon->isAttack = simon->isAttackDown && !simon->isPreviousAttackDown;
+	simon->isPreviousAttackDown = simon->isAttackDown;
+
 }
