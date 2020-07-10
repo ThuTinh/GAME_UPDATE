@@ -82,7 +82,7 @@ void Fleaman::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			fleamanState = FLEAMAN_STATE_JUMP_SHORT;
 			break;
 		case FLEAMAN_STATE_JUMP_SHORT:
-			setVx(getDirection() * FLEAMAN_VX);
+			setVx(getDirection() * FLEAMAN_VX_SHORT);
 			if (getIsOnGround())
 			{
 				if (jumpRemain > 0)
@@ -98,7 +98,7 @@ void Fleaman::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			}
 			break;
 		case FLEAMAN_STATE_JUMP_LONG:
-			setVx(getDirection() * FLEAMAN_VX);
+			setVx(getDirection() * FLEAMAN_VX_LONG);
 			if (getIsOnGround())
 			{
 				if (jumpRemain > 0)

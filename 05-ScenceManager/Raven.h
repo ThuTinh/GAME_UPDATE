@@ -1,11 +1,11 @@
 #pragma once
 #include"Enemy.h"
 #define RAVEN_SCORE 200
-#define DISTANCE_X 60
+#define DISTANCE_X 70
 #define RAVEN_DISTANCE_STOP 10
 #define VX 0.02
-#define VY 0.0003
-#define RAVEN_GRAVITY -0.003
+#define VY 0.004
+#define RAVEN_GRAVITY -0.0007
 enum RAVEN_STATE {
 	RAVEN_STATE_STAND,
 	RAVEN_STATE_ATTACK

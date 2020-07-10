@@ -79,8 +79,8 @@ void Sketon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		setDirection(DIRECTION_RIGHT);
 	}
 	Enemy::Update(dt,coObjects);
-
-	if (Simon::getInstance()->getY() > getY() && abs(Simon::getInstance()->getX() - getX()) <= DISTANCE_TO_THROW_WHITEBONE) {
+	//Simon::getInstance()->getY() > getY() &&
+	if ( abs(Simon::getInstance()->getX() - getX()) <= DISTANCE_TO_THROW_WHITEBONE) {
 		if (timeThrow.atTime()) {
 			WhiteBone* whiteBone = new WhiteBone();
 			CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(whiteBone);

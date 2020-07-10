@@ -9,6 +9,10 @@ void Raven::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 
 	vy += RAVEN_GRAVITY * dt;
+	if (getY() < 240) {
+		setAlive(false);
+		return;
+	}
 	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive && (Weapon::getInstance()->aniIndex == 2 || Weapon::getInstance()->aniIndex == 5 || Weapon::getInstance()->aniIndex == 8 || Weapon::getInstance()->aniIndex == 11)) {
 			setAlive(false);
 			ScoreBar::getInstance()->increaseScore(RAVEN_SCORE);
@@ -54,7 +58,7 @@ void Raven::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		x += min_tx * dx + nx * 0.4f;
 		y += min_ty * dy + ny * 0.4f;
 
-		for (UINT i = 0; i < coEvents.size(); i++)
+		/*for (UINT i = 0; i < coEvents.size(); i++)
 		{
 			LPCOLLISIONEVENT e = coEvents[i];
 			if (!dynamic_cast<Ground*>(e->obj)) {
@@ -66,12 +70,13 @@ void Raven::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 			}
 
-		}
+		}*/
 
 	}
 
 	//clean up collision events
 	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
+
 	/* mặc định là false cho tới khi chạm sàn */
 	switch (state)
 	{
@@ -85,6 +90,14 @@ void Raven::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		}
 		break;
 	case RAVEN_STATE_ATTACK:
+		if (Simon::getInstance()->getX() - getX() > DISTANCE_X) {
+			setDirection(DIRECTION_RIGHT);
+		}
+		else
+		{
+			if(Simon::getInstance()->getX() < getX())
+				setDirection(DIRECTION_LEFT);
+		}
 		setVy(VY);
 		setVx(getDirection() * VX);
 		aniIndex = RAVEN_ACTION_FLY;
