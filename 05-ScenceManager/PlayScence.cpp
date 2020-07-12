@@ -24,7 +24,7 @@
 #include"Axe.h"
 #include"Item700PTS.h"
 #include"Item400PTS.h"
-#include"HaiDo.h"
+#include"StopWatch.h"
 #include"HaiXanh.h"
 #include"GoldPotion.h"
 #include"BluePotion.h"
@@ -278,7 +278,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_ZOOMIE: obj = new Zoombie(); break;
 	case OBJECT_TYPE_CROWN: obj = new Crown(); break;
 	case OBJECT_TYPE_HAIXANH: obj = new HaiXanh(); break;
-	case OBJECT_TYPE_HAIDO: obj = new HaiDo(); break;
+	case OBJECT_TYPE_HAIDO: obj = new StopWatch(); break;
 	case OBJECT_TYPE_RAVEN : obj = new Raven(); break;
 	case OBJECT_TYPE_GHOST: obj = new Ghost(); break;
 	case OBJECT_TYPE_BOSSBAT: obj = new BossBat(); break;

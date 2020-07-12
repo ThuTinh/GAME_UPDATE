@@ -152,7 +152,7 @@
     <ClCompile Include="GoldPotion.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="Ground.cpp" />
-    <ClCompile Include="HaiDo.cpp" />
+    <ClCompile Include="StopWatch.cpp" />
     <ClCompile Include="HaiXanh.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Item1000PTS.cpp" />
@@ -173,6 +173,7 @@
     <ClCompile Include="SubBoomerangAttack.cpp" />
     <ClCompile Include="SubDaggerAttack.cpp" />
     <ClCompile Include="SubFireBombAttack.cpp" />
+    <ClCompile Include="SubStopWatchAttack.cpp" />
     <ClCompile Include="Sword.cpp" />
     <ClCompile Include="Tilemap.cpp" />
     <ClCompile Include="Utils.cpp" />
@@ -218,7 +219,7 @@
     <ClInclude Include="GoldPotion.h" />
     <ClInclude Include="Gound.h" />
     <ClInclude Include="Grid.h" />
-    <ClInclude Include="HaiDo.h" />
+    <ClInclude Include="StopWatch.h" />
     <ClInclude Include="HaiXanh.h" />
     <ClInclude Include="IBoss.h" />
     <ClInclude Include="Item.h" />
@@ -241,6 +242,7 @@
     <ClInclude Include="SubBoomerangAttack.h" />
     <ClInclude Include="SubDaggerAttack.h" />
     <ClInclude Include="SubFireBombAttack.h" />
+    <ClInclude Include="SubStopWatchAttack.h" />
     <ClInclude Include="Sword.h" />
     <ClInclude Include="Tilemap.h" />
     <ClInclude Include="Utils.h" />

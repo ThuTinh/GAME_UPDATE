@@ -4,6 +4,7 @@
 101	textures\misc\boomerang.png	255	0	128
 102	textures\misc\axes.png	255	0	128
 103	textures\misc\fireBomb.png	255	0	0
+104	textures\misc\stopWatch.png	255	0	0
 
 # id	left	top	with	height	 achorX achorY texture_id
 [SPRITES]
@@ -84,8 +85,11 @@
 222007	48	0	16	16	10	0	0	0	102
 ## FIRE BOMB
 222008	0	0	8	8	0	0	0	0	103
+## STOP WACH
+222009	0	0	15	16	0	0	0	0	104
 
 # ani_id	sprite1_id	time1	sprite2_id	time2	...
+
 [ANIMATIONS]
 #==SIMON==
 #Stand
@@ -119,11 +123,14 @@
 22201	222001	100	222002	100	222003	100
 #axes
 22202	222004	100	222005	100	222006	100	222007	100
+#Fire BOOM
 22203	222008	100
+#STOP WATCH
+22204	222009	100
 # id	ani1	ani2	ani3
 [ANIMATION_SETS]
 # SIMON
 1	100	101	102	103	104	105	106	107	108	109	110	111	112
-66	22201	22202	22203
+66	22201	22202	22203	22204
 
 

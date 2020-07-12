@@ -16,6 +16,7 @@
 13	textures\enemy\raven.png	255	0	128
 50	textures\misc\die-effect.png	255	0	0
 51	textures\enemy\WhiteBone.png	255	0	128
+52	textures\misc\stopWatch.png	255	0	0
 8	textures\weopon\image.png	55	0	128
 -1	textures\map3\tilesheet.png	255	0	0
 
@@ -127,6 +128,8 @@
 660006	16	0	16	16	0	0	0	0	32
 #CUNG
 40001	0	0	20	20	0	0	0	0	6
+#Stopwatch
+660007	0	0	15	16	0	0	0	0	52
 # ani_id	sprite1_id	time1	sprite2_id	time2	...
 [ANIMATIONS]
 #==HEART BIG==
@@ -191,7 +194,8 @@
 #Ghost
 6602	660004	100
 6603	660005	100	660006	100
-
+#Stopwatch
+6604	660007	100
 # id	ani1	ani2	ani3
 [ANIMATION_SETS]
 #HEART
@@ -230,7 +234,8 @@
 
 #Ghost
 52	6602	6603
-
+#stopwatch
+53	6604
 [STAIR]
 #type 	x	y	with  height  ani_set_id IsRightStair IsTop
 -2	150	291	19	11	-1	0	0	
@@ -297,7 +302,7 @@
 13	416	78	16	16	21
 13	481	46	16	16	21
 11	351	123	16	32	19
-23	666	349	16	14	16
+23	666	349	16	14	53
 15	609	350	9	16	12
 24	547	350	17	18	25
 2	727	333	8	16	11

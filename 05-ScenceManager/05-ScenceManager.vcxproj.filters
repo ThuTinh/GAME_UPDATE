@@ -165,9 +165,6 @@
     <ClCompile Include="HaiXanh.cpp">
       <Filter>Object\Item</Filter>
     </ClCompile>
-    <ClCompile Include="HaiDo.cpp">
-      <Filter>Object\Item</Filter>
-    </ClCompile>
     <ClCompile Include="Crown.cpp">
       <Filter>Object\Item</Filter>
     </ClCompile>
@@ -254,6 +251,12 @@
     </ClCompile>
     <ClCompile Include="objectBlack-effect.cpp">
       <Filter>Object\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="StopWatch.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="SubStopWatchAttack.cpp">
+      <Filter>Object\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -362,9 +365,6 @@
     <ClInclude Include="Item400PTS.h">
       <Filter>Object\Item</Filter>
     </ClInclude>
-    <ClInclude Include="HaiDo.h">
-      <Filter>Object\Item</Filter>
-    </ClInclude>
     <ClInclude Include="Crown.h">
       <Filter>Object\Item</Filter>
     </ClInclude>
@@ -457,6 +457,12 @@
     </ClInclude>
     <ClInclude Include="objectBlack-effect.h">
       <Filter>Object\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="StopWatch.h">
+      <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="SubStopWatchAttack.h">
+      <Filter>Object\Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

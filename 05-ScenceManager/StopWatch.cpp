@@ -1,6 +1,6 @@
-#include "HaiDo.h"
+#include "StopWatch.h"
 #include"Simon.h"
-void HaiDo::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
+void StopWatch::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	Item::Update(dt, coObjects);
 	if (AABBCheck(Simon::getInstance()) && getItemState() == ITEM_STATE_VISIBLE) {
@@ -10,15 +10,16 @@ void HaiDo::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	}
 }
 
-void HaiDo::onPlayerContact()
+void StopWatch::onPlayerContact()
 {
+	ScoreBar::getInstance()->setTypeSubWeapon(TYPE_SUBWEAPON::STOPWATCH);
 }
 
-HaiDo::HaiDo()
+StopWatch::StopWatch()
 {
 	//setAlive(false);
 }
 
-HaiDo::~HaiDo()
+StopWatch::~StopWatch()
 {
 }
