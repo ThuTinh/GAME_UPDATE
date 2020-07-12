@@ -11,8 +11,19 @@ void BlackNight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	timeDelay.update();
 	vy += ENEMY_GRAVITY * dt;
-	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive && (Weapon::getInstance()->aniIndex == 2 || Weapon::getInstance()->aniIndex == 5 || Weapon::getInstance()->aniIndex == 8 || Weapon::getInstance()->aniIndex == 11)) {
+	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive && (Weapon::getInstance()->aniIndex == 2 || Weapon::getInstance()->aniIndex == 5 || Weapon::getInstance()->aniIndex == 8 || Weapon::getInstance()->aniIndex == 11 || Weapon::getInstance()->aniIndex == 14 || Weapon::getInstance()->aniIndex == 17)) {
 		timeDelay.start();
+	}
+	if (CGame::GetInstance()->GetCurrentScene()->getAddtionalObject().size() > 0 && isAlive) {
+		vector<LPGAMEOBJECT> listObject = CGame::GetInstance()->GetCurrentScene()->getAddtionalObject();
+		for (size_t i = 0; i < listObject.size(); i++)
+		{
+			if (dynamic_cast<SubWeaponAttack*>(listObject[i]) && listObject[i]->isAlive) {
+				if (AABBCheck(listObject[i])) {
+					timeDelay.start();
+				}
+			}
+		}
 	}
 	if (timeDelay.isTerminated()) {
 		++counterInjured;
@@ -36,7 +47,14 @@ void BlackNight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			}
 		}
 	}
-	Enemy::Update(dt, coObjects);
+	/*Enemy::Update(dt, coObjects);*/
+	if (AABBCheck(Simon::getInstance()) && Simon::getInstance()->state != SIMON_STATE_ON_STAIR) {
+		if (!Simon::getInstance()->isDie()) {
+			Simon::getInstance()->setHurt(getDirection(), getX());
+		}
+
+	}
+	CGameObject::Update(dt);
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
 	coEvents.clear();

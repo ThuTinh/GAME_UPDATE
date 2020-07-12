@@ -10,7 +10,7 @@ void Sketon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	vy += ENEMY_GRAVITY * dt;
 	whiteBoneDelay.update();
-	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive && (Weapon::getInstance()->aniIndex == 2 || Weapon::getInstance()->aniIndex == 5 || Weapon::getInstance()->aniIndex == 8 || Weapon::getInstance()->aniIndex == 11)) {
+	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive && (Weapon::getInstance()->aniIndex == 2 || Weapon::getInstance()->aniIndex == 5 || Weapon::getInstance()->aniIndex == 8 || Weapon::getInstance()->aniIndex == 11 || Weapon::getInstance()->aniIndex == 14 || Weapon::getInstance()->aniIndex == 17)) {
 		setAlive(false);
 		ScoreBar::getInstance()->increaseScore(SKETON_SCORE);
 		DieEffect* dieEffect = new DieEffect();
