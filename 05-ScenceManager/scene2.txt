@@ -308,10 +308,10 @@ textures/map2/grid.dat
 #id X       Y       Width       Height CameraX     CameraY PlayerX     PlayerY
 #SceneCount 2
 #space1
-0	225	197	250	186	228	175	299	330
+0	225	197	250	186	225	175	299	330
 #spcae2
-1	1	3	505	170	262	-30	377	158
+1	1	3	511	170	262	-30	377	158
 #space3	
-2	225	197	250	186	228	175	345	191
+2	225	197	250	186	225	175	345	191
 
 

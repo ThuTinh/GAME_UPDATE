@@ -5,6 +5,7 @@
 #define VX 0.075
 #define VY 0.25
 #define TIME_DELAY 1200
+#define TIME_CHECK 200
 #define WHITE_BONE_ANI 51
 #define WHITE_BONE_GRAVITY -0.0005
 class WhiteBone : public CGameObject

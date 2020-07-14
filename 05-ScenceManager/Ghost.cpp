@@ -5,24 +5,52 @@
 #include "ScoreBar.h"
 #include "Die-affect.h"
 #include "Simon.h"
+#include "SubWeaponAttack.h"
+
 void Ghost::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-
+	timeDelay.update();
 	if (isRender) {
 
 	
-	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive && (Weapon::getInstance()->aniIndex == 2 || Weapon::getInstance()->aniIndex == 5 || Weapon::getInstance()->aniIndex == 8 || Weapon::getInstance()->aniIndex == 11|| Weapon::getInstance()->aniIndex == 14 || Weapon::getInstance()->aniIndex == 17)) {
-		setAlive(false);
-		ScoreBar::getInstance()->increaseScore(GHOST_SCORE);
-		DieEffect* dieEffect = new DieEffect();
-		CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(dieEffect);
-		dieEffect->setX(getMidX());
-		dieEffect->setY(getMidY());
-		dieEffect->setAlive(true);
-		dieEffect->timeDelay.start();
+	//if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive && (Weapon::getInstance()->aniIndex == 2 || Weapon::getInstance()->aniIndex == 5 || Weapon::getInstance()->aniIndex == 8 || Weapon::getInstance()->aniIndex == 11|| Weapon::getInstance()->aniIndex == 14 || Weapon::getInstance()->aniIndex == 17)) {
+	//	setAlive(false);
+	//	ScoreBar::getInstance()->increaseScore(GHOST_SCORE);
+	//	DieEffect* dieEffect = new DieEffect();
+	//	CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(dieEffect);
+	//	dieEffect->setX(getMidX());
+	//	dieEffect->setY(getMidY());
+	//	dieEffect->setAlive(true);
+	//	dieEffect->timeDelay.start();
+	//}
+	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive && (Weapon::getInstance()->aniIndex == 2 || Weapon::getInstance()->aniIndex == 5 || Weapon::getInstance()->aniIndex == 8 || Weapon::getInstance()->aniIndex == 11 || Weapon::getInstance()->aniIndex == 14 || Weapon::getInstance()->aniIndex == 17)) {
+		timeDelay.start();
 	}
-	
-		Enemy::Update(dt, coObjects);
+	if (CGame::GetInstance()->GetCurrentScene()->getAddtionalObject().size() > 0 && isAlive) {
+		vector<LPGAMEOBJECT> listObject = CGame::GetInstance()->GetCurrentScene()->getAddtionalObject();
+		for (size_t i = 0; i < listObject.size(); i++)
+		{
+			if (dynamic_cast<SubWeaponAttack*>(listObject[i]) && listObject[i]->isAlive) {
+				if (AABBCheck(listObject[i])) {
+					timeDelay.start();
+				}
+			}
+		}
+	}
+	if (timeDelay.isTerminated()) {
+		++counterInjured;
+		if (counterInjured >= COUNTER_LIFE) {
+			setAlive(false);
+			ScoreBar::getInstance()->increaseScore(GHOST_SCORE);
+			DieEffect* dieEffect = new DieEffect();
+			CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(dieEffect);
+			dieEffect->setX(getMidX());
+			dieEffect->setY(getMidY());
+			dieEffect->setAlive(true);
+			dieEffect->timeDelay.start();
+		}
+	}
+	Enemy::Update(dt, coObjects);
 	
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
@@ -77,7 +105,7 @@ void Ghost::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		break;
 	case GHOST_STATE_ATTACK:
 	
-		setVx(getDirection() * VX);
+		setVx(getDirection() * VX_GHOST);
 		aniIndex = GHOST_ACTION_FLY;
 		break;
 	default:
@@ -114,6 +142,8 @@ Ghost::Ghost()
 	setPhysicsEnable(false);
 	setDirection(DIRECTION_LEFT);
 	setIsRender(false);
+	timeDelay.init(20);
+	counterInjured = 0;
 	
 
 }

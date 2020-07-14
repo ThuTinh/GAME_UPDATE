@@ -151,8 +151,8 @@ Simon::Simon() : CGameObject()
 //	collitionTypeToCheck.push_back(COLLISION_TYPE_ENEMY);
 
 
-	hurtTimeDelay.init(1500);
-	jumbHurtTimeDelay.init(500);
+	hurtTimeDelay.init(1200);
+	jumbHurtTimeDelay.init(300);
 	hurtTime.init(45);
 }
 
@@ -173,6 +173,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	attackInStairDelay.update();
 	jumbHurtTimeDelay.update();
 	isOnGiaDo = false;
+	CGameObject::Update(dt);
 	if (aniIndex == SIMON_ANI_COLORS) {
 		
 		if(colorDelay.isTerminated()) {
@@ -187,6 +188,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 	if (hurtTimeDelay.isOnTime())
 	{
+		isOnGround = true;
 		if (hurtTime.atTime())
 		{
 			setRenderActive(false);
@@ -204,9 +206,9 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		setStopCollision(false);
 		setPhysicsEnable(true);
 		state = SIMON_STATE_NORMAL;
+		isOnGround = true;
 	}
 	
-	CGameObject::Update(dt);
 	if (!stopCollision) {
 		vector<LPCOLLISIONEVENT> coEvents;
 		vector<LPCOLLISIONEVENT> coEventsResult;
@@ -243,19 +245,22 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			{
 				LPCOLLISIONEVENT e = coEvents[i];
 				if (dynamic_cast<Ground*>(e->obj)) {
+					onCollision(e->obj, e->t, e->nx, e->ny);
 					if (state == SIMON_STATE_HURT) {
+						if (jumbHurtTimeDelay.isTerminated()) {
+							setPhysicsEnable(false);
+							setStopCollision(true);
+							aniIndex = SIMON_ANI_STAND;
+							//state = SIMON_STATE_NORMAL;
+							return;
+						}
 						if (jumbHurtTimeDelay.isOnTime()) {
 							x += hurtDirection *0.7;
 							y += 20;
 							return;
 						}
-						if (jumbHurtTimeDelay.isTerminated()) {
-							setPhysicsEnable(false);
-							setStopCollision(true);
-							aniIndex = SIMON_ANI_STAND;
-						}
+						
 					}
-					onCollision(e->obj, e->t, e->nx, e->ny);
 				}
 				if (dynamic_cast<GiaDo*>(e->obj)) {
 					setVx(e->obj->getVx());
@@ -488,9 +493,6 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					}
 				}
 			}
-			
-			
-			
 			return;
 		case SIMON_STAIR_STATE_GO_UP:
 			x += getDirection();
@@ -586,34 +588,14 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	case SIMON_STATE_HURT: {
 
 		
-		/*if (hurtDelay.isTerminated()) {
-			setPhysicsEnable(true);
-			ScoreBar::getInstance()->increaseHealth(-1);
-			setStopCollision(false);
-			state = SIMON_STATE_NORMAL;
-		}
-		if (hideHurtDelay.isTerminated()) {
-			setRenderActive(true);
-			x += hurtDirection * 20;
-		}
-		if (ScoreBar::getInstance()->getHealth() <= 0) {
-			ScoreBar::getInstance()->increasePlayerLife(-1);
-			aniIndex = SIMON_ANI_DEAD;
-			state = SIMON_STATE_DIE;
-			setHeight(animation_set->at(aniIndex)->getFrame(0)->GetSprite()->getHeight());
-			deadDelay.start();
-		}*/
-		
-		/*if (jumbHurtTimeDelay.isOnTime()) {
-			x += dx;
-			y += dy;
-		} 
-		if (jumbHurtTimeDelay.isTerminated()) {
-			setPhysicsEnable(false);
-			setStopCollision(true);
-		}*/
+
 	
 		if ( !jumbHurtTimeDelay.isOnTime()) {
+		
+			if (isJumpDown) {
+				aniIndex = SIMON_ANI_JUMB;
+				setVy(SIMON_JUMP_Y);
+			}
 			if (isRightDown) {
 				setDirection(DIRECTION_RIGHT);
 				aniIndex = SIMON_ANI_GO;
@@ -628,14 +610,50 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				}
 				else
 				{
-					/*if (isJumpDown) {
-						aniIndex = SIMON_ANI_JUMB;
-						setY(15);
+					///*if (isJumpDown) {
+					//	aniIndex = SIMON_ANI_JUMB;
+					//	setY(15);
+					//}
+					//else
+					//{*/
+					//	aniIndex = SIMON_ANI_STAND;
+					//}
+					if (isDownDown) {
+						/*state = SIMON_STATE_DUCK;
+						setHeight(25);
+						duckDelay.start();*/
 					}
 					else
-					{*/
-						aniIndex = SIMON_ANI_STAND;
-					//}
+					{
+						if (isUpDown) {
+							if (isAttack) {
+								state = SIMON_STATE_USE_SUB;
+								attackUseSub.start();
+								makeSubWeapon(ScoreBar::getInstance()->getTypeSubWeapon());
+
+							}
+							else {
+
+								aniIndex = SIMON_ANI_STAND;
+							}
+						}
+						else
+						{
+							if (isAttack) {
+								state = SIMON_STATE_ATTACK_STAND;
+								attackStandDelay.start();
+
+							}
+							else
+							{
+
+								aniIndex = SIMON_ANI_STAND;
+								if (!isOnGiaDo)
+									setVx(0);
+							}
+						}
+
+					}
 				}
 
 			}
@@ -982,6 +1000,7 @@ void Simon::setHurt( int directEnemy, float xOfEnemy) {
 		//aniIndex = SIMON_ANI_HURT;
 		hurtTimeDelay.start();
 		jumbHurtTimeDelay.start();  
+		isOnGround = true;
 	}
 }
 

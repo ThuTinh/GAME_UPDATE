@@ -3,8 +3,9 @@
 #define GHOST_SCORE 200
 #define DISTANCE_X 60
 #define GHOST_DISTANCE_STOP 10
-#define VX 0.015
+#define VX_GHOST 0.01
 #define GHOST_GRAVITY -0.003
+#define COUNTER_LIFE 2
 enum GHOST_STATE {
 	GHOST_STATE_STAND,
 	GHOST_STATE_ATTACK
@@ -16,6 +17,8 @@ enum GHOST_ACTION {
 class Ghost : public Enemy
 {
 	bool isRender;
+	DelayTime timeDelay;
+	int counterInjured;
 public:
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	virtual void Render();
