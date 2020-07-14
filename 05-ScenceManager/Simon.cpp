@@ -159,7 +159,26 @@ Simon::Simon() : CGameObject()
 void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
 	// Calculate dx, dy 
-	
+	if (switchScene1) {
+		CGame::GetInstance()->SwitchScene(1);
+		ScoreBar::getInstance()->setCurrentStageNumber(1);
+		return;
+	}
+	if (switchScene2) {
+		CGame::GetInstance()->SwitchScene(2);
+		ScoreBar::getInstance()->setCurrentStageNumber(2);
+		return;
+	}
+	if (switchScene3) {
+		CGame::GetInstance()->SwitchScene(3);
+		ScoreBar::getInstance()->setCurrentStageNumber(3);
+		return;
+	}
+	if (switchScene4) {
+		CGame::GetInstance()->SwitchScene(4);
+		ScoreBar::getInstance()->setCurrentStageNumber(4);
+		return;
+	}
 	attackStandDelay.update();
 	colorDelay.update();
 	//hurtDelay.update();

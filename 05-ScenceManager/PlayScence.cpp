@@ -534,5 +534,10 @@ void CPlayScenceKeyHandler::KeyState(BYTE *states)
 	simon->isAttackDown = game->IsKeyDown(DIK_Z);
 	simon->isAttack = simon->isAttackDown && !simon->isPreviousAttackDown;
 	simon->isPreviousAttackDown = simon->isAttackDown;
+	simon->switchScene1 = game->IsKeyDown(DIK_1);
+	simon->switchScene2 = game->IsKeyDown(DIK_2);
+	simon->switchScene3 = game->IsKeyDown(DIK_3);
+	simon->switchScene4 = game->IsKeyDown(DIK_4);
+
 
 }

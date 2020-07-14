@@ -37,14 +37,15 @@ void BlackNight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			dieEffect->setAlive(true);
 			dieEffect->timeDelay.start();
 			int r = rand();
-			if (r % 2 == 0) {
+			if (r % 2 == 1) {
 				BigHeart* bigHeart = new BigHeart();
 				bigHeart->animation_set = CAnimationSets::GetInstance()->Get(ID_ANI_HEART);
 				CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(bigHeart);
 				bigHeart->setX(getMidX());
 				bigHeart->setY(getMidY());
 				bigHeart->setAlive(true);
-			}
+				bigHeart->setItemState(ITEM_STATE_VISIBLE);
+		}
 		}
 	}
 	/*Enemy::Update(dt, coObjects);*/
@@ -52,7 +53,6 @@ void BlackNight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		if (!Simon::getInstance()->isDie()) {
 			Simon::getInstance()->setHurt(getDirection(), getX());
 		}
-
 	}
 	CGameObject::Update(dt);
 	vector<LPCOLLISIONEVENT> coEvents;
@@ -62,7 +62,7 @@ void BlackNight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	// turn off collision when die 
 	if (isAlive)
 		CalcPotentialCollisions(coObjects, coEvents);
-
+	
 
 	// No collision occured, proceed normally
 	if (coEvents.size() == 0)

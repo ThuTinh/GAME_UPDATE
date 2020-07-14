@@ -67,6 +67,10 @@ public:
 	bool isJump;
 	bool isAttack;
 	bool isAttackDown;
+	bool switchScene1;
+	bool switchScene2;
+	bool switchScene3;
+	bool switchScene4;
 	bool isPreviousAttackDown;
 	int numberArchery;
 	int fixWidth;

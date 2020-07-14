@@ -12,7 +12,7 @@ void ObjectBlack::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		checkOnlyOne = true;
 		makeEfect();
 		 Simon::getInstance()->addNumberObjectBlack(1);
-		if (getY() <=YTEMP) {
+		if (getY() <= YTEMP) {
 			setY(YRENDER);
 		}
 		isRender = true;
