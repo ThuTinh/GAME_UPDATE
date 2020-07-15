@@ -95,7 +95,7 @@ public:
 	DelayTime hurtTimeDelay;
 	GameTime hurtTime;
 	DelayTime jumbHurtTimeDelay;
-
+	bool switchSceneIn;
 	static Simon* instance;
 	static Simon* getInstance();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *colliable_objects = NULL);

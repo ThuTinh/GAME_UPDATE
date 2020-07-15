@@ -8,7 +8,7 @@ void ObjectBlack::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	if (checkOnlyOne)
 		return;
-	if (AABBCheck(Weapon::getInstance())) {
+	if (AABBCheck(Weapon::getInstance()) && (Weapon::getInstance()->aniIndex == 2 || Weapon::getInstance()->aniIndex == 5 || Weapon::getInstance()->aniIndex == 8 || Weapon::getInstance()->aniIndex == 11 || Weapon::getInstance()->aniIndex == 14 || Weapon::getInstance()->aniIndex == 17)) {
 		checkOnlyOne = true;
 		makeEfect();
 		 Simon::getInstance()->addNumberObjectBlack(1);

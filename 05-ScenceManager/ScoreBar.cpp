@@ -318,10 +318,12 @@ void ScoreBar::render()
 
 void ScoreBar::update()
 {
+	
 	if (timeGame.atTime())
 	{
 		increaseTime(-1);
 	}
+	
 }
 
 void ScoreBar::setSubWeapon(Item* subWeapon)

@@ -162,6 +162,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	if (switchScene1) {
 		CGame::GetInstance()->SwitchScene(1);
 		ScoreBar::getInstance()->setCurrentStageNumber(1);
+
 		return;
 	}
 	if (switchScene2) {
@@ -172,11 +173,18 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	if (switchScene3) {
 		CGame::GetInstance()->SwitchScene(3);
 		ScoreBar::getInstance()->setCurrentStageNumber(3);
+
 		return;
 	}
 	if (switchScene4) {
 		CGame::GetInstance()->SwitchScene(4);
 		ScoreBar::getInstance()->setCurrentStageNumber(4);
+
+		return;
+	}
+	if (getY() < 0) {
+		CGame::GetInstance()->SwitchScene(CGame::GetInstance()->current_scene);
+		ScoreBar::getInstance()->setTypeSubWeapon(TYPE_SUBWEAPON::DEFAUL);
 		return;
 	}
 	attackStandDelay.update();
@@ -558,8 +566,16 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					/* nếu là lần di chuyển cuối cùng */
 					if (getIsLastRunStair())
 					{
-						setY(getY() + 10);
-						setX(getX() + 5);
+						if (playerStairState == SIMON_STAIR_STATE_GO_DOWN) {
+						/*	setY(getY() +30);*/
+							setX(getX() + 5);
+						}
+						else
+						{
+							setY(getY() + 10);
+							setX(getX() + 5);
+						}
+						
 						setStopStair();
 					}
 				}
@@ -579,8 +595,15 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					/* nếu là lần di chuyển cuối cùng */
 					if (getIsLastRunStair())
 					{
-						setY(getY() + 5);
-						setX(getX() - 5);
+						if (playerStairState == SIMON_STAIR_STATE_GO_DOWN) {
+							/*setY(getY() +30 );*/
+							setX(getX() - 5);
+						}
+						else {
+							setY(getY() + 5);
+							setX(getX() - 5);
+						}
+						
 						setStopStair();
 					}
 				}
@@ -597,6 +620,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		/*	retoreWidthHeight();
 			setY(getY() + 45);*/
 			CGame::GetInstance()->SwitchScene(CGame::GetInstance()->current_scene);
+			ScoreBar::getInstance()->setTypeSubWeapon(TYPE_SUBWEAPON::DEFAUL);
 			state = SIMON_STATE_NORMAL ;
 			aniIndex = SIMON_ANI_STAND;
 			setVx(0);

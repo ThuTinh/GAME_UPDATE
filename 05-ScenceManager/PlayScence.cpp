@@ -445,7 +445,7 @@ void CPlayScene::Update(DWORD dt)
 			objectsInCamara.push_back(obj);
 		}
 	}
-
+	
 	for (size_t i = 0; i < objectsInCamara.size(); i++)
 	{
 		objectsInCamara[i]->Update(dt, &objectsInCamara);
@@ -496,6 +496,7 @@ void CPlayScene::Unload()
 	spritesID.clear();
 	animationsID.clear();
 	animationSetsID.clear();
+	addtionalObject.clear();
 
 }
 
