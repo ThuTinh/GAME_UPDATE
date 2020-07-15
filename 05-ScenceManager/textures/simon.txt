@@ -5,6 +5,7 @@
 102	textures\misc\axes.png	255	0	128
 103	textures\misc\fireBomb.png	255	0	0
 104	textures\misc\stopWatch.png	255	0	0
+204	textures\misc\money.png	255	0	0
 
 # id	left	top	with	height	 achorX achorY texture_id
 [SPRITES]
@@ -87,6 +88,13 @@
 222008	0	0	8	8	0	0	0	0	103
 ## STOP WACH
 222009	0	0	15	16	0	0	0	0	104
+
+## MONEY - efect
+444001	0	0	13	8	0	0	0	0	204
+444002	13	0	13	8	0	0	0	0	204
+444003	26	0	13	8	0	0	0	0	204
+444004	39	0	16	8	0	0	0	0	204
+444005	55	0	16	8	0	0	0	0	204
 
 # ani_id	sprite1_id	time1	sprite2_id	time2	...
 

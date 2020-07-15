@@ -152,6 +152,7 @@
     <ClCompile Include="GoldPotion.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="Ground.cpp" />
+    <ClCompile Include="money-effect.cpp" />
     <ClCompile Include="StopWatch.cpp" />
     <ClCompile Include="HaiXanh.cpp" />
     <ClCompile Include="Item.cpp" />
@@ -219,6 +220,7 @@
     <ClInclude Include="GoldPotion.h" />
     <ClInclude Include="Gound.h" />
     <ClInclude Include="Grid.h" />
+    <ClInclude Include="money-effect.h" />
     <ClInclude Include="StopWatch.h" />
     <ClInclude Include="HaiXanh.h" />
     <ClInclude Include="IBoss.h" />

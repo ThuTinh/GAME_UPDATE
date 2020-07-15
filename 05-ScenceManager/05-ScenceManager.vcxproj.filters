@@ -258,6 +258,9 @@
     <ClCompile Include="SubStopWatchAttack.cpp">
       <Filter>Object\Item</Filter>
     </ClCompile>
+    <ClCompile Include="money-effect.cpp">
+      <Filter>Object\Misc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Brick.h">
@@ -463,6 +466,9 @@
     </ClInclude>
     <ClInclude Include="SubStopWatchAttack.h">
       <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="money-effect.h">
+      <Filter>Object\Misc</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
