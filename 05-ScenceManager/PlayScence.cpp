@@ -428,6 +428,18 @@ void CPlayScene::Load()
 	DebugOut(L"[INFO] Done loading scene resources %s\n", sceneFilePath);
 }
 
+
+void AddObjectToCamara(vector<LPGAMEOBJECT>* objectsInCamara, LPGAMEOBJECT obj)
+{
+	for (size_t i = 0; i < objectsInCamara->size(); i++)
+	{
+		if (objectsInCamara->at(i) == obj) {
+			return;
+		}
+	}
+	objectsInCamara->push_back(obj);
+}
+
 void CPlayScene::Update(DWORD dt)
 {
 	// We know that Mario is the first object in the list hence we won't add him into the colliable object list
@@ -442,7 +454,8 @@ void CPlayScene::Update(DWORD dt)
 		LPGAMEOBJECT obj = objects[k];
 		if (obj->getAlive())
 		{
-			objectsInCamara.push_back(obj);
+			AddObjectToCamara(&objectsInCamara, obj);
+			//objectsInCamara.push_back(obj);
 		}
 	}
 	
