@@ -2,9 +2,8 @@
 #include "GameObject.h"
 #include"DelayTime.h"
 
-#define IDANI 70
-#define TIMEDELAY 2000
-#define GRAVITY_EFFECT -0.0002
+#define IDANI 44
+#define TIMEDELAY 1000
 class MoneyEffect : public CGameObject
 {
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
