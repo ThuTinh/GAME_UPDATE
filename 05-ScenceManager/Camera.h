@@ -4,7 +4,6 @@
 class Camera : public MovableRect
 {
 	static Camera* instance;
-
 	Space* space;
 
 public:

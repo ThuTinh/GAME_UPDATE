@@ -11,19 +11,7 @@ void Ghost::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	timeDelay.update();
 
-	if (isRender) {
-
-	
-	//if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive && (Weapon::getInstance()->aniIndex == 2 || Weapon::getInstance()->aniIndex == 5 || Weapon::getInstance()->aniIndex == 8 || Weapon::getInstance()->aniIndex == 11|| Weapon::getInstance()->aniIndex == 14 || Weapon::getInstance()->aniIndex == 17)) {
-	//	setAlive(false);
-	//	ScoreBar::getInstance()->increaseScore(GHOST_SCORE);
-	//	DieEffect* dieEffect = new DieEffect();
-	//	CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(dieEffect);
-	//	dieEffect->setX(getMidX());
-	//	dieEffect->setY(getMidY());
-	//	dieEffect->setAlive(true);
-	//	dieEffect->timeDelay.start();
-	//}
+  if (isRender) {
 	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive && (Weapon::getInstance()->aniIndex == 2 || Weapon::getInstance()->aniIndex == 5 || Weapon::getInstance()->aniIndex == 8 || Weapon::getInstance()->aniIndex == 11 || Weapon::getInstance()->aniIndex == 14 || Weapon::getInstance()->aniIndex == 17)) {
 		timeDelay.start();
 	}
@@ -90,7 +78,11 @@ void Ghost::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 		//clean up collision events
 		for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
-		setDirectionFollowPlayer();
+		if (abs(Simon::getInstance()->getX() - getX()) > GHOST_DISTANCE_STOP) {
+			setDirectionFollowPlayer();
+		}
+
+		//setDirectionFollowPlayer();
 
 	}
 	else

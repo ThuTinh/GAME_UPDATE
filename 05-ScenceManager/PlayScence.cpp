@@ -116,8 +116,6 @@ Space* CPlayScene::getCurentSpace()
 #define OBJECT_TYPE_GIADO 30
 #define OBJECT_TYPE_GHOST 32
 
-
-
 #define MAX_SCENE_LINE 1024
 
 void CPlayScene::_ParseSection_TEXTURES(string line)
@@ -455,7 +453,6 @@ void CPlayScene::Update(DWORD dt)
 		if (obj->getAlive())
 		{
 			AddObjectToCamara(&objectsInCamara, obj);
-			//objectsInCamara.push_back(obj);
 		}
 	}
 	

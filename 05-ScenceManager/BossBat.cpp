@@ -281,7 +281,7 @@ BossBat::BossBat()
 	setPhysicsEnable(false);
 	aniIndex = 0;
 	setAlive(true);
-	hurtDelay.init(16);
+	hurtDelay.init(10);
 }
 
 BossBat::~BossBat()

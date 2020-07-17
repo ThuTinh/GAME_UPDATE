@@ -2,7 +2,7 @@
 #include"Enemy.h"
 #define GHOST_SCORE 200
 #define DISTANCE_X 60
-#define GHOST_DISTANCE_STOP 10
+#define GHOST_DISTANCE_STOP 40
 #define VX_GHOST 0.02
 #define GHOST_GRAVITY -0.003
 #define COUNTER_LIFE 2

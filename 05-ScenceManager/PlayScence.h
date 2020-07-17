@@ -21,15 +21,11 @@ protected:
 	vector<LPGAMEOBJECT> objectsInCamara;
 	vector<LPGAMEOBJECT> addtionalObject;
 	bool stopUpdate;
-
-	
 	Space* currentSpace;
-
 	vector<int> texturesID;
 	vector<int> spritesID;
 	vector<int> animationsID;
 	vector<int> animationSetsID;
-
 	void _ParseSection_TEXTURES(string line);
 	void _ParseSection_SPRITES(string line);
 	void _ParseSection_ANIMATIONS(string line);
