@@ -15,6 +15,7 @@
 #include "SubWeaponAttack.h"
 #include "SubAxeAttack.h"
 #include "SubFireBombAttack.h"
+#include "SubStopWatchAttack.h"
 #define SCENE_SECTION_UNKNOWN -1
 #define SCENE_SECTION_TEXTURES 2
 #define SCENE_SECTION_MAP	3
@@ -357,7 +358,6 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				setDirection(DIRECTION_RIGHT);
 				aniIndex = SIMON_ANI_GO;
 				setVx(SIMON_VX);
-				
 			}
 			else
 			{
@@ -365,7 +365,6 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					aniIndex = SIMON_ANI_GO;
 					setDirection(DIRECTION_LEFT);
 					setVx(-SIMON_VX);
-					
 				}
 				else
 				{
@@ -378,9 +377,18 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					{
 						if (isUpDown) {
 							if (isAttack)    {
-								state = SIMON_STATE_USE_SUB;	
-								attackUseSub.start();
-								makeSubWeapon(ScoreBar::getInstance()->getTypeSubWeapon());
+								if (ScoreBar::getInstance()->getHeartCount() <= 0) {
+									state = SIMON_STATE_ATTACK_STAND;
+									setVx(0);
+									attackStandDelay.start();
+								}
+								else
+								{
+									state = SIMON_STATE_USE_SUB;
+									attackUseSub.start();
+									makeSubWeapon(ScoreBar::getInstance()->getTypeSubWeapon());
+								}
+							
 								/*SubWeaponAttack* sub;
 								switch (ScoreBar::getInstance()->getTypeSubWeapon())
 								{
@@ -799,6 +807,13 @@ void Simon::makeSubWeapon(TYPE_SUBWEAPON type) {
 		sub->setAlive(true);
 		sub->setPhysicsEnable(true);
 		sub->timeDelay.start();
+		break;
+	case STOPWATCH:
+		sub = new SubStopWatchAttack();
+		CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(sub);
+		sub->setAlive(true);
+		sub->timeDelay.start();
+		CGame::GetInstance()->GetCurrentScene()->setStopUpdate(true);
 		break;
 	default:
 		return;

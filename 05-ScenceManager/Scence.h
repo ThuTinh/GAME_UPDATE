@@ -20,6 +20,9 @@ public:
 	virtual void Render() = 0; 
 	virtual void addAddtionalObject(LPGAMEOBJECT obj) = 0;
 	virtual vector<LPGAMEOBJECT> getAddtionalObject() = 0;
+	virtual void setStopUpdate(bool stop) = 0;
+	virtual bool getStopUpdate() = 0;
+
 	
 };
 typedef CScene * LPSCENE;

@@ -172,6 +172,7 @@ void Weapon::Render()
 					break;
 				case 1:
 					setX(Simon::getInstance()->getX() - 30);
+					setY(Simon::getInstance()->getY() - 9);
 					aniIndex = WEAPON_ANI_W23;
 					break;
 				case 2:

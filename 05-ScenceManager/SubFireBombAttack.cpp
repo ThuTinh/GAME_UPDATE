@@ -1,6 +1,8 @@
 #include "SubFireBombAttack.h"
 #include"Simon.h"
 #include"ScoreBar.h"
+#include "explore-effect.h"
+#include "Game.h"
 void SubFireBombAttack::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 
@@ -9,6 +11,13 @@ void SubFireBombAttack::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	if (timeDelay.isTerminated())
 	{
 		setAlive(false);
+		ExploreEffect *effect = new ExploreEffect();
+		CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(effect);
+		effect->setX(getMidX());
+		effect->setY(getMidY() + 25);
+		effect->setAlive(true);
+		effect->setPhysicsEnable(true);
+		effect->timeDelay.start();
 	}
 	CGameObject::Update(dt, coObjects);
 	setX(getDx() + getX());

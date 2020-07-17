@@ -261,6 +261,9 @@
     <ClCompile Include="money-effect.cpp">
       <Filter>Object\Misc</Filter>
     </ClCompile>
+    <ClCompile Include="explore-effect.cpp">
+      <Filter>Object\Misc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Brick.h">
@@ -468,6 +471,9 @@
       <Filter>Object\Item</Filter>
     </ClInclude>
     <ClInclude Include="money-effect.h">
+      <Filter>Object\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="explore-effect.h">
       <Filter>Object\Misc</Filter>
     </ClInclude>
   </ItemGroup>

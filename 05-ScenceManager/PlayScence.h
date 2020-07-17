@@ -20,6 +20,7 @@ protected:
 	vector<LPGAMEOBJECT> objects;
 	vector<LPGAMEOBJECT> objectsInCamara;
 	vector<LPGAMEOBJECT> addtionalObject;
+	bool stopUpdate;
 
 	
 	Space* currentSpace;
@@ -48,6 +49,8 @@ public:
 	virtual void Update(DWORD dt);
 	virtual void Render();
 	virtual void Unload();
+	virtual void setStopUpdate(bool stop);
+	virtual bool getStopUpdate();
 	virtual void addAddtionalObject(LPGAMEOBJECT obj);
 	virtual vector<LPGAMEOBJECT> getAddtionalObject();
 	friend class CPlayScenceKeyHandler;

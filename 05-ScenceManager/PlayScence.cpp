@@ -513,6 +513,16 @@ void CPlayScene::Unload()
 
 }
 
+void CPlayScene::setStopUpdate(bool stop)
+{
+	stopUpdate = stop;
+}
+
+bool CPlayScene::getStopUpdate()
+{
+	return stopUpdate;
+}
+
 void CPlayScene::addAddtionalObject(LPGAMEOBJECT obj)
 {
 	addtionalObject.push_back(obj);

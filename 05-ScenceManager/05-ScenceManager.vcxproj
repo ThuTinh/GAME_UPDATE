@@ -140,6 +140,7 @@
     <ClCompile Include="DelayTime.cpp" />
     <ClCompile Include="Die-effect.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="explore-effect.cpp" />
     <ClCompile Include="Fire.cpp" />
     <ClCompile Include="Fleaman.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -209,6 +210,7 @@
     <ClInclude Include="DelayTime.h" />
     <ClInclude Include="Die-affect.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="explore-effect.h" />
     <ClInclude Include="Fire.h" />
     <ClInclude Include="Fleaman.h" />
     <ClInclude Include="GameTime.h" />
