@@ -8,6 +8,7 @@
 #include "Game.h"
 void Bat::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
+	Enemy::Update(dt, coObjects);
 	switch (state)
 	{
 	case BAT_STATE_STAND:
@@ -44,7 +45,6 @@ void Bat::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	default:
 		break;
 	}
-	Enemy::Update(dt, coObjects);
 	x += dx;
 	y += dy;
 }

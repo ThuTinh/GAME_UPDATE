@@ -851,6 +851,11 @@ int Simon::getNumberObjectBlack()
 	return numberObjectBlack;
 }
 
+void Simon::setNumberObjectBlack(int init)
+{
+	numberObjectBlack = init;
+}
+
 
 int Simon::getNumberArchery()
 {

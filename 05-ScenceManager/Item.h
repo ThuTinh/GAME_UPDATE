@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include "DelayTime.h"
 #define ITEM_GRAVITY -0.000009
 enum ITEM_STATE
 {
@@ -11,6 +12,8 @@ class Item : public CGameObject
 {
 	ITEM_STATE itemState;
 	virtual void Render();
+protected:
+	DelayTime delayVisible;
 
 public:
 	Item();
@@ -19,4 +22,5 @@ public:
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	ITEM_STATE getItemState();
 	virtual void onPlayerContact();
+	 void restorePosition() override;
 };

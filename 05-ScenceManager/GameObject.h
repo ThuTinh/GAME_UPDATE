@@ -6,6 +6,7 @@
 #include"CollitionType.h"
 #include "Sprites.h"
 #include "Animations.h"
+#include"Rect.h"
 
 #define MAX(a,b) a>b? a:b
 #define MIN(a,b) a>b? b:a
@@ -62,11 +63,8 @@ public:
 	int nx;	 
 	int frameIndex;
 	int state;
-
 	DWORD dt; 
-
 	LPANIMATION_SET animation_set;
-
 	/* cho phép trọng lực hay không */
 	bool physicsEnable;
 	/* vật có đứng trên mặt sàn hay không */
@@ -78,6 +76,7 @@ public:
 	bool isLastFrameAnimationDone;
 	bool pauseAnimation;
 	bool stopCollision;
+	Rect initBox;
 
 public: 
 	bool isOnGround;
@@ -121,7 +120,7 @@ public:
 	virtual void setIsLastFrameAnimationDone(bool isLastFrameAnimationDone);
 	bool AABBCheck(CGameObject* S);
 	int GetState() { return this->state; }
-
+	virtual void restorePosition();
 	void SetAnimationSet(LPANIMATION_SET ani_set) { animation_set = ani_set; }
 
 	LPCOLLISIONEVENT SweptAABBEx(LPGAMEOBJECT coO);

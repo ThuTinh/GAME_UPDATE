@@ -324,6 +324,13 @@ bool CGameObject::AABBCheck(CGameObject* S)
 	return ((getX() < S->getX() + S->getWidth() && getX() + getWidth() > S->getX()) &&
 		(getY() -getHeight() < S->getY() && getY() > S->getY() - S->getHeight()));
 }
+void CGameObject::restorePosition()
+{
+	SetPosition(initBox.getX(), initBox.getY());
+	setWidth(initBox.getWidth());
+	setHeight(initBox.getHeight());
+	setAlive(true);
+}
 void CGameObject::setX(float x)
 {
 	this->x = x;

@@ -3,18 +3,29 @@
 #include "Weapon.h"
 #include "Gound.h"
 #include "ScoreBar.h"
+#include "money-effect.h"
+#include "Game.h"
 void Crown::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	/*Item::Update(dt, coObjects);*/
+	delayVisible.update();
 	if (getItemState() == ITEM_STATE_PLAYER_EATED)
 		return;
 	vy += ITEM_GRAVITY * dt;
-
-	if (Simon::getInstance()->getNumberObjectBlack() >= 2) {
-		setItemState(ITEM_STATE_VISIBLE);
-		setPhysicsEnable(true);
+	if (delayVisible.isTerminated()) {
+		setAlive(false);
+		this->setItemState(ITEM_STATE_INVISIBLE);
 	}
-	CGameObject::Update(dt);
+	if (Simon::getInstance()->getNumberObjectBlack() >= 2) {
+		if (!checkOnlyOne) {
+			setItemState(ITEM_STATE_VISIBLE);
+			checkOnlyOne = true;
+			delayVisible.start();
+			setPhysicsEnable(true);
+		}
+		
+	}
+
 
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
@@ -74,13 +85,31 @@ void Crown::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		setItemState(ITEM_STATE_PLAYER_EATED);
 		setAlive(false);
 		ScoreBar::getInstance()->increaseScore(SCORE);
+		MoneyEffect* effect = new MoneyEffect();
+		CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(effect);
+		effect->setX(getMidX() + 10);
+		effect->setY(getMidY() + 10);
+		effect->setAlive(true);
+		effect->aniIndex = 4;
+		effect->timeDelay.start();
 		this->onPlayerContact();
 	}
+
+}
+
+void Crown::restorePosition()
+{
+	Item::restorePosition();
+	checkOnlyOne = false;
+	Simon::getInstance()->setNumberObjectBlack(0);
 }
 
 
 Crown::Crown()
 {
+	delayVisible.init(3500);
+	checkOnlyOne = false;
+	
 }
 
 Crown::~Crown()

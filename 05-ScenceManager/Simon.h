@@ -106,6 +106,7 @@ public:
 	void setNumberArchery(int num);
 	void addNumberObjectBlack(int num);
 	int getNumberObjectBlack();
+	void setNumberObjectBlack(int init);
 	int getNumberArchery();
 	void addNumberArchery(int num);
 	void SetState(int state);

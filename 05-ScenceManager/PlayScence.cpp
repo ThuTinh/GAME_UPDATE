@@ -48,6 +48,11 @@ CPlayScene::CPlayScene(int id, LPCWSTR filePath):
 	key_handler = new CPlayScenceKeyHandler(this);
 	titlemap = new Tilemap();
 }
+bool checkCollisionCamara(Rect* camera, Rect* cell)
+{
+	return ((camera->getX() < cell->getX() + cell->getWidth() && camera->getX() + camera->getWidth() > cell->getX()) &&
+		(camera->getY() - camera->getHeight() < cell->getY() && camera->getY() > cell->getY() - cell->getHeight()));
+}
 
 void CPlayScene::setCurentSpace(int spaceID)
 {
@@ -55,6 +60,17 @@ void CPlayScene::setCurentSpace(int spaceID)
 	Camera::getInstance()->setSpace(this->currentSpace);
 	Camera::getInstance()->setLocation(getCurentSpace()->CameraX, getCurentSpace()->CameraY);
 	player->SetPosition(getCurentSpace()->PlayerX, getCurentSpace()->PlayerY);
+	for (size_t n = 0; n < objects.size(); n++)
+	{
+		Rect rect1, rect2;
+		rect1.set(objects[n]->getX(), objects[n]->getY(), objects[n]->getWidth(), objects[n]->getHeight());
+		rect2.set(objects[n]->initBox.getX(), objects[n]->initBox.getY(), objects[n]->initBox.getWidth(), objects[n]->initBox.getHeight());
+		if (!checkCollisionCamara(Camera::getInstance(), &rect1) && !checkCollisionCamara(Camera::getInstance(), &rect2) && !dynamic_cast<Stair*>(objects[n]) && !objects[n]->isAlive || dynamic_cast<ObjectBlack*>(objects[n])) {
+			objects[n]->restorePosition();
+		}
+
+	}
+
 }
 
 Space* CPlayScene::getCurentSpace()
@@ -294,6 +310,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	obj->SetPosition(x, y);
 	obj->setWidth(width);
 	obj->setHeight(height);
+	obj->initBox.set(x, y, width, height);
 	if (ani_set_id != -1) {
 		LPANIMATION_SET ani_set = animation_sets->Get(ani_set_id);
 		obj->SetAnimationSet(ani_set);
@@ -447,6 +464,7 @@ void CPlayScene::Update(DWORD dt)
 	// TO-DO: This is a "dirty" way, need a more organized way 
 
 	//vector<LPGAMEOBJECT> coObjects;
+	
 	objectsInCamara.clear();
 	grid.checkCellColitionCamera(Camera::getInstance());
 	vector<int> tempIndexObject = grid.getInxInCamera();
@@ -473,6 +491,7 @@ void CPlayScene::Update(DWORD dt)
 	Weapon::getInstance()->Update(dt, &objectsInCamara);
 	ScoreBar::getInstance()->update();
 	Camera::getInstance()->update();
+	
 }
 
 void CPlayScene::Render()

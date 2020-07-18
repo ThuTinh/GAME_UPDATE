@@ -85,6 +85,11 @@ void Enemy::onPlayerContact()
 	
 }
 
+void Enemy::restorePosition()
+{
+	CGameObject::restorePosition();
+}
+
 Enemy::Enemy()
 {
 	setCollitionType(COLLISION_TYPE_ENEMY);

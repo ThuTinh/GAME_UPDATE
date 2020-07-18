@@ -400,8 +400,9 @@ void CGame::SwitchScene(int scene_id)
 	CGame::GetInstance()->SetKeyHandler(s->GetKeyEventHandler());
 	s->Load();
 	ScoreBar::getInstance()->restoreBossHealth();
-	ScoreBar::getInstance()->restoreHealth();
-	ScoreBar::getInstance()->setHeartCount(5);
-	ScoreBar::getInstance()->setTypeSubWeapon(DEFAUL);
+	//ScoreBar::getInstance()->restoreHealth();
+	//ScoreBar::getInstance()->setHeartCount(5);
+	//ScoreBar::getInstance()->setTypeSubWeapon(DEFAUL);
+	Simon::getInstance()->setNumberObjectBlack(0);
 
 }

@@ -28,6 +28,14 @@ void ObjectBlack::Render()
 	}
 }
 
+void ObjectBlack::restorePosition()
+{
+	CGameObject::restorePosition();
+	setPhysicsEnable(false);
+	isRender = false;
+	checkOnlyOne = false;
+}
+
 ObjectBlack::ObjectBlack()
 {
 	setCollitionType(COLLISION_TYPE_MISC);
