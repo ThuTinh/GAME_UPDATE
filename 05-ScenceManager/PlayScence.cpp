@@ -39,6 +39,7 @@
 #include"Crown.h"
 #include "BossBat.h"
 #include"ObjectBlack.h"
+#include "RestoreBlood.h"
 using namespace std;
 
 CPlayScene::CPlayScene(int id, LPCWSTR filePath):
@@ -115,6 +116,7 @@ Space* CPlayScene::getCurentSpace()
 #define OBJECT_TYPE_OBJECTBLACK 	28
 #define OBJECT_TYPE_GIADO 30
 #define OBJECT_TYPE_GHOST 32
+#define OBJECT_TYPE_RESTORE_BLOOD 56
 
 #define MAX_SCENE_LINE 1024
 
@@ -281,6 +283,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_GHOST: obj = new Ghost(); break;
 	case OBJECT_TYPE_BOSSBAT: obj = new BossBat(); break;
 	case OBJECT_TYPE_OBJECTBLACK: obj = new ObjectBlack(); break;
+	case OBJECT_TYPE_RESTORE_BLOOD: obj = new RestoreBlood(); break;
 	default:
 		DebugOut(L"[ERR] Invalid object type: %d\n", object_type);
 		return;

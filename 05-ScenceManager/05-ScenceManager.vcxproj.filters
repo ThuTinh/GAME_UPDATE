@@ -264,6 +264,9 @@
     <ClCompile Include="explore-effect.cpp">
       <Filter>Object\Misc</Filter>
     </ClCompile>
+    <ClCompile Include="RestoreBlood.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Brick.h">
@@ -475,6 +478,9 @@
     </ClInclude>
     <ClInclude Include="explore-effect.h">
       <Filter>Object\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="RestoreBlood.h">
+      <Filter>Object\Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

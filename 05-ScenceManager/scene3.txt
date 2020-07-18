@@ -17,6 +17,7 @@
 50	textures\misc\die-effect.png	255	0	0
 51	textures\enemy\WhiteBone.png	255	0	128
 52	textures\misc\stopWatch.png	255	0	0
+56	textures\misc\restoreBlood.png	255	0	0 
 8	textures\weopon\image.png	55	0	128
 -1	textures\map3\tilesheet.png	255	0	0
 
@@ -142,6 +143,8 @@
 40001	0	0	20	20	0	0	0	0	6
 #Stopwatch
 660007	0	0	15	16	0	0	0	0	52
+#restore blood
+660008	0	0	16	16	0	0	0	0	56
 # ani_id	sprite1_id	time1	sprite2_id	time2	...
 [ANIMATIONS]
 #==HEART BIG==
@@ -214,6 +217,8 @@
 6603	660005	100	660006	100
 #Stopwatch
 6604	660007	100
+#Resotre blood
+6605	660008	100
 # id	ani1	ani2	ani3
 [ANIMATION_SETS]
 #HEART
@@ -254,6 +259,8 @@
 52	6602	6603
 #stopwatch
 53	6604
+#store blood
+56	6605
 [STAIR]
 #type 	x	y	with  height  ani_set_id IsRightStair IsTop
 -2	150	291	19	11	-1	0	0	
@@ -341,7 +348,7 @@
 15	476	143	9	16	12
 16	531	144	17	16	7
 2	673	128	8	16	11
-15	673	125	9	16	12
+56	673	125	9	16	56
 25	723	84	16	17	22
 18	593	132	17	16	18
 32	624	352	16	16	52

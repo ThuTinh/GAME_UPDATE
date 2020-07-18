@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{C83A385D-5992-4E1B-B783-AB1D446414D5}</ProjectGuid>
     <RootNamespace>My05ScenceManager</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -154,6 +154,7 @@
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="money-effect.cpp" />
+    <ClCompile Include="RestoreBlood.cpp" />
     <ClCompile Include="StopWatch.cpp" />
     <ClCompile Include="HaiXanh.cpp" />
     <ClCompile Include="Item.cpp" />
@@ -223,6 +224,7 @@
     <ClInclude Include="Gound.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="money-effect.h" />
+    <ClInclude Include="RestoreBlood.h" />
     <ClInclude Include="StopWatch.h" />
     <ClInclude Include="HaiXanh.h" />
     <ClInclude Include="IBoss.h" />
