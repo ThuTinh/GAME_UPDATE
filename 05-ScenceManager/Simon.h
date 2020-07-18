@@ -62,6 +62,8 @@ public:
 	bool isLeftDown;
 	bool isUpDown;
 	bool isDownDown;
+	bool isDownDownPress;
+	bool isPreviousDownDown;
 	bool isJumpDown;
 	bool isPreviousJumpDown;
 	bool isJump;

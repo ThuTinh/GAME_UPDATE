@@ -570,6 +570,8 @@ void CPlayScenceKeyHandler::KeyState(BYTE *states)
 	simon->isRightDown = game->IsKeyDown(DIK_RIGHT);
 	simon->isLeftDown = game->IsKeyDown(DIK_LEFT);
 	simon->isDownDown = game->IsKeyDown(DIK_DOWN);
+	simon->isDownDownPress = simon->isDownDown && !simon->isPreviousDownDown;
+	simon->isPreviousDownDown = simon->isDownDown;
 	simon->isUpDown = game->IsKeyDown(DIK_UP);;
 	simon->isJump = game->IsKeyDown(DIK_X);
 	simon->isJumpDown = simon->isJump && !simon->isPreviousJumpDown;
@@ -581,6 +583,7 @@ void CPlayScenceKeyHandler::KeyState(BYTE *states)
 	simon->switchScene2 = game->IsKeyDown(DIK_2);
 	simon->switchScene3 = game->IsKeyDown(DIK_3);
 	simon->switchScene4 = game->IsKeyDown(DIK_4);
+
 
 
 }

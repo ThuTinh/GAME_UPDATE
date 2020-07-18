@@ -153,7 +153,7 @@ Simon::Simon() : CGameObject()
 
 
 	hurtTimeDelay.init(1200);
-	jumbHurtTimeDelay.init(300);
+	jumbHurtTimeDelay.init(250);
 	hurtTime.init(45);
 }
 
@@ -276,10 +276,9 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					onCollision(e->obj, e->t, e->nx, e->ny);
 					if (state == SIMON_STATE_HURT) {
 						if (jumbHurtTimeDelay.isTerminated()) {
-							setPhysicsEnable(false);
+							//setPhysicsEnable(false);
 							setStopCollision(true);
 							aniIndex = SIMON_ANI_STAND;
-							//state = SIMON_STATE_NORMAL;
 							return;
 						}
 						if (jumbHurtTimeDelay.isOnTime()) {
@@ -368,7 +367,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 				}
 				else
 				{
-					if (isDownDown) {
+					if (isDownDownPress) {
 						state = SIMON_STATE_DUCK;
 						setHeight(25);
 						duckDelay.start();
@@ -377,7 +376,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					{
 						if (isUpDown) {
 							if (isAttack)    {
-								if (ScoreBar::getInstance()->getHeartCount() <= 0) {
+								if (ScoreBar::getInstance()->getHeartCount() <= 0 || ScoreBar::getInstance()->getTypeSubWeapon() == DEFAUL ){
 									state = SIMON_STATE_ATTACK_STAND;
 									setVx(0);
 									attackStandDelay.start();
@@ -388,42 +387,6 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 									attackUseSub.start();
 									makeSubWeapon(ScoreBar::getInstance()->getTypeSubWeapon());
 								}
-							
-								/*SubWeaponAttack* sub;
-								switch (ScoreBar::getInstance()->getTypeSubWeapon())
-								{
-								case SWORD:
-									sub = new SubDaggerAttack();
-									CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(sub);
-									sub->setX(getMidX());
-									sub->setY(getMidY() + 10);
-									sub->setAlive(true);
-									sub->setPhysicsEnable(true);
-									sub->timeDelay.start();
-									
-									break;
-								case BOOMERANG:
-									sub = new SubBoomerangAttack();
-									CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(sub);
-									sub->setX(getMidX());
-									sub->setY(getMidY() + 10);
-									sub->setAlive(true);
-									sub->setPhysicsEnable(true);
-									sub->timeDelay.start();	
-									sub->timeCheckSimon.start();
-									break;
-								case AXE:
-									sub = new SubAxeAttack();
-									CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(sub);
-									sub->setX(getMidX());
-									sub->setY(getMidY() + 10);
-									sub->setAlive(true);
-									sub->setPhysicsEnable(true);
-									sub->timeDelay.start();
-									break;
-								default:
-									return;
-								}*/
 							}
 							else {
 
@@ -449,7 +412,6 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 						}
 						
 					}
-					
 				}
 			}
 			if (isJumpDown) {
@@ -521,7 +483,6 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 							{
 								playerStairState = SIMON_STAIR_STATE_ATTACK_DESEN;
 								aniIndex = SIMON_ANI_DESCEN_STAIRS_USING_SUB;
-
 							}
 						}
 
@@ -814,6 +775,9 @@ void Simon::makeSubWeapon(TYPE_SUBWEAPON type) {
 		sub->setAlive(true);
 		sub->timeDelay.start();
 		CGame::GetInstance()->GetCurrentScene()->setStopUpdate(true);
+		state = SIMON_STATE_ATTACK_STAND;
+		setVx(0);
+		attackStandDelay.start();
 		break;
 	default:
 		return;
@@ -1063,7 +1027,6 @@ void Simon::setHurt( int directEnemy, float xOfEnemy) {
 		//aniIndex = SIMON_ANI_HURT;
 		hurtTimeDelay.start();
 		jumbHurtTimeDelay.start();  
-		isOnGround = true;
 	}
 }
 
