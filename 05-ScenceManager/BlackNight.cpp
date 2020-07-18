@@ -11,8 +11,19 @@ void BlackNight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	timeDelay.update();
 	vy += ENEMY_GRAVITY * dt;
-	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive) {
+	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive && (Weapon::getInstance()->aniIndex == 2 || Weapon::getInstance()->aniIndex == 5 || Weapon::getInstance()->aniIndex == 8 || Weapon::getInstance()->aniIndex == 11 || Weapon::getInstance()->aniIndex == 14 || Weapon::getInstance()->aniIndex == 17)) {
 		timeDelay.start();
+	}
+	if (CGame::GetInstance()->GetCurrentScene()->getAddtionalObject().size() > 0 && isAlive) {
+		vector<LPGAMEOBJECT> listObject = CGame::GetInstance()->GetCurrentScene()->getAddtionalObject();
+		for (size_t i = 0; i < listObject.size(); i++)
+		{
+			if (dynamic_cast<SubWeaponAttack*>(listObject[i]) && listObject[i]->isAlive) {
+				if (AABBCheck(listObject[i])) {
+					timeDelay.start();
+				}
+			}
+		}
 	}
 	if (timeDelay.isTerminated()) {
 		++counterInjured;
@@ -26,17 +37,24 @@ void BlackNight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			dieEffect->setAlive(true);
 			dieEffect->timeDelay.start();
 			int r = rand();
-			if (r % 2 == 0) {
+			if (r % 2 == 1) {
 				BigHeart* bigHeart = new BigHeart();
 				bigHeart->animation_set = CAnimationSets::GetInstance()->Get(ID_ANI_HEART);
 				CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(bigHeart);
 				bigHeart->setX(getMidX());
 				bigHeart->setY(getMidY());
 				bigHeart->setAlive(true);
-			}
+				bigHeart->setItemState(ITEM_STATE_VISIBLE);
+		}
 		}
 	}
-	Enemy::Update(dt, coObjects);
+	/*Enemy::Update(dt, coObjects);*/
+	if (AABBCheck(Simon::getInstance()) && Simon::getInstance()->state != SIMON_STATE_ON_STAIR) {
+		if (!Simon::getInstance()->isDie()) {
+			Simon::getInstance()->setHurt(getDirection(), getX());
+		}
+	}
+	CGameObject::Update(dt);
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
 	coEvents.clear();
@@ -44,7 +62,7 @@ void BlackNight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	// turn off collision when die 
 	if (isAlive)
 		CalcPotentialCollisions(coObjects, coEvents);
-
+	
 
 	// No collision occured, proceed normally
 	if (coEvents.size() == 0)
@@ -90,7 +108,7 @@ void BlackNight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 void BlackNight::onCollision(CGameObject* other, float collisionTime, int nx, int ny)
 {
-	if (this->getX() + 5 > other->getRight() || nx == -1) {
+	if (this->getX() + 16 > other->getRight() || nx == -1) {
 		setDirection(DIRECTION_LEFT);
 		setVx(-BLACKNIGHT_VX);
 	}

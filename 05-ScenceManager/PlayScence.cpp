@@ -16,8 +16,6 @@
 #include"BlackNight.h"
 #include"Stair.h"
 #include"Gate.h"
-#include"GateStair1.h"
-#include"GateStair2.h"
 #include"GateStair.h"
 #include"GateStairChangeDirection.h"
 #include"ScoreBar.h"
@@ -26,7 +24,7 @@
 #include"Axe.h"
 #include"Item700PTS.h"
 #include"Item400PTS.h"
-#include"HaiDo.h"
+#include"StopWatch.h"
 #include"HaiXanh.h"
 #include"GoldPotion.h"
 #include"BluePotion.h"
@@ -37,6 +35,7 @@
 #include"Sketon.h"
 #include"Zoombie.h"
 #include"GiaDo.h"
+#include "Ghost.h"
 #include"Crown.h"
 #include "BossBat.h"
 #include"ObjectBlack.h"
@@ -115,9 +114,7 @@ Space* CPlayScene::getCurentSpace()
 #define OBJECT_TYPE_BOSSBAT	27
 #define OBJECT_TYPE_OBJECTBLACK 	28
 #define OBJECT_TYPE_GIADO 30
-
-
-
+#define OBJECT_TYPE_GHOST 32
 
 #define MAX_SCENE_LINE 1024
 
@@ -279,8 +276,9 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_ZOOMIE: obj = new Zoombie(); break;
 	case OBJECT_TYPE_CROWN: obj = new Crown(); break;
 	case OBJECT_TYPE_HAIXANH: obj = new HaiXanh(); break;
-	case OBJECT_TYPE_HAIDO: obj = new HaiDo(); break;
+	case OBJECT_TYPE_HAIDO: obj = new StopWatch(); break;
 	case OBJECT_TYPE_RAVEN : obj = new Raven(); break;
+	case OBJECT_TYPE_GHOST: obj = new Ghost(); break;
 	case OBJECT_TYPE_BOSSBAT: obj = new BossBat(); break;
 	case OBJECT_TYPE_OBJECTBLACK: obj = new ObjectBlack(); break;
 	default:
@@ -359,7 +357,7 @@ void CPlayScene::_ParseSection_GRID(string line)
 	vector<string> tokens = split(line);
 	if (tokens.size() < 1) return;
 	string path = tokens[0];
-	grid.Init(path);
+	grid.init(path);
 	
 
 }
@@ -428,6 +426,18 @@ void CPlayScene::Load()
 	DebugOut(L"[INFO] Done loading scene resources %s\n", sceneFilePath);
 }
 
+
+void AddObjectToCamara(vector<LPGAMEOBJECT>* objectsInCamara, LPGAMEOBJECT obj)
+{
+	for (size_t i = 0; i < objectsInCamara->size(); i++)
+	{
+		if (objectsInCamara->at(i) == obj) {
+			return;
+		}
+	}
+	objectsInCamara->push_back(obj);
+}
+
 void CPlayScene::Update(DWORD dt)
 {
 	// We know that Mario is the first object in the list hence we won't add him into the colliable object list
@@ -442,29 +452,18 @@ void CPlayScene::Update(DWORD dt)
 		LPGAMEOBJECT obj = objects[k];
 		if (obj->getAlive())
 		{
-			objectsInCamara.push_back(obj);
+			AddObjectToCamara(&objectsInCamara, obj);
 		}
 	}
-	/*for (size_t i = 0; i < objects.size()-1; i++)
-	{
-
-		coObjects.push_back(objects[i]);
-	}*/
-
-	/*for (size_t i = 0; i < objects.size(); i++)
-	{
-		objects[i]->Update(dt, &coObjects);
-	}*/
-
+	
 	for (size_t i = 0; i < objectsInCamara.size(); i++)
 	{
 		objectsInCamara[i]->Update(dt, &objectsInCamara);
 	}
-
 	for (int j = 0; j < addtionalObject.size(); j++) {
-		addtionalObject[j]->Update(dt, &objectsInCamara);
+		if(addtionalObject[j]->isAlive)
+			addtionalObject[j]->Update(dt, &objectsInCamara);
 	}
-	// Update camera to follow mario
 	if (player == NULL)
 		return;
 	player->Update(dt, &objectsInCamara);
@@ -507,7 +506,18 @@ void CPlayScene::Unload()
 	spritesID.clear();
 	animationsID.clear();
 	animationSetsID.clear();
+	addtionalObject.clear();
 
+}
+
+void CPlayScene::setStopUpdate(bool stop)
+{
+	stopUpdate = stop;
+}
+
+bool CPlayScene::getStopUpdate()
+{
+	return stopUpdate;
 }
 
 void CPlayScene::addAddtionalObject(LPGAMEOBJECT obj)
@@ -522,72 +532,33 @@ vector<LPGAMEOBJECT> CPlayScene::getAddtionalObject()
 
 void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 {
-	//DebugOut(L"[INFO] KeyDown: %d\n", KeyCode);
-
-	Simon *simon = ((CPlayScene*)scence)->player;
-	switch (KeyCode)
-	{
-	case DIK_Z:
-		simon->isAttack = true;
-		break;
-	case DIK_SPACE:
-		simon->isJumpDown = true;
-		break;
-	case DIK_UP:
-		simon->isUpDown = true;
-		break;
-	case DIK_DOWN:
-		simon->isDownDown = true;		
-		break;
-	case DIK_LEFT:
-		simon->isLeftDown = true;
-		break;
-	case DIK_RIGHT:
-		simon->isRightDown = true;
-		break;
-	}
 	
-
 }
 
 void CPlayScenceKeyHandler::OnKeyUp(int KeyCode)
 {
-	Simon* simon = ((CPlayScene*)scence)->player;
-	switch (KeyCode)
-	{
-	case DIK_Z:
-		simon->isAttack = false;
-		break;
-	case DIK_SPACE:
-		simon->isJumpDown = false;
-		break;
-	case DIK_UP:
-		simon->isUpDown = false;
-		break;
-	case DIK_DOWN:
-		simon->isDownDown = false;
-		break;
-	case DIK_LEFT:
-		simon->isLeftDown = false;
-		break;
-	case DIK_RIGHT:
-		simon->isRightDown = false;
-		break;
-	} 
 
 }
 
+
 void CPlayScenceKeyHandler::KeyState(BYTE *states)
 {
+	Simon* simon = ((CPlayScene*)scence)->player;
 	CGame *game = CGame::GetInstance();
-	Simon *mario = ((CPlayScene*)scence)->player;
+	simon->isRightDown = game->IsKeyDown(DIK_RIGHT);
+	simon->isLeftDown = game->IsKeyDown(DIK_LEFT);
+	simon->isDownDown = game->IsKeyDown(DIK_DOWN);
+	simon->isUpDown = game->IsKeyDown(DIK_UP);;
+	simon->isJump = game->IsKeyDown(DIK_X);
+	simon->isJumpDown = simon->isJump && !simon->isPreviousJumpDown;
+	simon->isPreviousJumpDown = simon->isJump;
+	simon->isAttackDown = game->IsKeyDown(DIK_Z);
+	simon->isAttack = simon->isAttackDown && !simon->isPreviousAttackDown;
+	simon->isPreviousAttackDown = simon->isAttackDown;
+	simon->switchScene1 = game->IsKeyDown(DIK_1);
+	simon->switchScene2 = game->IsKeyDown(DIK_2);
+	simon->switchScene3 = game->IsKeyDown(DIK_3);
+	simon->switchScene4 = game->IsKeyDown(DIK_4);
 
-	// disable control key when Mario die 
-	/*if (mario->GetState() == MARIO_STATE_DIE) return;
-	if (game->IsKeyDown(DIK_RIGHT))
-		mario->SetState(MARIO_STATE_WALKING_RIGHT);
-	else if (game->IsKeyDown(DIK_LEFT))
-		mario->SetState(MARIO_STATE_WALKING_LEFT);
-	else
-		mario->SetState(MARIO_STATE_IDLE);*/
+
 }

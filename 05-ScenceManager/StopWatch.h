@@ -1,12 +1,12 @@
 #pragma once
 #include"Item.h"
-class HaiDo : public Item
+class StopWatch : public Item
 {
 public:
 	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) override;
 	void onPlayerContact() override;
-	HaiDo();
-	~HaiDo();
+	StopWatch();
+	~StopWatch();
 
 private:
 

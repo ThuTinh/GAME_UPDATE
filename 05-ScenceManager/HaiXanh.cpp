@@ -16,6 +16,7 @@ void HaiXanh::onPlayerContact()
 
 HaiXanh::HaiXanh()
 {
+	setAlive(false);
 }
 
 HaiXanh::~HaiXanh()

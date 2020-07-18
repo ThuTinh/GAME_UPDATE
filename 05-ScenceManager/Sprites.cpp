@@ -51,12 +51,10 @@ void CSprite::Draw(float x, float y, DIRECTION direction,int alpha)
 	/* vẽ đối tượng lên màn hình */
 	if (currentDirection == DIRECTION_RIGHT) {
 		game->Draw(x, y, getAnchorXRight(), getAnchorYRight(), texture, getleft(), getTop(), getRight(), getBottom(), alpha);
-
 	}
 	else
 	{ 
 		game->Draw(x, y, getAnchorX(), getAnchorY(), texture, getleft(), getTop(), getRight(), getBottom(), alpha);
-
 	}
 
 	if (direction != imageDirection)

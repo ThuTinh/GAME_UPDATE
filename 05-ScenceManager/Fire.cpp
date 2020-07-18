@@ -5,7 +5,7 @@
 void Fire::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	
-	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive()) {
+	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && (Weapon::getInstance()->aniIndex == 2 || Weapon::getInstance()->aniIndex == 5 || Weapon::getInstance()->aniIndex == 8 || Weapon::getInstance()->aniIndex == 11 || Weapon::getInstance()->aniIndex == 14 || Weapon::getInstance()->aniIndex == 17)) {
 		setAlive(false);
 	}
 }

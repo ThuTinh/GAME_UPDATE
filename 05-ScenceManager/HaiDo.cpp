@@ -16,6 +16,7 @@ void HaiDo::onPlayerContact()
 
 HaiDo::HaiDo()
 {
+	//setAlive(false);
 }
 
 HaiDo::~HaiDo()

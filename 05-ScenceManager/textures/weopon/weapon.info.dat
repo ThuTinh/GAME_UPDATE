@@ -1,115 +1,169 @@
-Sprite roi
+Sprite weapon
 R	G	B
-255	0	128	0
+255	116	116	116
 Animation Count
-12
+18
 
 
 Name
-w11
+Animation
 Frame Count
 1
 
 FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
-0			0			8				32				0			0
+0			0			8				24				0			0
 
 
 Name
-w12
+Animation
 Frame Count
 1
 
 FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
-8			8			16				24				0			0
+8			5			16				19				0			0
 
 
 Name
-w13
+Animation
 Frame Count
 1
 
 FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
-24			16			24				16				0			0
+24			16			24				8				0			0
 
 
 Name
-w21
+Animation
 Frame Count
 1
 
 FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
-48			0			8				32				0			0
+48			0			8				24				0			0
 
 
 Name
-w22
+Animation
 Frame Count
 1
 
 FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
-56			8			16				24				0			0
+56			5			16				19				0			0
 
 
 Name
-w23
+Animation
 Frame Count
 1
 
 FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
-72			16			40				16				0			0
+72			18			24				6				0			0
 
 
 Name
-w31
+Animation
 Frame Count
 1
 
 FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
-112			0			8				32				0			0
+96			0			8				24				0			0
 
 
 Name
-w32
+Animation
 Frame Count
 1
 
 FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
-120			8			16				24				0			0
+104			5			16				19				0			0
 
 
 Name
-w33
+Animation
 Frame Count
 1
 
 FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
-136			16			40				16				0			0
+120			18			40				6				0			0
 
 
 Name
-w41
+Animation
 Frame Count
 1
 
 FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
-176			0			8				32				0			0
+48			0			8				24				0			0
 
 
 Name
-w42
+Animation
 Frame Count
 1
 
 FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
-184			8			16				24				0			0
+56			5			16				19				0			0
 
 
 Name
-w43
+Animation
 Frame Count
 1
 
 FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
-200			16			40				16				0			0
+160			18			40				6				0			0
+
+
+Name
+Animation
+Frame Count
+1
+
+FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
+200			0			8				24				0			0
+
+
+Name
+Animation
+Frame Count
+1
+
+FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
+208			5			16				19				0			0
+
+
+Name
+Animation
+Frame Count
+1
+
+FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
+224			18			40				6				0			0
+
+
+Name
+Animation
+Frame Count
+1
+
+FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
+264			0			8				24				0			0
+
+
+Name
+Animation
+Frame Count
+1
+
+FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
+272			5			16				19				0			0
+
+
+Name
+Animation
+Frame Count
+1
+
+FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
+288			18			40				6				0			0
 
 

@@ -7,8 +7,12 @@ void GateStairChangeDirection::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	
 	if (AABBCheck(Simon::getInstance())) {
-		if (Simon::getInstance()->getState() == SIMON_STATE_ON_STAIR && Simon::getInstance()->getDy() > 0 && checkOnlyOne) {
+		if (Simon::getInstance()->getState() == SIMON_STATE_ON_STAIR && Simon::getInstance()->aniIndex == SIMON_ANI_ASCEND_STAIRS ) {
 			Simon::getInstance()->setStairDirection(1);
+			checkOnlyOne = false;
+		}
+		if (Simon::getInstance()->getState() == SIMON_STATE_ON_STAIR && Simon::getInstance()->aniIndex == SIMON_ANI_DESCEN_STAIRS) {
+			Simon::getInstance()->setStairDirection(0);
 			checkOnlyOne = false;
 		}
 	}

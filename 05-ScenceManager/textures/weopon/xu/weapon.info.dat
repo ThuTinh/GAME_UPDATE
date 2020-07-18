@@ -1,0 +1,115 @@
+Sprite roi
+R	G	B
+255	0	128	0
+Animation Count
+12
+
+
+Name
+w11
+Frame Count
+1
+
+FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
+0			0			8				32				0			0
+
+
+Name
+w12
+Frame Count
+1
+
+FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
+8			8			16				24				0			0
+
+
+Name
+w13
+Frame Count
+1
+
+FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
+24			16			24				16				0			0
+
+
+Name
+w21
+Frame Count
+1
+
+FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
+48			0			8				32				0			0
+
+
+Name
+w22
+Frame Count
+1
+
+FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
+56			8			16				24				0			0
+
+
+Name
+w23
+Frame Count
+1
+
+FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
+72			16			40				16				0			0
+
+
+Name
+w31
+Frame Count
+1
+
+FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
+112			0			8				32				0			0
+
+
+Name
+w32
+Frame Count
+1
+
+FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
+120			8			16				24				0			0
+
+
+Name
+w33
+Frame Count
+1
+
+FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
+136			16			40				16				0			0
+
+
+Name
+w41
+Frame Count
+1
+
+FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
+176			0			8				32				0			0
+
+
+Name
+w42
+Frame Count
+1
+
+FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
+184			8			16				24				0			0
+
+
+Name
+w43
+Frame Count
+1
+
+FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
+200			16			40				16				0			0
+
+

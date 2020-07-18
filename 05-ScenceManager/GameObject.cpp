@@ -85,7 +85,8 @@ float CGameObject::SweptAABB(CGameObject* M, CGameObject* S, float& normalx, flo
 
 	// Trường hợp không xảy ra va chạm:
 	//Logger::getInstance()->getWidth()rite_text_to_log_file(std::to_string(GetVy()));
-	if (entryTime > exitTime || xEntry < 0.0f && yEntry < 0.0f || xEntry > 1.0f || yEntry > 1.0f)
+	//if (entryTime > exitTime || xEntry < 0.0f && yEntry < 0.0f || xEntry > 1.0f || yEntry > 1.0f)
+	if (xEntry < 0.0f && yEntry < 0.0f || xEntry > 1.0f || yEntry > 1.0f)
 	{
 		normalx = 0.0f;
 		normaly = 0.0f;
@@ -93,13 +94,13 @@ float CGameObject::SweptAABB(CGameObject* M, CGameObject* S, float& normalx, flo
 	}
 
 	else // Trường hợp xảy ra va chạm:
-	{
+	{ 
 		// Xác định hướng của pháp tuyến khi va chạm:
 		if (xEntry > yEntry)
 		{
 			if (M->getDx() < 0.0f) // Chạm vào bề mặt bên phải của block:
 			{
-				normalx = 1.0f;
+ 				normalx = 1.0f;
 				normaly = 0.0f;
 			}
 			else					// Chạm vào bề mặt bên trái của block:
@@ -119,6 +120,7 @@ float CGameObject::SweptAABB(CGameObject* M, CGameObject* S, float& normalx, flo
 			{
 				normalx = 0.0f;
 				normaly = -1.0f;
+				
 			}
 		}
 
@@ -130,7 +132,7 @@ float CGameObject::SweptAABB(CGameObject* M, CGameObject* S, float& normalx, flo
 void CGameObject::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
 	left = x;
-	top =  y - height/2;
+	top = y - height ;
 	right = x + width;
 	bottom = y + height;
 }
@@ -158,10 +160,7 @@ void CGameObject::onCollision(CGameObject* other, float collisionTime, int nx, i
 	if (ny != 0 && dynamic_cast<Ground*>(other))
 	{		
 		setIsOnGround(true);
-		/*vy = 0;*/
-
 	}
-	
 }
 
 void CGameObject::preventMovementWhenCollision(float collisionTime, int nx, int ny)
@@ -210,22 +209,30 @@ LPCOLLISIONEVENT CGameObject::SweptAABBEx(LPGAMEOBJECT coO)
 	//float ml, mt, mr, mb;		// moving object bbox
 	//float t, nx, ny;
 	//coO->GetBoundingBox(sl, st, sr, sb);
-	//// deal with moving object: m speed = original m speed - collide object speed
-	//float svx, svy;
-	//coO->GetSpeed(svx, svy);
-	//float sdx = svx*dt;
-	//float sdy = svy*dt;
-	//// (rdx, rdy) is RELATIVE movement distance/velocity 
-	//float rdx = this->dx - sdx;
-	//float rdy = this->dy - sdy;
-	//GetBoundingBox(ml, mt, mr, mb);
-	//CGame::SweptAABB(
-	//	ml, mt, mr, mb,
-	//	rdx, rdy,
-	//	sl, st, sr, sb,
-	//	t, nx, ny
-	//);
-
+	// deal with moving object: m speed = original m speed - collide object speed
+	/*float svx, svy;
+	coO->GetSpeed(svx, svy);
+	float sdx = svx*dt;
+	float sdy = svy*dt;*/
+	// (rdx, rdy) is RELATIVE movement distance/velocity 
+	/*float rdx = this->dx - sdx;
+	float rdy = this->dy - sdy;
+	GetBoundingBox(ml, mt, mr, mb);
+	for (int i = 0; i < collitionTypeToCheck.size(); i++) {
+		if (coO->collitionType == collitionTypeToCheck.at(i))
+		{
+			CGame::SweptAABB(
+				ml, mt, mr, mb,
+				rdx, rdy,
+				sl, st, sr, sb,
+				t, nx, ny
+			);
+			CCollisionEvent* e = new CCollisionEvent(t, nx, ny, rdx, rdy, coO);
+			return e;
+		}
+	}
+	return 0;
+*/
 	CGameObject* box = GetSweptBroadPhaseBox();
 	CCollisionEvent* e = NULL;
 	for (int i = 0; i < collitionTypeToCheck.size(); i++) {
@@ -236,7 +243,7 @@ LPCOLLISIONEVENT CGameObject::SweptAABBEx(LPGAMEOBJECT coO)
 				float normalX = 0, normalY = 0;
 				/* thì tính collisionTime */
 				float t = SweptAABB(this, coO, normalX, normalY);
-				e = new CCollisionEvent(t, normalX, normalY, t * dx, t * dy, coO);
+				e = new CCollisionEvent(t, normalX, normalY,  dx, dy, coO);
 			}
 			break;
 		}

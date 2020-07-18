@@ -156,9 +156,6 @@
     <ClCompile Include="Stair.cpp">
       <Filter>Object\Stair</Filter>
     </ClCompile>
-    <ClCompile Include="GateStair1.cpp">
-      <Filter>Object\Gate</Filter>
-    </ClCompile>
     <ClCompile Include="Item700PTS.cpp">
       <Filter>Object\Item</Filter>
     </ClCompile>
@@ -166,9 +163,6 @@
       <Filter>Object\Item</Filter>
     </ClCompile>
     <ClCompile Include="HaiXanh.cpp">
-      <Filter>Object\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="HaiDo.cpp">
       <Filter>Object\Item</Filter>
     </ClCompile>
     <ClCompile Include="Crown.cpp">
@@ -213,9 +207,6 @@
     <ClCompile Include="Die-effect.cpp">
       <Filter>Object\Misc</Filter>
     </ClCompile>
-    <ClCompile Include="GateStair2.cpp">
-      <Filter>Object\Gate</Filter>
-    </ClCompile>
     <ClCompile Include="GateStairChangeDirection.cpp">
       <Filter>Object\Gate</Filter>
     </ClCompile>
@@ -251,6 +242,27 @@
     </ClCompile>
     <ClCompile Include="SubAxeAttack.cpp">
       <Filter>Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Ghost.cpp">
+      <Filter>Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="SubFireBombAttack.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="objectBlack-effect.cpp">
+      <Filter>Object\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="StopWatch.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="SubStopWatchAttack.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="money-effect.cpp">
+      <Filter>Object\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="explore-effect.cpp">
+      <Filter>Object\Misc</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -353,16 +365,10 @@
     <ClInclude Include="Stair.h">
       <Filter>Object\Stair</Filter>
     </ClInclude>
-    <ClInclude Include="GateStair1.h">
-      <Filter>Object\Gate</Filter>
-    </ClInclude>
     <ClInclude Include="Item700PTS.h">
       <Filter>Object\Item</Filter>
     </ClInclude>
     <ClInclude Include="Item400PTS.h">
-      <Filter>Object\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="HaiDo.h">
       <Filter>Object\Item</Filter>
     </ClInclude>
     <ClInclude Include="Crown.h">
@@ -410,9 +416,6 @@
     <ClInclude Include="Die-affect.h">
       <Filter>Object\Misc</Filter>
     </ClInclude>
-    <ClInclude Include="GateStair2.h">
-      <Filter>Object\Gate</Filter>
-    </ClInclude>
     <ClInclude Include="GateStairChangeDirection.h">
       <Filter>Object\Gate</Filter>
     </ClInclude>
@@ -448,6 +451,30 @@
     </ClInclude>
     <ClInclude Include="SubAxeAttack.h">
       <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="IBoss.h">
+      <Filter>Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Ghost.h">
+      <Filter>Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="SubFireBombAttack.h">
+      <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="objectBlack-effect.h">
+      <Filter>Object\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="StopWatch.h">
+      <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="SubStopWatchAttack.h">
+      <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="money-effect.h">
+      <Filter>Object\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="explore-effect.h">
+      <Filter>Object\Misc</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

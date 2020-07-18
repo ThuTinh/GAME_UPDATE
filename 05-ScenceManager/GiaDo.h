@@ -2,7 +2,7 @@
 #pragma once
 #include "Gound.h"
 #define MAX_X 90
-#define MIN_X	35
+#define MIN_X 35
 #define Vx 0.02
 class GiaDo : public Ground
 {

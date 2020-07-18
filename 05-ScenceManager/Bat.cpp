@@ -20,10 +20,16 @@ void Bat::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			setVy(BAT_VY);
 			setVx(BAT_VX);
 			aniIndex = BAT_ACTION_FLY;
+			distanceNeedFlyHorizonal = getY() - DISTACE_CHANGE_FLY_HORIZONTAL;
 		}
 		break;
 	case BAT_STATE_FLY:
-		if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive) {
+
+		if (getY() <= distanceNeedFlyHorizonal) {
+			setVx(vx);
+			setVy(0);
+		}
+		if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive && (Weapon::getInstance()->aniIndex == 2 || Weapon::getInstance()->aniIndex == 5 || Weapon::getInstance()->aniIndex == 8 || Weapon::getInstance()->aniIndex == 11 || Weapon::getInstance()->aniIndex == 14 || Weapon::getInstance()->aniIndex == 17)) {
 				setAlive(false);
 				ScoreBar::getInstance()->increaseScore(ENEMY_SCORE);
 				DieEffect* dieEffect = new DieEffect();
@@ -58,6 +64,7 @@ Bat::Bat()
 	setPhysicsEnable(false);
 	aniIndex = BAT_ACTION_STAND;
 	state = BAT_STATE_STAND;
+
 }
 
 Bat::~Bat()

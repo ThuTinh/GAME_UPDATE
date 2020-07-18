@@ -4,12 +4,14 @@
 void GiaDo::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	if (getX()+ width >= MAX_X) {
+
 		nx = -1;
 	}
 	if (getX() <= MIN_X) {
 		nx = 1;
 	}
-	setX(getX() + nx*0.2);
+	setVx(nx * Vx);
+	setX(getX() + getVx()*dt);
 }
 
 void GiaDo::Render()
@@ -19,5 +21,6 @@ void GiaDo::Render()
 
 GiaDo::GiaDo()
 {
+	setVx(Vx);
 	nx = 1;
 }

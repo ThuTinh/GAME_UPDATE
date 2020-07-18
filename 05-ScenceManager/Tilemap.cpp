@@ -100,7 +100,6 @@ void Tilemap::Init(int idSheet, string matrixPath)
 	fstream fs(Path);
 	fs >> tileRows >> tileColumns >> tileWidth >> tileHeight >> tilesheetColumns;
 
-	int k = 5;
 	/* khởi tạo ma trận */
 	matrix = new int* [tileRows];
 

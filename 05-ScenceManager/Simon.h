@@ -3,11 +3,12 @@
 #include"DelayTime.h"
 #include "GameTime.h"
 #include "Item.h"
-#define SIMON_VX	0.07
+#include "ScoreBar.h"
+#define SIMON_VX	0.08
 //0.1f
-#define SIMON_JUMP_Y		0.27f
+#define SIMON_JUMP_Y		0.25f
 #define SIMON_JUMP_DEFLECT_SPEED 0.2f
-#define MARIO_GRAVITY			-0.0008f
+#define MARIO_GRAVITY			-0.0007f
 #define SIMON_DIE_DEFLECT_SPEED	 0.5f
 
 #define SIMON_STATE_NORMAL 100
@@ -62,7 +63,15 @@ public:
 	bool isUpDown;
 	bool isDownDown;
 	bool isJumpDown;
+	bool isPreviousJumpDown;
+	bool isJump;
 	bool isAttack;
+	bool isAttackDown;
+	bool switchScene1;
+	bool switchScene2;
+	bool switchScene3;
+	bool switchScene4;
+	bool isPreviousAttackDown;
 	int numberArchery;
 	int fixWidth;
 	int fixHeight;
@@ -70,6 +79,7 @@ public:
 	bool isUseSub;
 	bool renderActive;
 	int hurtDirection;
+	bool isOnGiaDo;
 	DelayTime attackStandDelay;
 	DelayTime colorDelay;
 	DelayTime hurtDelay;
@@ -82,14 +92,16 @@ public:
 	GameTime blinkTime;
 	DelayTime hideHurtDelay;
 	DelayTime attackInStairDelay;
-
-
+	DelayTime hurtTimeDelay;
+	GameTime hurtTime;
+	DelayTime jumbHurtTimeDelay;
+	bool switchSceneIn;
 	static Simon* instance;
 	static Simon* getInstance();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *colliable_objects = NULL);
 	virtual void Render();
 	void retoreWidthHeight();
-	Item *getSubweapo();
+	Item *getSubweapon();
 	void setSubWeapon(Item * item);
 	void setNumberArchery(int num);
 	void addNumberObjectBlack(int num);
@@ -98,6 +110,7 @@ public:
 	void addNumberArchery(int num);
 	void SetState(int state);
 	int getState();
+	void makeSubWeapon(TYPE_SUBWEAPON type);
 	void setAnChorRight();
 	void setAnChorLeft();
 	void SetLevel(int l) { level = l; }
@@ -113,6 +126,9 @@ public:
 	bool getRenderActive();
 	void onCollision(CGameObject* other, float collisionTime, int nx, int ny) override;
 	void Load(LPCWSTR simonFile);
+
+	void setHurt(int directEnemy, float xOfEnemy);
+	bool isDie();
 	Simon();
 
 };

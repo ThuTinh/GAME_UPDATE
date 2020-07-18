@@ -13,4 +13,6 @@ class ObjectBlack : public CGameObject
 public:
 	ObjectBlack();
 	virtual void SetState(int state);
+	void makeEfect();
+
 };

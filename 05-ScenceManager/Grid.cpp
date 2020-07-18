@@ -15,7 +15,7 @@ void Grid::checkCellColitionCamera(Camera* camera)
 {
 	inxInCamara.clear();
 	for (int i = 0; i < CellList->size(); i++) {
-		if (CheckCollisionCamara(camera, CellList->at(i))) {
+		if (checkCollisionCamara(camera, CellList->at(i))) {
 			vector<int> temp = CellList->at(i)->getInxObjects();
 			for (int j = 0; j < temp.size(); j++) {
 				inxInCamara.push_back(temp[j]);
@@ -25,7 +25,7 @@ void Grid::checkCellColitionCamera(Camera* camera)
 	}
 }
 
-void Grid::Init(string gridPath)
+void Grid::init(string gridPath)
 {
 	ifstream fs(gridPath);
 	int count;
@@ -56,7 +56,7 @@ void Grid::Init(string gridPath)
 	}
 }
 
-bool Grid::CheckCollisionCamara( Camera* camera, Cell* cell)
+bool Grid::checkCollisionCamara( Camera* camera, Cell* cell)
 {
 	return ((camera->getX() < cell->getX() + cell->getWidth() && camera->getX() + camera->getWidth() > cell->getX()) &&
 		(camera->getY() - camera->getHeight() < cell->getY() && camera->getY() > cell->getY() - cell->getHeight()));

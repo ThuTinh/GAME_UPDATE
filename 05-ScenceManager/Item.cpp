@@ -1,6 +1,9 @@
 ﻿#include "Item.h"
 #include"Weapon.h"
 #include "Gound.h"
+#include "Game.h"
+#include "BigHeart.h"
+#include "SubWeaponAttack.h"
 Item::Item()
 {
 	itemState = ITEM_STATE_INVISIBLE;
@@ -17,11 +20,25 @@ void Item::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		return;
 	vy += ITEM_GRAVITY*dt;
 
-	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive) {
+	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive()  && isAlive && (Weapon::getInstance()->aniIndex == 2 || Weapon::getInstance()->aniIndex == 5 || Weapon::getInstance()->aniIndex == 8 || Weapon::getInstance()->aniIndex == 11 || Weapon::getInstance()->aniIndex == 14|| Weapon::getInstance()->aniIndex == 17)) {
 		setPhysicsEnable(true);
 		itemState = ITEM_STATE_VISIBLE;
 		setWidth(animation_set->at(0)->getFrame(0)->GetSprite()->getWidth());
 		setHeight(animation_set->at(0)->getFrame(0)->GetSprite()->getHeight());
+	}
+	if (CGame::GetInstance()->GetCurrentScene()->getAddtionalObject().size() > 0 && isAlive && itemState != ITEM_STATE_VISIBLE) {
+		vector<LPGAMEOBJECT> listObject = CGame::GetInstance()->GetCurrentScene()->getAddtionalObject();
+		for (size_t i = 0; i < listObject.size(); i++)
+		{
+			if (dynamic_cast<SubWeaponAttack*>(listObject[i]) && listObject[i]->isAlive) {
+				if (AABBCheck(listObject[i])) {
+					setPhysicsEnable(true);
+					itemState = ITEM_STATE_VISIBLE;
+					setWidth(animation_set->at(0)->getFrame(0)->GetSprite()->getWidth());
+					setHeight(animation_set->at(0)->getFrame(0)->GetSprite()->getHeight());
+				}
+			}
+		}
 	}
 	CGameObject::Update(dt);
 	vector<LPCOLLISIONEVENT> coEvents;

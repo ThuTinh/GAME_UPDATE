@@ -6,7 +6,6 @@
 #include <d3d9.h>
 #include <d3dx9.h>
 
-
 #define DIRECTINPUT_VERSION 0x0800
 #include <dinput.h>
 #include "Scence.h"
@@ -54,14 +53,11 @@ public:
 	void DrawRect(float x, float y, int anchorX, int anchorY, LPDIRECT3DTEXTURE9 texture, RECT rect, int alpha = 255);
 	int IsKeyDown(int KeyCode);
 	void ProcessKeyboard();
-
 	void Load(LPCWSTR gameFile);
 	LPSCENE GetCurrentScene() { return scenes[current_scene]; }
 	void SwitchScene(int scene_id);
-
 	int GetScreenWidth() { return screen_width; }
 	int GetScreenHeight() { return screen_height; }
-
 	static void SweptAABB(
 		float ml,			// move left 
 		float mt,			// move top
@@ -76,13 +72,11 @@ public:
 		float &t, 
 		float &nx, 
 		float &ny);
-
 	LPDIRECT3DDEVICE9 GetDirect3DDevice() { return this->d3ddv; }
 	LPDIRECT3DSURFACE9 GetBackBuffer() { return backBuffer; }
 	LPD3DXSPRITE GetSpriteHandler() { return this->spriteHandler; }
 	void SetCamPos(float x, float y) { cam_x = x; cam_y = y; }
 	static CGame * GetInstance();
-
 	~CGame();
 };
 

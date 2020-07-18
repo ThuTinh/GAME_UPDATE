@@ -20,15 +20,12 @@ protected:
 	vector<LPGAMEOBJECT> objects;
 	vector<LPGAMEOBJECT> objectsInCamara;
 	vector<LPGAMEOBJECT> addtionalObject;
-
-	unordered_map<int, Space*> spaces;
+	bool stopUpdate;
 	Space* currentSpace;
-
 	vector<int> texturesID;
 	vector<int> spritesID;
 	vector<int> animationsID;
 	vector<int> animationSetsID;
-
 	void _ParseSection_TEXTURES(string line);
 	void _ParseSection_SPRITES(string line);
 	void _ParseSection_ANIMATIONS(string line);
@@ -41,12 +38,15 @@ protected:
 
 public: 
 	CPlayScene(int id, LPCWSTR filePath);
+	unordered_map<int, Space*> spaces;
 	void setCurentSpace(int index);
 	Space* getCurentSpace();
 	virtual void Load();
 	virtual void Update(DWORD dt);
 	virtual void Render();
 	virtual void Unload();
+	virtual void setStopUpdate(bool stop);
+	virtual bool getStopUpdate();
 	virtual void addAddtionalObject(LPGAMEOBJECT obj);
 	virtual vector<LPGAMEOBJECT> getAddtionalObject();
 	friend class CPlayScenceKeyHandler;
