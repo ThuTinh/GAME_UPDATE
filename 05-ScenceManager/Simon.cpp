@@ -155,6 +155,7 @@ Simon::Simon() : CGameObject()
 	hurtTimeDelay.init(1200);
 	jumbHurtTimeDelay.init(250);
 	hurtTime.init(45);
+	canMakeSub = true;
 }
 
 void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
@@ -376,16 +377,19 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					{
 						if (isUpDown) {
 							if (isAttack)    {
-								if (ScoreBar::getInstance()->getHeartCount() <= 0 || ScoreBar::getInstance()->getTypeSubWeapon() == DEFAUL ){
+								if (ScoreBar::getInstance()->getHeartCount() <= 0 || ScoreBar::getInstance()->getTypeSubWeapon() == DEFAUL || !canMakeSub){
 									state = SIMON_STATE_ATTACK_STAND;
 									setVx(0);
 									attackStandDelay.start();
 								}
 								else
 								{
-									state = SIMON_STATE_USE_SUB;
-									attackUseSub.start();
-									makeSubWeapon(ScoreBar::getInstance()->getTypeSubWeapon());
+									
+										state = SIMON_STATE_USE_SUB;
+										attackUseSub.start();
+										makeSubWeapon(ScoreBar::getInstance()->getTypeSubWeapon());
+									
+									
 								}
 							}
 							else {
@@ -422,10 +426,29 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		else
 		{
 			aniIndex = SIMON_ANI_JUMB;
-			if (isAttack) {
-				state = SIMON_STATE_ATTACK_JUMP;
-				attacJumbDelay.start();
+			if (isUpDown) {
+				if (isAttack) {
+					
+					if (ScoreBar::getInstance()->getHeartCount() <= 0 || ScoreBar::getInstance()->getTypeSubWeapon() == DEFAUL || !canMakeSub) {
+						state = SIMON_STATE_ATTACK_JUMP;
+						attacJumbDelay.start();
+					}
+					else
+					{
+						state = SIMON_STATE_USE_SUB;
+						attackUseSub.start();
+						makeSubWeapon(ScoreBar::getInstance()->getTypeSubWeapon());
+					}
+				}
 			}
+			else
+			{
+				if (isAttack) {
+					state = SIMON_STATE_ATTACK_JUMP;
+					attacJumbDelay.start();
+				}
+			}
+			
 		}
 	}
 	 break;
@@ -598,10 +621,6 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		return;
 	}
 	case SIMON_STATE_HURT: {
-
-		
-
-	
 		if ( !jumbHurtTimeDelay.isOnTime()) {
 		
 			if (isJumpDown) {
@@ -673,7 +692,6 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		
 		return;
 	}
-	
 	case SIMON_STATE_DUCK: {
 		aniIndex = SIMON_ANI_JUMB;
 		if (isAttack) {
@@ -714,6 +732,8 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		aniIndex = SIMON_ANI_STAND_USING_SUB;
 		break;
 	}
+	case SIMON_STATE_HIDE:
+		break;
 	default:
 		break;
 	}
@@ -729,9 +749,11 @@ void Simon::Render()
 
 void Simon::makeSubWeapon(TYPE_SUBWEAPON type) {
 	SubWeaponAttack* sub;
+	Simon::getInstance()->canMakeSub = false;
 	switch (type)
 	{
 	case SWORD:
+		ScoreBar::getInstance()->increaseHeartCount(-1);
 		sub = new SubDaggerAttack();
 		CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(sub);
 		sub->setX(getMidX());
@@ -739,9 +761,9 @@ void Simon::makeSubWeapon(TYPE_SUBWEAPON type) {
 		sub->setAlive(true);
 		sub->setPhysicsEnable(true);
 		sub->timeDelay.start();
-
 		break;
 	case BOOMERANG:
+		ScoreBar::getInstance()->increaseHeartCount(-1);
 		sub = new SubBoomerangAttack();
 		CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(sub);
 		sub->setX(getMidX());
@@ -752,6 +774,7 @@ void Simon::makeSubWeapon(TYPE_SUBWEAPON type) {
 		sub->timeCheckSimon.start();
 		break;
 	case AXE:
+		ScoreBar::getInstance()->increaseHeartCount(-1);
 		sub = new SubAxeAttack();
 		CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(sub);
 		sub->setX(getMidX());
@@ -761,6 +784,7 @@ void Simon::makeSubWeapon(TYPE_SUBWEAPON type) {
 		sub->timeDelay.start();
 		break;
 	case BLUEPOTION:
+		ScoreBar::getInstance()->increaseHeartCount(-1);
 		sub = new SubFireBombAttack();
 		CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(sub);
 		sub->setX(getMidX());
@@ -770,19 +794,25 @@ void Simon::makeSubWeapon(TYPE_SUBWEAPON type) {
 		sub->timeDelay.start();
 		break;
 	case STOPWATCH:
-		sub = new SubStopWatchAttack();
-		CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(sub);
-		sub->setAlive(true);
-		sub->timeDelay.start();
-		CGame::GetInstance()->GetCurrentScene()->setStopUpdate(true);
+	{
+		int heartCount = ScoreBar::getInstance()->getHeartCount();
+		if (heartCount - 5 >= 0) {
+			ScoreBar::getInstance()->increaseHeartCount(-5);
+			sub = new SubStopWatchAttack();
+			CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(sub);
+			sub->setAlive(true);
+			sub->timeDelay.start();
+			CGame::GetInstance()->GetCurrentScene()->setStopUpdate(true);
+		}
+		Simon::getInstance()->canMakeSub = true;
 		state = SIMON_STATE_ATTACK_STAND;
 		setVx(0);
 		attackStandDelay.start();
+	}
 		break;
 	default:
 		return;
 	}
-	ScoreBar::getInstance()->increaseHeartCount(-1);
 }
 void Simon::retoreWidthHeight()
 {
@@ -1028,6 +1058,13 @@ void Simon::setHurt( int directEnemy, float xOfEnemy) {
 		hurtTimeDelay.start();
 		jumbHurtTimeDelay.start();  
 	}
+}
+
+void Simon::setHide()
+{
+	aniIndex = SIMON_ANI_HIDE;
+	state = SIMON_STATE_HIDE;
+
 }
 
 void Simon::Load(LPCWSTR simonFile)

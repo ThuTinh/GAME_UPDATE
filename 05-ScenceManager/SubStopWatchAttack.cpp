@@ -9,6 +9,7 @@ void SubStopWatchAttack::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 	if (timeDelay.isTerminated())
 	{
+		Simon::getInstance()->canMakeSub = true;
 		CGame::GetInstance()->GetCurrentScene()->setStopUpdate(false);
 		setAlive(false);
 	}

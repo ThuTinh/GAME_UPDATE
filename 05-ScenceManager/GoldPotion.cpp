@@ -12,6 +12,7 @@ void GoldPotion::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 void GoldPotion::onPlayerContact()
 {
+	Simon::getInstance()->setHide();
 }
 
 GoldPotion::GoldPotion()

@@ -8,6 +8,7 @@ void SubAxeAttack::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	vy += AXE_GRAVITY * dt;
 	if (timeDelay.isTerminated())
 	{
+		Simon::getInstance()->canMakeSub = true;
 		setAlive(false);
 	}
 	CGameObject::Update(dt, coObjects);

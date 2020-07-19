@@ -10,6 +10,7 @@ void SubFireBombAttack::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	vy += AXE_GRAVITY * dt;
 	if (timeDelay.isTerminated())
 	{
+		Simon::getInstance()->canMakeSub = true;
 		setAlive(false);
 		ExploreEffect *effect = new ExploreEffect();
 		CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(effect);

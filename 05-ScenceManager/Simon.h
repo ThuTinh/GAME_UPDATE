@@ -25,6 +25,7 @@
 #define SIMON_STAIR_STATE_GO_DOWN 202
 #define SIMON_STAIR_STATE_ATTACK_ASCEN 203 // len cau thang
 #define SIMON_STAIR_STATE_ATTACK_DESEN 204
+#define SIMON_STATE_HIDE 205
 
 
 #define SIMON_ANI_STAND 0
@@ -40,6 +41,7 @@
 #define SIMON_ANI_ASCEN_STAIRS_USING_SUB 10	
 #define SIMON_ANI_DESCEN_STAIRS_USING_SUB 11
 #define SIMON_ANI_COLORS 12
+#define SIMON_ANI_HIDE 13
 
 
 
@@ -97,7 +99,9 @@ public:
 	DelayTime hurtTimeDelay;
 	GameTime hurtTime;
 	DelayTime jumbHurtTimeDelay;
+	DelayTime delayHide;
 	bool switchSceneIn;
+	bool canMakeSub;
 	static Simon* instance;
 	static Simon* getInstance();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *colliable_objects = NULL);
@@ -131,6 +135,7 @@ public:
 	void Load(LPCWSTR simonFile);
 
 	void setHurt(int directEnemy, float xOfEnemy);
+	void setHide();
 	bool isDie();
 	Simon();
 

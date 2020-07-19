@@ -267,6 +267,9 @@
     <ClCompile Include="RestoreBlood.cpp">
       <Filter>Object\Item</Filter>
     </ClCompile>
+    <ClCompile Include="RestoreBloodL1.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Brick.h">
@@ -480,6 +483,9 @@
       <Filter>Object\Misc</Filter>
     </ClInclude>
     <ClInclude Include="RestoreBlood.h">
+      <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="RestoreBloodL1.h">
       <Filter>Object\Item</Filter>
     </ClInclude>
   </ItemGroup>

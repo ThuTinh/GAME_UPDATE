@@ -217,9 +217,9 @@ void BossBat::checkWithSimon()
 		}
 	}
 	if (hurtDelay.isTerminated()) {
-		if (ScoreBar::getInstance()->getBossHealth()  > 1)
+		if (ScoreBar::getInstance()->getBossHealth()  > 2)
 		{
-			ScoreBar::getInstance()->increaseBossHealth(-1);
+			ScoreBar::getInstance()->increaseBossHealth(-2);
 
 		}
 		else
@@ -237,13 +237,19 @@ void BossBat::onDecreaseHealth()
 
 void BossBat::makeEffectDie()
 {
-	ScoreBar::getInstance()->increaseBossHealth(-1);
+	ScoreBar::getInstance()->increaseBossHealth(-2);
 	DieEffect* dieEffect = new DieEffect();
+	DieEffect* dieEffect1 = new DieEffect();
 	CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(dieEffect);
 	dieEffect->setX(getMidX());
 	dieEffect->setY(getMidY());
 	dieEffect->setAlive(true);
 	dieEffect->timeDelay.start();
+	CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(dieEffect1);
+	dieEffect1->setX(getMidX()+10);
+	dieEffect1->setY(getMidY());
+	dieEffect1->setAlive(true);
+	dieEffect1->timeDelay.start();
 	setAlive(false);
 }
 
@@ -281,7 +287,7 @@ BossBat::BossBat()
 	setPhysicsEnable(false);
 	aniIndex = 0;
 	setAlive(true);
-	hurtDelay.init(10);
+	hurtDelay.init(50);
 }
 
 BossBat::~BossBat()
