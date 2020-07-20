@@ -179,7 +179,7 @@ Sketon::Sketon()
 	setDirection(DIRECTION_RIGHT);
 	setVx(0.03);
 	whiteBoneDelay.init(10);
-	timeThrow.init(1000);
+	timeThrow.init(1500);
 	timeJumb.init(10000);
 	delayJumb.init(100);
 	timeJumb.start();

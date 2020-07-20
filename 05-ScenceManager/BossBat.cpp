@@ -251,6 +251,7 @@ void BossBat::makeEffectDie()
 	dieEffect1->setAlive(true);
 	dieEffect1->timeDelay.start();
 	setAlive(false);
+	Simon::getInstance()->isWin = true;
 }
 
 void BossBat::restore()
@@ -283,7 +284,7 @@ BossBat::BossBat()
 {
 	player = Simon::getInstance();
 	setDirection(DIRECTION_LEFT);
-	waitDelay.init(BOSS_TIME_WAITE);
+	waitDelay.init(Boss_time_wait);
 	setPhysicsEnable(false);
 	aniIndex = 0;
 	setAlive(true);

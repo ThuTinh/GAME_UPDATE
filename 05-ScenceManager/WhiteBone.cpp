@@ -10,7 +10,15 @@ void WhiteBone::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	{
 		if (isAlive) {
 			if (AABBCheck(Simon::getInstance())) {
-				ScoreBar::getInstance()->increaseHealth(-1);
+				if (Simon::getInstance()->state != SIMON_STATE_ON_STAIR) {
+					if (!Simon::getInstance()->isDie()) {
+						Simon::getInstance()->setHurt(getDirection(), getX());
+					}
+				}
+				else
+				{
+					Simon::getInstance()->setHurtInStair();
+				}
 			}
 		}
 	}

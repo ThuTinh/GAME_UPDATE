@@ -5,10 +5,14 @@
 #include "ScoreBar.h"
 #include "Die-affect.h"
 #include "Simon.h"
+#include"Camera.h"
+#define MAX(a,b) (a>b? a : b)
+#define MIN(a,b) (a<b? a : b)
+extern int getRandom(int start, int end);
 void Raven::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 
-	vy += RAVEN_GRAVITY * dt;
+	
 	if (getY() < 240) {
 		setAlive(false);
 		return;
@@ -16,6 +20,15 @@ void Raven::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive && (Weapon::getInstance()->aniIndex == 2 || Weapon::getInstance()->aniIndex == 5 || Weapon::getInstance()->aniIndex == 8 || Weapon::getInstance()->aniIndex == 11 || Weapon::getInstance()->aniIndex == 14 || Weapon::getInstance()->aniIndex == 17)) {
 		setAlive(false);
 		ScoreBar::getInstance()->increaseScore(RAVEN_SCORE);
+		DieEffect* dieEffect = new DieEffect();
+		CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(dieEffect);
+		dieEffect->setX(getMidX());
+		dieEffect->setY(getMidY());
+		dieEffect->setAlive(true);
+		dieEffect->timeDelay.start();
+	}
+	if (AABBCheck(Simon::getInstance())) {
+		setAlive(false);
 		DieEffect* dieEffect = new DieEffect();
 		CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(dieEffect);
 		dieEffect->setX(getMidX());
@@ -92,16 +105,21 @@ void Raven::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			}
 			break;
 		case RAVEN_STATE_ATTACK:
-			if (Simon::getInstance()->getX() - getX() > DISTANCE_X) {
-				setDirection(DIRECTION_RIGHT);
+			calculateOtherPoint();
+			if (xDes < getX())
+			{
+				vx = -RAVEN_VX;
+				setDirection(DIRECTION_LEFT);
+
 			}
 			else
 			{
-				if (Simon::getInstance()->getX() < getX())
-					setDirection(DIRECTION_LEFT);
+				vx = RAVEN_VX;
+				setDirection(DIRECTION_RIGHT);
 			}
-			setVy(VY);
-			setVx(getDirection() * VX);
+			vy = (vx * (yDes - getY()) / (xDes - getX() + 4));
+			/*setVy(RAVEN_VY);
+			setVx(getDirection() * RAVEN_VX);*/
 			aniIndex = RAVEN_ACTION_FLY;
 			/*if (getY()> Simon::getInstance()->getY())
 			{
@@ -116,11 +134,29 @@ void Raven::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	{
 		pauseAnimation = true;
 	}
-
+	vy += RAVEN_GRAVITY * dt;
 	
 
 }
+void Raven::calculateOtherPoint()
+{
+	Simon* player = Simon::getInstance();
+	auto camera = Camera::getInstance();
+	if (getMidX() > player->getMidX() && getX() - camera->getX() > 40)
+	{
+		xDes = camera->getleft();
+	}
+	else
+	{
+		xDes = camera->getRight();
+	}
 
+	int yMin = player->getMidY() - 60;
+
+	int yMax = player->getMidY()+20;
+
+	yDes = getRandom(yMin, yMax);
+}
 void Raven::Render()
 {
 	if (isAlive)

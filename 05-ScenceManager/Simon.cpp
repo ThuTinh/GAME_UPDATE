@@ -153,7 +153,7 @@ Simon::Simon() : CGameObject()
 
 
 	hurtTimeDelay.init(1200);
-	jumbHurtTimeDelay.init(250);
+	jumbHurtTimeDelay.init(300);
 	hurtTime.init(45);
 	canMakeSub = true;
 }
@@ -233,10 +233,25 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		setRenderActive(true);
 		ScoreBar::getInstance()->increaseHealth(-1);
 		setStopCollision(false);
-		setPhysicsEnable(true);
-		state = SIMON_STATE_NORMAL;
-		isOnGround = true;
+		if (state != SIMON_STATE_ON_STAIR) {
+			state = SIMON_STATE_NORMAL;
+			isOnGround = true;
+		}
+	
 	}
+	//if (state == SIMON_STATE_HURT) {
+	//	if (jumbHurtTimeDelay.isTerminated()) {
+	//		//setPhysicsEnable(false);
+	//		setStopCollision(false);
+	//		aniIndex = SIMON_ANI_STAND;
+	//		
+	//	}
+	//	/*if (jumbHurtTimeDelay.isOnTime()) {
+	//		x += hurtDirection * 0.7;
+	//		y += 20;
+	//		return;
+	//	}*/
+	//}
 	
 	if (!stopCollision) {
 		vector<LPCOLLISIONEVENT> coEvents;
@@ -283,11 +298,10 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 							return;
 						}
 						if (jumbHurtTimeDelay.isOnTime()) {
-							x += hurtDirection *0.7;
-							y += 20;
+							x += hurtDirection ;
+							y += 22;
 							return;
 						}
-						
 					}
 				}
 				if (dynamic_cast<GiaDo*>(e->obj)) {
@@ -630,14 +644,16 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			if (isRightDown) {
 				setDirection(DIRECTION_RIGHT);
 				aniIndex = SIMON_ANI_GO;
-				setX(getX() + 1);
+				//setVx(SIMON_VX);
+				setX(getX() +0.5);
 			}
 			else
 			{
 				if (isLeftDown) {
 					aniIndex = SIMON_ANI_GO;
 					setDirection(DIRECTION_LEFT);
-					setX(getX() - 1);
+					//setVx(-SIMON_VX);
+					setX(getX() - 0.5);
 				}
 				else
 				{
@@ -1024,25 +1040,6 @@ void Simon::setHurt( int directEnemy, float xOfEnemy) {
 	if (!hurtTimeDelay.isOnTime())
 	{
 		state = SIMON_STATE_HURT;
-		//setPhysicsEnable(false);
-		//setStopCollision(true);
-
-		/*setVx(-getDirection() * 0.003);
-		setVy(0.04);*/
-
-
-		/*hurtDelay.start();
-		hideHurtDelay.start();
-		if (hurtDelay.isOnTime()) {
-			if (aniIndex != SIMON_ANI_HURT)
-			{
-				if (blinkTime.atTime()) {
-					setRenderActive(false);
-				}
-			}
-		}*/
-		/*setVx(-getDirection() * 0.3);
-		setVy(0.004);*/
 		if (xOfEnemy < getX()) {
 				setDirection(DIRECTION_LEFT);
 				hurtDirection = 1;
@@ -1052,11 +1049,21 @@ void Simon::setHurt( int directEnemy, float xOfEnemy) {
 			setDirection(DIRECTION_RIGHT);
 			hurtDirection = -1;
 		}
-		
+		//setStopCollision(true);
+		/*x += hurtDirection * 0.7;
+		y += 20;*/
 		aniIndex = SIMON_ANI_HURT;
 		//aniIndex = SIMON_ANI_HURT;
 		hurtTimeDelay.start();
 		jumbHurtTimeDelay.start();  
+	}
+}
+
+void Simon::setHurtInStair()
+{
+	if (!hurtTimeDelay.isOnTime())
+	{
+		hurtTimeDelay.start();
 	}
 }
 

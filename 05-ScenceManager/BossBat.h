@@ -3,7 +3,7 @@
 #include"DelayTime.h"
 #include "Simon.h"
 #include "IBoss.h"
-#define BOSS_TIME_WAITE 1000
+#define Boss_time_wait 1000
 #define boss_distance_activ 50
 #define vampire_bat_fast_momen 150
 #define boss_move_fast_time_min 1000

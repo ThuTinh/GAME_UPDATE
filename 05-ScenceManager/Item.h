@@ -1,7 +1,8 @@
 #pragma once
 #include "GameObject.h"
 #include "DelayTime.h"
-#define ITEM_GRAVITY -0.000009
+#define ITEM_GRAVITY -0.00005
+#define ITEM_VY -0.05
 enum ITEM_STATE
 {
 	ITEM_STATE_INVISIBLE,

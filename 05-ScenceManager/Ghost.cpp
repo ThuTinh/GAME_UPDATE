@@ -10,9 +10,12 @@
 void Ghost::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	timeDelay.update();
+	timeHurtDelay.update();
 
   if (isRender) {
 	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive && (Weapon::getInstance()->aniIndex == 2 || Weapon::getInstance()->aniIndex == 5 || Weapon::getInstance()->aniIndex == 8 || Weapon::getInstance()->aniIndex == 11 || Weapon::getInstance()->aniIndex == 14 || Weapon::getInstance()->aniIndex == 17)) {
+		state = GHOST_STATE_HURT;
+		timeHurtDelay.start();
 		timeDelay.start();
 	}
 	if (CGame::GetInstance()->GetCurrentScene()->getAddtionalObject().size() > 0 && isAlive) {
@@ -22,22 +25,41 @@ void Ghost::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			if (dynamic_cast<SubWeaponAttack*>(listObject[i]) && listObject[i]->isAlive) {
 				if (AABBCheck(listObject[i])) {
 					timeDelay.start();
+					state = GHOST_STATE_HURT;
+					timeHurtDelay.start();
 				}
 			}
 		}
 	}
 	if (timeDelay.isTerminated()) {
 		++counterInjured;
-		if (counterInjured >= COUNTER_LIFE) {
-			setAlive(false);
-			ScoreBar::getInstance()->increaseScore(GHOST_SCORE);
-			DieEffect* dieEffect = new DieEffect();
-			CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(dieEffect);
-			dieEffect->setX(getMidX());
-			dieEffect->setY(getMidY());
-			dieEffect->setAlive(true);
-			dieEffect->timeDelay.start();
+		if (Simon::getInstance()->getNumberArchery()==0)
+		{
+			if (counterInjured >= COUNTER_LIFE_NOMAL) {
+				setAlive(false);
+				ScoreBar::getInstance()->increaseScore(GHOST_SCORE);
+				DieEffect* dieEffect = new DieEffect();
+				CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(dieEffect);
+				dieEffect->setX(getMidX());
+				dieEffect->setY(getMidY());
+				dieEffect->setAlive(true);
+				dieEffect->timeDelay.start();
+			}
 		}
+		else
+		{
+			if (counterInjured >= COUNTER_LIFE) {
+				setAlive(false);
+				ScoreBar::getInstance()->increaseScore(GHOST_SCORE);
+				DieEffect* dieEffect = new DieEffect();
+				CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(dieEffect);
+				dieEffect->setX(getMidX());
+				dieEffect->setY(getMidY());
+				dieEffect->setAlive(true);
+				dieEffect->timeDelay.start();
+			}
+		}
+		
 	}
 	Enemy::Update(dt, coObjects);
 	if (!CGame::GetInstance()->GetCurrentScene()->getStopUpdate()) {
@@ -101,10 +123,15 @@ void Ghost::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 		}
 		break;
-	case GHOST_STATE_ATTACK:
-	
+	case GHOST_STATE_ATTACK:	
 		setVx(getDirection() * VX_GHOST);
 		aniIndex = GHOST_ACTION_FLY;
+		break;
+	case GHOST_STATE_HURT:
+		setVx(0);
+		if (timeHurtDelay.isTerminated()) {
+			state = GHOST_STATE_ATTACK;
+		}
 		break;
 	default:
 		break;
@@ -141,6 +168,7 @@ Ghost::Ghost()
 	setDirection(DIRECTION_LEFT);
 	setIsRender(false);
 	timeDelay.init(20);
+	timeHurtDelay.init(500);
 	counterInjured = 0;
 	
 

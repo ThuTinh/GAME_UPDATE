@@ -20,10 +20,11 @@ void Item::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	delayVisible.update();
 	if (itemState == ITEM_STATE_PLAYER_EATED)
 		return;
-	vy += ITEM_GRAVITY*dt;
+	
 
 	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive()  && isAlive && (Weapon::getInstance()->aniIndex == 2 || Weapon::getInstance()->aniIndex == 5 || Weapon::getInstance()->aniIndex == 8 || Weapon::getInstance()->aniIndex == 11 || Weapon::getInstance()->aniIndex == 14|| Weapon::getInstance()->aniIndex == 17)) {
 		setPhysicsEnable(true);
+		setVy(ITEM_VY);
 		itemState = ITEM_STATE_VISIBLE;
 		delayVisible.start();
 		setWidth(animation_set->at(0)->getFrame(0)->GetSprite()->getWidth());
@@ -47,6 +48,7 @@ void Item::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		setAlive(false);
 		//itemState = ITEM_STATE_INVISIBLE;
 	}
+	vy += ITEM_GRAVITY * dt;
 	CGameObject::Update(dt);
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;

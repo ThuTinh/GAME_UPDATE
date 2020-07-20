@@ -100,6 +100,7 @@ public:
 	GameTime hurtTime;
 	DelayTime jumbHurtTimeDelay;
 	DelayTime delayHide;
+	bool isWin;
 	bool switchSceneIn;
 	bool canMakeSub;
 	static Simon* instance;
@@ -135,6 +136,7 @@ public:
 	void Load(LPCWSTR simonFile);
 
 	void setHurt(int directEnemy, float xOfEnemy);
+	void setHurtInStair();
 	void setHide();
 	bool isDie();
 	Simon();
