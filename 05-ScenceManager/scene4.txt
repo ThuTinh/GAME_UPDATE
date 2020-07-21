@@ -8,7 +8,6 @@
 18	textures\misc\axe.png	255	0	128
 5	textures\misc\heart.png		255	0	0
 6	textures\misc\cung.png	255	0	128
-50	textures\misc\die-effect.png	255	0	0
 27	textures\enemy\Boss.png	255	0	128
 4	textures\enemy\zoombie.png	255	0	128
 39	textures\misc\HoiMauL1.png	255	0	0
@@ -98,10 +97,6 @@
 220002	16	0	48	32	23	0	0	0	27
 220003	64	0	32	32	15	1	0	0	27
 
-#die efect
-550001	0	2	11	13	10	3	10	3	50
-550002	11	3	13	12	10	2	10	2	50
-
 # HoiMauL1
 660001	0	0	16	16	0	0	0	0	39
 660002	16	0	16	16	0	0	0	0	39
@@ -158,9 +153,6 @@
 2301	220001	100
 2302	220002	100	220003	100
 
-# die efect
-5501	550001	100	550002	100
-
 # HoiMauL1
 6601	660001	100	660002	100
 
@@ -188,8 +180,6 @@
 23	2201
 #boss
 24	2301	2302
-#die-efect
-50	5501
 #HoiMauL1
 51	6601
 [STAIR]

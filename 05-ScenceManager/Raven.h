@@ -3,7 +3,7 @@
 #define RAVEN_SCORE 200
 #define DISTANCE_X 70
 #define RAVEN_DISTANCE_STOP 10
-#define RAVEN_VX 0.035
+#define RAVEN_VX 0.02
 #define RAVEN_VY 0.005
 #define RAVEN_GRAVITY -0.0005
 enum RAVEN_STATE {

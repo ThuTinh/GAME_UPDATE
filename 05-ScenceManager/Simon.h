@@ -4,9 +4,9 @@
 #include "GameTime.h"
 #include "Item.h"
 #include "ScoreBar.h"
-#define SIMON_VX	0.08
+#define SIMON_VX	0.07
 //0.1f
-#define SIMON_JUMP_Y		0.25f
+#define SIMON_JUMP_Y		0.23f
 #define SIMON_JUMP_DEFLECT_SPEED 0.2f
 #define MARIO_GRAVITY			-0.0007f
 #define SIMON_DIE_DEFLECT_SPEED	 0.5f

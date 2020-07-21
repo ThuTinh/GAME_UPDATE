@@ -2,16 +2,15 @@
 #include "GameObject.h"
 #include"DelayTime.h"
 
-#define IDANI_EXPLORE 46
-#define INDEX_EXPLORE 0
-#define TIMEDELAY 500
-class ExploreEffect : public CGameObject
+#define IDANI 45
+#define TIMEDELAY 400
+class HitEffect : public CGameObject
 {
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	virtual void Render();
 
 public:
 	DelayTime timeDelay;
-	ExploreEffect();
+	HitEffect();
 
 };

@@ -6,6 +6,7 @@
 #include "Die-affect.h"
 #include "Simon.h"
 #include "SubWeaponAttack.h"
+#include"hit-effect.h"
 
 void Ghost::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
@@ -17,6 +18,13 @@ void Ghost::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		state = GHOST_STATE_HURT;
 		timeHurtDelay.start();
 		timeDelay.start();
+		HitEffect* hitEffect = new HitEffect();
+		CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(hitEffect);
+		hitEffect->setX(getMidX());
+		hitEffect->setY(getMidY());
+		hitEffect->setAlive(true);
+		hitEffect->timeDelay.start();
+
 	}
 	if (CGame::GetInstance()->GetCurrentScene()->getAddtionalObject().size() > 0 && isAlive) {
 		vector<LPGAMEOBJECT> listObject = CGame::GetInstance()->GetCurrentScene()->getAddtionalObject();

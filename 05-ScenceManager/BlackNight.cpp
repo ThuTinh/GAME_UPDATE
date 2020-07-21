@@ -7,12 +7,19 @@
 #include "Game.h"
 #include "BigHeart.h"
 #include "SubWeaponAttack.h"
+#include "hit-effect.h"
 void BlackNight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	timeDelay.update();
 	vy += ENEMY_GRAVITY * dt;
 	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive && (Weapon::getInstance()->aniIndex == 2 || Weapon::getInstance()->aniIndex == 5 || Weapon::getInstance()->aniIndex == 8 || Weapon::getInstance()->aniIndex == 11 || Weapon::getInstance()->aniIndex == 14 || Weapon::getInstance()->aniIndex == 17)) {
 		timeDelay.start();
+		HitEffect* hitEffect = new HitEffect();
+		CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(hitEffect);
+		hitEffect->setX(getMidX());
+		hitEffect->setY(getMidY());
+		hitEffect->setAlive(true);
+		hitEffect->timeDelay.start();
 	}
 	if (CGame::GetInstance()->GetCurrentScene()->getAddtionalObject().size() > 0 && isAlive) {
 		vector<LPGAMEOBJECT> listObject = CGame::GetInstance()->GetCurrentScene()->getAddtionalObject();
@@ -21,6 +28,12 @@ void BlackNight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			if (dynamic_cast<SubWeaponAttack*>(listObject[i]) && listObject[i]->isAlive) {
 				if (AABBCheck(listObject[i])) {
 					timeDelay.start();
+					HitEffect* hitEffect = new HitEffect();
+					CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(hitEffect);
+					hitEffect->setX(getMidX());
+					hitEffect->setY(getMidY());
+					hitEffect->setAlive(true);
+					hitEffect->timeDelay.start();
 				}
 			}
 		}

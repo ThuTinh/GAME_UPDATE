@@ -270,6 +270,12 @@
     <ClCompile Include="RestoreBloodL1.cpp">
       <Filter>Object\Item</Filter>
     </ClCompile>
+    <ClCompile Include="hit-effect.cpp">
+      <Filter>Object\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectHideBlackDoubleSub.h.cpp">
+      <Filter>Object\Misc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Brick.h">
@@ -487,6 +493,12 @@
     </ClInclude>
     <ClInclude Include="RestoreBloodL1.h">
       <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="hit-effect.h">
+      <Filter>Object\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectHideBlackDoubleSub.h">
+      <Filter>Object\Misc</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

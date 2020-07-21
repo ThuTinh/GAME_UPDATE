@@ -6,6 +6,9 @@
 103	textures\misc\fireBomb.png	255	0	0
 104	textures\misc\stopWatch.png	255	0	0
 204	textures\misc\money.png	255	0	0
+205	textures\misc\hit.png	255	0	0
+206	textures\misc\fireboom-efect.png	255	0	0
+50	textures\misc\die-effect.png	255	0	0
 
 # id	left	top	with	height	 achorX achorY texture_id
 [SPRITES]
@@ -98,6 +101,19 @@
 444004	39	0	16	8	0	0	0	0	204
 444005	55	0	16	8	0	0	0	0	204
 
+#Hit
+555001	0	0	8	16	0	0	0	0	205
+
+# Fireboom -effect
+666001	0	0	8	16	2	0	0	0	206
+666002	8	0	8	16	2	0	0	0	206
+666003	16	0	16	16	8	0	0	0	206
+666004	32	0	16	16	8	0	0	0	206
+
+#die efect
+550001	0	2	11	13	10	3	10	3	50
+550002	11	3	13	12	10	2	10	2	50
+
 # ani_id	sprite1_id	time1	sprite2_id	time2	...
 
 [ANIMATIONS]
@@ -150,12 +166,20 @@
 44404	444004	100
 #2000
 44405	444005	100
-
+#hit
+55501	555001	100
+#fireboom-efect
+66601	666001	100	666002	100	666003	100	666004	100
+# die efect
+5501	550001	100	550002	100
 # id	ani1	ani2	ani3
 [ANIMATION_SETS]
 # SIMON
 1	100	101	102	103	104	105	106	107	108	109	110	111	112	113
 66	22201	22202	22203	22204
 44	44401	44402	44403	44404	44405
-
+45	55501
+46	66601
+#die-efect
+50	5501
 

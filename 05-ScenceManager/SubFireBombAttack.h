@@ -2,10 +2,10 @@
 #include"SubWeaponAttack.h"
 #define ANI 66
 #define INDEX 2
-#define VX_AXE 0.06
-#define VY_AXE 0.1
-#define AXE_GRAVITY -0.0009
-#define TIME_DELAY_AXE 550
+#define VX_AXE 0.07
+#define VY_AXE 0.15
+#define AXE_GRAVITY -0.0008
+#define TIME_DELAY_FRIE_BOOM 550
 class SubFireBombAttack : public SubWeaponAttack
 {
 public:

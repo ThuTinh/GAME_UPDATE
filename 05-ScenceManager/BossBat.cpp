@@ -5,6 +5,7 @@
 #include"Game.h"
 #include "SubWeaponAttack.h"
 #include"PlayScence.h"
+#include "hit-effect.h"
 #define MAX(a,b) (a>b? a : b)
 #define MIN(a,b) (a<b? a : b)
 extern int getRandom(int start, int end);
@@ -185,6 +186,12 @@ void BossBat::checkWithSimon()
 	hurtDelay.update();
 	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive && (Weapon::getInstance()->aniIndex == 2 || Weapon::getInstance()->aniIndex == 5 || Weapon::getInstance()->aniIndex == 8 || Weapon::getInstance()->aniIndex == 11 || Weapon::getInstance()->aniIndex == 14 || Weapon::getInstance()->aniIndex == 17)) {
 		hurtDelay.start();
+		HitEffect* hitEffect = new HitEffect();
+		CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(hitEffect);
+		hitEffect->setX(getMidX());
+		hitEffect->setY(getMidY());
+		hitEffect->setAlive(true);
+		hitEffect->timeDelay.start();
 		if (ScoreBar::getInstance()->getBossHealth() == 1)
 		{
 			makeEffectDie();
@@ -206,6 +213,12 @@ void BossBat::checkWithSimon()
 					{
 						
 						hurtDelay.start();
+						HitEffect* hitEffect = new HitEffect();
+						CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(hitEffect);
+						hitEffect->setX(getMidX());
+						hitEffect->setY(getMidY());
+						hitEffect->setAlive(true);
+						hitEffect->timeDelay.start();
 					}
 					else
 					{

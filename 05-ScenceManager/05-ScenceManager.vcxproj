@@ -153,7 +153,9 @@
     <ClCompile Include="GoldPotion.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="Ground.cpp" />
+    <ClCompile Include="hit-effect.cpp" />
     <ClCompile Include="money-effect.cpp" />
+    <ClCompile Include="ObjectHideBlackDoubleSub.h.cpp" />
     <ClCompile Include="RestoreBlood.cpp" />
     <ClCompile Include="RestoreBloodL1.cpp" />
     <ClCompile Include="StopWatch.cpp" />
@@ -224,7 +226,9 @@
     <ClInclude Include="GoldPotion.h" />
     <ClInclude Include="Gound.h" />
     <ClInclude Include="Grid.h" />
+    <ClInclude Include="hit-effect.h" />
     <ClInclude Include="money-effect.h" />
+    <ClInclude Include="ObjectHideBlackDoubleSub.h" />
     <ClInclude Include="RestoreBlood.h" />
     <ClInclude Include="RestoreBloodL1.h" />
     <ClInclude Include="StopWatch.h" />

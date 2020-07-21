@@ -117,7 +117,7 @@ void Raven::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 				vx = RAVEN_VX;
 				setDirection(DIRECTION_RIGHT);
 			}
-			vy = (vx * (yDes - getY()) / (xDes - getX() + 4));
+			vy = (vx * (yDes - getY()) / (xDes - getX() -2));
 			/*setVy(RAVEN_VY);
 			setVx(getDirection() * RAVEN_VX);*/
 			aniIndex = RAVEN_ACTION_FLY;

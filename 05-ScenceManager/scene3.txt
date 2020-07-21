@@ -14,7 +14,6 @@
 12	textures\enemy\fleaman.png	255	0	128
 32	textures\enemy\ghost.png	255	0	128
 13	textures\enemy\raven.png	255	0	128
-50	textures\misc\die-effect.png	255	0	0
 51	textures\enemy\WhiteBone.png	255	0	128
 52	textures\misc\stopWatch.png	255	0	0
 56	textures\misc\restoreBlood.png	255	0	0 
@@ -124,10 +123,6 @@
 200003	32	0	16	16	0	0	0	0	13
 200004	48	0	16	16	0	0	0	0	13
 
-#die efect
-550001	0	2	11	13	10	3	10	3	50
-550002	11	3	13	12	10	2	10	2	50
-
 #WhiteBone
 660001	0	0	6	16	0	0	0	0	51
 660002	6	3	15	13	0	0	0	0	51
@@ -207,8 +202,6 @@
 #TienTim
 2101	70009	100
 2102	70010	100	70011	100	70012	100
-# die efect
-5501	550001	100	550002	100
 
 #whiteBone
 6601	660001	100	660002	100	660003	100
@@ -249,9 +242,6 @@
 21	2001	2002
 #TienTim
 22	2101	2102
-#die-efect
-50	5501
-
 #white bone 
 51	6601
 

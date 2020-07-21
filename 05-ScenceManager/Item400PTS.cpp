@@ -14,7 +14,7 @@ void Item400PTS::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		effect->setX(getMidX());
 		effect->setY(getMidY());
 		effect->setAlive(true);
-		effect->aniIndex = 3;
+		effect->aniIndex = 1;
 		effect->timeDelay.start();
 		this->onPlayerContact();
 	}

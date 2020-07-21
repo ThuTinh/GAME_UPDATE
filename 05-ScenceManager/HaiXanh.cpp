@@ -2,7 +2,7 @@
 #include"Simon.h"
 void HaiXanh::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	setAlive(false);
+//	setAlive(false);
 	Item::Update(dt, coObjects);
 	if (AABBCheck(Simon::getInstance()) && getItemState() == ITEM_STATE_VISIBLE) {
 		setItemState(ITEM_STATE_PLAYER_EATED);
@@ -17,7 +17,7 @@ void HaiXanh::onPlayerContact()
 
 HaiXanh::HaiXanh()
 {
-	setAlive(false);
+	//setAlive(false);
 }
 
 HaiXanh::~HaiXanh()
