@@ -186,15 +186,10 @@ void BossBat::checkWithSimon()
 	hurtDelay.update();
 	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive && (Weapon::getInstance()->aniIndex == 2 || Weapon::getInstance()->aniIndex == 5 || Weapon::getInstance()->aniIndex == 8 || Weapon::getInstance()->aniIndex == 11 || Weapon::getInstance()->aniIndex == 14 || Weapon::getInstance()->aniIndex == 17)) {
 		hurtDelay.start();
-		HitEffect* hitEffect = new HitEffect();
-		CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(hitEffect);
-		hitEffect->setX(getMidX());
-		hitEffect->setY(getMidY());
-		hitEffect->setAlive(true);
-		hitEffect->timeDelay.start();
+		makeHitEffect();
 		if (ScoreBar::getInstance()->getBossHealth() == 1)
 		{
-			makeEffectDie();
+			makeDieEffect();
 			return;
 		}
 	}
@@ -211,18 +206,12 @@ void BossBat::checkWithSimon()
 				if (AABBCheck(listObject[i])) {
 					if (ScoreBar::getInstance()->getBossHealth() > 1)
 					{
-						
 						hurtDelay.start();
-						HitEffect* hitEffect = new HitEffect();
-						CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(hitEffect);
-						hitEffect->setX(getMidX());
-						hitEffect->setY(getMidY());
-						hitEffect->setAlive(true);
-						hitEffect->timeDelay.start();
+						makeHitEffect();
 					}
 					else
 					{
-						makeEffectDie();
+						makeDieEffect();
 						return;
 					}
 				}
@@ -233,11 +222,10 @@ void BossBat::checkWithSimon()
 		if (ScoreBar::getInstance()->getBossHealth()  > 2)
 		{
 			ScoreBar::getInstance()->increaseBossHealth(-2);
-
 		}
 		else
 		{
-			makeEffectDie();
+			makeDieEffect();
 			return;
 		}
 	}
@@ -248,7 +236,7 @@ void BossBat::onDecreaseHealth()
 	ScoreBar::getInstance()->increaseBossHealth(-16);
 }
 
-void BossBat::makeEffectDie()
+void BossBat::makeDieEffect()
 {
 	ScoreBar::getInstance()->increaseBossHealth(-2);
 	DieEffect* dieEffect = new DieEffect();

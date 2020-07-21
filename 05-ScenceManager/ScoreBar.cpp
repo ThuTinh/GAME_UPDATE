@@ -107,7 +107,6 @@ void ScoreBar::renderSubWeapon()
 ScoreBar* ScoreBar::instance = 0;
 void ScoreBar::_ParseSection_TEXTURE_MISC(string line)
 {
-
 	vector<string> tokens = split(line);
 
 	if (tokens.size() < 5) return; // skip invalid lines

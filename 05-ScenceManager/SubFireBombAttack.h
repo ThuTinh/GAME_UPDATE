@@ -13,6 +13,7 @@ public:
 	~SubFireBombAttack();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	void Render();
+	void makeExploreEffect(LPGAMEOBJECT obj);
 private:
 
 };

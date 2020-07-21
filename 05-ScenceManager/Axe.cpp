@@ -7,7 +7,7 @@ void Axe::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	if (AABBCheck(Simon::getInstance()) && getItemState() == ITEM_STATE_VISIBLE) {
 		setItemState(ITEM_STATE_PLAYER_EATED);
 		setAlive(false);
-		this->onPlayerContact();
+		onPlayerContact();
 	}
 }
 

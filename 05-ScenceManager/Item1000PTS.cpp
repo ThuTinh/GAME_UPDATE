@@ -19,14 +19,15 @@ void Item1000PTS::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		if (AABBCheck(Simon::getInstance()) && getItemState() == ITEM_STATE_VISIBLE) {
 			setItemState(ITEM_STATE_PLAYER_EATED);
 			setAlive(false);
-			MoneyEffect* effect = new MoneyEffect();
+			/*MoneyEffect* effect = new MoneyEffect();
 			CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(effect);
 			effect->setX(getMidX()+10);
 			effect->setY(getMidY()+10);
 			effect->setAlive(true);
 			effect->aniIndex = 3;
-			effect->timeDelay.start();
+			effect->timeDelay.start();*/
 			onPlayerContact();
+			makeMoneyEffect(3);
 		}
 	}
 }

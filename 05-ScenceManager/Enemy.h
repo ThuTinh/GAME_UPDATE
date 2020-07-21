@@ -14,6 +14,7 @@ public:
 	void setDirectionFollowPlayer();
 	virtual void onPlayerContact();
 	virtual void restorePosition() ;
+
 	Enemy();
 	~Enemy();
 

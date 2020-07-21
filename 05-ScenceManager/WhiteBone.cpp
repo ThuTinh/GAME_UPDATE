@@ -57,8 +57,6 @@ WhiteBone::WhiteBone()
 	timeDelay.init(TIME_DELAY);
 	timeCheck.init(TIME_CHECK);
 	animation_set = CAnimationSets::GetInstance()->Get(WHITE_BONE_ANI);
-
-
 }
 
 WhiteBone::~WhiteBone()

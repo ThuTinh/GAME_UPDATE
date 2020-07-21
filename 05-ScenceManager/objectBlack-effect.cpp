@@ -14,7 +14,6 @@ void ObjectBlackEffect::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		setAlive(false);
 	}
 	vy += GRAVITY_EFFECT * dt;
-
 }
 
 void ObjectBlackEffect::Render()
@@ -23,8 +22,6 @@ void ObjectBlackEffect::Render()
 		animation_set->at(0)->Render(x, y, frameIndex, DIRECTION_LEFT);
 	}
 }
-
-
 
 ObjectBlackEffect::ObjectBlackEffect()
 {

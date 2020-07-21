@@ -7,11 +7,10 @@
 #define TIMEDELAY 500
 class ExploreEffect : public CGameObject
 {
-	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
-	virtual void Render();
-
 public:
 	DelayTime timeDelay;
+	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
+	virtual void Render();
 	ExploreEffect();
 
 };

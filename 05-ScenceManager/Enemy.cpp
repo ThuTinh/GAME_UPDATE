@@ -22,16 +22,6 @@ void Enemy::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		{
 			Simon::getInstance()->setHurtInStair();
 		}
-		
-	
-	/*	if (Simon::getInstance()->getX() > getX()) {
-			Simon::getInstance()->hurtDirection = 1;
-		}
-		else
-		{
-			Simon::getInstance()->hurtDirection = -1;
-		}*/
-		
 	}
 	if (CGame::GetInstance()->GetCurrentScene()->getAddtionalObject().size() > 0) {
 		vector<LPGAMEOBJECT> listObject = CGame::GetInstance()->GetCurrentScene()->getAddtionalObject();
@@ -41,12 +31,7 @@ void Enemy::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 				if (AABBCheck(listObject[i])) {
 					setAlive(false);
 					ScoreBar::getInstance()->increaseScore(ENEMY_SCORE);
-					DieEffect* dieEffect = new DieEffect();
-					CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(dieEffect);
-					dieEffect->setX(getMidX());
-					dieEffect->setY(getMidY());
-					dieEffect->setAlive(true);
-					dieEffect->timeDelay.start();
+					makeDieEffect();
 					int r = rand();
 					if (r % 2 == 0) {
 						BigHeart* bigHeart = new BigHeart();
@@ -61,7 +46,6 @@ void Enemy::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		}
 	}
 	CGameObject::Update(dt);
-
 }
 
 void Enemy::Render()

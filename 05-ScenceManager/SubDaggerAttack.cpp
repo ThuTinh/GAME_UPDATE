@@ -3,9 +3,7 @@
 #include"ScoreBar.h"
 void SubDaggerAttack::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-
 	SubWeaponAttack::Update(dt, coObjects);
-
 }
 
 void SubDaggerAttack::Render()

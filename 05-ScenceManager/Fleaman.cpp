@@ -13,24 +13,16 @@ void Fleaman::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive && (Weapon::getInstance()->aniIndex == 2 || Weapon::getInstance()->aniIndex == 5 || Weapon::getInstance()->aniIndex == 8 || Weapon::getInstance()->aniIndex == 11 || Weapon::getInstance()->aniIndex == 14 || Weapon::getInstance()->aniIndex == 17)) {
 		setAlive(false);
 		ScoreBar::getInstance()->increaseScore(FLEAMAN_SCORE);
-		DieEffect* dieEffect = new DieEffect();
-		CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(dieEffect);
-		dieEffect->setX(getMidX());
-		dieEffect->setY(getMidY());
-		dieEffect->setAlive(true);
-		dieEffect->timeDelay.start();
+		makeDieEffect();
 	}
 	pauseAnimation = false;
 	if (!CGame::GetInstance()->GetCurrentScene()->getStopUpdate()) {
 		vector<LPCOLLISIONEVENT> coEvents;
 		vector<LPCOLLISIONEVENT> coEventsResult;
-
 		coEvents.clear();
-
 		// turn off collision when die 
 		if (isAlive)
 			CalcPotentialCollisions(coObjects, coEvents);
-
 		// No collision occured, proceed normally
 		if (coEvents.size() == 0)
 		{
@@ -118,7 +110,6 @@ void Fleaman::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			default:
 				break;
 			}
-
 		}
 	}
 	else

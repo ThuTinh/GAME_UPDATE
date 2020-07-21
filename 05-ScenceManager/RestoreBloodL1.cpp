@@ -6,7 +6,6 @@
 #include "Gound.h"
 void RestoreBloodL1::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	
 	if (getItemState() == ITEM_STATE_PLAYER_EATED)
 		return;
 	vy += ITEM_GRAVITY * dt;
@@ -25,8 +24,6 @@ void RestoreBloodL1::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	// turn off collision when die 
 	if (isAlive)
 		CalcPotentialCollisions(coObjects, coEvents);
-
-
 	// No collision occured, proceed normally
 	if (coEvents.size() == 0)
 	{

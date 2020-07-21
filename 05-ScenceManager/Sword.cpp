@@ -8,17 +8,12 @@ void Sword::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		setItemState(ITEM_STATE_PLAYER_EATED);
 		setAlive(false);
 		onPlayerContact();
-
-
 	}
 }
 
 void Sword::onPlayerContact()
 {
-	//	Simon::getInstance()->setSubWeapon(this);
-	//ScoreBar::getInstance()->setSubWeapon(this);
 	ScoreBar::getInstance()->setTypeSubWeapon(TYPE_SUBWEAPON::SWORD);
-
 }
 
 Sword::Sword()

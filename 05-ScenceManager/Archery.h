@@ -6,10 +6,6 @@ public:
 	Archery();
 	~Archery();
 	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) override;
-	void onPlayerContact() override;
-
-
-private:
 
 };
 

@@ -8,7 +8,7 @@ void TripbleSub::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		setAlive(false);
 		Simon::getInstance()->setDoublSub(false);
 		Simon::getInstance()->setTripbleSub(true);
-		this->onPlayerContact();
+		onPlayerContact();
 	}
 }
 

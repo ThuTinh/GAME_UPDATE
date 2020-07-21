@@ -6,11 +6,12 @@
 #define TIMEDELAY 400
 class HitEffect : public CGameObject
 {
-	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
-	virtual void Render();
+
 
 public:
 	DelayTime timeDelay;
+	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
+	virtual void Render();
 	HitEffect();
 
 };

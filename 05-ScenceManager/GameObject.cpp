@@ -6,7 +6,8 @@
 #include "Game.h"
 #include "GameObject.h"
 #include "Sprites.h"
-
+#include "Die-affect.h"
+#include "hit-effect.h"
 CGameObject::CGameObject()
 {
 	x = y = 0;
@@ -198,6 +199,26 @@ void CGameObject::setStopCollision(bool stopCollision)
 bool CGameObject::getStopCollision()
 {
 	return  stopCollision;
+}
+
+void CGameObject::makeDieEffect()
+{
+	DieEffect* dieEffect = new DieEffect();
+	CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(dieEffect);
+	dieEffect->setX(getMidX());
+	dieEffect->setY(getMidY());
+	dieEffect->setAlive(true);
+	dieEffect->timeDelay.start();
+}
+
+void CGameObject::makeHitEffect()
+{
+	HitEffect* hitEffect = new HitEffect();
+	CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(hitEffect);
+	hitEffect->setX(getMidX());
+	hitEffect->setY(getMidY());
+	hitEffect->setAlive(true);
+	hitEffect->timeDelay.start();
 }
 
 /*

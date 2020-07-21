@@ -17,6 +17,7 @@ public:
 	void onCollision(CGameObject* other, float collisionTime, int nx, int ny) override;
 	SKETON_STATE getStateSketon();
 	void setStateSketon(SKETON_STATE state);
+	void makeWhiteBone();
 	DelayTime whiteBoneDelay;
 	GameTime timeThrow;
 	DelayTime timeJumb;

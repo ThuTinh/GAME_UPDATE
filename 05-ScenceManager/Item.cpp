@@ -4,6 +4,7 @@
 #include "Game.h"
 #include "BigHeart.h"
 #include "SubWeaponAttack.h"
+#include "money-effect.h"
 Item::Item()
 {
 	itemState = ITEM_STATE_INVISIBLE;
@@ -135,4 +136,15 @@ void Item::restorePosition()
 	itemState = ITEM_STATE_INVISIBLE;
 	setPhysicsEnable(false);
 	
+}
+
+void Item::makeMoneyEffect(int aniIdx)
+{
+	MoneyEffect* effect = new MoneyEffect();
+	CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(effect);
+	effect->setX(getMidX() + 10);
+	effect->setY(getMidY() + 10);
+	effect->setAlive(true);
+	effect->aniIndex = aniIdx;
+	effect->timeDelay.start();
 }

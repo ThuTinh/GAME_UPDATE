@@ -41,7 +41,7 @@ public:
 	void calculateOtherPoint();
 	void checkWithSimon();
 	void onDecreaseHealth();
-	void makeEffectDie();
+	void makeDieEffect() override;
 	void restore();
 
 	void preventGoOutsideCamera();

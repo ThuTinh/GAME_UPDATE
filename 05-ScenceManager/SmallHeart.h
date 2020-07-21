@@ -1,8 +1,6 @@
 #pragma once
 #include"Item.h"
 #define NUMBER_HEART 1
-
-
 class SmallHeart : public Item
 {
 public:

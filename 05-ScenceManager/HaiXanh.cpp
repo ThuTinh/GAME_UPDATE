@@ -8,13 +8,9 @@ void HaiXanh::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		Simon::getInstance()->setDoublSub(true);
 		Simon::getInstance()->setTripbleSub(false);
 		setAlive(false);
-		this->onPlayerContact();
 	}
 }
 
-void HaiXanh::onPlayerContact()
-{
-}
 
 HaiXanh::HaiXanh()
 {

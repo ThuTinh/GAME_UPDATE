@@ -148,6 +148,8 @@ public:
 	bool getPauseAnimation();
 	void setStopCollision( bool stopCollision);
 	bool getStopCollision();
+	virtual void makeDieEffect();
+	virtual void makeHitEffect();
 	~CGameObject();
 };
 

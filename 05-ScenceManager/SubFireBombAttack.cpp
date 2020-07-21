@@ -27,17 +27,10 @@ void SubFireBombAttack::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		{
 			LPCOLLISIONEVENT e = coEvents[i];
 			if (dynamic_cast<Ground*>(e->obj)) {
-				ExploreEffect* effect = new ExploreEffect();
-				CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(effect);
-				effect->setX(getMidX());
-				effect->setY(e->obj->getY()+15);
-				effect->setAlive(true);
-				effect->setPhysicsEnable(true);
-				effect->timeDelay.start();
+				makeExploreEffect(e->obj);
 				Simon::getInstance()->canMakeSub = true;
 				setAlive(false);
 			}
-			
 		}
 	}
 	else
@@ -57,6 +50,17 @@ void SubFireBombAttack::Render()
 {
 	if (isAlive)
 		animation_set->at(INDEX)->Render(x, y, frameIndex, direction);
+}
+
+void SubFireBombAttack::makeExploreEffect(LPGAMEOBJECT obj)
+{
+	ExploreEffect* effect = new ExploreEffect();
+	CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(effect);
+	effect->setX(getMidX());
+	effect->setY(obj->getY() + 15);
+	effect->setAlive(true);
+	effect->setPhysicsEnable(true);
+	effect->timeDelay.start();
 }
 
 SubFireBombAttack::SubFireBombAttack()

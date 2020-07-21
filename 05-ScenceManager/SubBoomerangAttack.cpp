@@ -4,11 +4,9 @@
 #include "Camera.h"
 void SubBoomerangAttack::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-
 	SubWeaponAttack::Update(dt, coObjects);
 	if (getX() >= Camera::getInstance()->getX() + Camera::getInstance()->getWidth()) {
 		setVx(-VX);
-
 	}
 	if ( Camera::getInstance()->getX() > getX()) {
 		setVx(VX);

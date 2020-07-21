@@ -11,9 +11,9 @@ enum ITEM_STATE
 };
 class Item : public CGameObject
 {
+protected:
 	ITEM_STATE itemState;
 	virtual void Render();
-protected:
 	DelayTime delayVisible;
 
 public:
@@ -23,5 +23,6 @@ public:
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	ITEM_STATE getItemState();
 	virtual void onPlayerContact();
-	 void restorePosition() override;
+	void restorePosition() override;
+	virtual void makeMoneyEffect(int aniIdx);
 };

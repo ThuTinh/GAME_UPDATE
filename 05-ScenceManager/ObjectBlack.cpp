@@ -17,7 +17,6 @@ void ObjectBlack::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		}*/
 		isRender = true;
 	}
-
 }
 
 void ObjectBlack::Render()

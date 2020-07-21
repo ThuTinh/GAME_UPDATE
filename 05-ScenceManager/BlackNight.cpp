@@ -14,12 +14,7 @@ void BlackNight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	vy += ENEMY_GRAVITY * dt;
 	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive && (Weapon::getInstance()->aniIndex == 2 || Weapon::getInstance()->aniIndex == 5 || Weapon::getInstance()->aniIndex == 8 || Weapon::getInstance()->aniIndex == 11 || Weapon::getInstance()->aniIndex == 14 || Weapon::getInstance()->aniIndex == 17)) {
 		timeDelay.start();
-		HitEffect* hitEffect = new HitEffect();
-		CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(hitEffect);
-		hitEffect->setX(getMidX());
-		hitEffect->setY(getMidY());
-		hitEffect->setAlive(true);
-		hitEffect->timeDelay.start();
+		makeHitEffect();
 	}
 	if (CGame::GetInstance()->GetCurrentScene()->getAddtionalObject().size() > 0 && isAlive) {
 		vector<LPGAMEOBJECT> listObject = CGame::GetInstance()->GetCurrentScene()->getAddtionalObject();
@@ -28,12 +23,7 @@ void BlackNight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			if (dynamic_cast<SubWeaponAttack*>(listObject[i]) && listObject[i]->isAlive) {
 				if (AABBCheck(listObject[i])) {
 					timeDelay.start();
-					HitEffect* hitEffect = new HitEffect();
-					CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(hitEffect);
-					hitEffect->setX(getMidX());
-					hitEffect->setY(getMidY());
-					hitEffect->setAlive(true);
-					hitEffect->timeDelay.start();
+					makeHitEffect();
 				}
 			}
 		}
@@ -43,12 +33,7 @@ void BlackNight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		if (counterInjured >= COUNTER_LIFE) {
 			setAlive(false);
 			ScoreBar::getInstance()->increaseScore(BLACKNIGHT_SCORE);
-			DieEffect* dieEffect = new DieEffect();
-			CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(dieEffect);
-			dieEffect->setX(getMidX());
-			dieEffect->setY(getMidY());
-			dieEffect->setAlive(true);
-			dieEffect->timeDelay.start();
+			makeDieEffect();
 			int r = rand();
 			if (r % 2 == 1) {
 				BigHeart* bigHeart = new BigHeart();
@@ -58,7 +43,7 @@ void BlackNight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 				bigHeart->setY(getMidY());
 				bigHeart->setAlive(true);
 				bigHeart->setItemState(ITEM_STATE_VISIBLE);
-		}
+			}
 		}
 	}
 	/*Enemy::Update(dt, coObjects);*/
@@ -75,8 +60,6 @@ void BlackNight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	// turn off collision when die 
 	if (isAlive)
 		CalcPotentialCollisions(coObjects, coEvents);
-	
-
 	// No collision occured, proceed normally
 	if (coEvents.size() == 0)
 	{
@@ -110,7 +93,6 @@ void BlackNight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			else
 			{
 				onCollision(e->obj, e->t, e->nx, e->ny);
-
 			}
 		}
 	}

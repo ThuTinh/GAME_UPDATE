@@ -18,12 +18,7 @@ void Ghost::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		state = GHOST_STATE_HURT;
 		timeHurtDelay.start();
 		timeDelay.start();
-		HitEffect* hitEffect = new HitEffect();
-		CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(hitEffect);
-		hitEffect->setX(getMidX());
-		hitEffect->setY(getMidY());
-		hitEffect->setAlive(true);
-		hitEffect->timeDelay.start();
+		makeHitEffect();
 
 	}
 	if (CGame::GetInstance()->GetCurrentScene()->getAddtionalObject().size() > 0 && isAlive) {
@@ -46,12 +41,7 @@ void Ghost::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			if (counterInjured >= COUNTER_LIFE_NOMAL) {
 				setAlive(false);
 				ScoreBar::getInstance()->increaseScore(GHOST_SCORE);
-				DieEffect* dieEffect = new DieEffect();
-				CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(dieEffect);
-				dieEffect->setX(getMidX());
-				dieEffect->setY(getMidY());
-				dieEffect->setAlive(true);
-				dieEffect->timeDelay.start();
+				makeDieEffect();
 			}
 		}
 		else
@@ -59,12 +49,7 @@ void Ghost::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			if (counterInjured >= COUNTER_LIFE) {
 				setAlive(false);
 				ScoreBar::getInstance()->increaseScore(GHOST_SCORE);
-				DieEffect* dieEffect = new DieEffect();
-				CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(dieEffect);
-				dieEffect->setX(getMidX());
-				dieEffect->setY(getMidY());
-				dieEffect->setAlive(true);
-				dieEffect->timeDelay.start();
+				makeDieEffect();
 			}
 		}
 		
@@ -74,13 +59,9 @@ void Ghost::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		vector<LPCOLLISIONEVENT> coEvents;
 		vector<LPCOLLISIONEVENT> coEventsResult;
 		coEvents.clear();
-
-
 		// turn off collision when die 
 		if (isAlive)
 			CalcPotentialCollisions(coObjects, coEvents);
-
-
 		// No collision occured, proceed normally
 		if (coEvents.size() == 0)
 		{
@@ -111,15 +92,13 @@ void Ghost::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		if (abs(Simon::getInstance()->getX() - getX()) > GHOST_DISTANCE_STOP) {
 			setDirectionFollowPlayer();
 		}
-
 		//setDirectionFollowPlayer();
-
 	}
 	else
 	{
 		pauseAnimation = true;
 	}
-	}
+  }
 	switch (state)
 	{
 	case GHOST_STATE_STAND:
@@ -128,7 +107,6 @@ void Ghost::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			state = GHOST_STATE_ATTACK;
 			setIsRender(true);
 			setPhysicsEnable(true);
-
 		}
 		break;
 	case GHOST_STATE_ATTACK:	
@@ -144,7 +122,6 @@ void Ghost::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	default:
 		break;
 	}
-
 }
 
 void Ghost::Render()
@@ -178,8 +155,6 @@ Ghost::Ghost()
 	timeDelay.init(20);
 	timeHurtDelay.init(500);
 	counterInjured = 0;
-	
-
 }
 
 Ghost::~Ghost()
