@@ -52,6 +52,8 @@ class Simon : public CGameObject
 	int playerStairDestx, playerStairDesty;
 	int playerStairState;
 	int stairDirection;
+	bool isDoubleSub;
+	bool isTripbleSub;
 	/* là lần di chuyển cuối cùng của player. sau khi di chuyển player sẽ thoát khỏi stair  */
 	bool isLastRunStair;
 	void _ParseSection_TEXTURES(string line);
@@ -103,6 +105,7 @@ public:
 	bool isWin;
 	bool switchSceneIn;
 	bool canMakeSub;
+	int numberSubThrow;
 	static Simon* instance;
 	static Simon* getInstance();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *colliable_objects = NULL);
@@ -118,6 +121,10 @@ public:
 	void addNumberArchery(int num);
 	void SetState(int state);
 	int getState();
+	void setDoublSub(bool isDoubleSub);
+	void setTripbleSub(bool isTripbleSub);
+	bool getDoubleSub();
+	bool getTripbleSub();
 	void makeSubWeapon(TYPE_SUBWEAPON type);
 	void setAnChorRight();
 	void setAnChorLeft();

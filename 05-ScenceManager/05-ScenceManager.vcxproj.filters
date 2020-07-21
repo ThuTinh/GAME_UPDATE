@@ -273,8 +273,8 @@
     <ClCompile Include="hit-effect.cpp">
       <Filter>Object\Misc</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectHideBlackDoubleSub.h.cpp">
-      <Filter>Object\Misc</Filter>
+    <ClCompile Include="TripbleSub.cpp">
+      <Filter>Object\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -497,8 +497,8 @@
     <ClInclude Include="hit-effect.h">
       <Filter>Object\Misc</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectHideBlackDoubleSub.h">
-      <Filter>Object\Misc</Filter>
+    <ClInclude Include="TripbleSub.h">
+      <Filter>Object\Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

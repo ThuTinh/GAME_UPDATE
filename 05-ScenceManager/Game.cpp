@@ -404,5 +404,9 @@ void CGame::SwitchScene(int scene_id)
 	//ScoreBar::getInstance()->setHeartCount(5);
 	//ScoreBar::getInstance()->setTypeSubWeapon(DEFAUL);
 	Simon::getInstance()->setNumberObjectBlack(0);
+	Simon::getInstance()->setDoublSub(false);
+	Simon::getInstance()->setTripbleSub(false);
+
+
 
 }

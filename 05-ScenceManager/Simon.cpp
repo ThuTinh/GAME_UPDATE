@@ -150,6 +150,7 @@ Simon::Simon() : CGameObject()
 	setCollitionType(COLLISION_TYPE_PLAYER);
 	collitionTypeToCheck.push_back(COLLISION_TYPE_GROUND);
 //	collitionTypeToCheck.push_back(COLLISION_TYPE_ENEMY);
+	numberSubThrow = 0;
 
 
 	hurtTimeDelay.init(1200);
@@ -391,19 +392,55 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 					{
 						if (isUpDown) {
 							if (isAttack)    {
-								if (ScoreBar::getInstance()->getHeartCount() <= 0 || ScoreBar::getInstance()->getTypeSubWeapon() == DEFAUL || !canMakeSub){
+								if (ScoreBar::getInstance()->getHeartCount() <= 0 || ScoreBar::getInstance()->getTypeSubWeapon() == DEFAUL || (!canMakeSub && !(isDoubleSub || isTripbleSub ))){
 									state = SIMON_STATE_ATTACK_STAND;
 									setVx(0);
 									attackStandDelay.start();
 								}
 								else
 								{
+									if (isDoubleSub) {
+										if (numberSubThrow >=2)
+										{
+											numberSubThrow = 0;
+											state = SIMON_STATE_ATTACK_STAND;
+											setVx(0);
+											attackStandDelay.start();
+										}
+										else
+										{
+											state = SIMON_STATE_USE_SUB;
+											attackUseSub.start();
+											makeSubWeapon(ScoreBar::getInstance()->getTypeSubWeapon());
+										}
+									}
+									else
+									{
+										if (isTripbleSub) {
+											if (numberSubThrow >= 3)
+											{
+												numberSubThrow = 0;
+												state = SIMON_STATE_ATTACK_STAND;
+												setVx(0);
+												attackStandDelay.start();
+											}
+											else
+											{
+												state = SIMON_STATE_USE_SUB;
+												attackUseSub.start();
+												makeSubWeapon(ScoreBar::getInstance()->getTypeSubWeapon());
+											}
+										}
+										else
+										{
+											state = SIMON_STATE_USE_SUB;
+											attackUseSub.start();
+											makeSubWeapon(ScoreBar::getInstance()->getTypeSubWeapon());
+										}
+									}
 									
-										state = SIMON_STATE_USE_SUB;
-										attackUseSub.start();
-										makeSubWeapon(ScoreBar::getInstance()->getTypeSubWeapon());
-									
-									
+								
+										
 								}
 							}
 							else {
@@ -443,15 +480,55 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			if (isUpDown) {
 				if (isAttack) {
 					
-					if (ScoreBar::getInstance()->getHeartCount() <= 0 || ScoreBar::getInstance()->getTypeSubWeapon() == DEFAUL || !canMakeSub) {
-						state = SIMON_STATE_ATTACK_JUMP;
-						attacJumbDelay.start();
+					if (ScoreBar::getInstance()->getHeartCount() <= 0 || ScoreBar::getInstance()->getTypeSubWeapon() == DEFAUL || (!canMakeSub && !(isDoubleSub || isTripbleSub))) {
+						state = SIMON_STATE_ATTACK_STAND;
+						setVx(0);
+						attackStandDelay.start();
 					}
 					else
 					{
-						state = SIMON_STATE_USE_SUB;
-						attackUseSub.start();
-						makeSubWeapon(ScoreBar::getInstance()->getTypeSubWeapon());
+						if (isDoubleSub) {
+							if (numberSubThrow >= 2)
+							{
+								numberSubThrow = 0;
+								state = SIMON_STATE_ATTACK_STAND;
+								setVx(0);
+								attackStandDelay.start();
+							}
+							else
+							{
+								state = SIMON_STATE_USE_SUB;
+								attackUseSub.start();
+								makeSubWeapon(ScoreBar::getInstance()->getTypeSubWeapon());
+							}
+						}
+						else
+						{
+							if (isTripbleSub) {
+								if (numberSubThrow >= 3)
+								{
+									numberSubThrow = 0;
+									state = SIMON_STATE_ATTACK_STAND;
+									setVx(0);
+									attackStandDelay.start();
+								}
+								else
+								{
+									state = SIMON_STATE_USE_SUB;
+									attackUseSub.start();
+									makeSubWeapon(ScoreBar::getInstance()->getTypeSubWeapon());
+								}
+							}
+							else
+							{
+								state = SIMON_STATE_USE_SUB;
+								attackUseSub.start();
+								makeSubWeapon(ScoreBar::getInstance()->getTypeSubWeapon());
+							}
+						}
+
+
+
 					}
 				}
 			}
@@ -766,6 +843,9 @@ void Simon::Render()
 void Simon::makeSubWeapon(TYPE_SUBWEAPON type) {
 	SubWeaponAttack* sub;
 	Simon::getInstance()->canMakeSub = false;
+	if (isDoubleSub || isTripbleSub) {
+		++numberSubThrow;
+	}
 	switch (type)
 	{
 	case SWORD:
@@ -886,6 +966,26 @@ void Simon::SetState(int state)
 int Simon::getState()
 {
 	return state;
+}
+
+void Simon::setDoublSub(bool isDoubleSub)
+{
+	this->isDoubleSub = isDoubleSub;
+}
+
+void Simon::setTripbleSub(bool isTripbleSub)
+{
+	this->isTripbleSub = isTripbleSub;
+}
+
+bool Simon::getDoubleSub()
+{
+	return isDoubleSub;
+}
+
+bool Simon::getTripbleSub()
+{
+	return isTripbleSub;
 }
 
 void Simon::setAnChorRight()

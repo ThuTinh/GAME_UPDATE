@@ -136,6 +136,7 @@ Space* CPlayScene::getCurentSpace()
 #define OBJECT_TYPE_RESTORE_BLOOD 56
 #define OBJECT_TYPE_RESTORE_BLOODL1 39
 
+
 #define MAX_SCENE_LINE 1024
 
 void CPlayScene::_ParseSection_TEXTURES(string line)
