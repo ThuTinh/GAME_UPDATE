@@ -180,9 +180,12 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		return;
 	}
 	if (getY() < 0) {
-		CGame::GetInstance()->SwitchScene(CGame::GetInstance()->current_scene);
-		ScoreBar::getInstance()->setTypeSubWeapon(TYPE_SUBWEAPON::DEFAUL);
-		return;
+		if (CGame::GetInstance()->current_scene != -1) {
+			CGame::GetInstance()->SwitchScene(CGame::GetInstance()->current_scene);
+			ScoreBar::getInstance()->setTypeSubWeapon(TYPE_SUBWEAPON::DEFAUL);
+			return;
+		}
+		
 	}
 	attackStandDelay.update();
 	colorDelay.update();

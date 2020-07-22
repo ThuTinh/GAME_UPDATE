@@ -55,6 +55,6 @@
 [SPACE]
 #id X       Y       Width       Height CameraX     CameraY PlayerX     PlayerY
 #SceneCount
-0	0	0	255	222	0	0	-100	-100
+0	0	0	255	222	8	0	-100	-100
 
 

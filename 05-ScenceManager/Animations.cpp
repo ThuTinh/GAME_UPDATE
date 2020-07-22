@@ -9,6 +9,11 @@ LPANIMATION_FRAME CAnimation::getFrame(int index)
 	return frames.at(index);
 }
 
+int CAnimation::getCurentFrame()
+{
+	return this->currentFrame;
+}
+
 void CAnimation::setCurrentFrame(int frameIndex)
 {
 	this->currentFrame = frameIndex;

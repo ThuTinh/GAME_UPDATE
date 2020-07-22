@@ -11,6 +11,7 @@ public:
 	virtual void SetState(int state);
 	DelayTime delayAni;
 	GameTime timeAni;
+	bool isRender;
 
 	KeyStart();
 };

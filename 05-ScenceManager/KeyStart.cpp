@@ -1,26 +1,23 @@
 #include "Gound.h"
 #include "KeyStart.h"
-#include "Weapon.h"
 #include"Simon.h"
-#include "Die-affect.h"
 #include "Game.h"
 
 void KeyStart::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	delayAni.update();
-
-	if (CGame::GetInstance()->isStartGame) {
+ 	if (CGame::GetInstance()->isStartGame) {
 		delayAni.start();
 	}
 
 	if (delayAni.isOnTime()) {
 		if (timeAni.atTime())
 		{
-			setAlive(true);
+			isRender = true;
 		}
 		else
 		{
-			setAlive(false);
+			isRender = false;
 		}
 	}
   	if (delayAni.isTerminated()) {
@@ -32,15 +29,17 @@ void KeyStart::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 void KeyStart::Render()
 {
-	if (isAlive)
+	if (isRender)
 		animation_set->at(0)->Render(x, y, frameIndex, DIRECTION_LEFT);
 }
 
 KeyStart::KeyStart()
 {
 	setPhysicsEnable(false);
-	delayAni.init(200);
-	timeAni.init(30);
+	delayAni.init(500);
+	timeAni.init(40);
+	isRender = true;
+	setAlive(true);
 }
 
 void KeyStart::SetState(int state)

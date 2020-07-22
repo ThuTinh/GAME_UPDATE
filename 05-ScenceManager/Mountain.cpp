@@ -1,9 +1,5 @@
 #include "Gound.h"
 #include "Mountain.h"
-#include "Weapon.h"
-#include"Simon.h"
-#include "Die-affect.h"
-#include "Game.h"
 void Mountain::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	

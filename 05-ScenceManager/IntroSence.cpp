@@ -316,9 +316,6 @@ void IntroSence::Load()
 
 void IntroSence::Update(DWORD dt)
 {
-	// We know that Mario is the first object in the list hence we won't add him into the colliable object list
-	// TO-DO: This is a "dirty" way, need a more organized way 
-	//vector<LPGAMEOBJECT> coObjects;
 	
 	for (size_t i = 0; i < objects.size(); i++)
 	{
@@ -334,7 +331,6 @@ void IntroSence::Update(DWORD dt)
 void IntroSence::Render()
 {
 	titlemap->render(Camera::getInstance());
-	//keyStart->Render();
 	for (int i = 0; i < objects.size(); i++)
 		objects[i]->Render();
 	if(player != NULL)
