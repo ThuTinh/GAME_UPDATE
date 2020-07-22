@@ -421,6 +421,7 @@ void CGame::SwitchScene(int scene_id)
 	Simon::getInstance()->setNumberObjectBlack(0);
 	Simon::getInstance()->setDoublSub(false);
 	Simon::getInstance()->setTripbleSub(false);
+	Simon::getInstance()->canMakeSub = true;
 
 
 

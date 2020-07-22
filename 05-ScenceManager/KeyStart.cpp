@@ -8,11 +8,11 @@
 void KeyStart::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	delayAni.update();
+
 	if (CGame::GetInstance()->isStartGame) {
 		delayAni.start();
-		/*CGame::GetInstance()->SwitchScene(1);
-		ScoreBar::getInstance()->setCurrentStageNumber(1);*/
 	}
+
 	if (delayAni.isOnTime()) {
 		if (timeAni.atTime())
 		{
@@ -23,11 +23,10 @@ void KeyStart::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			setAlive(false);
 		}
 	}
-	if (delayAni.isTerminated()) {
+  	if (delayAni.isTerminated()) {
 		Simon::getInstance()->SetState(SIMON_STATE_INTRO);
 		CGame::GetInstance()->SwitchScene(0);
 		ScoreBar::getInstance()->setCurrentStageNumber(1);
-	
 	}
 }
 
@@ -41,7 +40,7 @@ KeyStart::KeyStart()
 {
 	setPhysicsEnable(false);
 	delayAni.init(200);
-	timeAni.init(40);
+	timeAni.init(30);
 }
 
 void KeyStart::SetState(int state)

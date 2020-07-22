@@ -190,7 +190,17 @@ void IntroSence::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_GROUND: obj = new Ground(); break;
 	case OBJECT_TYPE_PLANE: obj = new AirPlane(); break;
 	case OBJECT_TYPE_GATE_INTRO: obj = new GateIntro(); break;
-	case OBJECT_TYPE_BAT_INTRO: obj = new IntroBat(); break;
+	case OBJECT_TYPE_BAT_INTRO: {
+		obj = new IntroBat();
+		if (x < 90) {
+			obj->setDirection(DIRECTION_RIGHT);
+		}
+		else
+		{
+			obj->setDirection(DIRECTION_LEFT);
+		}
+		break;
+	} 
 	case OBJECT_TYPE_KEYSTART: obj = new KeyStart(); break;
 	case OBJECT_TYPE_MOUNTAIN: obj = new Mountain(); break;
 	default:
@@ -312,13 +322,11 @@ void IntroSence::Update(DWORD dt)
 	
 	for (size_t i = 0; i < objects.size(); i++)
 	{
-		objects[i]->Update(dt, &objects);
+ 		objects[i]->Update(dt, &objects);
 	}
 	if (player == NULL)
 		return;
 	player->Update(dt, &objects);
-	//keyStart->Update(dt, &objects);
-	ScoreBar::getInstance()->update();
 	Camera::getInstance()->update();
 
 }
@@ -331,7 +339,8 @@ void IntroSence::Render()
 		objects[i]->Render();
 	if(player != NULL)
 		player->Render();
-	ScoreBar::getInstance()->render();
+	if(CGame::GetInstance()->current_scene != -1)
+		ScoreBar::getInstance()->render();
 }
 
 /*
@@ -387,7 +396,6 @@ void IntroScenceKeyHandler::OnKeyUp(int KeyCode)
 
 void IntroScenceKeyHandler::KeyState(BYTE* states)
 {
-// Xu ly o day
 	CGame* game = CGame::GetInstance();
 	game->isStartGame = game->IsKeyDown(DIK_W) || game->IsKeyDown(DIK_SPACE);
 

@@ -6,7 +6,7 @@
 #include "Game.h"
 void AirPlane::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	
+	setX(getX() - 0.2);
 }
 
 void AirPlane::Render()

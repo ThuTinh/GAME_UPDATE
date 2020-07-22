@@ -6,7 +6,8 @@
 #include "Game.h"
 void IntroBat::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	
+	setX(getX() + getDirection() * 0.2);
+	setY(getY() + getDirection() * 0.05); 
 }
 
 void IntroBat::Render()
@@ -18,6 +19,7 @@ void IntroBat::Render()
 IntroBat::IntroBat()
 {
 	setPhysicsEnable(false);
+	
 }
 
 void IntroBat::SetState(int state)
