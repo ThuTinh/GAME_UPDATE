@@ -1,0 +1,16 @@
+Sprite nui
+R	G	B
+255	128	0	0
+Animation Count
+1
+
+
+Name
+Animation
+Frame Count
+1
+
+FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
+0			0			72				56				0			0
+
+

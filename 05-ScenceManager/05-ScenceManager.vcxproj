@@ -124,6 +124,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AirPlane.cpp" />
     <ClCompile Include="Animations.cpp" />
     <ClCompile Include="Archery.cpp" />
     <ClCompile Include="Axe.cpp" />
@@ -146,6 +147,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameTime.cpp" />
     <ClCompile Include="Gate.cpp" />
+    <ClCompile Include="GateIntro.cpp" />
     <ClCompile Include="GateStair.cpp" />
     <ClCompile Include="GateStairChangeDirection.cpp" />
     <ClCompile Include="Ghost.cpp" />
@@ -154,7 +156,11 @@
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="hit-effect.cpp" />
+    <ClCompile Include="IntroBat.cpp" />
+    <ClCompile Include="IntroSence.cpp" />
+    <ClCompile Include="KeyStart.cpp" />
     <ClCompile Include="money-effect.cpp" />
+    <ClCompile Include="Mountain.cpp" />
     <ClCompile Include="RestoreBlood.cpp" />
     <ClCompile Include="RestoreBloodL1.cpp" />
     <ClCompile Include="StopWatch.cpp" />
@@ -197,6 +203,7 @@
     <ClCompile Include="Zoombie.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AirPlane.h" />
     <ClInclude Include="Animations.h" />
     <ClInclude Include="Archery.h" />
     <ClInclude Include="Axe.h" />
@@ -219,6 +226,7 @@
     <ClInclude Include="Fleaman.h" />
     <ClInclude Include="GameTime.h" />
     <ClInclude Include="Gate.h" />
+    <ClInclude Include="GateIntro.h" />
     <ClInclude Include="GateStair.h" />
     <ClInclude Include="GateStairChangeDirection.h" />
     <ClInclude Include="Ghost.h" />
@@ -227,7 +235,11 @@
     <ClInclude Include="Gound.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="hit-effect.h" />
+    <ClInclude Include="IntroBat.h" />
+    <ClInclude Include="IntroSence.h" />
+    <ClInclude Include="KeyStart.h" />
     <ClInclude Include="money-effect.h" />
+    <ClInclude Include="Mountain.h" />
     <ClInclude Include="RestoreBlood.h" />
     <ClInclude Include="RestoreBloodL1.h" />
     <ClInclude Include="StopWatch.h" />

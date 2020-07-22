@@ -263,7 +263,6 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			y += min_ty * dy + ny * 0.4f;
 			//
 			// Collision logic with other objects
-			//
 			for (UINT i = 0; i < coEvents.size(); i++)
 			{
 				LPCOLLISIONEVENT e = coEvents[i];
@@ -779,6 +778,16 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		break;
 	}
 	case SIMON_STATE_HIDE:
+		break;
+	case SIMON_STATE_INTRO:
+		setDirection(DIRECTION_LEFT);
+		aniIndex = SIMON_ANI_GO;
+		setVx(-0.04);
+		break;
+	case SIMON_STATE_INTRO_AWAIT:
+		setDirection(DIRECTION_RIGHT);
+ 		aniIndex = SIMON_ANI_INTRO;
+		setVx(0);
 		break;
 	default:
 		break;

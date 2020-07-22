@@ -1,0 +1,16 @@
+Sprite start_key
+R	G	B
+255	128	0	0
+Animation Count
+1
+
+
+Name
+startkey
+Frame Count
+1
+
+FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
+0			0			117				13				0			0
+
+

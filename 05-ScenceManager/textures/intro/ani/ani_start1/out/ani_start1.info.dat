@@ -1,0 +1,26 @@
+Sprite ani_start1
+R	G	B
+255	128	0	0
+Animation Count
+2
+
+
+Name
+Animation
+Frame Count
+2
+
+FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
+0			9			8				5				0			0
+8			7			8				7				0			0
+
+
+Name
+Animation
+Frame Count
+1
+
+FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
+16			0			32				14				0			0
+
+
