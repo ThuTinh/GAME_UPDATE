@@ -1,5 +1,6 @@
 #pragma once
 #include"Item.h"
+#define RESTORE_BLOOD -0.2
 class RestoreBlood : public Item
 {
 public:

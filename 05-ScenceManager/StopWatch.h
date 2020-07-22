@@ -1,5 +1,6 @@
 #pragma once
 #include"Item.h"
+#define STOPWATCH_VY - 0.2
 class StopWatch : public Item
 {
 public:

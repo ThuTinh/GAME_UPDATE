@@ -6,6 +6,7 @@
 #include "money-effect.h"
 void Item1000PTS::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
+	setVy(I1000PTS);
 	if (getItemState() == ITEM_STATE_PLAYER_EATED || !getAlive())
 		return;
 	else

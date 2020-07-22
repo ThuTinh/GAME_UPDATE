@@ -2,6 +2,7 @@
 #include"Simon.h"
  void Archery::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
+	 setVy(ARCHERY_VY);
 	 Item::Update(dt, coObjects);
 	 if (AABBCheck(Simon::getInstance()) && getItemState() == ITEM_STATE_VISIBLE) {
 		 Simon::getInstance()->aniIndex = SIMON_ANI_COLORS;

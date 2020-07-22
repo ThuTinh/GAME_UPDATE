@@ -1097,6 +1097,8 @@ bool Simon::isDie() {
 		state = SIMON_STATE_DIE;
 		setHeight(animation_set->at(aniIndex)->getFrame(0)->GetSprite()->getHeight()-5);
 		deadDelay.start();
+		ScoreBar::getInstance()->setTypeSubWeapon(DEFAUL);
+		setNumberArchery(0);
 		return true;
 	}
 	return false;

@@ -1,5 +1,6 @@
 #pragma once
 #include"Item.h"
+#define ARCHERY_VY - 0.2
 class Archery : public Item
 {
 public:

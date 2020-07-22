@@ -6,6 +6,7 @@
 #include "Gound.h"
 void RestoreBloodL1::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
+	setVy(RESTORE_BLOODL1);
 	if (getItemState() == ITEM_STATE_PLAYER_EATED)
 		return;
 	vy += ITEM_GRAVITY * dt;

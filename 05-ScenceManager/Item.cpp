@@ -25,7 +25,7 @@ void Item::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive()  && isAlive && (Weapon::getInstance()->aniIndex == 2 || Weapon::getInstance()->aniIndex == 5 || Weapon::getInstance()->aniIndex == 8 || Weapon::getInstance()->aniIndex == 11 || Weapon::getInstance()->aniIndex == 14|| Weapon::getInstance()->aniIndex == 17)) {
 		setPhysicsEnable(true);
-		setVy(ITEM_VY);
+		//setVy(ITEM_VY);
 		itemState = ITEM_STATE_VISIBLE;
 		delayVisible.start();
 		setWidth(animation_set->at(0)->getFrame(0)->GetSprite()->getWidth());
@@ -37,6 +37,7 @@ void Item::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		{
 			if (dynamic_cast<SubWeaponAttack*>(listObject[i]) && listObject[i]->isAlive) {
 				if (AABBCheck(listObject[i])) {
+					//setVy(ITEM_VY);
 					setPhysicsEnable(true);
 					itemState = ITEM_STATE_VISIBLE;
 					setWidth(animation_set->at(0)->getFrame(0)->GetSprite()->getWidth());

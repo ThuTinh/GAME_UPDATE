@@ -3,6 +3,7 @@
 #include"Simon.h"
 void BoomeRang::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
+	setVy(BOOMERANG_VY);
 	Item::Update(dt, coObjects);
 	if (AABBCheck(Simon::getInstance()) && getItemState() == ITEM_STATE_VISIBLE) {
 		setItemState(ITEM_STATE_PLAYER_EATED);
