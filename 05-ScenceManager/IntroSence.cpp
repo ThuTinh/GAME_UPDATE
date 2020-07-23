@@ -393,6 +393,6 @@ void IntroScenceKeyHandler::OnKeyUp(int KeyCode)
 void IntroScenceKeyHandler::KeyState(BYTE* states)
 {
 	CGame* game = CGame::GetInstance();
-	game->isStartGame = game->IsKeyDown(DIK_W) || game->IsKeyDown(DIK_SPACE);
+	game->isStartGame = game->IsKeyDown(DIK_W) || game->IsKeyDown(DIK_SPACE) || game->IsKeyDown(VK_RETURN);
 
 }

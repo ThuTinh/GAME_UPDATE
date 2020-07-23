@@ -20,6 +20,7 @@
 #define SCENE_SECTION_LOCATION_HEART	14
 #define SCENE_SECTION_TEXTURE_MISC 15
 #define SCENE_SECTION_TEXTURE_SCROE_BAR 16
+#define SCENE_SECTION_LOCATION_DOUBLE_SUB	17
 #define MAX_SCENE_LINE 1024
 
 #define MISC_SPRITE_ID_NUMBER 0
@@ -29,6 +30,8 @@
 #define MISC_SPRITE_ID_AXE 4
 #define MISC_SPRITE_ID_BLUE_POTION 6
 #define MISC_SPRITE_ID_STOPWATCH	7
+#define MISC_SPRITE_ID_DOUBLE_SUB 10
+#define MISC_SPRITE_ID_TRIPLE_SUB	9
 #define NUMBER_WIDTH 8
 #define HEALTH_WIDTH 4
 void ignoreLineIfstream(ifstream & fs, int lineCount);
@@ -101,6 +104,19 @@ void ScoreBar::renderSubWeapon()
 		break;
 	default:
 		break;
+	}
+}
+
+void ScoreBar::renderDoubleTripbleSub()
+{
+	if (hasDoubleSub) {
+		animation_set->at(MISC_SPRITE_ID_DOUBLE_SUB)->RenderScoreBar(doubleSubLocation.X, doubleSubLocation.Y , 0);
+	}
+	else
+	{
+		if (hasTripleSub) {
+			animation_set->at(MISC_SPRITE_ID_TRIPLE_SUB)->RenderScoreBar(doubleSubLocation.X, doubleSubLocation.Y, 0);
+		}
 	}
 }
 
@@ -273,6 +289,13 @@ void ScoreBar::_ParseSection_LOCATION_BOSS_HEATHY(string line)
 	bossHealthLocation.Y = atoi(tokens[1].c_str());
 	bossHealthLocation.MaxLength = atoi(tokens[2].c_str());
 }
+void ScoreBar::_ParseSection_LOCATION_DOUBLE_SUB(string line)
+{
+	vector<string> tokens = split(line);
+	if (tokens.size() < 2) return; // skip invalid lines
+	doubleSubLocation.X = atoi(tokens[0].c_str());
+	doubleSubLocation.Y = atoi(tokens[1].c_str());
+}
 ScoreBar* ScoreBar::getInstance()
 {
 	if (instance == 0)
@@ -293,6 +316,8 @@ ScoreBar::ScoreBar()
 	currentStageNumber = 1;
 	setSubWeapon(0);
 	stypeSubweapon = DEFAUL;
+	hasDoubleSub = false;
+	hasTripleSub = false;
 
 }
 
@@ -313,6 +338,7 @@ void ScoreBar::render()
 	renderHealth();
 	renderBossHealth();
 	renderSubWeapon();
+	renderDoubleTripbleSub();
 }
 
 void ScoreBar::update()
@@ -453,6 +479,9 @@ void ScoreBar::Load(LPCWSTR sorebarFile)
 		if (line == "[LOCATION_STAGE]") {
 			section = SCENE_SECTION_LOCATION_STAGE; continue;
 		}
+		if (line == "[LOCATION_DOUBLE_SUB]") {
+			section = SCENE_SECTION_LOCATION_DOUBLE_SUB; continue;
+		}
 
 		if (line[0] == '[') { section = SCENE_SECTION_UNKNOWN; continue; }
 
@@ -474,6 +503,7 @@ void ScoreBar::Load(LPCWSTR sorebarFile)
 		case SCENE_SECTION_LOCATION_STAGE: _ParseSection_LOCATION_STAGE(line); break;
 		case SCENE_SECTION_LOCATION_BOSS_HEATHY: _ParseSection_LOCATION_BOSS_HEATHY(line); break;
 		case SCENE_SECTION_LOCATION_SUBWEAPON: _ParseSection_LOCATION_SUBWEAPON(line); break;
+		case SCENE_SECTION_LOCATION_DOUBLE_SUB: _ParseSection_LOCATION_DOUBLE_SUB(line); break;
 
 		}
 	}
@@ -536,4 +566,24 @@ void ScoreBar::increaseBossHealth(int health)
 int ScoreBar::getMaxHealth()
 {
 	return maxHealth;
+}
+
+void ScoreBar::setHasDoubleSub(bool has)
+{
+	this->hasDoubleSub = has;
+}
+
+void ScoreBar::setHasTripbleSub(bool has)
+{
+	this->hasTripleSub = has;
+}
+
+bool ScoreBar::getHasDoubleSub()
+{
+	return hasDoubleSub;
+}
+
+bool ScoreBar::getHasTripleSub()
+{
+	return hasTripleSub;
 }

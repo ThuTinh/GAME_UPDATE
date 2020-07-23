@@ -58,8 +58,6 @@ void Sketon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 					if (stateSKeton == SKETON_NOMAL)
 					{
 						onCollision(e->obj, e->t, e->nx, e->ny);
-						/*vx = 0;
-						vy = 0;*/
 					}
 					else
 					{
@@ -124,6 +122,7 @@ void Sketon::makeWhiteBone()
 	whiteBone->setY(getMidY());
 	whiteBone->setAlive(true);
 	whiteBone->setPhysicsEnable(true);
+	whiteBone->setDirection(getDirection());
 	whiteBone->timeDelay.start();
 }
 

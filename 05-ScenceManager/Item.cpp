@@ -15,7 +15,6 @@ Item::Item()
 }
 
 
-
 void Item::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	delayVisible.update();
@@ -48,7 +47,6 @@ void Item::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	}
 	if (delayVisible.isTerminated()) {
 		setAlive(false);
-		//itemState = ITEM_STATE_INVISIBLE;
 	}
 	vy += ITEM_GRAVITY * dt;
 	CGameObject::Update(dt);

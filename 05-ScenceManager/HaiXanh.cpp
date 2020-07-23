@@ -8,6 +8,10 @@ void HaiXanh::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		setItemState(ITEM_STATE_PLAYER_EATED);
 		Simon::getInstance()->setDoublSub(true);
 		Simon::getInstance()->setTripbleSub(false);
+		ScoreBar::getInstance()->setHasDoubleSub(true);
+		ScoreBar::getInstance()->setHasTripbleSub(false);
+
+
 		setAlive(false);
 	}
 }

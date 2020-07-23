@@ -10,6 +10,7 @@
 206	textures\misc\fireboom-efect.png	255	0	0
 50	textures\misc\die-effect.png	255	0	0
 
+
 # id	left	top	with	height	 achorX achorY texture_id
 [SPRITES]
 # SIMON
@@ -172,6 +173,7 @@
 66601	666001	100	666002	100	666003	100	666004	100
 # die efect
 5501	550001	100	550002	100
+
 # id	ani1	ani2	ani3
 [ANIMATION_SETS]
 # SIMON
@@ -180,6 +182,7 @@
 44	44401	44402	44403	44404	44405
 45	55501
 46	66601
+88	7701	7702
 #die-efect
 50	5501
 

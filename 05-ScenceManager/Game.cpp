@@ -422,6 +422,10 @@ void CGame::SwitchScene(int scene_id)
 	Simon::getInstance()->setDoublSub(false);
 	Simon::getInstance()->setTripbleSub(false);
 	Simon::getInstance()->canMakeSub = true;
+	ScoreBar::getInstance()->setHasDoubleSub(false);
+	ScoreBar::getInstance()->setHasTripbleSub(false);
+
+
 
 
 

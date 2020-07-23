@@ -4,6 +4,7 @@
 #define DISTANCE_X 60
 #define GHOST_DISTANCE_STOP 40
 #define VX_GHOST 0.02
+#define VY_GHOST 0.01
 #define GHOST_GRAVITY -0.003
 #define COUNTER_LIFE 2
 #define COUNTER_LIFE_NOMAL 3

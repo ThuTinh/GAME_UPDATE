@@ -112,6 +112,18 @@ void Ghost::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	case GHOST_STATE_ATTACK:	
 		setVx(getDirection() * VX_GHOST);
 		aniIndex = GHOST_ACTION_FLY;
+		if (Simon::getInstance()->getY() - getY() > 5) {
+			setVy(VY_GHOST);
+		}
+		else
+		{
+			if(getY()- Simon::getInstance()->getY()>3)
+				setVy(-VY_GHOST);
+			else
+			{
+				setVy(0);
+			}
+		}
 		break;
 	case GHOST_STATE_HURT:
 		setVx(0);

@@ -30,6 +30,7 @@ class ScoreBar
 	void renderHealth();
 	void renderBossHealth();
 	void renderSubWeapon();
+	void renderDoubleTripbleSub();
 	static ScoreBar* instance;
 	SCORE_LOCATION lifeLocation;
 	SCORE_LOCATION heartLocation;
@@ -39,6 +40,7 @@ class ScoreBar
 	SCORE_LOCATION healthLocation;
 	SCORE_LOCATION subWeaponLocation;
 	SCORE_LOCATION bossHealthLocation;
+	SCORE_LOCATION doubleSubLocation;
 
 	int health;
 	int bossHealth;
@@ -49,6 +51,8 @@ class ScoreBar
 	int score;
 	int time;
 	GameTime timeGame;
+	bool hasDoubleSub;
+	bool hasTripleSub;
 	void _ParseSection_TEXTURE_MISC(string line);
 	void _ParseSection_TEXTURE_SCORE_BAR(string line);
 	void _ParseSection_SPRITES(string line);
@@ -62,6 +66,7 @@ class ScoreBar
 	void _ParseSection_LOCATION_HEALTHY(string line);
 	void _ParseSection_LOCATION_SUBWEAPON(string line);
 	void _ParseSection_LOCATION_BOSS_HEATHY(string line);
+	void _ParseSection_LOCATION_DOUBLE_SUB(string line);
 public:
 	static ScoreBar* getInstance();
 	ScoreBar();
@@ -102,6 +107,10 @@ public:
 
 	int getMaxHealth();
 
+	void setHasDoubleSub(bool has);
+	void setHasTripbleSub(bool has);
+	bool getHasDoubleSub();
+	bool getHasTripleSub();
 	void setCurrentStageNumber(int currentStageNumber);
 	int getCurrentStageNumber();
 	void Load(LPCWSTR sorebarFile);

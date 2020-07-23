@@ -30,6 +30,11 @@ void BossBat::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 				aniIndex = BOSS_ACTION_ACTIV;
 				setBossState(BOSS_STATE_WAIT);
+				float tempX = Simon::getInstance()->getX();
+				float tempY = Simon::getInstance()->getY();
+				dynamic_cast<CPlayScene*>(CGame::GetInstance()->GetCurrentScene())->setCurentSpace(1);
+				Simon::getInstance()->setX(tempX);
+				Simon::getInstance()->setY(tempY);
 				calculateOtherPoint();
 				if (xDes < getX())
 				{
@@ -39,7 +44,7 @@ void BossBat::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 				{
 					vx2 = vampire_bat_fast_momen;
 				}
-				vy2 = (vx2 * (yDes - getY()) / (xDes - getX()));
+				vy2 = (vx2 * (yDes - getY()) / (xDes - getX()-2));
 				waitDelay.start();
 			}
 			break;
@@ -145,7 +150,7 @@ void BossBat::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	}
 	 else
 	{
-	pauseAnimation = true;
+		pauseAnimation = true;
 	}
 	
 
@@ -171,10 +176,10 @@ void BossBat::calculateOtherPoint()
 	}
 	else
 	{
-		xDes = camera->getRight();
+		xDes = camera->getRight() ;
 	}
 
-	int yMin = player->getMidY() - 60;
+	int yMin = player->getMidY() - 60 ;
 
 	int yMax = player->getMidY();
 

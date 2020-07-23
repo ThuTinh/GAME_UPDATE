@@ -5,7 +5,7 @@
 #include "IBoss.h"
 #define Boss_time_wait 1000
 #define boss_distance_activ 50
-#define vampire_bat_fast_momen 150
+#define vampire_bat_fast_momen 300
 #define boss_move_fast_time_min 1000
 #define boss_move_fast_time_max 2000
 #define boss_move_slow_time_min	1000
