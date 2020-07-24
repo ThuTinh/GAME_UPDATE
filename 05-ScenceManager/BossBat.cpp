@@ -44,7 +44,7 @@ void BossBat::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 				{
 					vx2 = vampire_bat_fast_momen;
 				}
-				vy2 = (vx2 * (yDes - getY()) / (xDes - getX()-2));
+				vy2 = (vx2 * (yDes - getY()) / (xDes - getX()));
 				waitDelay.start();
 			}
 			break;
@@ -111,7 +111,7 @@ void BossBat::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 			if (moveFastDelay.isTerminated())
 			{
-				waitDelay.start();
+				//waitDelay.start();
 				setBossState(BOSS_STATE_MOVE_SLOW);
 				DWORD moveSlowDelayTime = getRandom(boss_move_slow_time_min, boss_move_slow_time_max);
 				moveSlowDelay.start(moveSlowDelayTime);
@@ -120,11 +120,11 @@ void BossBat::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 				setVy(0);
 				if (xDes < getX())
 				{
-					setDx(-1);
+					setDx(-1.5);
 				}
 				else
 				{
-					setDx(1);
+					setDx(1.5);
 				}
 				setDy(-(getDx() * (yDes - getY()) / (xDes - getX())));
 				return;
@@ -189,20 +189,6 @@ void BossBat::calculateOtherPoint()
 void BossBat::checkWithSimon()
 {
 	hurtDelay.update();
-	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive && (Weapon::getInstance()->aniIndex == 2 || Weapon::getInstance()->aniIndex == 5 || Weapon::getInstance()->aniIndex == 8 || Weapon::getInstance()->aniIndex == 11 || Weapon::getInstance()->aniIndex == 14 || Weapon::getInstance()->aniIndex == 17)) {
-		hurtDelay.start();
-		makeHitEffect();
-		if (ScoreBar::getInstance()->getBossHealth() == 1)
-		{
-			makeDieEffect();
-			return;
-		}
-	}
-	if (AABBCheck(Simon::getInstance()) && Simon::getInstance()->state != SIMON_STATE_ON_STAIR) {
-		if (!Simon::getInstance()->isDie()) {
-			Simon::getInstance()->setHurt(getDirection(), getX());
-		}
-	}
 	if (CGame::GetInstance()->GetCurrentScene()->getAddtionalObject().size() > 0) {
 		vector<LPGAMEOBJECT> listObject = CGame::GetInstance()->GetCurrentScene()->getAddtionalObject();
 		for (size_t i = 0; i < listObject.size(); i++)
@@ -223,6 +209,27 @@ void BossBat::checkWithSimon()
 			}
 		}
 	}
+	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive && (Weapon::getInstance()->aniIndex == 2 || Weapon::getInstance()->aniIndex == 5 || Weapon::getInstance()->aniIndex == 8 || Weapon::getInstance()->aniIndex == 11 || Weapon::getInstance()->aniIndex == 14 || Weapon::getInstance()->aniIndex == 17)) {
+		hurtDelay.start();
+		makeHitEffect();
+		if (ScoreBar::getInstance()->getBossHealth() == 1)
+		{
+			makeDieEffect();
+			return;
+		}
+	}
+	if (AABBCheck(Simon::getInstance())) {
+		if (Simon::getInstance()->state != SIMON_STATE_ON_STAIR) {
+			if (!Simon::getInstance()->isDie()) {
+				Simon::getInstance()->setHurt(getDirection(), getX());
+			}
+		}
+		else
+		{
+			Simon::getInstance()->setHurtInStair();
+		}
+	}
+	
 	if (hurtDelay.isTerminated()) {
 		if (ScoreBar::getInstance()->getBossHealth()  > 2)
 		{
@@ -294,7 +301,7 @@ BossBat::BossBat()
 	setPhysicsEnable(false);
 	aniIndex = 0;
 	setAlive(true);
-	hurtDelay.init(50);
+	hurtDelay.init(40);
 }
 
 BossBat::~BossBat()

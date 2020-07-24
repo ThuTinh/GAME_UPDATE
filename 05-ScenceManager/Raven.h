@@ -4,7 +4,7 @@
 #define RAVEN_SCORE 200
 #define DISTANCE_X 80
 #define RAVEN_DISTANCE_STOP 10
-#define RAVEN_VX 0.025
+#define RAVEN_VX 0.03
 #define RAVEN_GRAVITY -0.0005
 #define TIME_AWAIT 1000
 #define TIME_ATTACK 1200
