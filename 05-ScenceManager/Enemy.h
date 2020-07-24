@@ -13,6 +13,8 @@ public:
 	virtual void onCollision(CGameObject* other, float collisionTime, int nx, int ny);
 	void setDirectionFollowPlayer();
 	virtual void onPlayerContact();
+	virtual void restorePosition() ;
+
 	Enemy();
 	~Enemy();
 

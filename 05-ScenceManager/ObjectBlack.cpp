@@ -16,8 +16,8 @@ void ObjectBlack::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			setY(YRENDER);
 		}*/
 		isRender = true;
+		setCollitionType(COLLISION_TYPE_MISC);
 	}
-
 }
 
 void ObjectBlack::Render()
@@ -28,9 +28,17 @@ void ObjectBlack::Render()
 	}
 }
 
+void ObjectBlack::restorePosition()
+{
+	CGameObject::restorePosition();
+	setPhysicsEnable(false);
+	isRender = false;
+	checkOnlyOne = false;
+}
+
 ObjectBlack::ObjectBlack()
 {
-	setCollitionType(COLLISION_TYPE_MISC);
+	setCollitionType(COLLISION_TYPE_GROUND);
 	setPhysicsEnable(false);
 	isRender = false;
 	checkOnlyOne = false;

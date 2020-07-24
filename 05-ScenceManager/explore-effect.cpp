@@ -10,8 +10,6 @@ void ExploreEffect::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	{
 		setAlive(false);
 	}
-
-
 }
 
 void ExploreEffect::Render()
@@ -20,8 +18,6 @@ void ExploreEffect::Render()
 		animation_set->at(INDEX_EXPLORE)->Render(x, y, frameIndex, DIRECTION_LEFT);
 	}
 }
-
-
 
 ExploreEffect::ExploreEffect()
 {

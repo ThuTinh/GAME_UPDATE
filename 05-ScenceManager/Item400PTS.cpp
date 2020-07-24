@@ -5,18 +5,20 @@
 #include "money-effect.h"
 void Item400PTS::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
+	setVy(I400PTS_VY);
 	Item::Update(dt, coObjects);
 	if (AABBCheck(Simon::getInstance()) && getItemState() == ITEM_STATE_VISIBLE) {
 		setItemState(ITEM_STATE_PLAYER_EATED);
 		setAlive(false);
-		MoneyEffect* effect = new MoneyEffect();
+		/*MoneyEffect* effect = new MoneyEffect();
 		CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(effect);
 		effect->setX(getMidX());
 		effect->setY(getMidY());
 		effect->setAlive(true);
-		effect->aniIndex = 3;
-		effect->timeDelay.start();
-		this->onPlayerContact();
+		effect->aniIndex = 1;
+		effect->timeDelay.start();*/
+		onPlayerContact();
+		makeMoneyEffect(1);
 	}
 }
 

@@ -8,6 +8,7 @@
 #include "Game.h"
 void Bat::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
+	Enemy::Update(dt, coObjects);
 	switch (state)
 	{
 	case BAT_STATE_STAND:
@@ -30,21 +31,15 @@ void Bat::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			setVy(0);
 		}
 		if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive && (Weapon::getInstance()->aniIndex == 2 || Weapon::getInstance()->aniIndex == 5 || Weapon::getInstance()->aniIndex == 8 || Weapon::getInstance()->aniIndex == 11 || Weapon::getInstance()->aniIndex == 14 || Weapon::getInstance()->aniIndex == 17)) {
-				setAlive(false);
-				ScoreBar::getInstance()->increaseScore(ENEMY_SCORE);
-				DieEffect* dieEffect = new DieEffect();
-				CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(dieEffect);
-				dieEffect->setX(getMidX());
-				dieEffect->setY(getMidY());
-				dieEffect->setAlive(true);
-				dieEffect->timeDelay.start();
+			setAlive(false);
+			ScoreBar::getInstance()->increaseScore(ENEMY_SCORE);
+			makeDieEffect();
 				
 		}
 		break;
 	default:
 		break;
 	}
-	Enemy::Update(dt, coObjects);
 	x += dx;
 	y += dy;
 }

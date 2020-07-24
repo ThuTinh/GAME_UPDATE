@@ -1,6 +1,8 @@
 #pragma once
 #include"Item.h"
 #define ITEM1000PTS_SCORE 1000
+#define I1000PTS -0.2
+
 class Item1000PTS : public Item
 {
 public:

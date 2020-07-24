@@ -2,8 +2,8 @@
 #include"GameObject.h"
 #include "DelayTime.h"
 #include "GameTime.h"
-#define VX 0.1
-#define TIME_DELAY 3000
+#define VX 0.125
+#define TIME_DELAY 2500
 class SubWeaponAttack : public CGameObject
 {
 public:

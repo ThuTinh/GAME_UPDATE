@@ -181,7 +181,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	game->InitKeyboard();
 	Simon::getInstance()->Load(L"textures\\simon.txt");
 	ScoreBar::getInstance()->Load(L"textures\\scorebar.txt");
-
 	game->Load(L"mario-sample.txt");
 	Run();
 

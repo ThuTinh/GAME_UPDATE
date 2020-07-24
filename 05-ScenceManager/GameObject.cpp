@@ -6,7 +6,8 @@
 #include "Game.h"
 #include "GameObject.h"
 #include "Sprites.h"
-
+#include "Die-affect.h"
+#include "hit-effect.h"
 CGameObject::CGameObject()
 {
 	x = y = 0;
@@ -200,6 +201,26 @@ bool CGameObject::getStopCollision()
 	return  stopCollision;
 }
 
+void CGameObject::makeDieEffect()
+{
+	DieEffect* dieEffect = new DieEffect();
+	CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(dieEffect);
+	dieEffect->setX(getMidX());
+	dieEffect->setY(getMidY());
+	dieEffect->setAlive(true);
+	dieEffect->timeDelay.start();
+}
+
+void CGameObject::makeHitEffect()
+{
+	HitEffect* hitEffect = new HitEffect();
+	CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(hitEffect);
+	hitEffect->setX(getMidX());
+	hitEffect->setY(getMidY());
+	hitEffect->setAlive(true);
+	hitEffect->timeDelay.start();
+}
+
 /*
 	Extension of original SweptAABB to deal with two moving objects
 */
@@ -323,6 +344,13 @@ bool CGameObject::AABBCheck(CGameObject* S)
 {
 	return ((getX() < S->getX() + S->getWidth() && getX() + getWidth() > S->getX()) &&
 		(getY() -getHeight() < S->getY() && getY() > S->getY() - S->getHeight()));
+}
+void CGameObject::restorePosition()
+{
+	SetPosition(initBox.getX(), initBox.getY());
+	setWidth(initBox.getWidth());
+	setHeight(initBox.getHeight());
+	setAlive(true);
 }
 void CGameObject::setX(float x)
 {

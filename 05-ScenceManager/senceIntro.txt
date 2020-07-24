@@ -1,0 +1,60 @@
+# id	file_path	transparent_color_r	g	b
+[TEXTURES]
+100	textures\intro\intro.png	255	128	0
+-1	textures\intro\map\intro\tilesheet.png	255	0	0
+
+[MAP]
+#file titlesheet file matrix map
+-1	textures/intro/map/intro/matrix.dat
+
+# id	left	top	with	height	 achorX achorY texture_id
+[SPRITES]
+#Nui
+12301	0	0	72	56	0	0	0	0	100
+12302	72	0	72	56	0	0	0	0	100
+12303	144	0	72	56	0	0	0	0	100
+12304	216	0	72	56	0	0	0	0	100
+12305	288	0	72	56	0	0	0	0	100
+12306	360	0	72	56	0	0	0	0	100
+12307	432	0	72	56	0	0	0	0	100
+12308	504	0	72	56	0	0	0	0	100
+12309	576	0	72	56	0	0	0	0	100
+12310	648	0	72	56	0	0	0	0	100
+12311	720	0	72	56	0	0	0	0	100
+12312	792	0	72	56	0	0	0	0	100
+12313	864	0	72	56	0	0	0	0	100
+12314	936	0	72	56	0	0	0	0	100
+12315	1008	0	72	56	0	0	0	0	100
+# KEy start
+12316	1080	43	118	13	0	0	0	0	100
+
+# ani_id	sprite1_id	time1	sprite2_id	time2	...
+[ANIMATIONS]
+
+#==NUI==
+1234	12301	50	12302	50	12303	50	12304	50	12305	50	12306	50	12307	50	12308	50	12309	50	12310	50	12311	50	12312	50	12313	50	12314	50	12315	50
+#==KEY START==
+1235	12316	100
+
+# id	ani1	ani2	ani3
+[ANIMATION_SETS]
+# NUI
+200	1234
+#KEY start
+201	1235
+
+[OBJECTS]
+# type collitionid 	x	y	with  height  ani_set_id	extra_settings per object type
+# type: 0 = Simon , 1 = FIRE, 5 = HEART, 6= CUNG, 7=KIEM, 8 = weapon, -1  = Ground, -3 = Gate
+# Simon
+
+100	184	96	72	56	200
+101	72	125	117	13	201
+0	100	40	16	30	1
+
+[SPACE]
+#id X       Y       Width       Height CameraX     CameraY PlayerX     PlayerY
+#SceneCount
+0	0	0	255	222	8	0	-100	-100
+
+

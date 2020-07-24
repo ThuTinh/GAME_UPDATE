@@ -61,6 +61,9 @@
     <Filter Include="GridGame">
       <UniqueIdentifier>{b1bfed4f-51a3-474b-90dd-aaf6f22e0179}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Intro">
+      <UniqueIdentifier>{21a0325f-3826-44a0-bdc4-c4a1fb8136d4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Brick.cpp">
@@ -263,6 +266,36 @@
     </ClCompile>
     <ClCompile Include="explore-effect.cpp">
       <Filter>Object\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="RestoreBlood.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="RestoreBloodL1.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="hit-effect.cpp">
+      <Filter>Object\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="TripbleSub.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroSence.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Mountain.cpp">
+      <Filter>Intro</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyStart.cpp">
+      <Filter>Intro</Filter>
+    </ClCompile>
+    <ClCompile Include="AirPlane.cpp">
+      <Filter>Intro</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroBat.cpp">
+      <Filter>Intro</Filter>
+    </ClCompile>
+    <ClCompile Include="GateIntro.cpp">
+      <Filter>Intro</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -475,6 +508,36 @@
     </ClInclude>
     <ClInclude Include="explore-effect.h">
       <Filter>Object\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="RestoreBlood.h">
+      <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="RestoreBloodL1.h">
+      <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="hit-effect.h">
+      <Filter>Object\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="TripbleSub.h">
+      <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroSence.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mountain.h">
+      <Filter>Intro</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyStart.h">
+      <Filter>Intro</Filter>
+    </ClInclude>
+    <ClInclude Include="AirPlane.h">
+      <Filter>Intro</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroBat.h">
+      <Filter>Intro</Filter>
+    </ClInclude>
+    <ClInclude Include="GateIntro.h">
+      <Filter>Intro</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

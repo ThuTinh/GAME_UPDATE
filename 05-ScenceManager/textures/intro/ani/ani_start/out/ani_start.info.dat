@@ -1,0 +1,39 @@
+Sprite ani_start
+R	G	B
+255	128	0	0
+Animation Count
+2
+
+
+Name
+Animation
+Frame Count
+15
+
+FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
+0			0			72				56				0			0
+72			0			72				56				0			0
+144			0			72				56				0			0
+216			0			72				56				0			0
+288			0			72				56				0			0
+360			0			72				56				0			0
+432			0			72				56				0			0
+504			0			72				56				0			0
+576			0			72				56				0			0
+648			0			72				56				0			0
+720			0			72				56				0			0
+792			0			72				56				0			0
+864			0			72				56				0			0
+936			0			72				56				0			0
+1008			0			72				56				0			0
+
+
+Name
+Animation
+Frame Count
+1
+
+FrameX		FrameY		FrameWidth		FrameHeight		AnchorX		AnchorY
+1080			43			118				13				0			0
+
+

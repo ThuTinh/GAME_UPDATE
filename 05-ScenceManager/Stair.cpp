@@ -3,7 +3,6 @@
 
 void Stair::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	
 	Simon* player = Simon::getInstance();
 	bool isUpDown = player->isUpDown;
 	bool isDownDown = player->isDownDown;
@@ -11,7 +10,6 @@ void Stair::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	{
 		if (isUpDown)
 		{
-
 			if (
 				!isTop &&
 				player->getIsOnGround() &&

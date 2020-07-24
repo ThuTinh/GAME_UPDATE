@@ -12,19 +12,16 @@ void Enemy::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	
 	///* mặc định là false cho tới khi chạm sàn */
-	if (AABBCheck(Simon::getInstance()) && Simon::getInstance()->state != SIMON_STATE_ON_STAIR) {
-		if (!Simon::getInstance()->isDie()) {
-			Simon::getInstance()->setHurt(getDirection(), getX());
-		}
-	
-	/*	if (Simon::getInstance()->getX() > getX()) {
-			Simon::getInstance()->hurtDirection = 1;
+	if (AABBCheck(Simon::getInstance()) ) {
+		if (Simon::getInstance()->state != SIMON_STATE_ON_STAIR) {
+			if (!Simon::getInstance()->isDie()) {
+				Simon::getInstance()->setHurt(getDirection(), getX());
+			}
 		}
 		else
 		{
-			Simon::getInstance()->hurtDirection = -1;
-		}*/
-		
+			Simon::getInstance()->setHurtInStair();
+		}
 	}
 	if (CGame::GetInstance()->GetCurrentScene()->getAddtionalObject().size() > 0) {
 		vector<LPGAMEOBJECT> listObject = CGame::GetInstance()->GetCurrentScene()->getAddtionalObject();
@@ -34,12 +31,7 @@ void Enemy::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 				if (AABBCheck(listObject[i])) {
 					setAlive(false);
 					ScoreBar::getInstance()->increaseScore(ENEMY_SCORE);
-					DieEffect* dieEffect = new DieEffect();
-					CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(dieEffect);
-					dieEffect->setX(getMidX());
-					dieEffect->setY(getMidY());
-					dieEffect->setAlive(true);
-					dieEffect->timeDelay.start();
+					makeDieEffect();
 					int r = rand();
 					if (r % 2 == 0) {
 						BigHeart* bigHeart = new BigHeart();
@@ -54,7 +46,6 @@ void Enemy::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		}
 	}
 	CGameObject::Update(dt);
-
 }
 
 void Enemy::Render()
@@ -83,6 +74,11 @@ void Enemy::setDirectionFollowPlayer()
 void Enemy::onPlayerContact()
 {
 	
+}
+
+void Enemy::restorePosition()
+{
+	CGameObject::restorePosition();
 }
 
 Enemy::Enemy()

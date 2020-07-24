@@ -7,6 +7,7 @@ void SubWeaponAttack::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	timeCheckSimon.update();
 	if (timeDelay.isTerminated())
 	{
+		Simon::getInstance()->canMakeSub = true;
 		setAlive(false);
 	}
 	CGameObject::Update(dt, coObjects);

@@ -10,8 +10,6 @@ void MoneyEffect::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	{
 		setAlive(false);
 	}
-	
-
 }
 
 void MoneyEffect::Render()
@@ -20,8 +18,6 @@ void MoneyEffect::Render()
 		animation_set->at(aniIndex)->Render(x, y, frameIndex, DIRECTION_LEFT);
 	}
 }
-
-
 
 MoneyEffect::MoneyEffect()
 {

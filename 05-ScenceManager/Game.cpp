@@ -3,7 +3,7 @@
 
 #include "Game.h"
 #include "Utils.h"
-
+#include"IntroSence.h"
 #include "PlayScence.h"
 
 CGame* CGame::__instance = NULL;
@@ -328,6 +328,7 @@ CGame* CGame::GetInstance()
 #define GAME_FILE_SECTION_UNKNOWN -1
 #define GAME_FILE_SECTION_SETTINGS 1
 #define GAME_FILE_SECTION_SCENES 2
+#define GAME_FILE_SECTION_INTRO 3
 
 void CGame::_ParseSection_SETTINGS(string line)
 {
@@ -349,6 +350,18 @@ void CGame::_ParseSection_SCENES(string line)
 	LPCWSTR path = ToLPCWSTR(tokens[1]);
 
 	LPSCENE scene = new CPlayScene(id, path);
+	scenes[id] = scene;
+}
+
+void CGame::_ParseSection_INTRO(string line)
+{
+	vector<string> tokens = split(line);
+
+	if (tokens.size() < 2) return;
+	int id = atoi(tokens[0].c_str());
+	LPCWSTR path = ToLPCWSTR(tokens[1]);
+
+	LPSCENE scene = new IntroSence(id, path);
 	scenes[id] = scene;
 }
 
@@ -374,6 +387,7 @@ void CGame::Load(LPCWSTR gameFile)
 
 		if (line == "[SETTINGS]") { section = GAME_FILE_SECTION_SETTINGS; continue; }
 		if (line == "[SCENES]") { section = GAME_FILE_SECTION_SCENES; continue; }
+		if (line == "[INTRO]") { section = GAME_FILE_SECTION_INTRO; continue; }
 
 		//
 		// data section
@@ -382,6 +396,7 @@ void CGame::Load(LPCWSTR gameFile)
 		{
 		case GAME_FILE_SECTION_SETTINGS: _ParseSection_SETTINGS(line); break;
 		case GAME_FILE_SECTION_SCENES: _ParseSection_SCENES(line); break;
+		case GAME_FILE_SECTION_INTRO: _ParseSection_INTRO(line); break;
 		}
 	}
 	f.close();
@@ -399,4 +414,19 @@ void CGame::SwitchScene(int scene_id)
 	LPSCENE s = scenes[scene_id];
 	CGame::GetInstance()->SetKeyHandler(s->GetKeyEventHandler());
 	s->Load();
+	ScoreBar::getInstance()->restoreBossHealth();
+	//ScoreBar::getInstance()->restoreHealth();
+	//ScoreBar::getInstance()->setHeartCount(5);
+	//ScoreBar::getInstance()->setTypeSubWeapon(DEFAUL);
+	Simon::getInstance()->setNumberObjectBlack(0);
+	Simon::getInstance()->setDoublSub(false);
+	Simon::getInstance()->setTripbleSub(false);
+	Simon::getInstance()->canMakeSub = true;
+	ScoreBar::getInstance()->setHasDoubleSub(false);
+	ScoreBar::getInstance()->setHasTripbleSub(false);
+
+
+
+
+
 }

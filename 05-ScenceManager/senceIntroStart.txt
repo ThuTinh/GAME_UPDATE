@@ -1,0 +1,49 @@
+# id	file_path	transparent_color_r	g	b
+[TEXTURES]
+200	textures\intro\intro-start.png	255	128	0
+-1	textures\intro\map\start_game\tilesheet.png	255	0	0
+
+[MAP]
+#file titlesheet file matrix map
+-1	textures/intro/map/start_game/matrix.dat
+
+# id	left	top	with	height	 achorX achorY texture_id
+[SPRITES]
+#Doi
+32101	0	9	8	5	0	0	0	0	200
+32102	8	7	8	7	0	0	0	0	200
+# MayBay
+32103	16	0	32	14	0	0	0	0	200
+
+# ani_id	sprite1_id	time1	sprite2_id	time2	...
+[ANIMATIONS]
+
+#==Doi==
+321	32101	100	32102	100
+# MAY BAY
+322	32103	100
+
+# id	ani1	ani2	ani3
+[ANIMATION_SETS]
+# NUI
+300	321
+#May bay
+301	322
+
+[OBJECTS]
+# type collitionid 	x	y	with  height  ani_set_id	extra_settings per object type
+# type: 0 = Simon , 1 = FIRE, 5 = HEART, 6= CUNG, 7=KIEM, 8 = weapon, -1  = Ground, -3 = Gate
+# Simon
+-1	0	160	257	7	-1	
+-100	117	119	5	38	-1
+201	35	51	8	7	300
+201	146	18	8	7	300
+200	234	31	32	14	301
+0	100	40	16	30	1
+
+[SPACE]
+#id X       Y       Width       Height CameraX     CameraY PlayerX     PlayerY
+#SceneCount
+0	0	0	250	157	0	-30	238	80
+
+

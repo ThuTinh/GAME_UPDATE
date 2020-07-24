@@ -1,5 +1,6 @@
 #pragma once
 #include"Item.h"
+#define SWORD_VY - 0.2
 class Sword : public Item
 {
 public:

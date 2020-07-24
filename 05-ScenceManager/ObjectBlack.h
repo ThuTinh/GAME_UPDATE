@@ -7,6 +7,7 @@ class ObjectBlack : public CGameObject
 {
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	virtual void Render();
+	void restorePosition() override;
 	bool isRender;
 	bool checkOnlyOne;
 

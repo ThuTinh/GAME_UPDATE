@@ -4,13 +4,15 @@
 #include "GameTime.h"
 #include "Item.h"
 #include "ScoreBar.h"
-#define SIMON_VX	0.08
+#define SIMON_VX	0.07
 //0.1f
-#define SIMON_JUMP_Y		0.25f
+#define SIMON_JUMP_Y		0.23f
 #define SIMON_JUMP_DEFLECT_SPEED 0.2f
 #define MARIO_GRAVITY			-0.0007f
 #define SIMON_DIE_DEFLECT_SPEED	 0.5f
 
+#define SIMON_STATE_INTRO_AWAIT 98
+#define SIMON_STATE_INTRO 99
 #define SIMON_STATE_NORMAL 100
 #define SIMON_STATE_ON_STAIR 101
 #define SIMON_STATE_ATTACK_STAND 102
@@ -25,6 +27,7 @@
 #define SIMON_STAIR_STATE_GO_DOWN 202
 #define SIMON_STAIR_STATE_ATTACK_ASCEN 203 // len cau thang
 #define SIMON_STAIR_STATE_ATTACK_DESEN 204
+#define SIMON_STATE_HIDE 205
 
 
 #define SIMON_ANI_STAND 0
@@ -40,6 +43,7 @@
 #define SIMON_ANI_ASCEN_STAIRS_USING_SUB 10	
 #define SIMON_ANI_DESCEN_STAIRS_USING_SUB 11
 #define SIMON_ANI_COLORS 12
+#define SIMON_ANI_HIDE 13
 
 
 
@@ -50,6 +54,8 @@ class Simon : public CGameObject
 	int playerStairDestx, playerStairDesty;
 	int playerStairState;
 	int stairDirection;
+	bool isDoubleSub;
+	bool isTripbleSub;
 	/* là lần di chuyển cuối cùng của player. sau khi di chuyển player sẽ thoát khỏi stair  */
 	bool isLastRunStair;
 	void _ParseSection_TEXTURES(string line);
@@ -62,6 +68,8 @@ public:
 	bool isLeftDown;
 	bool isUpDown;
 	bool isDownDown;
+	bool isDownDownPress;
+	bool isPreviousDownDown;
 	bool isJumpDown;
 	bool isPreviousJumpDown;
 	bool isJump;
@@ -95,7 +103,11 @@ public:
 	DelayTime hurtTimeDelay;
 	GameTime hurtTime;
 	DelayTime jumbHurtTimeDelay;
+	DelayTime delayHide;
+	bool isWin;
 	bool switchSceneIn;
+	bool canMakeSub;
+	int numberSubThrow;
 	static Simon* instance;
 	static Simon* getInstance();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *colliable_objects = NULL);
@@ -106,10 +118,15 @@ public:
 	void setNumberArchery(int num);
 	void addNumberObjectBlack(int num);
 	int getNumberObjectBlack();
+	void setNumberObjectBlack(int init);
 	int getNumberArchery();
 	void addNumberArchery(int num);
 	void SetState(int state);
 	int getState();
+	void setDoublSub(bool isDoubleSub);
+	void setTripbleSub(bool isTripbleSub);
+	bool getDoubleSub();
+	bool getTripbleSub();
 	void makeSubWeapon(TYPE_SUBWEAPON type);
 	void setAnChorRight();
 	void setAnChorLeft();
@@ -128,6 +145,8 @@ public:
 	void Load(LPCWSTR simonFile);
 
 	void setHurt(int directEnemy, float xOfEnemy);
+	void setHurtInStair();
+	void setHide();
 	bool isDie();
 	Simon();
 

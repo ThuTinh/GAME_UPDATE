@@ -4,11 +4,9 @@
 #include "Camera.h"
 void SubBoomerangAttack::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-
 	SubWeaponAttack::Update(dt, coObjects);
 	if (getX() >= Camera::getInstance()->getX() + Camera::getInstance()->getWidth()) {
 		setVx(-VX);
-
 	}
 	if ( Camera::getInstance()->getX() > getX()) {
 		setVx(VX);
@@ -16,6 +14,7 @@ void SubBoomerangAttack::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	
 	if (!timeCheckSimon.isOnTime()) {
 		if (AABBCheck(Simon::getInstance())) {
+			Simon::getInstance()->canMakeSub = true;
 			if(isAlive)
 				ScoreBar::getInstance()->increaseHeartCount(1);
 			setAlive(false);

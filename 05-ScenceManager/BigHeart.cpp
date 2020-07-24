@@ -3,6 +3,7 @@
 #include "ScoreBar.h"
 void BigHeart::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
+	setVy(BIGHEART_VY);
 	Item::Update(dt, coObjects);
 	if (AABBCheck(Simon::getInstance()) && getItemState() == ITEM_STATE_VISIBLE) {
 		setItemState(ITEM_STATE_PLAYER_EATED);
@@ -18,6 +19,7 @@ void BigHeart::onPlayerContact()
 
 BigHeart::BigHeart()
 {
+	
 }
 
 BigHeart::~BigHeart()

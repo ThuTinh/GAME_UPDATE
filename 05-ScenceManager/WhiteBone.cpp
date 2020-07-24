@@ -5,12 +5,20 @@ void WhiteBone::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	timeDelay.update();
 	vy += WHITE_BONE_GRAVITY * dt;
-	setDirectionFollowPlayer();
+	//setDirectionFollowPlayer();
 	if (timeCheck.atTime())
 	{
 		if (isAlive) {
 			if (AABBCheck(Simon::getInstance())) {
-				ScoreBar::getInstance()->increaseHealth(-1);
+				if (Simon::getInstance()->state != SIMON_STATE_ON_STAIR) {
+					if (!Simon::getInstance()->isDie()) {
+						Simon::getInstance()->setHurt(getDirection(), getX());
+					}
+				}
+				else
+				{
+					Simon::getInstance()->setHurtInStair();
+				}
 			}
 		}
 	}
@@ -30,17 +38,6 @@ void WhiteBone::Render()
 		animation_set->at(0)->Render(x, y, frameIndex, direction);
 }
 
-void WhiteBone::setDirectionFollowPlayer()
-{
-	if (Simon::getInstance()->getMidX() - getMidX() < 0)
-	{
-		setDirection(DIRECTION_LEFT);
-	}
-	else
-	{
-		setDirection(DIRECTION_RIGHT);
-	}
-}
 
 WhiteBone::WhiteBone()
 {
@@ -49,8 +46,6 @@ WhiteBone::WhiteBone()
 	timeDelay.init(TIME_DELAY);
 	timeCheck.init(TIME_CHECK);
 	animation_set = CAnimationSets::GetInstance()->Get(WHITE_BONE_ANI);
-
-
 }
 
 WhiteBone::~WhiteBone()

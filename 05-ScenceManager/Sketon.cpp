@@ -8,48 +8,12 @@
 #include "WhiteBone.h"
 void Sketon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	/*delayJumb.update();
-	timeJumb.update();
-	if (getX() < 288) {
-		if (timeJumb.isOnTime())
-		{
-			setStateSketon(SKETON_NOMAL);
-
-		}
-		if (timeJumb.isTerminated()) {
-			delayJumb.start();
-			if (delayJumb.isOnTime()) {
-				setStateSketon(SKETON_JUMB);
-				setVx(0.05);
-				setVy(0.07);
-			}
-		}
-		if (delayJumb.isTerminated())
-		{
-			timeJumb.start();
-			setVx(-0.05);
-			setVy(0.06);
-		}
-	}
-	else
-	{
-		setStateSketon(SKETON_NOMAL);
-	}*/
-	
-		
-		
-	
 	vy += ENEMY_GRAVITY * dt;
 	whiteBoneDelay.update();
 	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive && (Weapon::getInstance()->aniIndex == 2 || Weapon::getInstance()->aniIndex == 5 || Weapon::getInstance()->aniIndex == 8 || Weapon::getInstance()->aniIndex == 11 || Weapon::getInstance()->aniIndex == 14 || Weapon::getInstance()->aniIndex == 17)) {
 		setAlive(false);
 		ScoreBar::getInstance()->increaseScore(SKETON_SCORE);
-		DieEffect* dieEffect = new DieEffect();
-		CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(dieEffect);
-		dieEffect->setX(getMidX());
-		dieEffect->setY(getMidY());
-		dieEffect->setAlive(true);
-		dieEffect->timeDelay.start();
+		makeDieEffect();
 	}
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
@@ -59,8 +23,6 @@ void Sketon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		// turn off collision when die 
 		if (isAlive)
 			CalcPotentialCollisions(coObjects, coEvents);
-
-
 		// No collision occured, proceed normally
 		if (coEvents.size() == 0)
 		{
@@ -95,19 +57,13 @@ void Sketon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 				{
 					if (stateSKeton == SKETON_NOMAL)
 					{
-
 						onCollision(e->obj, e->t, e->nx, e->ny);
-						/*vx = 0;
-						vy = 0;*/
-
-
 					}
 					else
 					{
 						/*	setVx( getDirection()* 0.04);
 							setVy(0.02);*/
 					}
-
 				}
 			}
 		}
@@ -124,13 +80,7 @@ void Sketon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		//Simon::getInstance()->getY() > getY() &&
 		if (abs(Simon::getInstance()->getX() - getX()) <= DISTANCE_TO_THROW_WHITEBONE) {
 			if (timeThrow.atTime()) {
-				WhiteBone* whiteBone = new WhiteBone();
-				CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(whiteBone);
-				whiteBone->setX(getMidX());
-				whiteBone->setY(getMidY());
-				whiteBone->setAlive(true);
-				whiteBone->setPhysicsEnable(true);
-				whiteBone->timeDelay.start();
+				makeWhiteBone();
 			}
 		}
 	}
@@ -139,7 +89,6 @@ void Sketon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		setPauseAnimation(true);
 	}
 	Enemy::Update(dt, coObjects);
-
 }
 
 void Sketon::onCollision(CGameObject* other, float collisionTime, int nx, int ny)
@@ -157,12 +106,24 @@ void Sketon::onCollision(CGameObject* other, float collisionTime, int nx, int ny
 
 SKETON_STATE Sketon::getStateSketon()
 {
-	return stateSKeton;
+	return this->stateSKeton;
 }
 
 void Sketon::setStateSketon(SKETON_STATE state)
 {
 	stateSKeton = state;
+}
+
+void Sketon::makeWhiteBone()
+{
+	WhiteBone* whiteBone = new WhiteBone();
+	CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(whiteBone);
+	whiteBone->setX(getMidX());
+	whiteBone->setY(getMidY());
+	whiteBone->setAlive(true);
+	whiteBone->setPhysicsEnable(true);
+	whiteBone->setDirection(getDirection());
+	whiteBone->timeDelay.start();
 }
 
 void Sketon::Render()
@@ -179,11 +140,10 @@ Sketon::Sketon()
 	setDirection(DIRECTION_RIGHT);
 	setVx(0.03);
 	whiteBoneDelay.init(10);
-	timeThrow.init(3000);
+	timeThrow.init(1500);
 	timeJumb.init(10000);
 	delayJumb.init(100);
 	timeJumb.start();
-	
 }
 
 Sketon::~Sketon()

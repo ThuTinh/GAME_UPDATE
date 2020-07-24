@@ -4,25 +4,29 @@
 #include "Game.h"
 #include "BigHeart.h"
 #include "SubWeaponAttack.h"
+#include "money-effect.h"
 Item::Item()
 {
 	itemState = ITEM_STATE_INVISIBLE;
 	setPhysicsEnable(false);
 	setCollitionType(COLLISION_TYPE_MISC);
 	collitionTypeToCheck.push_back(COLLISION_TYPE_GROUND);
+	delayVisible.init(3000);
 }
-
 
 
 void Item::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
+	delayVisible.update();
 	if (itemState == ITEM_STATE_PLAYER_EATED)
 		return;
-	vy += ITEM_GRAVITY*dt;
+	
 
 	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive()  && isAlive && (Weapon::getInstance()->aniIndex == 2 || Weapon::getInstance()->aniIndex == 5 || Weapon::getInstance()->aniIndex == 8 || Weapon::getInstance()->aniIndex == 11 || Weapon::getInstance()->aniIndex == 14|| Weapon::getInstance()->aniIndex == 17)) {
 		setPhysicsEnable(true);
+		//setVy(ITEM_VY);
 		itemState = ITEM_STATE_VISIBLE;
+		delayVisible.start();
 		setWidth(animation_set->at(0)->getFrame(0)->GetSprite()->getWidth());
 		setHeight(animation_set->at(0)->getFrame(0)->GetSprite()->getHeight());
 	}
@@ -32,6 +36,7 @@ void Item::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		{
 			if (dynamic_cast<SubWeaponAttack*>(listObject[i]) && listObject[i]->isAlive) {
 				if (AABBCheck(listObject[i])) {
+					//setVy(ITEM_VY);
 					setPhysicsEnable(true);
 					itemState = ITEM_STATE_VISIBLE;
 					setWidth(animation_set->at(0)->getFrame(0)->GetSprite()->getWidth());
@@ -40,6 +45,10 @@ void Item::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			}
 		}
 	}
+	if (delayVisible.isTerminated()) {
+		setAlive(false);
+	}
+	vy += ITEM_GRAVITY * dt;
 	CGameObject::Update(dt);
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
@@ -117,4 +126,24 @@ ITEM_STATE Item::getItemState()
 
 void Item::onPlayerContact()
 {
+	
+}
+
+void Item::restorePosition()
+{
+	CGameObject::restorePosition();
+	itemState = ITEM_STATE_INVISIBLE;
+	setPhysicsEnable(false);
+	
+}
+
+void Item::makeMoneyEffect(int aniIdx)
+{
+	MoneyEffect* effect = new MoneyEffect();
+	CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(effect);
+	effect->setX(getMidX() + 10);
+	effect->setY(getMidY() + 10);
+	effect->setAlive(true);
+	effect->aniIndex = aniIdx;
+	effect->timeDelay.start();
 }

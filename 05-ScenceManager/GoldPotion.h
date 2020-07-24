@@ -1,5 +1,6 @@
 #pragma once
 #include"Item.h"
+#define GOLD_VY -0.2 
 class GoldPotion : public Item
 {
 public:

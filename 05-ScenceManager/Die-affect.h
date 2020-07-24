@@ -6,10 +6,9 @@
 #define TIMEDELAY 400
 class DieEffect : public CGameObject
 {
+public:
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	virtual void Render();
-	
-public:
 	DelayTime timeDelay;
 	DieEffect();
 	

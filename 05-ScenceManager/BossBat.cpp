@@ -5,6 +5,7 @@
 #include"Game.h"
 #include "SubWeaponAttack.h"
 #include"PlayScence.h"
+#include "hit-effect.h"
 #define MAX(a,b) (a>b? a : b)
 #define MIN(a,b) (a<b? a : b)
 extern int getRandom(int start, int end);
@@ -29,6 +30,11 @@ void BossBat::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 				aniIndex = BOSS_ACTION_ACTIV;
 				setBossState(BOSS_STATE_WAIT);
+				float tempX = Simon::getInstance()->getX();
+				float tempY = Simon::getInstance()->getY();
+				dynamic_cast<CPlayScene*>(CGame::GetInstance()->GetCurrentScene())->setCurentSpace(1);
+				Simon::getInstance()->setX(tempX);
+				Simon::getInstance()->setY(tempY);
 				calculateOtherPoint();
 				if (xDes < getX())
 				{
@@ -38,7 +44,7 @@ void BossBat::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 				{
 					vx2 = vampire_bat_fast_momen;
 				}
-				vy2 = (vx2 * (yDes - getY()) / (xDes - getX()));
+				vy2 = (vx2 * (yDes - getY()) / (xDes - getX()-2));
 				waitDelay.start();
 			}
 			break;
@@ -144,7 +150,7 @@ void BossBat::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	}
 	 else
 	{
-	pauseAnimation = true;
+		pauseAnimation = true;
 	}
 	
 
@@ -170,10 +176,10 @@ void BossBat::calculateOtherPoint()
 	}
 	else
 	{
-		xDes = camera->getRight();
+		xDes = camera->getRight() ;
 	}
 
-	int yMin = player->getMidY() - 60;
+	int yMin = player->getMidY() - 60 ;
 
 	int yMax = player->getMidY();
 
@@ -185,9 +191,10 @@ void BossBat::checkWithSimon()
 	hurtDelay.update();
 	if (AABBCheck(Weapon::getInstance()) && Weapon::getInstance()->getAlive() && isAlive && (Weapon::getInstance()->aniIndex == 2 || Weapon::getInstance()->aniIndex == 5 || Weapon::getInstance()->aniIndex == 8 || Weapon::getInstance()->aniIndex == 11 || Weapon::getInstance()->aniIndex == 14 || Weapon::getInstance()->aniIndex == 17)) {
 		hurtDelay.start();
+		makeHitEffect();
 		if (ScoreBar::getInstance()->getBossHealth() == 1)
 		{
-			makeEffectDie();
+			makeDieEffect();
 			return;
 		}
 	}
@@ -204,12 +211,12 @@ void BossBat::checkWithSimon()
 				if (AABBCheck(listObject[i])) {
 					if (ScoreBar::getInstance()->getBossHealth() > 1)
 					{
-						
 						hurtDelay.start();
+						makeHitEffect();
 					}
 					else
 					{
-						makeEffectDie();
+						makeDieEffect();
 						return;
 					}
 				}
@@ -217,14 +224,13 @@ void BossBat::checkWithSimon()
 		}
 	}
 	if (hurtDelay.isTerminated()) {
-		if (ScoreBar::getInstance()->getBossHealth()  > 1)
+		if (ScoreBar::getInstance()->getBossHealth()  > 2)
 		{
-			ScoreBar::getInstance()->increaseBossHealth(-1);
-
+			ScoreBar::getInstance()->increaseBossHealth(-2);
 		}
 		else
 		{
-			makeEffectDie();
+			makeDieEffect();
 			return;
 		}
 	}
@@ -235,16 +241,23 @@ void BossBat::onDecreaseHealth()
 	ScoreBar::getInstance()->increaseBossHealth(-16);
 }
 
-void BossBat::makeEffectDie()
+void BossBat::makeDieEffect()
 {
-	ScoreBar::getInstance()->increaseBossHealth(-1);
+	ScoreBar::getInstance()->increaseBossHealth(-2);
 	DieEffect* dieEffect = new DieEffect();
+	DieEffect* dieEffect1 = new DieEffect();
 	CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(dieEffect);
 	dieEffect->setX(getMidX());
 	dieEffect->setY(getMidY());
 	dieEffect->setAlive(true);
 	dieEffect->timeDelay.start();
+	CGame::GetInstance()->GetCurrentScene()->addAddtionalObject(dieEffect1);
+	dieEffect1->setX(getMidX()+10);
+	dieEffect1->setY(getMidY());
+	dieEffect1->setAlive(true);
+	dieEffect1->timeDelay.start();
 	setAlive(false);
+	Simon::getInstance()->isWin = true;
 }
 
 void BossBat::restore()
@@ -277,11 +290,11 @@ BossBat::BossBat()
 {
 	player = Simon::getInstance();
 	setDirection(DIRECTION_LEFT);
-	waitDelay.init(BOSS_TIME_WAITE);
+	waitDelay.init(Boss_time_wait);
 	setPhysicsEnable(false);
 	aniIndex = 0;
 	setAlive(true);
-	hurtDelay.init(10);
+	hurtDelay.init(50);
 }
 
 BossBat::~BossBat()
