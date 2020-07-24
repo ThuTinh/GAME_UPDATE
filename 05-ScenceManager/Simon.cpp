@@ -155,7 +155,7 @@ Simon::Simon() : CGameObject()
 
 void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
-	// Calculate dx, dy 
+	//Chuyển sence trong playSence 
 	if (switchScene1) {
 		CGame::GetInstance()->SwitchScene(1);
 		ScoreBar::getInstance()->setCurrentStageNumber(1);
@@ -179,6 +179,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 		return;
 	}
+	// KHi simon bị rơi
 	if (getY() < 0) {
 		if (CGame::GetInstance()->current_scene != -1) {
 			CGame::GetInstance()->SwitchScene(CGame::GetInstance()->current_scene);
@@ -210,7 +211,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			return;
 		}
 	}
-
+	// Xử lý ani cho simon
 	if (hurtTimeDelay.isOnTime())
 	{
 		isOnGround = true;
@@ -235,6 +236,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		}
 	
 	}
+	
 	if (!stopCollision) {
 		vector<LPCOLLISIONEVENT> coEvents;
 		vector<LPCOLLISIONEVENT> coEventsResult;
@@ -301,6 +303,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	
 	// Simple fall down
 	vy += MARIO_GRAVITY * dt;
+
 	if (attackStandDelay.isTerminated())
 	{
 		state = SIMON_STATE_NORMAL;
@@ -764,7 +767,6 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		if (isAttack) {
 			state = SIMON_STATE_ATTACK_DUCK;
 			attackDuckDelay.start();
-			/*return;*/
 		}
 		if (duckDelay.isTerminated())
 		{

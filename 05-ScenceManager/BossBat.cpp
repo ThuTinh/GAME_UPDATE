@@ -1,4 +1,4 @@
-#include "BossBat.h"
+﻿#include "BossBat.h"
 #include "Camera.h"
 #include"Die-affect.h"
 #include "Weapon.h"
@@ -23,11 +23,9 @@ void BossBat::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		{
 		case BOSS_STATE_INVISIBLE:
 		{
-			//dynamic_cast<CPlayScene*>(CGame::GetInstance()->GetCurrentScene())->setCurentSpace(1);
 			int distance = player->getX() - getX();
 			if (distance > boss_distance_activ)
 			{
-
 				aniIndex = BOSS_ACTION_ACTIV;
 				setBossState(BOSS_STATE_WAIT);
 				float tempX = Simon::getInstance()->getX();
@@ -76,7 +74,7 @@ void BossBat::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		case BOSS_STATE_MOVE_FAST:
 		{
 			auto camera = Camera::getInstance();
-
+			//Boss vượt qua camera bên trái thì tính lại vx, vy cho boss
 			if (getDx() < 0 && camera->getleft() > getX() + getDx())
 			{
 				calculateOtherPoint();
@@ -92,7 +90,7 @@ void BossBat::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 				setVx(vx2);
 				setVy(vy2);
 			}
-
+			//Boss vượt qua camera bên phải thì tính lại vx, vy cho boss
 			if (getDx() > 0 && camera->getRight() < getRight() + getDx())
 			{
 				calculateOtherPoint();
@@ -111,7 +109,6 @@ void BossBat::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 			if (moveFastDelay.isTerminated())
 			{
-				//waitDelay.start();
 				setBossState(BOSS_STATE_MOVE_SLOW);
 				DWORD moveSlowDelayTime = getRandom(boss_move_slow_time_min, boss_move_slow_time_max);
 				moveSlowDelay.start(moveSlowDelayTime);
@@ -280,12 +277,12 @@ void BossBat::restore()
 void BossBat::preventGoOutsideCamera()
 {
 	auto camera = Camera::getInstance();
-
+	//boss vượt qua bên trái/phải camera
 	if ((getX() + getDx() < camera->getleft() && getDx() < 0) || (getRight() + getDx() > camera->getRight() && getDx() > 0))
 	{
 		setDx(-getDx());
 	}
-
+	//Boss vượt qua phía trên/dưới camera
 	if ((getY() + getDy() > camera->getTop() - 48 && getDy() > 0)
 		|| (getBottom() + getDy() < camera->getBottom() + 32 && getDy() < 0))
 	{
