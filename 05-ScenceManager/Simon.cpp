@@ -665,16 +665,27 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		setVx(0);
 		if (deadDelay.isTerminated())
 		{
+			
 			ScoreBar::getInstance()->increasePlayerLife(-1);
+			if (ScoreBar::getInstance()->getPlayerLife() <= -1) {
+				CGame::GetInstance()->SwitchScene(1);
+				ScoreBar::getInstance()->setPlayerLife(2);
+				state = SIMON_STATE_NORMAL;
+				aniIndex = SIMON_ANI_STAND;
+			}
+			else
+			{
+				CGame::GetInstance()->SwitchScene(CGame::GetInstance()->current_scene);
+				state = SIMON_STATE_NORMAL ;
+				aniIndex = SIMON_ANI_STAND;
+				setVx(0);
+				setVy(0);
+			}
 			ScoreBar::getInstance()->restoreHealth();
 		/*	retoreWidthHeight();
 			setY(getY() + 45);*/
-			CGame::GetInstance()->SwitchScene(CGame::GetInstance()->current_scene);
 			ScoreBar::getInstance()->setTypeSubWeapon(TYPE_SUBWEAPON::DEFAUL);
-			state = SIMON_STATE_NORMAL ;
-			aniIndex = SIMON_ANI_STAND;
-			setVx(0);
-			setVy(0);
+			
 		}
 		return;
 	}
@@ -688,14 +699,14 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 			if (isRightDown) {
 				setDirection(DIRECTION_RIGHT);
 				aniIndex = SIMON_ANI_GO;
-				setX(getX() +0.5);
+				setX(getX() +0.7);
 			}
 			else
 			{
 				if (isLeftDown) {
 					aniIndex = SIMON_ANI_GO;
 					setDirection(DIRECTION_LEFT);
-					setX(getX() - 0.5);
+					setX(getX() - 0.7);
 				}
 				else
 				{

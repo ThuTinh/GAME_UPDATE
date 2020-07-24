@@ -385,7 +385,7 @@ int ScoreBar::getPlayerLife()
 
 void ScoreBar::setPlayerLife(int playerLife)
 {
-	if (playerLife >= 0)
+	//if (playerLife >= 0)
 		this->playerLife = playerLife;
 }
 
