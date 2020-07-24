@@ -11,7 +11,10 @@
 extern int getRandom(int start, int end);
 void Raven::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	if (getY() < 240) {
+	Enemy::Update(dt, coObjects);
+	delayTimeWait.update();
+	delayTimeAttack.update();
+	if (getY() < 250) {
 		setAlive(false);
 		return;
 	}
@@ -24,7 +27,6 @@ void Raven::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		setAlive(false);
 		makeDieEffect();
 	}
-	Enemy::Update(dt, coObjects);
 	pauseAnimation = false;
 	if (!CGame::GetInstance()->GetCurrentScene()->getStopUpdate()) {
 		vector<LPCOLLISIONEVENT> coEvents;
@@ -65,29 +67,52 @@ void Raven::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		{
 		case RAVEN_STATE_STAND:
 			if (abs(getX() - Simon::getInstance()->getX()) < DISTANCE_X) {
-				if (abs(Simon::getInstance()->getX() - getX()) > RAVEN_DISTANCE_STOP) {
-					setDirectionFollowPlayer();
-				}
 				state = RAVEN_STATE_ATTACK;
+				delayTimeAttack.start();
 				setPhysicsEnable(true);
 			}
 			break;
 		case RAVEN_STATE_ATTACK:
+			if (delayTimeAttack.isTerminated()) {
+				setVx(0);
+				setVy(0);
+				state = RAVEN_STATE_WAIT;
+				delayTimeWait.start();
+				return;
+			}
 			calculateOtherPoint();
 			if (xDes < getX())
 			{
 				vx = -RAVEN_VX;
-				setDirection(DIRECTION_LEFT);
 
 			}
 			else
 			{
 				vx = RAVEN_VX;
-				setDirection(DIRECTION_RIGHT);
 			}
-			vy = (vx * (yDes - getY()) / (xDes - getX() -2));
+			vy = (vx * (yDes - getY()) / (xDes - getX()));
 			aniIndex = RAVEN_ACTION_FLY;
+			
 			break;
+
+		case RAVEN_STATE_WAIT:
+			if (delayTimeWait.isTerminated()) {
+				state = RAVEN_STATE_ATTACK;
+				delayTimeAttack.start();
+				calculateOtherPoint();
+				if (xDes < getX())
+				{
+					vx = -RAVEN_VX;
+
+				}
+				else
+				{
+					vx = RAVEN_VX;
+				}
+				vy = (vx * (yDes - getY()) / (xDes - getX()));
+			}
+			break;
+
 		default:
 			break;
 		}
@@ -96,13 +121,13 @@ void Raven::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	{
 		pauseAnimation = true;
 	}
-	vy += RAVEN_GRAVITY * dt;
+
 }
 void Raven::calculateOtherPoint()
 {
 	Simon* player = Simon::getInstance();
 	auto camera = Camera::getInstance();
-	if (getMidX() > player->getMidX() && getX() - camera->getX() > 40)
+	if (getMidX() > player->getMidX() && getX() - camera->getX() > 30)
 	{
 		xDes = camera->getleft();
 	}
@@ -111,9 +136,9 @@ void Raven::calculateOtherPoint()
 		xDes = camera->getRight();
 	}
 
-	int yMin = player->getMidY() - 60;
+	int yMin = player->getMidY() - 120;
 
-	int yMax = player->getMidY()+20;
+	int yMax = player->getMidY();
 
 	yDes = getRandom(yMin, yMax);
 }
@@ -131,6 +156,8 @@ Raven::Raven()
 	collitionTypeToCheck.push_back(COLLISION_TYPE_GROUND);
 	setPhysicsEnable(false);
 	setDirection(DIRECTION_RIGHT);
+	delayTimeAttack.init(TIME_ATTACK);
+	delayTimeWait.init(TIME_AWAIT);
 }
 
 Raven::~Raven()
